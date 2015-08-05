@@ -8,4 +8,4 @@ var configEnv = require("./config/env.js");
 app.use(express.static("public"));
 
 
-app.listen(configEnv.serverPort, configEnv.serverIp, function(){console.log("Server started: listening...");});
+app.listen(configEnv.serverPort, function(){console.log("Server started: listening...");});
