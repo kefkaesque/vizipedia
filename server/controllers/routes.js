@@ -1,13 +1,13 @@
 var express = require('express');
-var router = express.Router();
+var routes = express();
 
 
 var wikiServices = require('./wikiServices');
 // var googleServices = require('./googleServices');
+module.exports = routes;
 
 // ---------------------------------------------------------------------------
 // ROUTES
-router.use('/wikiServices', wikiServices);
+routes.use('/wikiServices', wikiServices);
 // router.use('/googleServices', otherServices); 
 
-module.exports = router;
