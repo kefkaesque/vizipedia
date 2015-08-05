@@ -1,7 +1,9 @@
-var express = require("express")
-    app     = express();;
+var express = require("express");
+var app = express();
+
+var configEnv = require("./config/env.js");
 
 // --------------------------------------------------------------------------------
 
 app.use(express.static("public"));
-app.listen(3333, "localhost", function(){console.log("Server started: listening...");});
+app.listen(configEnv.serverPort, configEnv.serverIp, function(){console.log("Server started: listening...");});
