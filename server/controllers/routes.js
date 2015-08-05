@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-var wikiServices = require('./wikiServices');
+var wiki = require('./wiki');
 
 // ---------------------------------------------------------------------------
 // ROUTES
-router.use('/wikiServices', wikiServices);
+router.use('/', wiki);
 
 module.exports = router;
