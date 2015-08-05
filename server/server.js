@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var app        = express();
 
 var configEnv = require("./config/env.js");
-var routes = require("./controllers/routes.js")
+var routes = require("./controllers/routes.js");
 
 // --------------------------------------------------------------------------------
 
