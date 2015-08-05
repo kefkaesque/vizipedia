@@ -1,4 +1,3 @@
 module.exports = {
-    serverIp: "127.0.0.1",
-    serverPort: "8000"
+    serverPort: process.env.PORT || "8000"
 };
