@@ -1,6 +1,8 @@
 ### Indentation
 When submitting a pull request use the following format
 
+* always pull request to dev branch
+
 * [feat] What feature you created
 
 * [fix] What you fixed
