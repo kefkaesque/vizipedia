@@ -15,10 +15,6 @@ passport.use("signup",
   new LocalStrategy({passReqToCallback: true},
   function(req, username, password, done) {
     var email = req.body.email;
-    if(!isValidUsername(username)) done(null, false);
-    if(!isValidPassword(password)) done(null, false);
-    if(!isValidEmail(email)) done(null, false);
-
     // TODO: check if user exists
     // TODO: check if email exists
     // TODO: create new user
@@ -34,17 +30,3 @@ passport.use("login",
     // TODO: validate user password
   }
 ));
-
-// --------------------------------------------------------------------------------
-
-function isValidUsername(username) {
-    return true;
-}
-
-function isValidPassword(password) {
-    return true;
-}
-
-function isValidEmail(email) {
-    return true;
-}
