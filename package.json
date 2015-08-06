@@ -1,13 +1,17 @@
 {
   "name": "vizi",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Wikipedia that is visually appealing, engaging, and interactive",
   "main": "server/server.js",
+  "repository" :
+  { "type" : "git",
+    "url" : "https://github.com/kefkaesque/vizipedia.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js"
   },
-  "author": "",
+  "author": "Team Kefaesque",
   "license": "ISC",
   "dependencies": {
     "body-parser": "~1.0.1",
