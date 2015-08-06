@@ -5,6 +5,6 @@ var wiki = require('./wiki');
 
 // ---------------------------------------------------------------------------
 // ROUTES
-router.use('/', wiki);
+router.use('/wiki', wiki);
 
 module.exports = router;
