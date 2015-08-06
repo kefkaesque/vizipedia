@@ -22,6 +22,8 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.set("views", "server/views");
+app.set("view engine", "jade");
 
 // --------------------------------------------------------------------------------
 
