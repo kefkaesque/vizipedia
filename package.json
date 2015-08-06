@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "A Wikipedia that is visually appealing, engaging, and interactive",
   "main": "server/server.js",
-  "repository" :
-  { "type" : "git",
-    "url" : "https://github.com/kefkaesque/vizipedia.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kefkaesque/vizipedia.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,6 +20,8 @@
     "express-session": "^1.11.3",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
-    "request": "^2.60.0"
+    "request": "^2.60.0",
+    "sequelize": "^3.5.1",
+    "sqlite3": "^3.0.10"
   }
 }
