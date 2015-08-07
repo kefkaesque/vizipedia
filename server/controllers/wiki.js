@@ -5,7 +5,9 @@ module.exports = router;
 
 router.get('/:topic', function(req, res) {
   getWikiPage(req.params.topic, function(data) {
-    res.send(data);
+    console.log("ein");
+    res.locals.article = data;
+    res.render("article");
   });
 });
 
