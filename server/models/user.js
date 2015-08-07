@@ -30,6 +30,12 @@ classMethods.login = function(username, password) {
 };
 
 classMethods.signup = function(username, password, email) {
+  if(!isValidUsername)
+      return false;
+  if(!isValidPassword)
+      return false;
+  if(!isValidEmail)
+      return false;
   return User.findOne({
     where: {
       username: username
