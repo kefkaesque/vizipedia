@@ -8,7 +8,12 @@ function getWikiPage(topic, cb) {
   var reqParam = 'action=parse&format=json&page=' + encodeURI(topic) + '&prop=text';
   var reqUrl = endpoint + reqParam;
   request(reqUrl, function(error, response, body) {
-    cb(JSON.parse(body).parse.text['*']);
+    if (JSON.parse(body).parse === undefined) {
+      // handle 404 page here.
+      cb('');
+    } else {
+      cb(JSON.parse(body).parse.text['*']);
+    }
   });
 }
 
