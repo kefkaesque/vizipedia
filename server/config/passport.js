@@ -1,35 +1,39 @@
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
-var User = null;
+var User = require("../models/user.js");
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-  // TODO: fetch user from database
-  done(null, null);
+  User.findOne({
+    where: {
+      id: id
+    }
+  })
+  .then(function(user) {
+    done(null, user);
+  });
 });
 
 passport.use("signup",
   new LocalStrategy({passReqToCallback: true},
   function(req, username, password, done) {
     var email = req.body.email;
-    console.log("attempting log with "+username+" "+password+" "+email);
-    // TODO: check if user exists
-    // TODO: check if email exists
-    // TODO: create new user
-    // TODO: check if database throws errors
-    // TODO: use promises
+    User.signup(username, password, email)
+    .then(function(user) {
+      done(null, user);
+    });
   }
 ));
 
 passport.use("login",
   new LocalStrategy({passReqToCallback: true},
   function(req, username, password, done) {
-    console.log("attempting log with "+username+" "+password);
-    done(null,false);
-    // TODO: fetch user from database
-    // TODO: validate user password
+    User.login(username, password)
+    .then(function(user) {
+      done(null,user);
+    });
   }
 ));

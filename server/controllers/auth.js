@@ -13,14 +13,14 @@ router.get('/signup', function(req, res) {
 
 router.post('/login', passport.authenticate(
   'login', {
-    successRedirect: "/",
+    successRedirect: "/greet",
     failureRedirect: "/login"
   }
 ));
 
 router.post('/signup', passport.authenticate(
   'signup', {
-    successRedirect: "/",
+    successRedirect: "/greet",
     failureRedirect: "/signup"
   }
 ));

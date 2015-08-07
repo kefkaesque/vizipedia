@@ -8,7 +8,9 @@ var app = express();
 
 var configEnv = require('./config/env.js');
 var configPassport = require('./config/passport.js');
-var routes = require("./controllers/routes.js");
+
+var middleware = require('./middleware/main.js');
+var routes = require('./controllers/routes.js');
 
 // --------------------------------------------------------------------------------
 
@@ -22,12 +24,14 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.set("views", "server/views");
-app.set("view engine", "jade");
+app.use(middleware);
+
+app.set('views', 'server/views');
+app.set('view engine', 'jade');
 
 // --------------------------------------------------------------------------------
 
-app.use(express.static("public"));
+app.use(express.static('public'));
 
 app.use('/', routes);
-app.listen(configEnv.serverPort, function(){console.log("Server started: listening...");});
+app.listen(configEnv.serverPort, function(){console.log('Server started: listening...');});
