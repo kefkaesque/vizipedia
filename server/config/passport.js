@@ -15,6 +15,7 @@ passport.use("signup",
   new LocalStrategy({passReqToCallback: true},
   function(req, username, password, done) {
     var email = req.body.email;
+    console.log("attempting log with "+username+" "+password+" "+email);
     // TODO: check if user exists
     // TODO: check if email exists
     // TODO: create new user

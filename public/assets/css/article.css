@@ -1,0 +1,32 @@
+.main {
+  width:1100px;
+  margin:0px auto;
+}
+
+h2 {
+  margin:1.6em 0 .5em;
+}
+
+p {
+  margin-bottom:1.6em;
+}
+
+a {color:#2a80b9; text-decoration:none;}
+a:visited {color:#2a80b9;}
+
+li {
+  list-style-type:none;
+}
+
+img,
+.infobox,
+.hatnote,
+.reference,
+#References,
+.reflist,
+.mw-editsection,
+.metadata,
+.portal,
+.navbox {
+  display:none;
+}
