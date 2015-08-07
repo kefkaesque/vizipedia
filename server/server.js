@@ -12,6 +12,10 @@ var configPassport = require('./config/passport.js');
 var middleware = require('./middleware/main.js');
 var routes = require('./controllers/routes.js');
 
+var http = require('http');
+var jackrabbit = require('jackrabbit');
+var path = require('path');
+
 // --------------------------------------------------------------------------------
 
 app.use(bodyParser.urlencoded({ extended: true }));
