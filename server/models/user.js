@@ -30,11 +30,11 @@ classMethods.login = function(username, password) {
 };
 
 classMethods.signup = function(username, password, email) {
-  if(!isValidUsername)
+  if(!isValidUsername())
       return false;
-  if(!isValidPassword)
+  if(!isValidPassword())
       return false;
-  if(!isValidEmail)
+  if(!isValidEmail())
       return false;
   return User.findOne({
     where: {
@@ -47,7 +47,7 @@ classMethods.signup = function(username, password, email) {
     }
     return User.findOne({
       where: {
-        username: username
+        email: email
       }
     });
   })
