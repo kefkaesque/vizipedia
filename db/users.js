@@ -24,3 +24,22 @@ db.sync();
 module.exports = {
 
 }
+
+// TODO: integrate as Users method
+function login(username, pw) {
+  return Users.findOne({
+    where: {
+      user_name: username
+    }
+  }).then(function(result){
+    if(result.password === pw){
+      // console.log('You are logged in!');
+      return result;
+    }else{
+      // console.log('Your password is incorrect!');
+      return false;
+    }
+  });
+}
+
+// login('carter','');
