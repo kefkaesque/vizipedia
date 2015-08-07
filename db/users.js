@@ -26,7 +26,7 @@ var Users = db.define('users',
           } 
         })
         .then(function(result) {
-          console.log('result: ', result)
+          console.log('result: ', result);
           if (result) {
             console.log('Username exists!');
             return false;
@@ -46,7 +46,7 @@ var Users = db.define('users',
                   return user;
                 });
               }
-            })
+            });
           }
         });
       },
