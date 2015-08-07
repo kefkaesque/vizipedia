@@ -1,0 +1,65 @@
+var express    = require('express');
+var bodyParser = require('body-parser');
+var app        = express();
+
+var configEnv = require("./config/env.js");
+var routes = require("./controllers/routes.js");
+
+// --------------------------------------------------------------------------------
+
+// configure body parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use(express.static("public"));
+
+app.use('/', routes);
+app.listen(configEnv.serverPort, function(){console.log("Server started: listening...");});
+
+module.exports = {
+    serverPort: process.env.PORT || "8000"
+};
+
+
+
+var express = require('express');
+var router = express.Router();
+
+var wiki = require('./wiki');
+
+// ---------------------------------------------------------------------------
+// ROUTES
+router.use('/', wiki);
+
+module.exports = router;
+
+var express    = require('express');
+var router = express.Router();
+var request = require('request');
+module.exports = router;
+
+router.get('/:topic', function(req, res) {
+  getWikiPage(req.params.topic, function(data) {
+    res.send(data);
+  });
+});
+
+function getWikiPage(topic, cb) {
+  var endpoint = 'https://en.wikipedia.org/w/api.php?';
+  var reqParam = 'action=parse&format=json&page=' + encodeURI(topic) + '&prop=text';
+  var reqUrl = endpoint + reqParam;
+  request(reqUrl, function(error, response, body) {
+    cb(JSON.parse(body).parse.text['*']);
+  });
+}
+
+
+var express    = require('express');
+var router = express.Router();
+
+router.get('/', function(req, res) {
+  res.json({ message: 'hooray! welcome to our api!' });
+});
+
+module.exports = router;
+
