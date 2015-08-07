@@ -26,6 +26,8 @@ passport.use("signup",
 passport.use("login",
   new LocalStrategy({passReqToCallback: true},
   function(req, username, password, done) {
+    console.log("attempting log with "+username+" "+password);
+    done(null,false);
     // TODO: fetch user from database
     // TODO: validate user password
   }
