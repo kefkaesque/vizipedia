@@ -22,12 +22,11 @@ amqp.connect('amqp://localhost').then(function(conn) {
       return ch.consume(q, reply);
     });
     return ok.then(function() {
-      console.log(' [x] Awaiting RPC requests');
+      // Awaiting requests
     });
 
     function reply(msg) {
       var message = msg.content.toString();
-      console.log(' topic', message);
       var response = getWikiPage(message, function(data) {
         ch.sendToQueue(msg.properties.replyTo,
                        new Buffer(data.toString()),

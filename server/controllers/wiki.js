@@ -8,11 +8,6 @@ var when = require('when');
 var uuid = require('node-uuid');
 
 router.get('/:topic', function(req, res) {
-  // getWikiPage(req.params.topic, function(data) {
-  //   console.log("ein");
-  //   res.locals.article = data;
-  //   res.render("article");
-  // });
   queue(req, res);
 });
 var queue = function(req, res) {
@@ -27,7 +22,6 @@ var queue = function(req, res) {
           answer.resolve(msg.content.toString());
         }
       }
-
       var ok = ch.assertQueue('', {exclusive: true})
         .then(function(qok) { return qok.queue; });
 
@@ -37,7 +31,6 @@ var queue = function(req, res) {
       });
 
       ok = ok.then(function(queue) {
-        console.log(' [x] Requesting ', topic);
         ch.sendToQueue('rpc_queue', new Buffer(topic), {
           correlationId: corrId, replyTo: queue
         });
