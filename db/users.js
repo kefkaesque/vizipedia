@@ -28,7 +28,7 @@ var Users = db.define('users',
         .then(function(result) {
           console.log('result: ', result)
           if (result) {
-            console.log('Username is exist!');
+            console.log('Username exists!');
             return false;
           } else {
             return this.findOne({ 
@@ -38,7 +38,7 @@ var Users = db.define('users',
             })
             .then(function(result) {
               if (result) {
-                console.log('Email is exist!');
+                console.log('Email exists!');
                 return false;
               } else {
                 return this.create({username: username, password: password, email: email})
@@ -70,14 +70,8 @@ var Users = db.define('users',
   }
 );
 
-
 /* .sync() makes Sequelize create the database table for us if it doesn't
  *  exist already: */
 db.sync();
 
 module.exports = Users;
-
-
-var signupUser = Users;
-signupUser.signupUser('dvd8', 'abc', 'dvd8@gmail.com');
-//console.log(signupUser.login('dvd6', 'abc'));
