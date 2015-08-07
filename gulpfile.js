@@ -10,13 +10,9 @@ var gulp  = require('gulp'),
     del = require('del'),
     sourcemaps = require('gulp-sourcemaps');
 
-// define the default task and add the watch task to it
-gulp.task('default', ['watch']);
-
-
 var paths = {
-  jsscripts: ['./server/**/*.js', './server/*.js', './client/*.js','!./node_modules/**'],
-  css: './public/style/*.css',
+  jsscripts: ['./db/*.js', './client/*.js','!./node_modules/**'],
+  css: './public/assets/css/*.css',
   tests: './spec/*.js'
 };
 // configure the jshint task
@@ -33,7 +29,7 @@ gulp.task('watch', function() {
 
 gulp.task('clean', function(cb) {
   // You can use multiple globbing patterns as you would with `gulp.src`
-  del(['public/assets/*'], cb);
+  del(['public/assets/dest/*'], cb);
 });
 
 /* 
@@ -47,7 +43,7 @@ gulp.task('minify-css', ['clean'], function() {
     .pipe(sourcemaps.init())
     .pipe(minifyCss())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('public/assets/css'));
+    .pipe(gulp.dest('public/assets/dest/css'));
 });
 
 gulp.task('build-js', ['clean'], function() {
@@ -57,7 +53,9 @@ gulp.task('build-js', ['clean'], function() {
       //only uglify if gulp is ran with '--type production'
       .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop()) 
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('public/assets/javascript'));
+    .pipe(gulp.dest('public/assets/dest/javascript'));
 });
 
-gulp.task('default', ['watch', 'jshint', 'minify-css', 'build-js']);
+gulp.task('default', ['watch', 'jshint', 'minify-css', 'build-js'], function() {
+  process.exit(0);
+});
