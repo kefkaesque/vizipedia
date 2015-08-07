@@ -11,4 +11,15 @@ Wikipedia is the de facto reference of the Internet, but falls short as a learni
 ## Installation ##
 
 To work on the source code, after cloning the repo you must run npm install.
-To start your local server run npm start
+To start your local server run npm start. You must also run a worker server.
+To start a worker server first install RabbitMQ with
+
+brew install rabbitmq
+
+Then you can start a rabbitmq server by running the command in your bash:
+
+rabbitmq-server
+
+After you have a rabbitmq server, you can run the worker.js file with:
+
+node worker.js
