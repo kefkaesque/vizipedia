@@ -1,6 +1,7 @@
 var amqp = require('amqplib');
 var request = require('request');
-var WikiArticle = require('./server/models/wikiArticle.js');
+var WikiArticle = require('../server/models/wikiArticle.js');
+var configEnv = require('../server/config/env.js');
 
 function getWikiPage(topic, cb) {
   var endpoint = 'https://en.wikipedia.org/w/api.php?';
