@@ -6,10 +6,24 @@ module.exports = router;
 var amqp = require('amqplib');
 var when = require('when');
 var uuid = require('node-uuid');
+var WikiArticle = require('../models/wikiArticle.js');
 
 router.get('/:topic', function(req, res) {
-  queue(req, res);
+  WikiArticle.findOne({
+    where: {
+      title: req.params.topic
+    }
+  })
+  .then(function(article) {
+    if(article) {
+      res.locals.article = article.content;
+      res.render("article");
+    } else {
+      queue(req, res);
+    }
+  });
 });
+
 var queue = function(req, res) {
   var topic = req.params.topic;
   var defer = when.defer;
@@ -18,7 +32,7 @@ var queue = function(req, res) {
       var answer = defer();
       var corrId = uuid();
       function maybeAnswer(msg) {
-        if (msg.properties.correlationId === corrId) {
+        if(msg.properties.correlationId === corrId) {
           answer.resolve(msg.content.toString());
         }
       }
