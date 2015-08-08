@@ -39,7 +39,7 @@ var queue = function(req, res) {
           answer.resolve(msg.content.toString());
         }
       }
-      var ok = ch.assertQueue(q, {exclusive: true})
+      var ok = ch.assertQueue('', {exclusive: true})
         .then(function(qok) { return qok.queue; });
 
       ok = ok.then(function(queue) {
