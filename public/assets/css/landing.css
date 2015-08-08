@@ -22,33 +22,34 @@ body {
   height:100%;
 }
 
-.logo {
+.splash .logo {
   color:#fff;
   font-size:4em;
   font-weight:500;
 }
 
-form {
+.splash form {
   margin:1em;
 }
 
-input[type=text] {
+.splash input[type=text] {
   margin-right:.38em;
-  padding:.62em 1em;
+  width:240px;
+  padding:.5em 1em;
   border:0;
   color:#333;
 }
 
-button {
+.splash button {
   background:transparent;
   border:0;
   color:#fff;
   font-size:1.3em;
-  pointer:cursor;
+  cursor:pointer;
 }
 
-input,
-button {
+.splash input,
+.splash button {
   display:inline-block;
   vertical-align:middle;
 }
