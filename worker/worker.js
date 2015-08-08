@@ -16,7 +16,8 @@ function getWikiPage(topic, cb) {
   });
 }
 
-amqp.connect('amqp://localhost').then(function(conn) {
+var url = configEnv.CLOUDAMQP_URL;
+amqp.connect(url).then(function(conn) {
   process.once('SIGINT', function() { conn.close(); });
   return conn.createChannel().then(function(ch) {
     var q = 'rpc_queue';
