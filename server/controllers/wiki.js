@@ -28,7 +28,7 @@ router.get('/:topic', function(req, res) {
 var queue = function(req, res) {
   var topic = req.params.topic;
   var defer = when.defer;
-  var url = configEnv.CLOUDAMQP_URL;
+  var url = configEnv.cloudAMQP;
   amqp.connect(url).then(function(conn) {
     return when(conn.createChannel().then(function(ch) {
       var answer = defer();
