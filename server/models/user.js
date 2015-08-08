@@ -94,6 +94,3 @@ var User = db.define('user', schema, {classMethods: classMethods, instanceMethod
 
 db.sync();
 module.exports = User;
-
-User.signup('carter12','pw1','cartersdfsfishfi2');
-
