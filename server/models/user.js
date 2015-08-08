@@ -1,5 +1,6 @@
 var Sequelize = require('sequelize');
 var db = require('../config/postgres.js');
+var bcrypt = require('bcrypt');
 
 var schema = {
   username: {
@@ -57,10 +58,13 @@ classMethods.signup = function(username, password, email) {
     if(user) {
       return false;
     }
-    return User.create({username: username, password: password, email: email})
+
+    var hash = bcrypt.hashSync(password, 10);
+    return User.create({username: username, password: hash, email: email})
     .then(function(user){
       return user;
     });
+
   });
 };
 
@@ -69,7 +73,7 @@ classMethods.signup = function(username, password, email) {
 var instanceMethods = {};
 
 instanceMethods.usesPassword = function(password) {
-  return this.password === password;
+  return bcrypt.compareSync(password, this.password);
 };
 
 // --------------------------------------------------------------------------------
