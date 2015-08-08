@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title Kefkaesque greets you...!
+    include style.jade
+  body
+    include header.jade
+    div.splash
+      div.spacer
+      div
+        div.logo.serif vizipedia
+        form(method="post")
+          input(type="text",name="topic",placeholder="Search...")
+          button(type="submit")
+            span(class="fa fa-fw fa-search")
