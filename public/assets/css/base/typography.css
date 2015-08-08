@@ -1,19 +1,29 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat);
 @import url(http://fonts.googleapis.com/css?family=Raleway:500,600,400,300);
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400,700,300);
 @import url(http://fonts.googleapis.com/css?family=Lora:400,700);
 
 html {
-	color:#333;
+	color:#2a2a2a;
 	line-height:1.25;
-	font-size:18px;
-	font-family: Proxima Nova, sans-serif;
+	font-size:20px;
 	font-weight:400;
 	letter-spacing:.0;
 }
 
-h1,h2,h3,h4,h5,h6,.h {
+html,
+input {
 	font-family: Proxima Nova, sans-serif;
+}
+
+input {
+  font-size:15px;
+}
+
+h1,h2,h3,h4,h5,h6,.h {
+	font-family: Lora, Proxima Nova, sans-serif;
 	#font-weight:400 !important;
 }
 
@@ -32,14 +42,15 @@ p:last-of-type {
 	margin-bottom:0;
 }
 
-.serif {font-family: Lora, serif;}
+.logo.serif {font-family: Lora, serif;}
+.serif {font-family: Merriweather, serif;}
 .hl {color:#0095da;}
 .ahl, a.ahl {color:#0a82d1;}
 .ahl2, a.ahl2 {color:#15bcef;}
 
 a:link, a:visited, a:active, a:hover {
 	text-decoration: none;
-	color:#2a80b9;
+	color:inherit;
 }
 
 @font-face {

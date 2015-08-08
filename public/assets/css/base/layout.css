@@ -1,7 +1,6 @@
 .wrapper {
-	width:calc(90%);
-	min-width:1175px;
-	max-width:1336px;
+ 	width:calc((425 * 100% - 75000px) / 570);
+	width:60%;
 	margin:0px auto;
 }
 
