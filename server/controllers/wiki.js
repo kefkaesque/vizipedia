@@ -7,6 +7,7 @@ var amqp = require('amqplib');
 var when = require('when');
 var uuid = require('node-uuid');
 var WikiArticle = require('../models/wikiArticle.js');
+var configEnv = require('../config/env.js');
 
 router.get('/:topic', function(req, res) {
   WikiArticle.findOne({
@@ -27,10 +28,12 @@ router.get('/:topic', function(req, res) {
 var queue = function(req, res) {
   var topic = req.params.topic;
   var defer = when.defer;
-  amqp.connect('amqp://localhost').then(function(conn) {
+  var url = configEnv.CLOUDAMQP_URL;
+  amqp.connect(url).then(function(conn) {
     return when(conn.createChannel().then(function(ch) {
       var answer = defer();
       var corrId = uuid();
+      var q = 'rpc_queue';
       function maybeAnswer(msg) {
         if(msg.properties.correlationId === corrId) {
           answer.resolve(msg.content.toString());
@@ -45,7 +48,7 @@ var queue = function(req, res) {
       });
 
       ok = ok.then(function(queue) {
-        ch.sendToQueue('rpc_queue', new Buffer(topic), {
+        ch.sendToQueue(q, new Buffer(topic), {
           correlationId: corrId, replyTo: queue
         });
         return answer.promise;

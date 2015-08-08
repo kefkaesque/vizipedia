@@ -1,6 +1,7 @@
 var amqp = require('amqplib');
 var request = require('request');
-var WikiArticle = require('./server/models/wikiArticle.js');
+var WikiArticle = require('../server/models/wikiArticle.js');
+var configEnv = require('../server/config/env.js');
 
 function getWikiPage(topic, cb) {
   var endpoint = 'https://en.wikipedia.org/w/api.php?';
@@ -16,7 +17,8 @@ function getWikiPage(topic, cb) {
   });
 }
 
-amqp.connect('amqp://localhost').then(function(conn) {
+var url = configEnv.CLOUDAMQP_URL;
+amqp.connect(url).then(function(conn) {
   process.once('SIGINT', function() { conn.close(); });
   return conn.createChannel().then(function(ch) {
     var q = 'rpc_queue';
