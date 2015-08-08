@@ -17,7 +17,7 @@ function getWikiPage(topic, cb) {
   });
 }
 
-var url = configEnv.CLOUDAMQP_URL;
+var url = configEnv.cloudAMQP;
 amqp.connect(url).then(function(conn) {
   process.once('SIGINT', function() { conn.close(); });
   return conn.createChannel().then(function(ch) {
