@@ -2,11 +2,13 @@ var express = require('express');
 var router = express.Router();
 module.exports = router;
 
-var wiki = require('./wiki');
+var landing = require('./landing');
 var auth = require('./auth');
+var wiki = require('./wiki');
 
 // ---------------------------------------------------------------------------
 
+router.use('/', landing);
 router.use('/', auth);
 router.use('/wiki', wiki);
 
@@ -14,5 +16,5 @@ router.use('/wiki', wiki);
 
 // Placeholder user welcome
 router.get('/greet', function(req, res) {
-  res.render("greet");
+  res.render('greet');
 });
