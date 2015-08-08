@@ -1,7 +1,6 @@
-#!/usr/bin/env node
-
 var amqp = require('amqplib');
 var request = require('request');
+var WikiArticle = require('./server/models/wikiArticle.js');
 
 function getWikiPage(topic, cb) {
   var endpoint = 'https://en.wikipedia.org/w/api.php?';
@@ -33,9 +32,12 @@ amqp.connect('amqp://localhost').then(function(conn) {
     function reply(msg) {
       var message = msg.content.toString();
       var response = getWikiPage(message, function(data) {
+        WikiArticle.create({title: message, content: data.toString()});
+        // setTimeout(function() {
         ch.sendToQueue(msg.properties.replyTo,
                        new Buffer(data.toString()),
                        {correlationId: msg.properties.correlationId});
+        // }, 10000);
       });
       ch.ack(msg);
     }

@@ -60,7 +60,7 @@ classMethods.signup = function(username, password, email) {
       return user;
     });
   });
-}
+};
 
 // --------------------------------------------------------------------------------
 

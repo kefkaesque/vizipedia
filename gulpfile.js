@@ -32,7 +32,7 @@ gulp.task('clean', function(cb) {
   del(['public/assets/dest/*'], cb);
 });
 
-/* 
+/*
 gulp-sourcemaps
 Write inline source maps
 Inline source maps are embedded in the source file.
@@ -51,7 +51,7 @@ gulp.task('build-js', ['clean'], function() {
     .pipe(sourcemaps.init())
       .pipe(concat('bundle.js'))
       //only uglify if gulp is ran with '--type production'
-      .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop()) 
+      .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('public/assets/dest/javascript'));
 });
