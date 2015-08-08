@@ -22,8 +22,10 @@ classMethods.login = function(username, password) {
     }
   })
   .then(function(user) {
-    if(user.usesPassword(password)) {
-      return user;
+    if(user) {
+      if(user.usesPassword(password)) {
+        return user;
+      }
     }
     return false;
   });
