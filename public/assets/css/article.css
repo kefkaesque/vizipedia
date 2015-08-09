@@ -1,14 +1,15 @@
 .article {
-  padding:2.6em 0;
+  padding:1.6em 0;
   line-height:1.45;
 }
 
+.article h1,
 .article h2 {
-  margin:1.6em 0 .5em;
+  margin:1em 0 .5em;
 }
 
 .article p {
-  margin-bottom:1.6em;
+  margin-bottom:1em;
 }
 
 .article a {color:#2a80b9; text-decoration:none;}
@@ -19,6 +20,7 @@
 }
 
 .article img,
+.thumb,
 .infobox,
 .hatnote,
 .reference,

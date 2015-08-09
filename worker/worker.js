@@ -1,5 +1,6 @@
 var amqp = require('amqplib');
 var request = require('request');
+var Vizifier = require("./vizifier.js");
 var WikiArticle = require('../server/models/wikiArticle.js');
 var configEnv = require('../server/config/env.js');
 
@@ -12,7 +13,8 @@ function getWikiPage(topic, cb) {
       // handle 404 page here.
       cb('');
     } else {
-      cb(JSON.parse(body).parse.text['*']);
+      body = JSON.parse(body).parse;
+      cb(body.text['*'], body.title);
     }
   });
 }
@@ -33,11 +35,12 @@ amqp.connect(url).then(function(conn) {
 
     function reply(msg) {
       var message = msg.content.toString();
-      var response = getWikiPage(message, function(data) {
-        WikiArticle.create({title: message, content: data.toString()});
+      var response = getWikiPage(message, function(article, title) {
+        article = Vizifier.vizify(article, title);
+        WikiArticle.create({title: title, content: article});
         // setTimeout(function() {
         ch.sendToQueue(msg.properties.replyTo,
-                       new Buffer(data.toString()),
+                       new Buffer(article),
                        {correlationId: msg.properties.correlationId});
         // }, 10000);
       });
