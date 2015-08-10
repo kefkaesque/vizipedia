@@ -6,15 +6,28 @@ var configEnv = require('../server/config/env.js');
 
 function getWikiPage(topic, cb) {
   var endpoint = 'https://en.wikipedia.org/w/api.php?';
-  var reqParam = 'action=parse&format=json&page=' + encodeURI(topic) + '&prop=text';
+  var reqParam = 'action=parse&format=json&page=' + encodeURI(topic);// + '&prop=text';
   var reqUrl = endpoint + reqParam;
   request(reqUrl, function(error, response, body) {
-    if (JSON.parse(body).parse === undefined) {
+    body = JSON.parse(body);
+    if (body.parse === undefined) {
       // handle 404 page here.
       cb('');
     } else {
-      body = JSON.parse(body).parse;
-      cb(body.text['*'], body.title);
+      var article = body.parse.text['*'];
+      var title = body.parse.title;
+
+      if(article.indexOf("redirectMsg")>=0) {
+        // TODO: make this efficient
+        var links = body.parse.links;
+        for(var i = 0; i < links.length; i++) {
+          var l = links[i];
+          if(l.ns===0) {
+            title = l['*'];
+          }
+        }
+      }
+      cb(article, title);
     }
   });
 }
@@ -36,12 +49,20 @@ amqp.connect(url).then(function(conn) {
     function reply(msg) {
       var message = msg.content.toString();
       var response = getWikiPage(message, function(article, title) {
-        article = Vizifier.vizify(article, title);
-        WikiArticle.create({title: title, content: article});
+        var ntitle = title.replace(/ /g, '_');
+        if(ntitle === message) {
+          article = Vizifier.vizify(article, title);
+        } else {
+          article = '';
+        }
+        WikiArticle.create({query: message, title: ntitle, content: article});
         // setTimeout(function() {
         ch.sendToQueue(msg.properties.replyTo,
-                       new Buffer(article),
-                       {correlationId: msg.properties.correlationId});
+          new Buffer(JSON.stringify({
+            article:article,
+            title:title
+          })),
+          {correlationId: msg.properties.correlationId});
         // }, 10000);
       });
       ch.ack(msg);

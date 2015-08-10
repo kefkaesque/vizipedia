@@ -2,6 +2,9 @@ var Sequelize = require('sequelize');
 var db = require('../config/postgres.js');
 
 var wikiArticle = db.define('wikiarticle', {
+  query: {
+    type: Sequelize.STRING
+  },
   title: {
     type: Sequelize.STRING
   },
