@@ -11,6 +11,9 @@ var wikiArticle = db.define('wikiarticle', {
   },
   content: {
     type: Sequelize.STRING
+  },
+  recommend: {
+    type: Sequelize.INTEGER
   }
 });
 
