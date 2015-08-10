@@ -19,7 +19,7 @@
   position:absolute;
   width:100%;
   padding:0 1em;
-  padding-top:.24em;
+  #padding-top:.24em;
   background:rgba(0,0,0,.03);
   box-shadow:0px 1px 1px rgba(255,255,255,.1);
   color:#fff;
@@ -76,7 +76,7 @@
 
 .filled .header {
   position:relative;
-  padding-top:.24em;
+  #padding-top:.24em;
   background:#222;
 }
 
@@ -84,7 +84,7 @@
   content:"";
   position:absolute;
   left:0; top:0;
-  width:100%; height:.24em;
+  #width:100%; height:.24em;
   background:url("../img/bg.jpg"), #333;
   background-size:100% auto;
 }
