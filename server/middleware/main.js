@@ -6,6 +6,8 @@ module.exports = app;
 app.use(function(req, res, next) {
   if(req.user) {
     res.locals.username = req.user.username;
+    res.locals.user = {};
+    res.locals.user.username = req.user.username;
   }
   next();
 });
