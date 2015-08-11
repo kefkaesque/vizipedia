@@ -66,8 +66,8 @@ classMethods.getHistory = function(userId, limit) {
   })
   .then(function(articles) {
     return articles;
-  })
-}
+  });
+};
 
 var visitedArticle = db.define('visitedArticles', schema, {classMethods: classMethods});
 

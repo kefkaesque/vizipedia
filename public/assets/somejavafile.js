@@ -2,7 +2,7 @@
 // var VisitedArticle = require('../models/visitedArticle.js');
 
 var recommend = function() {
-  console.log('hey');
+  console.log('hey' );
 };
 // };
 // router.get('/:topic', function(req, res) {
