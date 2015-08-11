@@ -45,7 +45,7 @@ amqp.connect(url).then(function(conn) {
         else
           article = '';
         //console.log("******", query, title, article.substring(0,100));
-        WikiArticle.create({query: query, title: ntitle, content: article.substring(0,255)});
+        WikiArticle.create({query: query, title: ntitle, content: article});
         /*if(query !== ntitle) {
           WikiArticle.create({query: query, title: ntitle, content: ''});
           if(query !== title)
