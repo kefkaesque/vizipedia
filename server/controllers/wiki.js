@@ -21,8 +21,9 @@ router.get('/:topic', function(req, res) {
       redirect(res, article.title);
     }
     else if(article) {
-      // VisitedArticle.visitIfUnvisited(res.locals.user.username, article.title);
-      VisitedArticle.visitIfUnvisited('carter', article.title);
+      if(res.locals.user.username){
+        VisitedArticle.visitIfUnvisited(res.locals.user.username, article.title);
+      }
       res.locals.article = "FROM DB"+article.content;
       res.render("article");
     } else {
