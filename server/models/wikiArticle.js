@@ -10,7 +10,7 @@ var wikiArticle = db.define('wikiarticle', {
     type: Sequelize.STRING
   },
   content: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   recommend: {
     type: Sequelize.INTEGER
