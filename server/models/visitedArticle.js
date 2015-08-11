@@ -7,6 +7,9 @@ var schema = {
   },
   articleTitle: {
     type: Sequelize.STRING
+  },
+  liked: {
+    type: Sequelize.BOOLEAN
   }
 };
 
@@ -14,18 +17,29 @@ var classMethods = {};
 
 classMethods.visitIfUnvisited = function(username, articleTitle) {
   //check if visited already
-  visitedArticle.findOne({
+  visitedArticle.findOrCreate({
     where: {
       username: username,
       articleTitle: articleTitle
-    }
-  })
-  .then(function(visited) {
-    //if not visited already, mark as visited
-    if(!visited) {
-      visitedArticle.create({username: username, articleTitle: articleTitle})
+    },
+    defaults: {
+      liked: false
     }
   });
+
+};
+
+classMethods.toggleLike = function(username, articleTitle) {
+  visitedArticle.findOne({
+     where: {
+      username: username,
+      articleTitle: articleTitle
+    }   
+  })
+  .then(function(visited) {
+    visited.update({liked: !visited.liked});
+  });
+
 };
 
 var visitedArticle = db.define('visitedArticles', schema, {classMethods: classMethods});
