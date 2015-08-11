@@ -12,18 +12,25 @@ var configEnv = require('../config/env.js');
 router.get('/:topic', function(req, res) {
   WikiArticle.findOne({
     where: {
-      title: req.params.topic
+      query: req.params.topic
     }
   })
   .then(function(article) {
-    if(article) {
-      res.locals.article = article.content;
+    if(article && article.title !== req.params.topic) {
+      redirect(res, article.title);
+    }
+    else if(article) {
+      res.locals.article = "FROM DB"+article.content;
       res.render("article");
     } else {
       queue(req, res);
     }
   });
 });
+
+var redirect = function(res, topic) {
+  res.redirect("/wiki/"+topic);
+}
 
 var queue = function(req, res) {
   var topic = req.params.topic;
@@ -55,7 +62,9 @@ var queue = function(req, res) {
       });
 
       return ok.then(function(data) {
-        res.locals.article = data;
+        data = JSON.parse(data);
+        //redirect(res, data.title);
+        res.locals.article = "FROM REQUEST"+data.article;
         res.render("article");
       });
     })).ensure(function() { conn.close(); });
