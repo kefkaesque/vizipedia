@@ -21,8 +21,9 @@ router.get('/:topic', function(req, res) {
       redirect(res, article.title);
     }
     else if(article) {
-      if(res.locals.user.username){
-        VisitedArticle.visitIfUnvisited(res.locals.user.username, article.title);
+      res.locals.Locals.articleid = article.id;
+      if(res.locals.user.id){
+        VisitedArticle.visitIfUnvisited(res.locals.user.id, article.id);
       }
       res.locals.article = "FROM DB"+article.content;
       res.render("article");
