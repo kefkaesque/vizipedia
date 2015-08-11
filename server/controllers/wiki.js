@@ -63,7 +63,9 @@ var queue = function(req, res) {
 
       return ok.then(function(data) {
         data = JSON.parse(data);
-        redirect(res, data.title);
+        //redirect(res, data.title);
+        res.locals.article = "FROM REQUEST"+data.article;
+        res.render("article");
       });
     })).ensure(function() { conn.close(); });
   }).then(null, console.warn);

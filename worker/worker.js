@@ -6,7 +6,7 @@ var configEnv = require('../server/config/env.js');
 
 function getWikiPage(topic, cb) {
   var endpoint = 'https://en.wikipedia.org/w/api.php?';
-  var reqParam = 'action=parse&format=json&page=' + encodeURI(topic);// + '&prop=text';
+  var reqParam = 'action=parse&format=json&page=' + encodeURI(topic) + '&prop=text&redirects';
   var reqUrl = endpoint + reqParam;
   request(reqUrl, function(error, response, body) {
     body = JSON.parse(body);
@@ -16,17 +16,7 @@ function getWikiPage(topic, cb) {
     } else {
       var article = body.parse.text['*'];
       var title = body.parse.title;
-
-      if(article.indexOf("redirectMsg")>=0) {
-        // TODO: make this efficient
-        var links = body.parse.links;
-        for(var i = 0; i < links.length; i++) {
-          var l = links[i];
-          if(l.ns===0) {
-            title = l['*'];
-          }
-        }
-      }
+      article = Vizifier.vizify(article, title);
       cb(article, title);
     }
   });
@@ -47,15 +37,17 @@ amqp.connect(url).then(function(conn) {
     });
 
     function reply(msg) {
-      var message = msg.content.toString();
-      var response = getWikiPage(message, function(article, title) {
+      var query = msg.content.toString();
+      var response = getWikiPage(query, function(article, title) {
         var ntitle = title.replace(/ /g, '_');
-        if(ntitle === message) {
-          article = Vizifier.vizify(article, title);
-        } else {
-          article = '';
+
+        WikiArticle.create({query: ntitle, title: ntitle, content: article});
+        if(query !== ntitle) {
+          WikiArticle.create({query: query, title: ntitle, content: ''});
+          if(query !== title)
+            WikiArticle.create({query: title, title: ntitle, content: ''});
         }
-        WikiArticle.create({query: message, title: ntitle, content: article});
+
         // setTimeout(function() {
         ch.sendToQueue(msg.properties.replyTo,
           new Buffer(JSON.stringify({
