@@ -19,3 +19,8 @@ router.use('/comments', comments)
 router.get('/greet', function(req, res) {
   res.render('greet');
 });
+
+// Placeholder for like
+router.get('/like', function(req, res) {
+  console.log('***res*** ', res);
+});

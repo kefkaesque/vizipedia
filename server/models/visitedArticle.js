@@ -25,7 +25,6 @@ classMethods.visitIfUnvisited = function(userId, articleId) {
       liked: false
     }
   });
-
 };
 
 classMethods.toggleLike = function(userId, articleId) {
@@ -38,7 +37,6 @@ classMethods.toggleLike = function(userId, articleId) {
   .then(function(visited) {
     visited.update({liked: !visited.liked});
   });
-
 };
 
 classMethods.checkIfLiked = function(userId, articleId) {
@@ -51,7 +49,18 @@ classMethods.checkIfLiked = function(userId, articleId) {
   .then(function(visited) {
     return visited.liked;
   });
+};
 
+classMethods.numLiked = function(articleId) {
+  return visitedArticle.findAndCount({
+     where: {
+      articleId: articleId,
+      liked: true
+    }
+  })
+  .then(function(result) {
+    return result;
+  });
 };
 
 // Return the most recent articles visited by user; "limit" will determine the number returned.
