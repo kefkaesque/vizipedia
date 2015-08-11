@@ -9,7 +9,3 @@ function run(article, title) {
 function addTitle(article, title) {
   return "<h1>"+title+"</h1>"+article;
 }
-
-function addButton() {
-  return "<button>Recommend<button>";
-}
