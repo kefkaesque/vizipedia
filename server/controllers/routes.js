@@ -5,12 +5,13 @@ module.exports = router;
 var landing = require('./landing');
 var auth = require('./auth');
 var wiki = require('./wiki');
-
+var comments = require('./comments')
 // ---------------------------------------------------------------------------
 
 router.use('/', landing);
 router.use('/', auth);
 router.use('/wiki', wiki);
+router.use('/comments', comments)
 
 // ---------------------------------------------------------------------------
 
