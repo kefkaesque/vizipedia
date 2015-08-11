@@ -2,11 +2,11 @@ var Sequelize = require('sequelize');
 var db = require('../config/postgres.js');
 
 var schema = {
-  username: {
-    type: Sequelize.STRING
+  userId: {
+    type: Sequelize.INTEGER
   },
-  articleTitle: {
-    type: Sequelize.STRING
+  articleId: {
+    type: Sequelize.INTEGER
   },
   liked: {
     type: Sequelize.BOOLEAN
@@ -15,12 +15,11 @@ var schema = {
 
 var classMethods = {};
 
-classMethods.visitIfUnvisited = function(username, articleTitle) {
-  //check if visited already
-  visitedArticle.findOrCreate({
+classMethods.visitIfUnvisited = function(userId, articleId) {
+  return visitedArticle.findOrCreate({
     where: {
-      username: username,
-      articleTitle: articleTitle
+      userId: userId,
+      articleId: articleId
     },
     defaults: {
       liked: false
@@ -29,11 +28,11 @@ classMethods.visitIfUnvisited = function(username, articleTitle) {
 
 };
 
-classMethods.toggleLike = function(username, articleTitle) {
-  visitedArticle.findOne({
+classMethods.toggleLike = function(userId, articleId) {
+  return visitedArticle.findOne({
      where: {
-      username: username,
-      articleTitle: articleTitle
+      userId: userId,
+      articleId: articleId
     }
   })
   .then(function(visited) {
@@ -42,12 +41,25 @@ classMethods.toggleLike = function(username, articleTitle) {
 
 };
 
+classMethods.checkIfLiked = function(userId, articleId) {
+  return visitedArticle.findOne({
+     where: {
+      userId: userId,
+      articleId: articleId
+    }
+  })
+  .then(function(visited) {
+    return visited.liked;
+  });
+
+};
+
 // Return the most recent articles visited by user; "limit" will determine the number returned.
-// Returns an array of visitedArticle instances with username, articleTitle, liked, createdAt, updatedAt
-classMethods.getHistory = function(username, limit) {
+// Returns an array of visitedArticle instances with userId, articleId, liked, createdAt, updatedAt
+classMethods.getHistory = function(userId, limit) {
   return visitedArticle.findAll({
     where: {
-      username: username
+      userId: userId
     },
     limit: limit,
     order: [['createdAt','DESC']]
