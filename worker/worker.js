@@ -16,7 +16,6 @@ function getWikiPage(topic, cb) {
     } else {
       var article = body.parse.text['*'];
       var title = body.parse.title;
-      article = Vizifier.vizify(article, title);
       cb(article, title);
     }
   });
@@ -41,12 +40,16 @@ amqp.connect(url).then(function(conn) {
       var response = getWikiPage(query, function(article, title) {
         var ntitle = title.replace(/ /g, '_');
 
+        if(query === ntitle)
+          article = Vizifier.vizify(article, title);
+        else
+          article = '';
         WikiArticle.create({query: ntitle, title: ntitle, content: article});
-        if(query !== ntitle) {
+        /*if(query !== ntitle) {
           WikiArticle.create({query: query, title: ntitle, content: ''});
           if(query !== title)
             WikiArticle.create({query: title, title: ntitle, content: ''});
-        }
+        }*/
 
         // setTimeout(function() {
         ch.sendToQueue(msg.properties.replyTo,
