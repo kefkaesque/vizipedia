@@ -42,7 +42,22 @@ classMethods.toggleLike = function(username, articleTitle) {
 
 };
 
+classMethods.getHistory = function(username, limit) {
+  visitedArticle.findAll({
+    where: {
+      username: username
+    },
+    limit: limit,
+    order: [['createdAt','DESC']]
+  })
+  .then(function(articles) {
+    console.log(articles);
+  })
+}
+
 var visitedArticle = db.define('visitedArticles', schema, {classMethods: classMethods});
 
 db.sync();
 module.exports = visitedArticle;
+
+visitedArticle.getHistory('me', 10);
