@@ -7,6 +7,7 @@ var amqp = require('amqplib');
 var when = require('when');
 var uuid = require('node-uuid');
 var WikiArticle = require('../models/wikiArticle.js');
+var VisitedArticle = require('../models/visitedArticle.js')
 var configEnv = require('../config/env.js');
 
 router.get('/:topic', function(req, res) {
@@ -20,6 +21,9 @@ router.get('/:topic', function(req, res) {
       redirect(res, article.title);
     }
     else if(article) {
+      if(res.locals.user.username){
+        VisitedArticle.visitIfUnvisited(res.locals.user.username, article.title);
+      }
       res.locals.article = "FROM DB"+article.content;
       res.render("article");
     } else {
