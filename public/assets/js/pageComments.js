@@ -3,7 +3,7 @@ var Comment = React.createClass({
     return (
       <div className="comment">
         <h2 className="commentAuthor">
-          {this.props.author}
+          {this.props.username}
         </h2>
         {this.props.children}
       </div>
@@ -26,21 +26,18 @@ var CommentBox = React.createClass({
     });
   },
   handleCommentSubmit: function(comment) {
-    var comments = this.state.data;
-    comments.push(comment);
-    this.setState({data: comments}, function() {
-      $.ajax({
-        url: this.props.url,
-        dataType: 'json',
-        type: 'POST',
-        data: comment,
-        success: function(data) {
-          this.setState({data: data});
-        }.bind(this),
-        error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
-        }.bind(this)
-      });
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: comment,
+      success: function(data) {
+        console.log(data);
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
     });
   },
   getInitialState: function() {
@@ -64,7 +61,7 @@ var CommentList = React.createClass({
   render: function() {
     var commentNodes = this.props.data.map(function(comment, index) {
       return (
-        <Comment author={comment.author} key={index}>
+        <Comment username={comment.username} key={index}>
           {comment.text}
         </Comment>
       );
@@ -80,20 +77,17 @@ var CommentList = React.createClass({
 var CommentForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
-    var author = React.findDOMNode(this.refs.author).value.trim();
     var text = React.findDOMNode(this.refs.text).value.trim();
-    if (!text || !author) {
+    if (!text) {
       return;
     }
-    this.props.onCommentSubmit({author: author, text: text});
-    React.findDOMNode(this.refs.author).value = '';
+    this.props.onCommentSubmit({text: text});
     React.findDOMNode(this.refs.text).value = '';
     return;
   },
   render: function() {
     return (
       <form className="commentForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Your name" ref="author"/>
         <input type="text" placeholder="Say something..." ref="text" />
         <input type="submit" value="Post" />
       </form>
@@ -101,7 +95,7 @@ var CommentForm = React.createClass({
   }
 });
 
-var articleId = 1339;
+var articleId = 'Cats';
 
 React.render(
   <CommentBox url={"comments/"+articleId} />,
