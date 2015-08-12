@@ -1,3 +1,15 @@
+var Comment = React.createClass({
+  render: function() {
+    return (
+      <div className="comment">
+        <h2 className="commentAuthor">
+          {this.props.author}
+        </h2>
+        {this.props.children}
+      </div>
+    )
+  }
+});
 
 var CommentBox = React.createClass({
   loadCommentsFromServer: function() {
@@ -14,17 +26,21 @@ var CommentBox = React.createClass({
     });
   },
   handleCommentSubmit: function(comment) {
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      type: 'POST',
-      data: comment,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
+    var comments = this.state.data;
+    comments.push(comment);
+    this.setState({data: comments}, function() {
+      $.ajax({
+        url: this.props.url,
+        dataType: 'json',
+        type: 'POST',
+        data: comment,
+        success: function(data) {
+          this.setState({data: data});
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+        }.bind(this)
+      });
     });
   },
   getInitialState: function() {
@@ -46,9 +62,9 @@ var CommentBox = React.createClass({
 
 var CommentList = React.createClass({
   render: function() {
-    var commentNodes = this.props.data.map(function (comment) {
+    var commentNodes = this.props.data.map(function(comment, index) {
       return (
-        <Comment author={comment.author}>
+        <Comment author={comment.author} key={index}>
           {comment.text}
         </Comment>
       );
@@ -77,26 +93,14 @@ var CommentForm = React.createClass({
   render: function() {
     return (
       <form className="commentForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Your name" />
-        <input type="text" placeholder="Say something..." />
+        <input type="text" placeholder="Your name" ref="author"/>
+        <input type="text" placeholder="Say something..." ref="text" />
         <input type="submit" value="Post" />
       </form>
     );
   }
 });
 
-var Comment = React.createClass({
-  render: function() {
-    return (
-      <div className="comment">
-        <h2>
-          {this.props.author}
-        </h2>
-        {this.props.children}
-      </div>
-    )
-  }
-})
 
 React.render(
   <CommentBox url="comments/test" />,
