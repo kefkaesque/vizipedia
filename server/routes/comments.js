@@ -3,7 +3,7 @@ var router = express.Router();
 module.exports = router;
 
 var data = [
-  {author: "Carterx", text: "Hey guys"},
+  {author: "Carter", text: "Hey guys"},
   {author: "David", text: "How's it going?"},
   {author: "Patrick", text: "Not bad, making good progress."},
   {author: "Stephen", text: "Good work!"}
@@ -14,7 +14,6 @@ router.get('/test', function(req, res) {
 });
 
 router.post('/test', function(req, res) {
-  console.log(req.body);
-  data.push(req.comment);
+  data.push(req.body);
   res.send(JSON.stringify(data));
 });
