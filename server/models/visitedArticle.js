@@ -52,14 +52,14 @@ classMethods.checkIfLiked = function(userId, articleId) {
 };
 
 classMethods.numLiked = function(articleId) {
-  return visitedArticle.findAndCount({
+  return visitedArticle.findAndCountAll({
      where: {
       articleId: articleId,
       liked: true
     }
   })
   .then(function(result) {
-    return result;
+    return result.count;
   });
 };
 

@@ -3,8 +3,9 @@ html
   head
     include style.jade
   body
-    button(onclick='recommend()')
+    button(onclick='recommend(Locals.articleid)')
       | Recommend
+    span(class='likeCount')
     div.filled
       include header.jade
     div.wrapper.article.serif!= article

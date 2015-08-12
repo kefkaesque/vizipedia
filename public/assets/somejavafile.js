@@ -1,6 +1,8 @@
-// var WikiArticle = require('../models/wikiArticle.js');
-// var VisitedArticle = require('../models/visitedArticle.js');
-var recommend = function() {
-  console.log('hey' );
-  return $.get('/like');
+var recommend = function(articleId) {
+  $.get('/likes/' + articleId, function(numLiked) {
+    console.log("num of liked: ", numLiked);
+    $('.likeCount').text(numLiked);
+  });
+
 };
+
