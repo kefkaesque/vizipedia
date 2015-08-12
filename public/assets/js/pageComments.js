@@ -14,7 +14,7 @@ var Comment = React.createClass({
 var CommentBox = React.createClass({
   loadCommentsFromServer: function() {
     $.ajax({
-      url: 'comments/test',
+      url: this.props.url,
       dataType: 'json',
       cache: false,
       success: function(data) {
@@ -101,8 +101,9 @@ var CommentForm = React.createClass({
   }
 });
 
+var articleId = 1339;
 
 React.render(
-  <CommentBox url="comments/test" />,
+  <CommentBox url={"comments/"+articleId} />,
   document.getElementById('content')
 );
