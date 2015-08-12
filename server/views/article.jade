@@ -3,11 +3,11 @@ html
   head
     include style.jade
   body
-    button(onclick='recommend(Locals.articleid)')
+    button(class='recommend' onclick='recommend(Locals.articleid)')
       | Recommend
-    span(class='likeCount')
+    span(class='rCount')
     div.filled
       include header.jade
     div.wrapper.article.serif!= article
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
-  script(src='/assets/somejavafile.js')
+  script(src='/assets/js/recommend.js')

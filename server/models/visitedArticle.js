@@ -8,7 +8,7 @@ var schema = {
   articleId: {
     type: Sequelize.INTEGER
   },
-  liked: {
+  recommended: {
     type: Sequelize.BOOLEAN
   }
 };
@@ -22,12 +22,12 @@ classMethods.visitIfUnvisited = function(userId, articleId) {
       articleId: articleId
     },
     defaults: {
-      liked: false
+      recommended: false
     }
   });
 };
 
-classMethods.toggleLike = function(userId, articleId) {
+classMethods.toggleRec = function(userId, articleId) {
   return visitedArticle.findOne({
      where: {
       userId: userId,
@@ -35,11 +35,11 @@ classMethods.toggleLike = function(userId, articleId) {
     }
   })
   .then(function(visited) {
-    visited.update({liked: !visited.liked});
+    visited.update({recommended: !visited.recommended});
   });
 };
 
-classMethods.checkIfLiked = function(userId, articleId) {
+classMethods.checkIfRec = function(userId, articleId) {
   return visitedArticle.findOne({
      where: {
       userId: userId,
@@ -47,15 +47,15 @@ classMethods.checkIfLiked = function(userId, articleId) {
     }
   })
   .then(function(visited) {
-    return visited.liked;
+    return visited.recommended;
   });
 };
 
-classMethods.numLiked = function(articleId) {
+classMethods.numRec = function(articleId) {
   return visitedArticle.findAndCountAll({
      where: {
       articleId: articleId,
-      liked: true
+      recommended: true
     }
   })
   .then(function(result) {
@@ -64,7 +64,7 @@ classMethods.numLiked = function(articleId) {
 };
 
 // Return the most recent articles visited by user; "limit" will determine the number returned.
-// Returns an array of visitedArticle instances with userId, articleId, liked, createdAt, updatedAt
+// Returns an array of visitedArticle instances with userId, articleId, recommended, createdAt, updatedAt
 classMethods.getHistory = function(userId, limit) {
   return visitedArticle.findAll({
     where: {
