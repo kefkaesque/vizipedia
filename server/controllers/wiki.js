@@ -7,7 +7,7 @@ var amqp = require('amqplib');
 var when = require('when');
 var uuid = require('node-uuid');
 var WikiArticle = require('../models/wikiArticle.js');
-var VisitedArticle = require('../models/visitedArticle.js')
+var VisitedArticle = require('../models/visitedArticle.js');
 var configEnv = require('../config/env.js');
 
 router.get('/:topic', function(req, res) {
@@ -35,7 +35,7 @@ router.get('/:topic', function(req, res) {
 
 var redirect = function(res, topic) {
   res.redirect("/wiki/"+topic);
-}
+};
 
 var queue = function(req, res) {
   var topic = req.params.topic;
@@ -69,8 +69,8 @@ var queue = function(req, res) {
       return ok.then(function(data) {
         data = JSON.parse(data);
         redirect(res, data.title);
-        //res.locals.article = "FROM REQUEST"+data.article;
-        //res.render("article");
+        // res.locals.article = "FROM REQUEST"+data.article;
+        // res.render("article");
       });
     })).ensure(function() { conn.close(); });
   }).then(null, console.warn);
