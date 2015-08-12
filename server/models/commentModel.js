@@ -31,6 +31,14 @@ classMethods.getArticleComments = function(articleTitle) {
   });
 };
 
+classMethods.getUserComments = function(username) {
+  return Comment.findAll({
+    where: {
+      username: username
+    }
+  });
+};
+
 var Comment = db.define('comments', schema, {classMethods: classMethods});
 module.exports = Comment;
 

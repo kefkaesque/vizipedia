@@ -11,9 +11,6 @@ router.get('/:articleTitle', function(req, res) {
 });
 
 router.post('/:articleTitle', function(req, res) {
-  if (res.locals.user.id) {
-    console.log("user id: ", res.locals.user.id)
-  }
   commentModel.addComment(req.body.text, res.locals.user.username, req.params.articleTitle)
   .then(function() {
     return commentModel.getArticleComments(req.params.articleTitle);
