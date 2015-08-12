@@ -1,26 +1,24 @@
-$.ajax({
-  url: 'comments/test',
-  dataType: 'json',
-  cache: false,
-  success: function(data) {
-    console.log(data);
-  }.bind(this),
-  error: function(xhr, status, err) {
-    console.error('error', status, err);
-  }.bind(this)
-});
-
-/* Hard-coded data */
-var data = [
-  {author: "Carter", text: "Hey guys"},
-  {author: "David", text: "How's it going?"},
-  {author: "Patrick", text: "Not bad, making good progress."},
-  {author: "Stephen", text: "Good work!"}
-];
 
 var CommentBox = React.createClass({
+  loadCommentsFromServer: function() {
+    $.ajax({
+      url: 'comments/test',
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        console.log(data);
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('error', status, err);
+      }.bind(this)
+    });
+  },
   getInitialState: function() {
     return {data: []};
+  },
+  componentDidMount: function() {
+    this.loadCommentsFromServer();
   },
   render: function() {
     return (
@@ -74,6 +72,6 @@ var Comment = React.createClass({
 })
 
 React.render(
-  <CommentBox data={data} />, /* Hard-coded data */
+  <CommentBox url="comments/test" />, /* Hard-coded data */
   document.getElementById('content')
 );
