@@ -1,5 +1,7 @@
-window.React = require('react');
-FluxArticle = require('./components/article.react')
+var FluxArticle = require('./components/Article.react');
+// var wikiAPI = require('./utils/wikiAPI');
+
+// wikiApi.getArticleData();
 
 React.render(
 

@@ -10,7 +10,6 @@ var WikiArticle = require('../models/wikiArticle.js');
 var VisitedArticle = require('../models/visitedArticle.js');
 var configEnv = require('../config/env.js');
 
-var FluxActions = require('../../public/assets/js/actions/FluxActions.js');
 
 router.get('/:topic', function(req, res) {
   WikiArticle.findOne({
@@ -27,14 +26,12 @@ router.get('/:topic', function(req, res) {
       if(res.locals.user.id){
         VisitedArticle.visitIfUnvisited(res.locals.user.id, article.id);
       }
-      res.locals.article = "FROM DB"+article.content;
-      var data = {
-        content: article.content
-      };
+      res.locals.article = article.content;
+      // var data = {
+      //   content: article.content
+      // };
       // res.send(JSON.stringify(data));
-      var data = JSON.stringify(data);
-      FluxActions.getArticle(data);
-      // res.render("article");
+      res.render("article");
     } else {
       queue(req, res);
     }

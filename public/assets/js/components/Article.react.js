@@ -7,7 +7,7 @@ function getArticleState() {
   };
 }
 
-var FluxCartApp = React.createClass({
+var FluxArticleApp = React.createClass({
 
   getInitialState: function() {
     return getArticleState();
@@ -23,10 +23,11 @@ var FluxCartApp = React.createClass({
   render: function() {
     return (
       <div className="article">
-        <h1>hello</h1>
+        Hello, World
       </div>
     );
   },
+
 
   // Method to setState based upon Store changes
   _onChange: function() {
@@ -35,4 +36,4 @@ var FluxCartApp = React.createClass({
 
 });
 
-module.exports = FluxCartApp;
+module.exports = FluxArticleApp;
