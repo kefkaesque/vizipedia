@@ -40,8 +40,6 @@ router.get('/:topic', function(req, res) {
         };
         res.send(JSON.stringify(data));
       });
-      // res.locals.article = article.content;
-      // res.render("article");
     } else {
       queue(req, res);
     }
