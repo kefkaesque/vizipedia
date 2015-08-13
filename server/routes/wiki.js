@@ -10,6 +10,8 @@ var WikiArticle = require('../models/wikiArticle.js');
 var VisitedArticle = require('../models/visitedArticle.js');
 var configEnv = require('../config/env.js');
 
+var FluxActions = require('../../public/assets/js/actions/FluxActions.js');
+
 router.get('/:topic', function(req, res) {
   WikiArticle.findOne({
     where: {
@@ -29,7 +31,9 @@ router.get('/:topic', function(req, res) {
       var data = {
         content: article.content
       };
-      res.send(JSON.stringify(data));
+      // res.send(JSON.stringify(data));
+      var data = JSON.stringify(data);
+      FluxActions.getArticle(data);
       // res.render("article");
     } else {
       queue(req, res);

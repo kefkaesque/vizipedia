@@ -5,19 +5,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
 </head>
 <body>
-  <div id="article"></div>
+  <div id="flux-article"></div>
   <script type="text/jsx">
 
+    var Counter = React.createClass({
+      render: function() {
+        return (
+          <div>
+            <p>The <b>domestic cat</b><sup id="cite_ref-MSW3fc_1-1" class="reference"><a href="#cite_note-MSW3fc-1"><span>[</span>1<span>]</span></a></sup><sup id="cite_ref-ITIS_F.c._2-1" class="reference"><a href="#cite_note-ITIS_F.c.-2"><span>[</span>2<span>]</span></a></sup> (<i><b>Felis catus</b></i> or <i><b>Felis silvestris catus</b></i>)<sup id="cite_ref-ITIS_F.c._2-2" class="reference"><a href="#cite_note-ITIS_F.c.-2"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-Driscoll_4-1" class="reference"><a href="#cite_note-Driscoll-4"><span>[</span>4<span>]</span></a></sup> is a small, usually <a href="/wiki/Fur" title="Fur">furry</a>, <a href="/wiki/Domestication" title="Domestication">domesticated</a>, and <a href="/wiki/Carnivore" title="Carnivore">carnivorous</a> <a href="/wiki/Mammal" title="Mammal">mammal</a>. They are often called <b>housecats</b> when kept as an indoor pet or simply <b>cats</b> when there is no need to distinguish them from other <a href="/wiki/Felidae" title="Felidae">felids</a> and <a href="/wiki/Felinae" title="Felinae">felines</a>.<sup id="cite_ref-AHD_6-0" class="reference"><a href="#cite_note-AHD-6"><span>[</span>6<span>]</span></a></sup> Cats are often valued by humans for companionship and their ability to hunt vermin.</p>
+          </div>
+        );
+      }
+    });
 
-
-
-
-
-
-
-
-
-
+    React.render(<Counter/>, document.body);
 
   </script>
 </body>

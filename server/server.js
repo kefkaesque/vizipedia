@@ -30,8 +30,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(middleware);
 
-app.set('views', 'server/views');
-app.set('view engine', 'jade');
+// app.set('views', 'server/views');
+// app.set('view engine', 'jade');
+
+
 
 // --------------------------------------------------------------------------------
 
