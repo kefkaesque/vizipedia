@@ -1,11 +1,11 @@
-var FluxArticle = require('./components/Article.react');
-// var wikiAPI = require('./utils/wikiAPI');
+var React = require('react');
+var Article = require('./components/Article.react');
+var WikiUtils = require('./utils/WikiUtils');
 
-// wikiApi.getArticleData();
+// eventually the client will call this
+WikiUtils.getArticleData();
 
 React.render(
-
-  <FluxArticle />,
-  document.getElementById('flux-article')
-
+  <Article />,
+  document.getElementById('article')
 );

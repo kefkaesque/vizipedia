@@ -4,28 +4,22 @@ var FluxConstants = require('../constants/FluxConstants');
 
 var _ = require('underscore');
 
-var data = {};
+var article = {};
 function loadData(data) {
-  data = data;
+  article = data;
 }
 
 var ArticleStore = _.extend({}, EventEmitter.prototype, {
 
   getData: function() {
-    return data;
+    return article;
   },
-
- // Emit Change event
   emitChange: function() {
     this.emit('change');
   },
-
-  // Add change listener
   addChangeListener: function(callback) {
     this.on('change', callback);
   },
-
-  // Remove change listener
   removeChangeListener: function(callback) {
     this.removeListener('change', callback);
   }
@@ -33,20 +27,14 @@ var ArticleStore = _.extend({}, EventEmitter.prototype, {
 
 AppDispatcher.register(function(action) {
   var text;
-
   switch(action.actionType) {
-
-    // Respond to RECEIVE_DATA action
-    case FluxCartConstants.VIZI_SEARCH:
+    case FluxConstants.VIZI_SEARCH:
       loadData(action.data);
       break;
-
     default:
       // none
   }
-
   ArticleStore.emitChange();
-  return true;
 });
 
 module.exports = ArticleStore;

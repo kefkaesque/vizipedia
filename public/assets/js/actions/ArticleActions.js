@@ -3,13 +3,12 @@ var FluxConstants = require('../constants/FluxConstants.js');
 
 var FluxActions = {
 
-  getArticle: function(data) {
+  dispatchArticle: function(data) {
     AppDispatcher.dispatch({
       actionType: FluxConstants.VIZI_SEARCH,
       data: data
     });
   }
-
 
 }
 

@@ -3,11 +3,11 @@ var ArticleStore = require('../stores/ArticleStore');
 
 function getArticleState() {
   return {
-    data: ArticleStore.loadData(),
+    data: ArticleStore.getData(),
   };
 }
 
-var FluxArticleApp = React.createClass({
+var Article = React.createClass({
 
   getInitialState: function() {
     return getArticleState();
@@ -18,22 +18,16 @@ var FluxArticleApp = React.createClass({
   componentWillUnmount: function() {
     ArticleStore.removeChangeListener(this._onChange);
   },
-
-  // Render our child components, passing state via props
   render: function() {
     return (
-      <div className="article">
-        Hello, World
+      <div>
+        {this.state.data}
       </div>
     );
   },
-
-
-  // Method to setState based upon Store changes
   _onChange: function() {
     this.setState(getArticleState());
   }
-
 });
 
-module.exports = FluxArticleApp;
+module.exports = Article;
