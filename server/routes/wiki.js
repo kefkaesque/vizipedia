@@ -25,7 +25,7 @@ router.get('/:topic', function(req, res) {
       if(res.locals.user.id){
         VisitedArticle.visitIfUnvisited(res.locals.user.id, article.id);
       }
-      res.locals.article = "FROM DB"+article.content;
+      res.locals.article = article.content;
       res.render("article");
     } else {
       queue(req, res);
