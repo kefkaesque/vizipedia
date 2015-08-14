@@ -8,10 +8,16 @@ Profile component
 */
 
 var Profile = React.createClass({
+  componentDidMount: function() {
+    ProfileStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    ProfileStore.removeChangeListener(this._onChange);
+  },
   render: function() {
     return (
       <div className="profile">
-        <Header />
+        <ProfileHeader />
         <ReadCompletion />
         <RecommendedArticles />
         <CommentsMade />
@@ -21,7 +27,7 @@ var Profile = React.createClass({
   }
 });
 
-var Header = React.createClass({
+var ProfileHeader = React.createClass({
   componentWillMount: function() {
     //this executes right before the render
     //invoke an action to request data from server
