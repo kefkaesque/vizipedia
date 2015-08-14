@@ -1,5 +1,5 @@
 var ArticleActions = require('../actions/ArticleActions');
-
+var $ = require('jquery');
 module.exports = {
 
   getArticleData: function(topic) {

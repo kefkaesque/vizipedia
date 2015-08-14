@@ -1,5 +1,7 @@
 var React = require('react');
 var ArticleStore = require('../stores/ArticleStore');
+var WikiUtils = require('../utils/WikiUtils');
+
 
 function getArticleState() {
   return {
@@ -10,6 +12,7 @@ function getArticleState() {
 var Article = React.createClass({
 
   getInitialState: function() {
+    WikiUtils.getArticleData();
     return getArticleState();
   },
   componentDidMount: function() {
