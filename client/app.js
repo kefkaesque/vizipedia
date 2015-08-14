@@ -31,13 +31,14 @@ var Landing = React.createClass({
   }
 });
 
-var Article = React.createClass({
-  render() {
-    return (
-        <h1>Article: {this.props.params.topic}</h1>
-    )
-  }
-});
+var Article = require('./components/Article.react');
+// var Article = React.createClass({
+//   render() {
+//     return (
+//         <h1>Article: {this.props.params.topic}</h1>
+//     )
+//   }
+// });
 
 // --------------------------------------------------------------------------------
 
