@@ -1,8 +1,9 @@
-/* File: gulpfile.js */
-
-// grab our gulp packages
 var gulp  = require('gulp'),
     gutil = require('gulp-util'),
+    browserify = require('browserify'),
+    watchify = require('watchify'),
+    reactify = require('reactify'),
+    source = require('vinyl-source-stream'),
     jshint = require('gulp-jshint'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
@@ -15,6 +16,37 @@ var paths = {
   css: './public/assets/css/*.css',
   tests: './spec/*.js'
 };
+
+gulp.task('watchify', function() {
+  var handle = watchify(browserify({
+    entries: ['./client/app.js'],
+    transform: [reactify],
+    extensions: ['.js'],
+    cache: {},
+    packageCache: {},
+    fullPaths: true,
+    debug: true
+  }));
+
+  var bundle = function() {
+    handle
+    .bundle()
+    .on('error', function(err) {
+      console.log(err);
+      this.emit('end');
+    })
+    .pipe(source('app.js'))
+    .pipe(gulp.dest('./public/assets/js'));
+  };
+
+  bundle();
+
+  handle
+  .on('update', function() {
+    bundle();
+  });
+});
+
 // configure the jshint task
 gulp.task('jshint', function() {
   return gulp.src(paths.jsscripts)
@@ -24,7 +56,8 @@ gulp.task('jshint', function() {
 
 // configure which files to watch and what tasks to use on file changes
 gulp.task('watch', function() {
-  gulp.watch(paths.jsscripts, ['jshint']);
+  //gulp.watch(paths.jsscripts, ['jshint']);
+  
 });
 
 gulp.task('clean', function(cb) {
@@ -56,6 +89,6 @@ gulp.task('build-js', ['clean'], function() {
     .pipe(gulp.dest('public/assets/dest/javascript'));
 });
 
-gulp.task('default', ['watch', 'jshint', 'minify-css', 'build-js'], function() {
+gulp.task('ddefault', ['watch', 'jshint', 'minify-css', 'build-js'], function() {
   process.exit(0);
 });
