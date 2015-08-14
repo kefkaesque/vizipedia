@@ -27,11 +27,11 @@ router.get('/:topic', function(req, res) {
         VisitedArticle.visitIfUnvisited(res.locals.user.id, article.id);
       }
       res.locals.article = article.content;
-      // var data = {
-      //   content: article.content
-      // };
-      // res.send(JSON.stringify(data));
-      res.render("article");
+      var data = {
+        content: article.content
+      };
+      res.send(JSON.stringify(data));
+      // res.render("article");
     } else {
       queue(req, res);
     }
