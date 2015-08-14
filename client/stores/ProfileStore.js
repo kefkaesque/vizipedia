@@ -4,7 +4,9 @@ var FluxConstants = require('../constants/FluxConstants');
 
 var _ = require('underscore');
 
-var profileData = {};
+var profileData = {
+  username: 'patrick'
+};
 
 function storeProfileData(data) {
   profileData = data;
@@ -13,6 +15,7 @@ function storeProfileData(data) {
 var ProfileStore = _.extend({}, EventEmitter.prototype, {
 
   getData: function() {
+    console.log('profile store getting data');
     return profileData;
   },
   emitChange: function() {

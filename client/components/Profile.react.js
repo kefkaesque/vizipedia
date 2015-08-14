@@ -1,13 +1,19 @@
+var React = require('react');
 var ProfileStore = require('../stores/ProfileStore');
+var ProfileUtils = require('../utils/ProfileUtils');
+
+function getProfileState() {
+  console.log('profile.react.js getting profile state');
+  return {
+    data: ProfileStore.getData(),
+  };
+}
+
 
 var Profile = React.createClass({
-  getProfileState: function() {
-    return {
-      data: ProfileStore.getData(),
-    };
-  },
   getInitialState: function() {
-    return this.getProfileState();
+    ProfileUtils.getProfileData();
+    return getProfileState();
   },
   componentDidMount: function() {
     ProfileStore.addChangeListener(this._onChange);
@@ -18,7 +24,7 @@ var Profile = React.createClass({
   render: function() {
     return (
       <div className="mainProfile">
-        <ProfileHeader username={this.state.username} />
+        <ProfileHeader username={this.state.data.username} />
         <ReadCompletion />
         <RecommendedArticles />
         <CommentsMade />
@@ -27,7 +33,7 @@ var Profile = React.createClass({
     )
   },
   _onChange: function() {
-    this.setState(this.getProfileState());
+    this.setState(getProfileState());
   }
 });
 
@@ -36,7 +42,7 @@ var ProfileHeader = React.createClass({
   render: function() {
     return (
       <div className="header">
-        <h1>{this.state.username}</h1>
+        <h1>{this.props.username}</h1>
         <h2>Followed by 100</h2>
         <h2>Following 15</h2>
       </div>
@@ -92,7 +98,7 @@ var Playlists = React.createClass({
 
   render: function() {
     return (
-      <div classname="playlists">
+      <div className="playlists">
         <h3>Playlists</h3>
         <ul>
           <li>Data Structures</li>
@@ -102,3 +108,5 @@ var Playlists = React.createClass({
     )
   }
 });
+
+module.exports = Profile;
