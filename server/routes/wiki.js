@@ -10,6 +10,7 @@ var WikiArticle = require('../models/wikiArticle.js');
 var VisitedArticle = require('../models/visitedArticle.js');
 var configEnv = require('../config/env.js');
 
+
 router.get('/:topic', function(req, res) {
   WikiArticle.findOne({
     where: {
@@ -25,7 +26,7 @@ router.get('/:topic', function(req, res) {
       if(res.locals.user.id){
         VisitedArticle.visitIfUnvisited(res.locals.user.id, article.id);
       }
-      res.locals.article = "FROM DB"+article.content;
+      res.locals.article = article.content;
       var data = {
         content: article.content
       };
