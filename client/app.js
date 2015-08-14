@@ -34,6 +34,7 @@ var Landing = React.createClass({
   }
 });
 
+var Header = require('./components/Header.react');
 var Article = require('./components/Article.react');
 var Profile = require('./components/Profile.react');
 
