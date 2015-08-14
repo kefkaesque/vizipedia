@@ -54,6 +54,7 @@ router.get('/:topic', function(req, res) {
         };
         res.send(JSON.stringify(data));
       });
+
     } else {
       queue(req, res);
     }
