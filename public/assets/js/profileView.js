@@ -22,6 +22,11 @@ var Profile = React.createClass({
 });
 
 var Header = React.createClass({
+  componentWillMount: function() {
+    //this executes right before the render
+    //invoke an action to request data from server
+    //this action will dispatch
+  },
   render: function() {
     return (
       <div className="header">
