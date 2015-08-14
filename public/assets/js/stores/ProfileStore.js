@@ -5,7 +5,8 @@ var FluxConstants = require('../constants/FluxConstants');
 var _ = require('underscore');
 
 var profileData = {};
-function loadData(data) {
+
+function storeProfileData(data) {
   profileData = data;
 }
 
@@ -29,7 +30,7 @@ AppDispatcher.register(function(action) {
   var text;
   switch(action.actionType) {
     case FluxConstants.PROFILE_LOAD_DATA:
-      loadData(action.data);
+      storeProfileData(action.data);
       break;
     default:
       // none

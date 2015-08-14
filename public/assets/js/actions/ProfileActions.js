@@ -4,11 +4,14 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var FluxConstants = require('../constants/FluxConstants');
 
 var ProfileActions = {
-  loadData: function() {
+
+  dispatchProfileData: function(data) {
     AppDispatcher.dispatch({
-      actionType: FluxConstants.PROFILE_LOAD_DATA
+      actionType: FluxConstants.PROFILE_LOAD_DATA,
+      data: data
     });
   }
+
 };
 
 module.exports = ProfileActions;
