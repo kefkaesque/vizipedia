@@ -26,12 +26,17 @@ var Landing = React.createClass({
         <Link to="wiki" params={{topic: "google"}}>
           {'this links to ... google'}
         </Link>
+        <Link to="profile">
+          {'this links to ... profile'}
+        </Link>
       </div>
     )
   }
 });
 
 var Article = require('./components/Article.react');
+var Profile = require('./components/Profile.react');
+
 // var Article = React.createClass({
 //   render() {
 //     return (
@@ -46,6 +51,7 @@ var routes = (
   <Route handler={App}>
     <Route path='/' handler={Landing}/>
     <Route name="wiki" path='/wiki/:topic' handler={Article}/>
+    <Route name="profile" path='/profile' handler={Profile}/>
   </Route>
 );
 

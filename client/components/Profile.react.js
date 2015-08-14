@@ -1,13 +1,20 @@
-/*
-Profile component
-  Header component
-  Read Completion component
-  Recommended Articles component
-  Comments Made component
-  Playlists component
-*/
+var React = require('react');
+var ProfileStore = require('../stores/ProfileStore');
+var ProfileUtils = require('../utils/ProfileUtils');
+
+function getProfileState() {
+  console.log('profile.react.js getting profile state');
+  return {
+    data: ProfileStore.getData(),
+  };
+}
+
 
 var Profile = React.createClass({
+  getInitialState: function() {
+    ProfileUtils.getProfileData();
+    return getProfileState();
+  },
   componentDidMount: function() {
     ProfileStore.addChangeListener(this._onChange);
   },
@@ -16,27 +23,26 @@ var Profile = React.createClass({
   },
   render: function() {
     return (
-      <div className="profile">
-        <ProfileHeader />
+      <div className="mainProfile">
+        <ProfileHeader username={this.state.data.username} />
         <ReadCompletion />
         <RecommendedArticles />
         <CommentsMade />
         <Playlists />
       </div>
     )
+  },
+  _onChange: function() {
+    this.setState(getProfileState());
   }
 });
 
 var ProfileHeader = React.createClass({
-  componentWillMount: function() {
-    //this executes right before the render
-    //invoke an action to request data from server
-    //this action will dispatch
-  },
+
   render: function() {
     return (
       <div className="header">
-        <h1>carterchung</h1>
+        <h1>{this.props.username}</h1>
         <h2>Followed by 100</h2>
         <h2>Following 15</h2>
       </div>
@@ -45,6 +51,7 @@ var ProfileHeader = React.createClass({
 });
 
 var ReadCompletion = React.createClass({
+
   render: function() {
     return (
       <div className="completion">
@@ -55,6 +62,7 @@ var ReadCompletion = React.createClass({
 });
 
 var RecommendedArticles = React.createClass({
+
   render: function() {
     return (
       <div className="recommended">
@@ -70,6 +78,7 @@ var RecommendedArticles = React.createClass({
 });
 
 var CommentsMade = React.createClass({
+
   render: function() {
     return (
       <div className="commentsMade">
@@ -86,9 +95,10 @@ var CommentsMade = React.createClass({
 });
 
 var Playlists = React.createClass({
+
   render: function() {
     return (
-      <div classname="playlists">
+      <div className="playlists">
         <h3>Playlists</h3>
         <ul>
           <li>Data Structures</li>
@@ -99,7 +109,4 @@ var Playlists = React.createClass({
   }
 });
 
-React.render(
-  <Profile />,
-  document.getElementById('content')
-);
+module.exports = Profile;

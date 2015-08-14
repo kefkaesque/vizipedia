@@ -4,14 +4,18 @@ var FluxConstants = require('../constants/FluxConstants');
 
 var _ = require('underscore');
 
-var profileData = {};
-function loadData(data) {
+var profileData = {
+  username: 'patrick'
+};
+
+function storeProfileData(data) {
   profileData = data;
 }
 
 var ProfileStore = _.extend({}, EventEmitter.prototype, {
 
   getData: function() {
+    console.log('profile store getting data');
     return profileData;
   },
   emitChange: function() {
@@ -29,7 +33,7 @@ AppDispatcher.register(function(action) {
   var text;
   switch(action.actionType) {
     case FluxConstants.PROFILE_LOAD_DATA:
-      loadData(action.data);
+      storeProfileData(action.data);
       break;
     default:
       // none
