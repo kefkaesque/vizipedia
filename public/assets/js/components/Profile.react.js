@@ -17,7 +17,7 @@ var Profile = React.createClass({
   },
   render: function() {
     return (
-      <div className="profile">
+      <div className="mainProfile">
         <ProfileHeader username={this.state.username} />
         <ReadCompletion />
         <RecommendedArticles />
