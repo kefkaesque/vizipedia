@@ -1,88 +1,120 @@
 var Sequelize = require('sequelize');
 var db = require('../config/postgres.js');
-var wikiArticle = require('../models/wikiArticle.js');
+var Article = require('../models/wikiArticle.js');
 var User = require('../models/user.js');
+var Promise = require('bluebird');
 
 var schema = {
-  words: {
+  text: {
     type: Sequelize.STRING, allowNull: false
   }
 };
 
 var classMethods = {};
 
-classMethods.addcomment = function(words, userid, wikiarticleid) {
-  return Comment.create({words: words})
-  .then(function(comment){
-    comment.setUsers([userid]);
-    comment.setWikiarticles([wikiarticleid]);
-  });
-};
-
-classMethods.usergetcomment = function(username) {
-  console.log('in usergetcomment!')
+classMethods.addComment = function(text, username, articleTitle) {
+  var userid, articleid;
+  // console.log('USERNAME!!!!', username);
+  Article.findOne({
+    where: {
+      title: articleTitle
+    }
+  })
+  .then(function(article) {
+    articleid = article.dataValues.id;
+  })
   return User.findOne({
-      where: {
-        username: username
-      }
+    where: {
+      username: username
+    }
   })
   .then(function(user) {
-    console.log('user:', user.dataValues.username);
-    user.getComments()
-    .then(function(comments){
-      for (var i = 0; i < comments.length; i++){
-        console.log('user comments :', i, comments[i].dataValues.words);
-        comments[i].getWikiarticles()
-        .then(function(wikiarticles){
-          console.log('user comment wikiarticles :', wikiarticles[0].dataValues.title)
-        })
-      }
-    })
+    userid = user.dataValues.id;
+    return Comment.create({text: text})
+    .then(function(comment) {
+      comment.setWikiarticle([articleid]);
+      return comment.setUser([userid]);
+    });
   })
-}
+};
 
-classMethods.wikiarticlegetcomment = function(username) {
-  return wikiArticle.findOne({
-      where: {
-        title: username
-      }
+classMethods.getArticleComments = function(articleTitle) {
+  return Article.find({
+    where: {
+      title: articleTitle
+    }
   })
   .then(function(wikiarticle) {
-    console.log('wikiarticle:', wikiarticle.dataValues.title);
-    wikiarticle.getComments()
-    .then(function(comments){
-      for (var i = 0; i < comments.length; i++){
-        console.log('wikiarticle comments :', i, comments[i].dataValues.words);
-        comments[i].getUsers()
-        .then(function(users){
-          console.log('wikiarticle comment user :', users[0].dataValues.username)
-        })
+    return Comment.findAll({ 
+      where: { 
+        wiki_id: wikiarticle.id 
       }
     })
+    .then(function(comments) {
+      var result = [];
+      var files = [];
+      for (var i=0; i<comments.length; i++) {
+        files.push(Comment.find({
+          where:{
+            id: comments[i].dataValues.id
+          },
+          include: [Article, User]
+        })
+        .then(function(user) {
+          result.push(user);
+        })
+        )
+      }
+      return Promise.all(files).then(function() {
+         return result;
+      });
+    })
   })
-}
+};
 
-var Comment = db.define('comment', schema, {classMethods: classMethods});
+classMethods.getUserComments = function(username) {
+  return User.find({
+    where: {
+      username: username
+    }
+  })
+  .then(function(user) {
+      return Comment.findAll({ 
+        where: { 
+          user_id: user.dataValues.id
+        }
+      })
+  })
+  .then(function(comments) {
+    var result = [];
+    var files = [];
+    for (var i=0; i<comments.length; i++) {
+      files.push(Comment.find({
+        where: {
+          id: comments[i].dataValues.id
+        },
+        include: [Article, User]
+      })
+      .then(function (article) {
+        result.push(article);
+      })
+      )
+    }
+    return Promise.all(files).then(function() {
+      return result;
+    });
+  })
+};
 
+var Comment = db.define('comments', schema, {classMethods: classMethods});
 
-// Define Many to Many relationship between tables
+User.hasMany(Comment, {foreignKey: 'user_id'});
+Comment.belongsTo(User, {foreignKey: 'user_id'});
 
-wikiArticle.belongsToMany(Comment, {
-  through: 'wikiArticleComment'
-});
-
-Comment.belongsToMany(wikiArticle, {
-  through: 'wikiArticleComment'
-});
-
-User.belongsToMany(Comment, {
-  through: 'UserComment'
-});
-
-Comment.belongsToMany(User, {
-  through: 'UserComment'
-});
+Article.hasMany(Comment, {foreignKey: 'wiki_id'});
+Comment.belongsTo(Article, {foreignKey: 'wiki_id'});
 
 db.sync();
 
 module.exports = Comment;
+

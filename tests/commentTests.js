@@ -4,7 +4,7 @@ var express = require('express');
 var Sequelize = require('sequelize');
 var User = require('../server/models/user.js');
 var wikiArticle = require('../server/models/wikiArticle.js');
-var Comment = require('../server/models/Comment.js');
+var Comment = require('../server/models/commentModel.js');
 
 // describe('Comment db add/retrive function', function() {
 
@@ -83,22 +83,22 @@ var Articles = {
 
 var Comments = {
   testComment1 : {
-    words: 'Hello1!'
+    text: 'Hello1!'
   },
   testComment2 : {
-    words: 'Hello2!'
+    text: 'Hello2!'
   },
   testComment3 : {
-    words: 'Hello3!'
+    text: 'Hello3!'
   },
   testComment4 : {
-    words: 'Hello4!'
+    text: 'Hello4!'
   },
   testComment5 : {
-    words: 'Hello5!'
+    text: 'Hello5!'
   },
   testComment6 : {
-    words: 'Hello6!'
+    text: 'Hello6!'
   }
 }
 
@@ -106,7 +106,7 @@ var Comments = {
   for (var comment in Comments) {
     Comment.destroy({
       where: {
-        words: Comments[comment].words
+        text: Comments[comment].text
       }
     });
   }
@@ -116,7 +116,7 @@ var Comments = {
   for (var comment in Comments) {
     Comment.destroy({
       where: {
-        words: Comments[comment].words
+        text: Comments[comment].text
       }
     });
   }
@@ -147,24 +147,79 @@ for (var article in Articles) {
 // UserComments.create({comment: testComment5.comment, userId:2, wikiarticleId:3});
 // UserComments.create({comment: testComment6.comment, userId:3, wikiarticleId:2});
 
-console.log('Comment :', Comment);
+//console.log('Comment :', Comment);
 
-Comment.addcomment(Comments.testComment1.words, 1, 1);
-Comment.addcomment(Comments.testComment2.words, 1, 2);
-Comment.addcomment(Comments.testComment3.words, 1, 3);
-Comment.addcomment(Comments.testComment4.words, 2, 1);
-Comment.addcomment(Comments.testComment5.words, 2, 3);
-
-
-// it('should return false if username already exists', function(done){
-  Comment.addcomment(Comments.testComment6.words, 3, 2)
-    .then(function(){
-      Comment.usergetcomment('testUser1');
-      Comment.wikiarticlegetcomment('Cater2')
-      .then(function(){
-        console.log('Done!')
-      });
+User.signup('testUser4', 'pw', 'testUser1@carterchung.com')
+.then(function(){
+  Comment.addComment(Comments.testComment1.text, 'testUser1', 'Cater1')
+  Comment.addComment(Comments.testComment2.text, 'testUser1', 'Cater2')
+  Comment.addComment(Comments.testComment3.text, 'testUser1', 'Cater3')
+  Comment.addComment(Comments.testComment4.text, 'testUser2', 'Cater1')
+  Comment.addComment(Comments.testComment5.text, 'testUser2', 'Cater3')
+  Comment.addComment(Comments.testComment6.text, 'testUser3', 'Cater2')
+  .then(function(result){
+    console.log('comment inserted !!!:', result)
+      Comment.getArticleComments('Cater2')
+  .then(function(result){
+    // console.log('result!!!:',result);
+    for (var i=0; i<result.length; i++){
+        console.log('result comment:',i, result[i].dataValues.text);
+        console.log('result article title:',i, result[i].dataValues.wikiarticle.dataValues.title)
+        console.log('result user',i, result[i].dataValues.user.dataValues.username)
+      }
     });
+    Comment.getUserComments('testUser1')
+    .then(function(result){
+      for (var i=0; i<result.length; i++){
+        console.log('result2 comment:',i, result[i].dataValues.text);
+        console.log('result2 article title:',i, result[i].dataValues.wikiarticle.dataValues.title)
+        console.log('result2 user',i, result[i].dataValues.user.dataValues.username)
+      }
+    });
+  });
+})
+
+// Comment.addComment(Comments.testComment1.text, 1, 1);
+// Comment.addComment(Comments.testComment2.text, 1, 2);
+// Comment.addComment(Comments.testComment3.text, 1, 3);
+// Comment.addComment(Comments.testComment4.text, 2, 1);
+// Comment.addComment(Comments.testComment5.text, 2, 3);
+// Comment.addComment(Comments.testComment6.text, 3, 2)
+// .then(function(){
+//   // console.log('Comment.getArticleComments:', Comment.getArticleComments('Cater2'));
+//   Comment.getArticleComments('Cater2')
+//   .then(function(result){
+//     // console.log('result!!!:',result);
+//     for (var i=0; i<result.length; i++){
+//       console.log('result comment:',i, result[i].dataValues.text);
+//       console.log('result article title:',i, result[i].dataValues.wikiarticle.dataValues.title)
+//       console.log('result user',i, result[i].dataValues.user.dataValues.username)
+//     }
+//   });
+//   Comment.getUserComments('testUser1')
+//   .then(function(result){
+//     for (var i=0; i<result.length; i++){
+//       console.log('result2 comment:',i, result[i].dataValues.text);
+//       console.log('result2 article title:',i, result[i].dataValues.wikiarticle.dataValues.title)
+//       console.log('result2 user',i, result[i].dataValues.user.dataValues.username)
+//     }
+//   });
+// });
+// it('should return false if username already exists', function(done){
+    // .then(function(){
+    //   Comment.usergetcomment('testUser1');
+    //   Comment.wikiarticlegetcomment('Cater2')
+    //   .then(function(){
+    //     console.log('Done!')
+    //   });
+    // });
+
+
+
+
+
+
+
 // });
 // });
 // Comment.create({words: testComment1.words})
