@@ -33,6 +33,8 @@ app.use(middleware);
 app.set('views', 'server/views');
 app.set('view engine', 'jade');
 
+
+
 // --------------------------------------------------------------------------------
 
 app.use(express.static('public'));
