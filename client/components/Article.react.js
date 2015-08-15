@@ -22,8 +22,9 @@ var Article = React.createClass({
   },
   render: function() {
     return (
-      <div>
-        {this.state.data}
+      <div className="filled">
+        <div className="wrapper article serif">
+        <div dangerouslySetInnerHTML={{__html: this.state.data.content}} />        </div>
       </div>
     );
   },

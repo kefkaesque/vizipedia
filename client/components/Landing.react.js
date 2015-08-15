@@ -5,9 +5,12 @@ var Router = require('react-router');
 var Landing = React.createClass({
   render() {
     return (
-      <div>
-        <h1>Landing</h1>
-        <SearchBar />
+      <div className="splash">
+        <div className="spacer"></div>
+        <div>
+          <div className="logo serif">vizipedia</div>
+          <SearchBar />
+        </div>
       </div>
     )
   }
@@ -34,8 +37,8 @@ var SearchBar = React.createClass({
   render: function() {
     return (
       <form className="headerForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Search Articles" ref="text" />
-        <input type="submit" value="Post" />
+        <input type="text" placeholder="Search..." ref="text" />
+        <button type="submit"><span className="fa fa-fw fa-search"></span></button>
       </form>
     );
   }

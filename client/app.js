@@ -12,9 +12,8 @@ var Link = Router.Link;
 var App = React.createClass({
   render() {
     return (
-      <div>
+      <div className="app">
         <Header/>
-        <h1>Welcome to the app</h1>
         <RouteHandler/>
       </div>
     )
