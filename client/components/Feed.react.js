@@ -10,11 +10,9 @@ function getFeedState() {
 }
 
 var Feed = React.createClass({
-  mixins: [ Router.Navigation ],
-
   getInitialState: function() {
     FeedUtils.getFeedData();
-    getFeedState();
+    return getFeedState();
   },
   componentDidMount: function() {
     FeedStore.addChangeListener(this._onChange);
