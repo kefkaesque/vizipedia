@@ -13,6 +13,7 @@ var App = React.createClass({
   render() {
     return (
       <div>
+        <Header/>
         <h1>Welcome to the app</h1>
         <RouteHandler/>
       </div>

@@ -1,31 +1,23 @@
 var React = require('react');
+var WikiUtils = require('../utils/WikiUtils');
+
+var Router = require('react-router');
+var Route = Router.Route;
+var RouteHandler = Router.RouteHandler;
+var Link = Router.Link;
+var State = Router.State;
+
 
 var Header = React.createClass({
 
-  handleHeaderSubmit: function(comment) {
-    console.log('Submit Button pressed')
-    // $.ajax({
-    //   url: this.props.url,
-    //   dataType: 'json',
-    //   type: 'POST',
-    //   data: comment,
-    //   success: function(data) {
-    //     console.log(data);
-    //     this.setState({data: data});
-    //   }.bind(this),
-    //   error: function(xhr, status, err) {
-    //     console.error(this.props.url, status, err.toString());
-    //   }.bind(this)
-    // });
-  },
   render: function() {
     return (
       <div className="header">
         <h1>Header</h1>
-        <div class="logo">vizipedia</div>
-        <HeaderForm onHeaderSubmit={this.handleHeaderSubmit} />
-        <div class="menu">
-          <LoginButton/> 
+        <div className="logo">vizipedia</div>
+        <HeaderForm />
+        <div className="menu">
+          <LoginButton/>
           <SignupButton/>
         </div>
       </div>
@@ -36,19 +28,6 @@ var Header = React.createClass({
 var LoginButton = React.createClass({
   handlePress: function(e) {
     console.log('Login Pressed!')
-    // $.ajax({
-    //   url: this.props.url,   //   /login
-    //   dataType: 'json',
-    //   type: 'POST',
-    //   data: comment,
-    //   success: function(data) {
-    //     console.log(data);
-    //     this.setState({data: data});
-    //   }.bind(this),
-    //   error: function(xhr, status, err) {
-    //     console.error(this.props.url, status, err.toString());
-    //   }.bind(this)
-    // });
   },
   render: function() {
     return (
@@ -56,7 +35,7 @@ var LoginButton = React.createClass({
         <button onClick={this.handlePress}>
           Login
         </button>
-      </div>  
+      </div>
     );
   }
 });
@@ -64,19 +43,7 @@ var LoginButton = React.createClass({
 var SignupButton = React.createClass({
   handlePress: function(e) {
     console.log('Signup Pressed!')
-    // $.ajax({
-    //   url: this.props.url, // /signup
-    //   dataType: 'json',
-    //   type: 'POST',
-    //   data: comment,
-    //   success: function(data) {
-    //     console.log(data);
-    //     this.setState({data: data});
-    //   }.bind(this),
-    //   error: function(xhr, status, err) {
-    //     console.error(this.props.url, status, err.toString());
-    //   }.bind(this)
-    // });
+
   },
   render: function() {
     return (
@@ -84,39 +51,34 @@ var SignupButton = React.createClass({
         <button onClick={this.handlePress}>
           Signup
         </button>
-      </div>  
+      </div>
     );
   }
 });
 
-
 var HeaderForm = React.createClass({
+  mixins: [ Router.Navigation ],
+
   handleSubmit: function(e) {
     console.log('Submit Search!')
     e.preventDefault();
     var text = React.findDOMNode(this.refs.text).value.trim();// get the vaule
+    WikiUtils.getArticleData(text);
     if (!text) {
       return;
     }
-    this.props.onHeaderSubmit({text: text});// assign the vaule
     React.findDOMNode(this.refs.text).value = '';// clean the vaule
+    this.transitionTo('wiki', {topic: text});
     return;
   },
   render: function() {
     return (
-      <form className="headertForm" onSubmit={this.handleSubmit}>
+      <form className="headerForm" onSubmit={this.handleSubmit}>
         <input type="text" placeholder="Search Articles" ref="text" />
         <input type="submit" value="Post" />
       </form>
     );
   }
 });
-
-var articleId = 'Cats';
-
-React.render(
-  <Header url={"/wiki/"+articleId} />,
-  document.getElementById('header')
-);
 
 module.exports = Header;

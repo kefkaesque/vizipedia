@@ -9,7 +9,6 @@ module.exports = {
       url: '/wiki/' + topic,
       dataType: 'json',
       success: function(data) {
-        console.log(data);
         ArticleActions.dispatchArticle(data);
       },
       error: function(data) {
