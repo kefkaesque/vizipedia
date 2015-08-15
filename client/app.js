@@ -21,44 +21,10 @@ var App = React.createClass({
   }
 });
 
-var Landing = React.createClass({
-  render() {
-    return (
-      <div>
-        <h1>Landing</h1>
-        <Link to="wiki" params={{topic: "google"}}>
-          {'this links to ... google'}
-        </Link>
-        <Link to="profile">
-          {'this links to ... profile'}
-        </Link>
-        <div className="splash">
-          <div className="spacer"></div>
-          <div>
-            <div className="logo serif">vizipedia</div>
-            <form>
-              <input type="text" name="topic" placeholder="Search..."/>
-              <button onclick="WikiUtils.getArticleData(topic)
-"><span className="fa fa-fw fa-search"></span></button>
-            </form>
-          </div>
-        </div>
-      </div>
-    )
-  }
-});
-
 var Header = require('./components/Header.react');
 var Article = require('./components/Article.react');
 var Profile = require('./components/Profile.react');
-
-// var Article = React.createClass({
-//   render() {
-//     return (
-//         <h1>Article: {this.props.params.topic}</h1>
-//     )
-//   }
-// });
+var Landing = require('./components/Landing.react');
 
 // --------------------------------------------------------------------------------
 

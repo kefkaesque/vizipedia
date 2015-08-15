@@ -1,12 +1,6 @@
 var React = require('react');
 var WikiUtils = require('../utils/WikiUtils');
-
 var Router = require('react-router');
-var Route = Router.Route;
-var RouteHandler = Router.RouteHandler;
-var Link = Router.Link;
-var State = Router.State;
-
 
 var Header = React.createClass({
 
