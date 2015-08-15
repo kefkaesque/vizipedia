@@ -19,8 +19,9 @@ var CreatePlaylist = React.createClass({
   render: function() {
     return (
       <form className="createPlaylistForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Playlist name..." ref="text" />
-        <button type="submit"><span className="fa fa-search"></span></button>
+        <div style={{height:200+'px'}}></div>
+        <input type="text" placeholder="Enter playlist name..." ref="text" />
+        <button type="submit">Create</button>
       </form>
     );
   }
