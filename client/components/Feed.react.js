@@ -1,7 +1,7 @@
 var React = require('react');
 var FeedStore = require('../stores/FeedStore');
 var FeedUtils = require('../utils/FeedUtils');
-
+var Router = require('react-router');
 
 function getFeedState() {
   return {
@@ -10,6 +10,7 @@ function getFeedState() {
 }
 
 var Feed = React.createClass({
+  mixins: [ Router.Navigation ],
 
   getInitialState: function() {
     FeedUtils.getFeedData();
