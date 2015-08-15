@@ -1,6 +1,6 @@
 var React = require('react');
 var FeedStore = require('../stores/FeedStore');
-var WikiUtils = require('../utils/WikiUtils');
+var FeedUtils = require('../utils/FeedUtils');
 
 
 function getFeedState() {
@@ -12,6 +12,7 @@ function getFeedState() {
 var Feed = React.createClass({
 
   getInitialState: function() {
+    FeedUtils.getFeedData();
     getFeedState();
   },
   componentDidMount: function() {
