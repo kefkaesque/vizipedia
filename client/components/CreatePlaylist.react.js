@@ -13,7 +13,7 @@ var CreatePlaylist = React.createClass({
     }
     PlaylistUtils.createPlaylist(text);
     React.findDOMNode(this.refs.text).value = '';
-    this.transitionTo('playlist/edit', {playlistName: text});
+    this.transitionTo('editPlaylist', {playlistName: text});
     return;
   },
   render: function() {

@@ -28,6 +28,7 @@ var Article = require('./components/Article.react');
 var Profile = require('./components/Profile.react');
 var Landing = require('./components/Landing.react');
 var CreatePlaylist = require('./components/CreatePlaylist.react');
+var EditPlaylist = require('./components/EditPlaylist.react');
 
 // --------------------------------------------------------------------------------
 
@@ -37,6 +38,7 @@ var routes = (
     <Route name="wiki" path='/wiki/:topic' handler={Article}/>
     <Route name="profile" path='/profile' handler={Profile}/>
     <Route name="createPlaylist" path='/playlist/create' handler={CreatePlaylist}/>
+    <Route name="editPlaylist" path='/playlist/edit/:playlistName' handler={EditPlaylist}/>
   </Route>
 );
 
