@@ -7,7 +7,7 @@ var PlaylistStore = require('../stores/PlaylistStore');
 function getCurrentPlaylist() {
   console.log('EditPlaylist.react.js getCurrentPlaylist');
   return {
-    data: PlaylistStore.getData(),
+    data: PlaylistStore.getPlaylistInfo(),
   };
 }
 

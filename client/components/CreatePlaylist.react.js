@@ -11,9 +11,14 @@ var CreatePlaylist = React.createClass({
     if (!text) {
       return;
     }
-    PlaylistUtils.createPlaylist(text);
+
+    var goEdit = (function(data) {
+      this.transitionTo('editPlaylist', {playlistName: text, playlistId: data.playlistId});
+    }).bind(this);
+
+    PlaylistUtils.createPlaylist(text, goEdit);
     React.findDOMNode(this.refs.text).value = '';
-    this.transitionTo('editPlaylist', {playlistName: text});
+
     return;
   },
   render: function() {
