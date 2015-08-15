@@ -12,7 +12,6 @@ function getArticleState() {
 var Article = React.createClass({
 
   getInitialState: function() {
-    WikiUtils.getArticleData();
     return getArticleState();
   },
   componentDidMount: function() {

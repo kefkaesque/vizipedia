@@ -1,5 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
+var WikiUtils = require('./utils/WikiUtils');
+
 
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
@@ -11,6 +13,7 @@ var App = React.createClass({
   render() {
     return (
       <div>
+        <Header/>
         <h1>Welcome to the app</h1>
         <RouteHandler/>
       </div>
@@ -29,6 +32,17 @@ var Landing = React.createClass({
         <Link to="profile">
           {'this links to ... profile'}
         </Link>
+        <div className="splash">
+          <div className="spacer"></div>
+          <div>
+            <div className="logo serif">vizipedia</div>
+            <form>
+              <input type="text" name="topic" placeholder="Search..."/>
+              <button onclick="WikiUtils.getArticleData(topic)
+"><span className="fa fa-fw fa-search"></span></button>
+            </form>
+          </div>
+        </div>
       </div>
     )
   }
