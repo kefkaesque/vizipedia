@@ -60,8 +60,7 @@ classMethods.getFollowingRecommended = function(userId) {
     return ids;
   })
   .then(function(res) {
-    var activity = [];
-    VisitedArticle.findAll({
+    return VisitedArticle.findAll({
       where: {
         userId: res,
         recommended: true
@@ -78,8 +77,6 @@ classMethods.getFollowingRecommended = function(userId) {
 };
 
 var Relation = db.define('relations', schema, {classMethods: classMethods});
-
-Relation.getFollowingRecommended(1);
 
 db.sync();
 module.exports = Relation;
