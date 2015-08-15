@@ -55,12 +55,13 @@ classMethods.getFollowingRecommended = function(userId) {
   .then(function(following) {
     var ids = [];
     for (var i = 0; i < following.length; i++) {
-      ids.push(following[i].dataValues.following);
+      ids.push(following[i].get('following'));
     }
     return ids;
   })
   .then(function(res) {
-    return VisitedArticle.findAll({
+    var activity = [];
+    VisitedArticle.findAll({
       where: {
         userId: res,
         recommended: true
@@ -69,15 +70,16 @@ classMethods.getFollowingRecommended = function(userId) {
     .then(function(recs) {
       var articleIds = [];
       for (var j = 0; j < recs.length; j++) {
-        articleIds.push(recs[j].dataValues.articleId);
+        articleIds.push(recs[j].get('articleId'));
       }
-      console.log(articleIds);
       return articleIds;
     });
   });
 };
 
 var Relation = db.define('relations', schema, {classMethods: classMethods});
+
+Relation.getFollowingRecommended(1);
 
 db.sync();
 module.exports = Relation;
