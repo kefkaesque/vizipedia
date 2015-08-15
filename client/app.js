@@ -13,6 +13,9 @@ var App = React.createClass({
   render() {
     return (
       <div className="app">
+        <Link to="createPlaylist">
+          {'this links to ... Create Playlist'}
+        </Link>
         <Header/>
         <RouteHandler/>
       </div>
@@ -24,6 +27,7 @@ var Header = require('./components/Header.react');
 var Article = require('./components/Article.react');
 var Profile = require('./components/Profile.react');
 var Landing = require('./components/Landing.react');
+var CreatePlaylist = require('./components/CreatePlaylist.react');
 
 // --------------------------------------------------------------------------------
 
@@ -32,6 +36,7 @@ var routes = (
     <Route path='/' handler={Landing}/>
     <Route name="wiki" path='/wiki/:topic' handler={Article}/>
     <Route name="profile" path='/profile' handler={Profile}/>
+    <Route name="createPlaylist" path='/playlist/create' handler={CreatePlaylist}/>
   </Route>
 );
 
