@@ -13,6 +13,9 @@ var App = React.createClass({
   render() {
     return (
       <div className="app">
+        <Link to="createPlaylist">
+          {'this links to ... Create Playlist'}
+        </Link>
         <Header/>
         <RouteHandler/>
       </div>
