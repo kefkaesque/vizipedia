@@ -23,7 +23,7 @@ var Feed = React.createClass({
   render: function() {
     return (
       <div>
-
+        Feed
       </div>
     );
   },
