@@ -7,13 +7,12 @@ var Header = React.createClass({
   render: function() {
     return (
       <div className="header">
-        <h1>Header</h1>
-        <div className="logo">vizipedia</div>
-        <HeaderForm />
         <div className="menu">
           <LoginButton/>
           <SignupButton/>
         </div>
+        <div className="logo serif">vizipedia</div>
+        <HeaderForm />
       </div>
     )
   }
@@ -25,7 +24,7 @@ var LoginButton = React.createClass({
   },
   render: function() {
     return (
-      <div className="loginButton">
+      <div className="item">
         <button onClick={this.handlePress}>
           Login
         </button>
@@ -41,7 +40,7 @@ var SignupButton = React.createClass({
   },
   render: function() {
     return (
-      <div className="signupButton">
+      <div className="item">
         <button onClick={this.handlePress}>
           Signup
         </button>
@@ -69,7 +68,7 @@ var HeaderForm = React.createClass({
     return (
       <form className="headerForm" onSubmit={this.handleSubmit}>
         <input type="text" placeholder="Search Articles" ref="text" />
-        <input type="submit" value="Post" />
+        <button type="submit"><span className="fa fa-search"></span></button>
       </form>
     );
   }
