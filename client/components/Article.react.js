@@ -12,7 +12,7 @@ function getArticleState() {
 var Article = React.createClass({
 
   getInitialState: function() {
-    return getArticleState();
+    return {data: ''};
   },
   componentDidMount: function() {
     ArticleStore.addChangeListener(this._onChange);
