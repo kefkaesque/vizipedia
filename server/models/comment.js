@@ -117,4 +117,3 @@ Comment.belongsTo(Article, {foreignKey: 'wiki_id'});
 db.sync();
 
 module.exports = Comment;
-
