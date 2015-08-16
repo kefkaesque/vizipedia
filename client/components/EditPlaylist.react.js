@@ -17,7 +17,7 @@ var EditPlaylist = React.createClass({
   },
   render: function() {
     return (
-      <div>Edit Playlist {this.state.data.playlistId}</div>
+      <div>Edit Playlist {this.state.data.playlistName} ({this.state.data.playlistId})</div>
     );
   },
   componentDidMount: function() {

@@ -6,6 +6,7 @@ module.exports = {
   createPlaylist: function(playlistName, callback) {
     //send post request here
     var data = { //dummy data
+      playlistName: playlistName,
       playlistId: 1337
     };
 
