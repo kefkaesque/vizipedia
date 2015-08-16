@@ -5,7 +5,6 @@ var FluxConstants = require('../constants/FluxConstants');
 var _ = require('underscore');
 
 var profileData = {
-  username: 'patrick'
 };
 
 function storeProfileData(data) {
