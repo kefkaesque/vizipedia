@@ -5,21 +5,19 @@ var PlaylistStore = require('../stores/PlaylistStore');
 
 
 function getCurrentPlaylist() {
-  console.log('EditPlaylist.react.js getCurrentPlaylist');
   return {
-    data: PlaylistStore.getData(),
+    data: PlaylistStore.getPlaylistInfo(),
   };
 }
 
 var EditPlaylist = React.createClass({
 
   getInitialState: function() {
-    return {data: 'test'}; //initialize data
+    return getCurrentPlaylist();
   },
   render: function() {
-    console.log("EditPlaylist: rendering ",this.state.data);
     return (
-      <div>Edit Playlist</div>
+      <div>Edit Playlist {this.state.data.playlistName} ({this.state.data.playlistId})</div>
     );
   },
   componentDidMount: function() {
@@ -29,7 +27,7 @@ var EditPlaylist = React.createClass({
     PlaylistStore.removeChangeListener(this._onChange);
   },
   _onChange: function() {
-    console.log('EditPlaylist.react.js onChange');
+    console.log('EditPlaylist _onChange');
     this.setState(getCurrentPlaylist());
   }
 });

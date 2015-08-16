@@ -6,7 +6,7 @@ var _ = require('underscore');
 
 var playlistInfo = {};
 function loadData(data) {
-  console.log('PlaylistStore: loadData: ', data);
+  console.log('PlaylistStore: loadData: ', data); //log retrieved data
   playlistInfo = data;
 }
 
@@ -30,7 +30,6 @@ AppDispatcher.register(function(action) {
   var text;
   switch(action.actionType) {
     case FluxConstants.PLAYLIST_CREATED:
-      console.log("PlaylistStore: Registered and seen ", action.data);
       loadData(action.data);
       break;
     default:

@@ -38,7 +38,7 @@ var routes = (
     <Route name="wiki" path='/wiki/:topic' handler={Article}/>
     <Route name="profile" path='/profile' handler={Profile}/>
     <Route name="createPlaylist" path='/playlist/create' handler={CreatePlaylist}/>
-    <Route name="editPlaylist" path='/playlist/edit/:playlistName' handler={EditPlaylist}/>
+    <Route name="editPlaylist" path='/playlist/edit/:playlistId' handler={EditPlaylist}/>
   </Route>
 );
 
