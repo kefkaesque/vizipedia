@@ -6,7 +6,7 @@ module.exports = router;
 var Relation = require('../models/relation.js');
 
 router.get('/', function(req, res) {
-  Relation.getFollowingRecommended()
+  Relation.getFollowingRecommended(res.locals.user.id)
   .then(function(data) {
     res.send(JSON.stringify(data));
   });
