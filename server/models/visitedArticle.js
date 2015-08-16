@@ -26,8 +26,8 @@ classMethods.visitIfUnvisited = function(userId, articleId) {
     }
   });
 };
-
-classMethods.toggleRec = function(userId, articleId) {
+// recommend
+classMethods.rec = function(userId, articleId) {
   return visitedArticle.findOne({
      where: {
       userId: userId,
@@ -35,10 +35,21 @@ classMethods.toggleRec = function(userId, articleId) {
     }
   })
   .then(function(visited) {
-    visited.update({recommended: !visited.recommended});
+    visited.update({recommended: true});
   });
 };
-
+// unrecommend
+classMethods.unRec = function(userId, articleId) {
+  return visitedArticle.findOne({
+     where: {
+      userId: userId,
+      articleId: articleId
+    }
+  })
+  .then(function(visited) {
+    visited.update({recommended: false});
+  });
+};
 classMethods.checkIfRec = function(userId, articleId) {
   return visitedArticle.findOne({
      where: {
@@ -79,6 +90,5 @@ classMethods.getHistory = function(userId, limit) {
 };
 
 var visitedArticle = db.define('visitedArticles', schema, {classMethods: classMethods});
-
 db.sync();
 module.exports = visitedArticle;

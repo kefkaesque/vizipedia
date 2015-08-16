@@ -16,6 +16,9 @@ var App = React.createClass({
         <Link to="createPlaylist">
           {'this links to ... Create Playlist'}
         </Link>
+        <Link to="feed">
+          {'this links to ... Feed'}
+        </Link>
         <Header/>
         <RouteHandler/>
       </div>
@@ -29,6 +32,7 @@ var Profile = require('./components/Profile.react');
 var Landing = require('./components/Landing.react');
 var CreatePlaylist = require('./components/CreatePlaylist.react');
 var EditPlaylist = require('./components/EditPlaylist.react');
+var Feed = require('./components/Feed.react');
 
 // --------------------------------------------------------------------------------
 
@@ -39,6 +43,7 @@ var routes = (
     <Route name="profile" path='/profile' handler={Profile}/>
     <Route name="createPlaylist" path='/playlist/create' handler={CreatePlaylist}/>
     <Route name="editPlaylist" path='/playlist/edit/:playlistId' handler={EditPlaylist}/>
+    <Route name="feed" path='/feed' handler={Feed}/>
   </Route>
 );
 
