@@ -12,11 +12,12 @@ function getProfileState() {
 
 var Profile = React.createClass({
   getInitialState: function() {
-    ProfileUtils.getProfileData();
-    return getProfileState();
+     return {data: {}};
   },
   componentDidMount: function() {
     ProfileStore.addChangeListener(this._onChange);
+    ProfileUtils.getProfileData();
+    return getProfileState();
   },
   componentWillUnmount: function() {
     ProfileStore.removeChangeListener(this._onChange);
@@ -25,7 +26,7 @@ var Profile = React.createClass({
     return (
       <div className="mainProfile">
         <ProfileHeader username={this.state.data.username} />
-        <ReadCompletion />
+        <ReadCompletion numArticle={this.state.data.numArticle}/>
         <RecommendedArticles />
         <CommentsMade />
         <Playlists />
@@ -41,7 +42,7 @@ var ProfileHeader = React.createClass({
 
   render: function() {
     return (
-      <div className="header">
+      <div className="profileheader">
         <h1>{this.props.username}</h1>
         <h2>Followed by 100</h2>
         <h2>Following 15</h2>
@@ -55,7 +56,7 @@ var ReadCompletion = React.createClass({
   render: function() {
     return (
       <div className="completion">
-        <p>0.14% of Wikipedia read</p>
+        <p>Number of Articles Completed : {this.props.numArticle}</p>
       </div>
     )
   }
