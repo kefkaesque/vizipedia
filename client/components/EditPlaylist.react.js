@@ -25,8 +25,8 @@ var EditPlaylist = React.createClass({
     return (
       <div>
         Edit Playlist {this.state.data.playlistName} ({this.state.data.playlistId})
-        <AddPlaylistItem playlistId={this.state.data.playlistId}/>
-        <CurrentPlaylist />
+        <AddPlaylistItem playlistId={this.state.data.playlistId} />
+        <CurrentPlaylist items={this.state.data.items} />
       </div>
     );
   },
@@ -61,12 +61,28 @@ var AddPlaylistItem = React.createClass({
 
 var CurrentPlaylist = React.createClass({
   render: function() {
+    var itemNodes = this.props.items.map(function(item, index) {
+      return (
+        <PlaylistItem title={item.title} key={index} />
+      );
+    });
     return (
       <div>
         <h2>Current Playlist</h2>
+        {itemNodes}
       </div>
     );
   }
 });
+
+var PlaylistItem = React.createClass({
+  render: function() {
+    return (
+      <div>
+        {this.props.title}
+      </div>
+    );
+  }
+})
 
 module.exports = EditPlaylist;
