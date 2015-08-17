@@ -22,4 +22,12 @@ router.get('/', function(req, res) {
   }
 });
 
+router.post('/', function(req, res) {
+  var name = req.body.name;
+  var userid = req.body.userid;
 
+  Playlist.createPlaylist(name, userid)
+  .then(function(playlist) {
+    res.send(JSON.stringify(playlist));
+  });
+});

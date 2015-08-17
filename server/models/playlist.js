@@ -24,6 +24,10 @@ classMethods.getUserPlaylists = function(userid) {
   });
 };
 
+classMethods.createPlaylist = function(name, userid) {
+  return Playlist.create({name: name, userid: userid});
+}
+
 // --------------------------------------------------------------------------------
 
 var Playlist = db.define('playlist', schema, {classMethods: classMethods});
