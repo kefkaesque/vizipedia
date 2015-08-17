@@ -1,6 +1,7 @@
 var React = require('react');
 var WikiUtils = require('../utils/WikiUtils');
 var Router = require('react-router');
+var Link = Router.Link;
 
 var Header = React.createClass({
 
@@ -19,15 +20,17 @@ var Header = React.createClass({
 });
 
 var LoginButton = React.createClass({
+  mixins: [ Router.Navigation ],
   handlePress: function(e) {
-    console.log('Login Pressed!')
+    console.log('Login Pressed!');
+    this.transitionTo('login');
   },
   render: function() {
     return (
       <div className="item">
-        <button onClick={this.handlePress}>
+        <a href='/login'>
           Login
-        </button>
+        </a>
       </div>
     );
   }
@@ -41,9 +44,9 @@ var SignupButton = React.createClass({
   render: function() {
     return (
       <div className="item">
-        <button onClick={this.handlePress}>
+        <a href='/signup'>
           Signup
-        </button>
+        </a>
       </div>
     );
   }
