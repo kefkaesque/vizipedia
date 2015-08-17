@@ -74,6 +74,18 @@ classMethods.numRec = function(articleId) {
   });
 };
 
+/* I just wrote this not tested */
+classMethods.numRead = function(userId) {
+  return visitedArticle.findAndCountAll({
+     where: {
+      userId: userId
+    }
+  })
+  .then(function(result) {
+    console.log('numRead',result);
+    return result.count;
+  });
+};
 // Return the most recent articles visited by user; "limit" will determine the number returned.
 // Returns an array of visitedArticle instances with userId, articleId, recommended, createdAt, updatedAt
 classMethods.getHistory = function(userId, limit) {
