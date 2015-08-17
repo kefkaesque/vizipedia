@@ -18,8 +18,6 @@ var CreatePlaylist = React.createClass({
 
     PlaylistUtils.createPlaylist(text, goEdit);
     React.findDOMNode(this.refs.text).value = '';
-
-    return;
   },
   render: function() {
     return (

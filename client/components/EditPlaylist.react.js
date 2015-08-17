@@ -25,7 +25,7 @@ var EditPlaylist = React.createClass({
     return (
       <div>
         Edit Playlist {this.state.data.playlistName} ({this.state.data.playlistId})
-        <AddPlaylistItem />
+        <AddPlaylistItem playlistId={this.state.data.playlistId}/>
         <CurrentPlaylist />
       </div>
     );
@@ -37,10 +37,23 @@ var EditPlaylist = React.createClass({
 });
 
 var AddPlaylistItem = React.createClass({
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var text = React.findDOMNode(this.refs.text).value.trim();
+    if (!text) {
+      return;
+    }
+    PlaylistUtils.addItem(text, this.props.playlistId);
+    React.findDOMNode(this.refs.text).value = '';
+  },
   render: function() {
     return (
       <div>
         <h2>Add Playlist Item</h2>
+        <form className="addPlaylistItem" onSubmit={this.handleSubmit}>
+          <input type="text" placeholder="Enter playlist item..." ref="text" />
+          <button type="submit">Add to playlist</button>
+        </form>
       </div>
     );
   }
