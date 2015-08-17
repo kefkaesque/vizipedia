@@ -19,6 +19,9 @@ var App = React.createClass({
         <Link to="feed">
           {'this links to ... Feed'}
         </Link>
+        <Link to="profile">
+          {'this links to ... Profile'}
+        </Link>
         <Header/>
         <RouteHandler/>
       </div>
