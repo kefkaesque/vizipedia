@@ -28,6 +28,7 @@ router.get('/:topic', function(req, res) {
       }
       res.locals.article = article.content;
       var data = {
+        id: article.id,
         content: article.content
       };
       res.send(JSON.stringify(data));

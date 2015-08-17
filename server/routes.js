@@ -9,6 +9,7 @@ var comments = require('./routes/comments');
 var recommendations = require('./routes/recommendations');
 var feed = require('./routes/feed');
 var profile = require('./routes/profile');
+
 // ---------------------------------------------------------------------------
 
 router.use('/', landing);
@@ -21,7 +22,8 @@ router.use('/profile', profile);
 
 // ---------------------------------------------------------------------------
 
-// Placeholder user welcome
-router.get('/greet', function(req, res) {
-  res.render('greet');
-});
+var apiPlaylist = require('./api/playlist');
+
+// ---------------------------------------------------------------------------
+
+router.use('/api/playlist', apiPlaylist);

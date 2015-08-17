@@ -8,7 +8,20 @@ var schema = {
 
 var classMethods = {};
 
-classMethods.find = function(userid) {
+classMethods.getPlaylist = function(playlistId) {
+  return Playlist.findOne({
+    where: {
+      id: playlistId
+    }
+  });
+};
+
+classMethods.getUserPlaylists = function(userid) {
+  return Playlist.findOne({
+    where: {
+      id: userid
+    }
+  });
 };
 
 // --------------------------------------------------------------------------------
