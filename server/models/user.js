@@ -91,6 +91,5 @@ function isValidEmail(email) {
 }
 
 var User = db.define('user', schema, {classMethods: classMethods, instanceMethods: instanceMethods});
-
 db.sync();
 module.exports = User;
