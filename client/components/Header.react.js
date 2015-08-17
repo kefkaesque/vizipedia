@@ -1,5 +1,6 @@
 var React = require('react');
 var WikiUtils = require('../utils/WikiUtils');
+var ProfileUtils = require('../utils/ProfileUtils');
 var Router = require('react-router');
 var Link = Router.Link;
 
@@ -14,6 +15,7 @@ var Header = React.createClass({
         </div>
         <div className="logo serif">vizipedia</div>
         <HeaderForm />
+        <UserSearch />
       </div>
     )
   }
@@ -75,6 +77,27 @@ var HeaderForm = React.createClass({
   }
 });
 
+var UserSearch = React.createClass({
+  mixins: [ Router.Navigation ],
 
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var text = React.findDOMNode(this.refs.text).value.trim();// get the value
+    ProfileUtils.getProfileData(text);
+    if (!text) {
+      return;
+    }
+    React.findDOMNode(this.refs.text).value = '';// clean the value
+    this.transitionTo('profile', {username: text});
+  },
+  render: function() {
+    return (
+      <form className="headerForm" onSubmit={this.handleSubmit}>
+        <input type="text" placeholder="Search Users" ref="text" />
+        <button type="submit"><span className="fa fa-search"></span></button>
+      </form>
+    );
+  }
+});
 
 module.exports = Header;
