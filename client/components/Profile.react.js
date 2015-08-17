@@ -16,7 +16,7 @@ var Profile = React.createClass({
   },
   componentDidMount: function() {
     ProfileStore.addChangeListener(this._onChange);
-    ProfileUtils.getProfileData();
+    ProfileUtils.getProfileData();// remove later
     return getProfileState();
   },
   componentWillUnmount: function() {
@@ -30,6 +30,7 @@ var Profile = React.createClass({
         <RecommendedArticles />
         <CommentsMade />
         <Playlists />
+        <FollowButton />
       </div>
     )
   },
@@ -107,6 +108,22 @@ var Playlists = React.createClass({
         </ul>
       </div>
     )
+  }
+});
+
+var FollowButton = React.createClass({
+  handlePress: function(e) {
+    console.log('FollowButton Pressed!')
+    ProfileUtils.postProfileData();
+  },
+  render: function() {
+    return (
+      <div className="item">
+        <button onClick={this.handlePress}>
+          Follow 
+        </button>
+      </div>
+    );
   }
 });
 
