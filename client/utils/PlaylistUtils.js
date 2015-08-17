@@ -17,7 +17,7 @@ module.exports = {
 
   addItem: function(item, playlistId) {
     //send post request here
-    data.items.push(item);
+    data.items.push({title: item});
 
     PlaylistActions.dispatchEdit(data);
   }
