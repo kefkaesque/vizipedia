@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 module.exports = router;
 
-var landing = require('./landing');
-var auth = require('./auth');
-var wiki = require('./wiki');
-var comments = require('./comments');
-var recommendations = require('./recommendations');
-var feed = require('./feed');
-var profile = require('./profile');
+var landing = require('./routes/landing');
+var auth = require('./routes/auth');
+var wiki = require('./routes/wiki');
+var comments = require('./routes/comments');
+var recommendations = require('./routes/recommendations');
+var feed = require('./routes/feed');
+var profile = require('./routes/profile');
 // ---------------------------------------------------------------------------
 
 router.use('/', landing);

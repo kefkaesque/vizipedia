@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 var db = require('../config/postgres.js');
-var VisitedArticle = require('./VisitedArticle.js');
+var VisitedArticle = require('./visitedArticle.js');
 
 var schema = {
   follower: {
@@ -80,4 +80,3 @@ var Relation = db.define('relations', schema, {classMethods: classMethods});
 
 db.sync();
 module.exports = Relation;
-
