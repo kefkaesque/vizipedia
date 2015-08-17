@@ -3,12 +3,13 @@ var FluxConstants = require('../constants/FluxConstants.js');
 
 var PlaylistActions = {
 
-  dispatchPlaylistCreation: function(data) {
+  dispatchEdit: function(data) {
     AppDispatcher.dispatch({
-      actionType: FluxConstants.PLAYLIST_CREATED,
+      actionType: FluxConstants.PLAYLIST_EDITED,
       data: data
     });
   }
+
 };
 
 module.exports = PlaylistActions;

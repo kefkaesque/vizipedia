@@ -29,7 +29,7 @@ var PlaylistStore = _.extend({}, EventEmitter.prototype, {
 AppDispatcher.register(function(action) {
   var text;
   switch(action.actionType) {
-    case FluxConstants.PLAYLIST_CREATED:
+    case FluxConstants.PLAYLIST_EDITED:
       loadData(action.data);
       break;
     default:
