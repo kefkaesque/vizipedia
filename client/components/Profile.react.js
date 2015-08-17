@@ -14,12 +14,10 @@ function getProfileState() {
 
 var Profile = React.createClass({
   getInitialState: function() {
-     return {data: {}};
+     return getProfileState();
   },
   componentDidMount: function() {
     ProfileStore.addChangeListener(this._onChange);
-    ProfileUtils.getProfileData();// remove later
-    return getProfileState();
   },
   componentWillUnmount: function() {
     ProfileStore.removeChangeListener(this._onChange);
@@ -105,7 +103,7 @@ var Playlists = React.createClass({
       <div className="playlists">
         <h3>Playlists</h3>
         <Link to="createPlaylist">
-          {'Create New Playlist'}
+          {' + Create New Playlist'}
         </Link>
         <ul>
           <li>Data Structures</li>

@@ -60,10 +60,12 @@ var HeaderForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
     var text = React.findDOMNode(this.refs.text).value.trim();// get the value
-    WikiUtils.getArticleData(text);
+
     if (!text) {
       return;
     }
+
+    WikiUtils.getArticleData(text);
     React.findDOMNode(this.refs.text).value = '';// clean the value
     this.transitionTo('wiki', {topic: text});
   },
@@ -82,13 +84,19 @@ var UserSearch = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
-    var text = React.findDOMNode(this.refs.text).value.trim();// get the value
-    ProfileUtils.getProfileData(text);
+    var text = React.findDOMNode(this.refs.text).value.trim();
+
     if (!text) {
       return;
     }
-    React.findDOMNode(this.refs.text).value = '';// clean the value
-    this.transitionTo('profile', {username: text});
+
+    var goProfile = (function(data) {
+      this.transitionTo('profile', {username: text});
+    }).bind(this);
+
+    ProfileUtils.getProfileData(text, goProfile);
+    React.findDOMNode(this.refs.text).value = '';
+
   },
   render: function() {
     return (
