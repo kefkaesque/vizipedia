@@ -56,16 +56,14 @@ var HeaderForm = React.createClass({
   mixins: [ Router.Navigation ],
 
   handleSubmit: function(e) {
-    console.log('Submit Search!')
     e.preventDefault();
-    var text = React.findDOMNode(this.refs.text).value.trim();// get the vaule
+    var text = React.findDOMNode(this.refs.text).value.trim();// get the value
     WikiUtils.getArticleData(text);
     if (!text) {
       return;
     }
-    React.findDOMNode(this.refs.text).value = '';// clean the vaule
+    React.findDOMNode(this.refs.text).value = '';// clean the value
     this.transitionTo('wiki', {topic: text});
-    return;
   },
   render: function() {
     return (
@@ -76,5 +74,7 @@ var HeaderForm = React.createClass({
     );
   }
 });
+
+
 
 module.exports = Header;
