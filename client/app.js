@@ -15,9 +15,6 @@ var App = React.createClass({
       <div className="app">
         <Header/>
         <RouteHandler/>
-        <Link to="createPlaylist">
-          {'this links to ... Create Playlist'}
-        </Link>
         <Link to="feed">
           {'this links to ... Feed'}
         </Link>

@@ -1,6 +1,8 @@
 var React = require('react');
 var ProfileStore = require('../stores/ProfileStore');
 var ProfileUtils = require('../utils/ProfileUtils');
+var Router = require('react-router');
+var Link = Router.Link;
 
 function getProfileState() {
   console.log('profile.react.js getting profile state');
@@ -102,6 +104,9 @@ var Playlists = React.createClass({
     return (
       <div className="playlists">
         <h3>Playlists</h3>
+        <Link to="createPlaylist">
+          {'Create New Playlist'}
+        </Link>
         <ul>
           <li>Data Structures</li>
           <li>Road trip to NYC</li>
