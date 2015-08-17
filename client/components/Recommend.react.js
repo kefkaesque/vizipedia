@@ -1,5 +1,6 @@
 var React = require('react');
 var RecommendStore = require('../stores/RecommendStore');
+var RecUtils = require('../utils/RecUtils');
 
 function getRecommendState() {
   return {
@@ -19,6 +20,7 @@ var RecommendButton = React.createClass({
   },
   handlePress: function(e) {
     console.log('rec Pressed!');
+    RecUtils.getRecData();
     // create an action
   },
   render: function() {
