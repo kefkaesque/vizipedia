@@ -22,11 +22,6 @@ var Header = React.createClass({
 });
 
 var LoginButton = React.createClass({
-  mixins: [ Router.Navigation ],
-  handlePress: function(e) {
-    console.log('Login Pressed!');
-    this.transitionTo('login');
-  },
   render: function() {
     return (
       <div className="item">
@@ -39,10 +34,6 @@ var LoginButton = React.createClass({
 });
 
 var SignupButton = React.createClass({
-  handlePress: function(e) {
-    console.log('Signup Pressed!')
-
-  },
   render: function() {
     return (
       <div className="item">
