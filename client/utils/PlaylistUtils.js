@@ -1,20 +1,30 @@
 var PlaylistActions = require('../actions/PlaylistActions');
 var $ = require('jquery');
 
-var data = {}; //dummy data
+var data = {
+  items: []
+}; //dummy data
 
 module.exports = {
 
   createPlaylist: function(playlistName, callback) {
-    data.playlistName = playlistName;
-    data.playlistId = 1337;
-    data.items = [];
+    var playlistData = {
+      name: playlistName
+    };
 
-    //send post request here
-    // POST: 'playlist/create', data: playlistName
-    // response: data: {playlistName:...,playlistId:...,items: [{title:...}]}
-    PlaylistActions.dispatchEdit(data);
-    callback(data);
+    $.ajax({
+      url: '/api/playlist',
+      dataType: 'json',
+      type: 'POST',
+      data: playlistData,
+      success: function(data) {
+        PlaylistActions.dispatchEdit(data);
+        callback(data);
+      },
+      error: function(xhr, status, err) {
+        console.error('/api/playlist', status, err.toString());
+      }
+    });
   },
 
   addItem: function(item, playlistId) {
