@@ -31,7 +31,6 @@ var EditPlaylist = React.createClass({
     );
   },
   _onChange: function() {
-    console.log('EditPlaylist _onChange');
     this.setState(getCurrentPlaylist());
   }
 });
