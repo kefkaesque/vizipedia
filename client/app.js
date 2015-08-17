@@ -33,8 +33,6 @@ var Landing = require('./components/Landing.react');
 var CreatePlaylist = require('./components/CreatePlaylist.react');
 var EditPlaylist = require('./components/EditPlaylist.react');
 var Feed = require('./components/Feed.react');
-var Login = require('./components/Login.react');
-var Signup = require('./components/Signup.react');
 
 
 // --------------------------------------------------------------------------------
