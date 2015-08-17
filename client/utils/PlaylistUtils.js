@@ -6,11 +6,13 @@ var data = {}; //dummy data
 module.exports = {
 
   createPlaylist: function(playlistName, callback) {
-    //send post request here
     data.playlistName = playlistName;
     data.playlistId = 1337;
     data.items = [];
 
+    //send post request here
+    // POST: 'playlist/create', data: playlistName
+    // response: data: {playlistName:...,playlistId:...,items: [{title:...}]}
     PlaylistActions.dispatchEdit(data);
     callback(data);
   },
@@ -18,7 +20,7 @@ module.exports = {
   addItem: function(item, playlistId) {
     //send post request here
     data.items.push({title: item});
-
+    // POST: 'playlist/edit', data: playlistId, playlistItem
     PlaylistActions.dispatchEdit(data);
   }
 };
