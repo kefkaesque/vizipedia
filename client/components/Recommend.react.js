@@ -1,6 +1,7 @@
 var React = require('react');
 var RecUtils = require('../utils/RecUtils');
 var RecommendStore = require('../stores/RecommendStore');
+var ArticleStore = require('../stores/ArticleStore');
 
 function getRecommendState() {
   console.log('getting recommended state');
@@ -11,23 +12,14 @@ function getRecommendState() {
 
 var RecommendButton = React.createClass({
   getInitialState: function() {
-    console.log('initial', this.props.articleId);
+    var data = ArticleStore.getData();
+    RecUtils.getRecData(data.id);
     return getRecommendState();
   },
   componentDidMount: function() {
     RecommendStore.addChangeListener(this._onChange);
-    console.log('didmount', this.props);
-  },
-  componentDidUpdate: function() {
-    // RecUtils.getRecData(articleId);
-
-    console.log('didupdate', this.props);
-  },
-  componentWillReceiveProps: function() {
-    console.log('willreceive', this.props);
   },
   componentWillUnmount: function() {
-    console.log('willunmount', this.props.articleId);
     RecommendStore.removeChangeListener(this._onChange);
   },
   handlePress: function(articleId) {
