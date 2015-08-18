@@ -26,7 +26,7 @@ var EditPlaylist = React.createClass({
       <div>
         Edit Playlist {this.state.data.name} ({this.state.data.id})
         <AddPlaylistItem playlistId={this.state.data.id} />
-        <CurrentPlaylist items={this.state.data.playlistitems} />
+        <CurrentPlaylist playlistitems={this.state.data.playlistitems} />
         <Link to="profile" params={{username: Locals.username}}>{'Return to profile'}</Link>
       </div>
     );
@@ -61,9 +61,9 @@ var AddPlaylistItem = React.createClass({
 
 var CurrentPlaylist = React.createClass({
   render: function() {
-    var itemNodes = this.props.items.map(function(item, index) {
+    var itemNodes = this.props.playlistitems.map(function(item, index) {
       return (
-        <PlaylistItem title={item.title} key={index} />
+        <PlaylistItem topic={item.topic} key={index} />
       );
     });
     return (
@@ -79,7 +79,7 @@ var PlaylistItem = React.createClass({
   render: function() {
     return (
       <div>
-        {this.props.title}
+        {this.props.topic}
       </div>
     );
   }

@@ -37,14 +37,14 @@ module.exports = {
     });
   },
 
-  addItem: function(item, playlistId) {
-    var playlistData = { //May need to change depending on api
-      item: item,
+  addItem: function(topic, playlistId) {
+    var playlistData = {
+      topic: topic,
       playlistId: playlistId
     };
 
     $.ajax({
-      url: '/api/playlist/edit',
+      url: '/api/playlistitem',
       dataType: 'json',
       type: 'POST',
       data: playlistData,
