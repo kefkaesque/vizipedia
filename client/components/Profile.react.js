@@ -42,11 +42,10 @@ var Profile = React.createClass({
 var ProfileHeader = React.createClass({
 
   render: function() {
-    console.log('this.props.data.followedby:',this.props.data)
     return (
       <div className="profileheader">
         <h1>{this.props.data.username}</h1>
-        <h2>Followed by {this.props.data.followedby}</h2>
+        <h2>Followed by {this.props.data.followedBy}</h2>
         <h2>Following {this.props.data.following}</h2>
       </div>
     )
