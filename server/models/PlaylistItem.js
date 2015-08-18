@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 var db = require('../config/postgres');
 
-var Playlist = require('./playlist');
+var Playlist = require('./Playlist');
 
 var schema = {
   playlist_id: {type: Sequelize.INTEGER},
