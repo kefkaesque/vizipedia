@@ -31,12 +31,14 @@ router.post('/', function(req, res) {
     .then(function(playlist) {
       res.send(JSON.stringify(playlist));
     });
+  else
+    res.send(403);
 });
 
 // --------------------------------------------------------------------------------
 
 function getPlaylist(playlistId) {
-  return Playlist.findAll({
+  return Playlist.findOne({
     where: {id: playlistId},
     include: [PlaylistItem]
   })
