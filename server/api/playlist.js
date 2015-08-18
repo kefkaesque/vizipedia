@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 module.exports = router;
 
-var Playlist = require('../models/playlist.js');
-var PlaylistItem = require('../models/playlistItem.js');
+var Playlist = require('../models/Playlist.js');
+var PlaylistItem = require('../models/PlaylistItem.js');
 
 router.get('/', function(req, res) {
   var playlistId = req.query.id;
