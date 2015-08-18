@@ -5,7 +5,6 @@ var Router = require('react-router');
 var Link = Router.Link;
 
 function getProfileState() {
-  console.log('profile.react.js getting profile state');
   return {
     data: ProfileStore.getData(),
   };
@@ -120,7 +119,6 @@ var Playlists = React.createClass({
 
 var FollowButton = React.createClass({
   handlePress: function(e) {
-    console.log('FollowButton Pressed!',this.props.username)
     ProfileUtils.postProfileData(this.props.username);
   },
   render: function() {
