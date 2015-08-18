@@ -1,6 +1,8 @@
 var React = require('react');
 var ProfileStore = require('../stores/ProfileStore');
 var ProfileUtils = require('../utils/ProfileUtils');
+var Router = require('react-router');
+var Link = Router.Link;
 
 function getProfileState() {
   console.log('profile.react.js getting profile state');
@@ -12,12 +14,10 @@ function getProfileState() {
 
 var Profile = React.createClass({
   getInitialState: function() {
-     return {data: {}};
+     return getProfileState();
   },
   componentDidMount: function() {
     ProfileStore.addChangeListener(this._onChange);
-    ProfileUtils.getProfileData();// remove later
-    return getProfileState();
   },
   componentWillUnmount: function() {
     ProfileStore.removeChangeListener(this._onChange);
@@ -29,7 +29,7 @@ var Profile = React.createClass({
         <ReadCompletion numArticle={this.state.data.numArticle}/>
         <RecommendedArticles />
         <CommentsMade />
-        <Playlists />
+        <Playlists username={this.state.data.username}/>
         <FollowButton />
       </div>
     )
@@ -99,9 +99,16 @@ var CommentsMade = React.createClass({
 var Playlists = React.createClass({
 
   render: function() {
+    var createLink = '';
+    if(Locals.username===this.props.username){
+      createLink = (<Link to="createPlaylist">{' + Create New Playlist'}</Link>);
+    }
     return (
       <div className="playlists">
         <h3>Playlists</h3>
+        <div>
+          {createLink}
+        </div>
         <ul>
           <li>Data Structures</li>
           <li>Road trip to NYC</li>

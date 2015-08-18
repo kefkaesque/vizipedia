@@ -3,13 +3,9 @@ var $ = require('jquery');
 
 module.exports = {
 
-  getProfileData: function(user) {
-    //get user data and dispatch it
-    // var data = {
-    //   username: 'carterchung'
-    // };
+  getProfileData: function(user, cb) {
+
     var result = {};
-    user = 'testUser3'; // remove later
     result.username = user;
 
     $.ajax({
@@ -20,6 +16,7 @@ module.exports = {
         console.log('data from prfile get request', data);
         //change data content, should include username & #of article read
         result.numArticle = data;
+        cb();
         ProfileActions.dispatchProfileData(result);
       },
       error: function(data) {
