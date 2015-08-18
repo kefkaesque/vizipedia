@@ -99,12 +99,16 @@ var CommentsMade = React.createClass({
 var Playlists = React.createClass({
 
   render: function() {
+    var createLink = '';
+    if(Locals.userid){
+      createLink = (<Link to="createPlaylist">{' + Create New Playlist'}</Link>);
+    }
     return (
       <div className="playlists">
         <h3>Playlists</h3>
-        <Link to="createPlaylist">
-          {' + Create New Playlist'}
-        </Link>
+        <div>
+          {createLink}
+        </div>
         <ul>
           <li>Data Structures</li>
           <li>Road trip to NYC</li>
