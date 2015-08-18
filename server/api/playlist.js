@@ -25,12 +25,12 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   var name = req.body.name;
-  var userid = req.body.userid;
 
-  createPlaylist(name, userid)
-  .then(function(playlist) {
-    res.send(JSON.stringify(playlist));
-  });
+  if(req.user)
+    createPlaylist(name, req.user.id)
+    .then(function(playlist) {
+      res.send(JSON.stringify(playlist));
+    });
 });
 
 // --------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ function getUserPlaylists(userId) {
 function createPlaylist(name, userId) {
   return Playlist.create({name: name, user_id: userId})
   .then(function(playlist) {
-    playlist.items = [];
+    playlist.playlistitems = [];
     return playlist;
   });
 };
