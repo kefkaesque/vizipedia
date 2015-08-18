@@ -11,14 +11,23 @@ function getRecommendState() {
 
 var RecommendButton = React.createClass({
   getInitialState: function() {
-    RecUtils.getRecData(this.props.articleId);
-    console.log('getting initial state');
+    console.log('initial', this.props.articleId);
     return getRecommendState();
   },
   componentDidMount: function() {
     RecommendStore.addChangeListener(this._onChange);
+    console.log('didmount', this.props);
+  },
+  componentDidUpdate: function() {
+    // RecUtils.getRecData(articleId);
+
+    console.log('didupdate', this.props);
+  },
+  componentWillReceiveProps: function() {
+    console.log('willreceive', this.props);
   },
   componentWillUnmount: function() {
+    console.log('willunmount', this.props.articleId);
     RecommendStore.removeChangeListener(this._onChange);
   },
   handlePress: function(articleId) {
