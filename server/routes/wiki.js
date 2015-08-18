@@ -22,7 +22,6 @@ router.get('/:topic', function(req, res) {
       redirect(res, article.title);
     }
     else if(article) {
-      res.locals.Locals.articleid = article.id;
       if(res.locals.user.id){
         VisitedArticle.visitIfUnvisited(res.locals.user.id, article.id);
       }

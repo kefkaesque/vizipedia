@@ -8,6 +8,7 @@ app.use(function(req, res, next) {
     res.locals.user.username = req.user.username;
     res.locals.user.id = req.user.id;
     res.locals.Locals.userid = req.user.id;
+    res.locals.Locals.username = req.user.username;
   }
   next();
 });
