@@ -4,29 +4,15 @@ var db = require('../config/postgres');
 var Playlist = require('./Playlist');
 
 var schema = {
-  playlist_id: {type: Sequelize.INTEGER},
+  playlistId: {type: Sequelize.INTEGER},
   name: {type: Sequelize.STRING}
-};
-
-var classMethods = {};
-
-classMethods.getPlaylist = function(playlistId) {
-  return Playlist.findOne({
-    where: {
-      id: playlistId
-    }
-  });
-};
-
-classMethods.createPlaylist = function(name, userid) {
-  return Playlist.create({name: name, userid: userid});
 };
 
 // --------------------------------------------------------------------------------
 
-var PlaylistItem = db.define('playlistitem', schema, {classMethods: classMethods});
-Playlist.hasMany(PlaylistItem, {foreignKey: "playlist_id"});
-PlaylistItem.belongsTo(Playlist, {foreignKey: "playlist_id"})
+var PlaylistItem = db.define('playlistitem', schema);
+Playlist.hasMany(PlaylistItem, {foreignKey: "playlistId"});
+PlaylistItem.belongsTo(Playlist, {foreignKey: "playlistId"})
 
 db.sync();
 module.exports = PlaylistItem;
