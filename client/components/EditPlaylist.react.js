@@ -22,13 +22,12 @@ var EditPlaylist = React.createClass({
     PlaylistStore.removeChangeListener(this._onChange);
   },
   render: function() {
-    console.log(this.state.data);
     return (
       <div>
         Edit Playlist {this.state.data.name} ({this.state.data.id})
         <AddPlaylistItem playlistId={this.state.data.id} />
-        <CurrentPlaylist items={this.state.data.items} />
-        <Link to="profile" params={Locals.username}>{'Return to profile'}</Link>
+        <CurrentPlaylist items={this.state.data.playlistitems} />
+        <Link to="profile" params={{username: Locals.username}}>{'Return to profile'}</Link>
       </div>
     );
   },
