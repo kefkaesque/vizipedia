@@ -1,8 +1,8 @@
 var React = require('react');
 var PlaylistUtils = require('../utils/PlaylistUtils');
-var Router = require('react-router');
 var PlaylistStore = require('../stores/PlaylistStore');
-
+var Router = require('react-router');
+var Link = Router.Link;
 
 function getCurrentPlaylist() {
   return {
@@ -28,6 +28,7 @@ var EditPlaylist = React.createClass({
         Edit Playlist {this.state.data.name} ({this.state.data.id})
         <AddPlaylistItem playlistId={this.state.data.id} />
         <CurrentPlaylist items={this.state.data.items} />
+        <Link to="profile" params={Locals.username}>{'Return to profile'}</Link>
       </div>
     );
   },
