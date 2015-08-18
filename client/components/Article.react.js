@@ -2,6 +2,7 @@ var React = require('react');
 var ArticleStore = require('../stores/ArticleStore');
 var WikiUtils = require('../utils/WikiUtils');
 var Recommend = require('./Recommend.react');
+var RecUtils = require('../utils/RecUtils');
 
 
 function getArticleState() {
@@ -25,7 +26,7 @@ var Article = React.createClass({
     return (
       <div className="filled">
         <div className="wrapper article serif">
-        <Recommend />
+          <Recommend articleId={this.state.data.id} />
         <div dangerouslySetInnerHTML={{__html: this.state.data.content}} />
         </div>
       </div>

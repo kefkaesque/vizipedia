@@ -1,8 +1,8 @@
 var ArticleActions = require('../actions/ArticleActions');
 var $ = require('jquery');
 
-module.exports = {
 
+module.exports = {
   getArticleData: function(topic) {
     $.ajax({
       // add topic to url

@@ -3,7 +3,7 @@ var FluxConstants = require('../constants/FluxConstants.js');
 
 var FluxActions = {
 
-  dispatchArticle: function(data) {
+  dispatchRec: function(data) {
     AppDispatcher.dispatch({
       actionType: FluxConstants.UPDATE_REC,
       data: data

@@ -8,8 +8,8 @@ module.exports = {
       // add topic to url
       url: '/recommendations/' + article,
       dataType: 'json',
-      success: function(article) {
-        RecActions.dispatchArticle(data);
+      success: function(data) {
+        RecActions.dispatchRec(data);
       },
       error: function(data) {
         console.log('failed');
