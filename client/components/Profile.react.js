@@ -10,7 +10,6 @@ function getProfileState() {
   };
 }
 
-
 var Profile = React.createClass({
   getInitialState: function() {
      return getProfileState();
@@ -22,6 +21,10 @@ var Profile = React.createClass({
     ProfileStore.removeChangeListener(this._onChange);
   },
   render: function() {
+    var followButton ='';
+    if(Locals.username && Locals.username !== this.state.data.username){
+      followButton = (<FollowButton username={this.state.data.username}/>);
+    }
     return (
       <div className="mainProfile">
         <ProfileHeader data={this.state.data}/>
@@ -29,7 +32,7 @@ var Profile = React.createClass({
         <RecommendedArticles />
         <CommentsMade />
         <Playlists username={this.state.data.username}/>
-        <FollowButton username={this.state.data.username}/>
+        {followButton}
       </div>
     )
   },
