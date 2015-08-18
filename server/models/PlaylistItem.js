@@ -5,7 +5,7 @@ var Playlist = require('./Playlist');
 
 var schema = {
   playlistId: {type: Sequelize.INTEGER},
-  name: {type: Sequelize.STRING}
+  topic: {type: Sequelize.STRING}
 };
 
 // --------------------------------------------------------------------------------

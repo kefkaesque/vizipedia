@@ -23,7 +23,9 @@ router.use('/profile', profile);
 // ---------------------------------------------------------------------------
 
 var apiPlaylist = require('./api/playlist');
+var apiPlaylistItem = require('./api/playlistitem');
 
 // ---------------------------------------------------------------------------
 
 router.use('/api/playlist', apiPlaylist);
+router.use('/api/playlistitem', apiPlaylistItem);
