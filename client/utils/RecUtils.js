@@ -1,15 +1,15 @@
-var ArticleActions = require('../actions/ArticleActions');
+var RecActions = require('../actions/RecActions');
 var $ = require('jquery');
 
-
 module.exports = {
-  getArticleData: function(topic) {
+
+  getRecData: function(article) {
     $.ajax({
       // add topic to url
-      url: '/wiki/' + topic,
+      url: '/recommendations/' + article,
       dataType: 'json',
       success: function(data) {
-        ArticleActions.dispatchArticle(data);
+        RecActions.dispatchRec(data);
       },
       error: function(data) {
         console.log('failed');
