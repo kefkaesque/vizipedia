@@ -8,7 +8,7 @@ var relation = require('../models/relation.js');
 module.exports = router;
 
 router.get('/:userName', function(req, res) {
-  getdata(req.params.userName, function(data) {
+  getData(req.params.userName, function(data) {
     res.send(JSON.stringify(data));
   });
 });
@@ -16,7 +16,6 @@ router.get('/:userName', function(req, res) {
 router.post('/', function(req, res) {
   // use res.locals.user.id for follower column
   // req.body is for following column
-  console.log('Profile Post request! req:', req);
   User.findOne({
     where: {
       username: req.body.user
@@ -24,16 +23,15 @@ router.post('/', function(req, res) {
   })
   .then(function(user) {
     relation.follow(res.locals.user.id, user.dataValues.id)
-    .then(function(relation){
-      console.log('relation created', relation);
-      getdata(req.body.user, function(data) {
+    .then(function(relation) {
+      getData(req.body.user, function(data) {
       res.send(JSON.stringify(data));
   });
     });
   });
 });
 
-var getdata = function(user , cb) {
+var getData = function(user , cb) {
   var data = {};
   data.username = user;
   User.findOne({
@@ -44,21 +42,14 @@ var getdata = function(user , cb) {
   .then(function(user) {
     data.id = user.dataValues.id;
     visitedArticle.numRead(user.dataValues.id)
-    .then(function(numArticle){
+    .then(function(numArticle) {
       data.numArticle = numArticle;
-      data.followedby = 15;
-      data.following = 100;
-      console.log('getdata return data:', data);
-      cb(data);
+        relation.getStats(data.id)
+        .then(function(res) {
+          data.followedBy = res.followedBy;
+          data.following = res.following;
+          cb(data);
+        })
     });
   });
 };
-
-
-router.get('/getStats', function(req, res) {
-  relation.getStats(res.locals.user.id)
-  .then(function(res) {
-    res.send(JSON.stringify(res));
-  });
-});
-
