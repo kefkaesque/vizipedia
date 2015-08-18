@@ -9,7 +9,7 @@ router.get('/:articleId', function(req, res) {
   if (!res.locals.user.id) {
     // do something if user is not logged in
   }
-  VisitedArticle.toggleRec(res.locals.user.id, req.params.articleId)
+  VisitedArticle.rec(res.locals.user.id, req.params.articleId)
   .then(function() {
     return VisitedArticle.numRec(req.params.articleId);
   })
@@ -17,3 +17,6 @@ router.get('/:articleId', function(req, res) {
     res.send(result + '');
   });
 });
+    // button(class='recommend' onclick='recommend(Locals.articleid)')
+    //   | Recommend
+    // span(class='rCount')

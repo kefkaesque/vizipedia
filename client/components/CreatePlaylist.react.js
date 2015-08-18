@@ -13,7 +13,7 @@ var CreatePlaylist = React.createClass({
     }
 
     var goEdit = (function(data) {
-      this.transitionTo('editPlaylist', {playlistId: data.playlistId});
+      this.transitionTo('editPlaylist', {playlistId: data.id});
     }).bind(this);
 
     PlaylistUtils.createPlaylist(text, goEdit);

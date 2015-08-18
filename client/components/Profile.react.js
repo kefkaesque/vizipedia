@@ -1,6 +1,8 @@
 var React = require('react');
 var ProfileStore = require('../stores/ProfileStore');
 var ProfileUtils = require('../utils/ProfileUtils');
+var Router = require('react-router');
+var Link = Router.Link;
 
 function getProfileState() {
   console.log('profile.react.js getting profile state');
@@ -12,12 +14,10 @@ function getProfileState() {
 
 var Profile = React.createClass({
   getInitialState: function() {
-     return {data: {}};
+     return getProfileState();
   },
   componentDidMount: function() {
     ProfileStore.addChangeListener(this._onChange);
-    ProfileUtils.getProfileData();// remove later
-    return getProfileState();
   },
   componentWillUnmount: function() {
     ProfileStore.removeChangeListener(this._onChange);
@@ -25,12 +25,12 @@ var Profile = React.createClass({
   render: function() {
     return (
       <div className="mainProfile">
-        <ProfileHeader username={this.state.data.username} />
+        <ProfileHeader data={this.state.data}/>
         <ReadCompletion numArticle={this.state.data.numArticle}/>
         <RecommendedArticles />
         <CommentsMade />
-        <Playlists />
-        <FollowButton />
+        <Playlists username={this.state.data.username}/>
+        <FollowButton username={this.state.data.username}/>
       </div>
     )
   },
@@ -42,11 +42,12 @@ var Profile = React.createClass({
 var ProfileHeader = React.createClass({
 
   render: function() {
+    console.log('this.props.data.followedby:',this.props.data)
     return (
       <div className="profileheader">
-        <h1>{this.props.username}</h1>
-        <h2>Followed by 100</h2>
-        <h2>Following 15</h2>
+        <h1>{this.props.data.username}</h1>
+        <h2>Followed by {this.props.data.followedby}</h2>
+        <h2>Following {this.props.data.following}</h2>
       </div>
     )
   }
@@ -99,9 +100,16 @@ var CommentsMade = React.createClass({
 var Playlists = React.createClass({
 
   render: function() {
+    var createLink = '';
+    if(Locals.username===this.props.username){
+      createLink = (<Link to="createPlaylist">{' + Create New Playlist'}</Link>);
+    }
     return (
       <div className="playlists">
         <h3>Playlists</h3>
+        <div>
+          {createLink}
+        </div>
         <ul>
           <li>Data Structures</li>
           <li>Road trip to NYC</li>
@@ -113,8 +121,8 @@ var Playlists = React.createClass({
 
 var FollowButton = React.createClass({
   handlePress: function(e) {
-    console.log('FollowButton Pressed!')
-    ProfileUtils.postProfileData();
+    console.log('FollowButton Pressed!',this.props.username)
+    ProfileUtils.postProfileData(this.props.username);
   },
   render: function() {
     return (

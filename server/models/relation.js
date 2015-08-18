@@ -76,7 +76,35 @@ classMethods.getFollowingRecommended = function(userId) {
   });
 };
 
-var Relation = db.define('relations', schema, {classMethods: classMethods});
+classMethods.getStats = function(userId) {
+  var stats = {};
+  return Relation.findAndCountAll({
+    where: {
+      follower: userId
+    }
+  })
+  .then(function(res) {
+    return res;
+  })
+  .then(function(res) {
+    stats.following = res.count;
+    return Relation.findAndCountAll({
+      where: {
+        following: userId
+      }
+    })
+    .then(function(res) {
+      return res;
+    })
+    .then(function(res) {
+      stats.followedBy = res.count;
+      return stats;
+    });
+  });
+};
 
+
+var Relation = db.define('relations', schema, {classMethods: classMethods});
+Relation.getStats(1);
 db.sync();
 module.exports = Relation;
