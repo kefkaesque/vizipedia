@@ -6,7 +6,6 @@ var _ = require('underscore');
 
 var playlistInfo = {};
 function loadData(data) {
-  console.log('PlaylistStore: loadData: ', data); //log retrieved data
   playlistInfo = data;
 }
 
