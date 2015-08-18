@@ -4,15 +4,13 @@ var router = express.Router();
 var User = require('../models/user.js');
 var visitedArticle = require('../models/visitedArticle.js');
 var relation = require('../models/relation.js');
+
 module.exports = router;
 
 router.get('/:userName', function(req, res) {
   getdata(req.params.userName, function(data) {
-    res.send(JSON.stringify(data))
-  })
-
-
-
+    res.send(JSON.stringify(data));
+  });
 });
 
 router.post('/', function(req, res) {
@@ -25,16 +23,14 @@ router.post('/', function(req, res) {
     }
   })
   .then(function(user) {
-    console.log('user.dataValues.id :',user.dataValues.id);
-    console.log('follower ID',res.locals.user.id)
     relation.follow(res.locals.user.id, user.dataValues.id)
     .then(function(relation){
-      console.log('relation created', relation)
+      console.log('relation created', relation);
       getdata(req.body.user, function(data) {
-      res.send(JSON.stringify(data))
-  })
-    });  
-  })
+      res.send(JSON.stringify(data));
+  });
+    });
+  });
 });
 
 var getdata = function(user , cb) {
@@ -52,10 +48,17 @@ var getdata = function(user , cb) {
       data.numArticle = numArticle;
       data.followedby = 15;
       data.following = 100;
-      console.log('getdata return data:', data)
+      console.log('getdata return data:', data);
       cb(data);
     });
-    
-  })
-}
+  });
+};
+
+
+router.get('/getStats', function(req, res) {
+  relation.getStats(res.locals.user.id)
+  .then(function(res) {
+    res.send(JSON.stringify(res));
+  });
+});
 

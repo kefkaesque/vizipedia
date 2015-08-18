@@ -17,6 +17,3 @@ router.get('/:articleId', function(req, res) {
     res.send(result + '');
   });
 });
-    // button(class='recommend' onclick='recommend(Locals.articleid)')
-    //   | Recommend
-    // span(class='rCount')

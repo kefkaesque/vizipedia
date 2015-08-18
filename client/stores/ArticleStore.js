@@ -8,7 +8,9 @@ var article = {};
 function loadData(data) {
   article = data;
 }
-
+function loadRecData(data) {
+  article.recs = data;
+}
 var ArticleStore = _.extend({}, EventEmitter.prototype, {
 
   getData: function() {
@@ -30,6 +32,9 @@ AppDispatcher.register(function(action) {
   switch(action.actionType) {
     case FluxConstants.VIZI_SEARCH:
       loadData(action.data);
+      break;
+    case FluxConstants.UPDATE_REC:
+      loadRecData(action.data);
       break;
     default:
       // none
