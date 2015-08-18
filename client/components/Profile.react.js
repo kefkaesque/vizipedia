@@ -29,7 +29,7 @@ var Profile = React.createClass({
         <ReadCompletion numArticle={this.state.data.numArticle}/>
         <RecommendedArticles />
         <CommentsMade />
-        <Playlists />
+        <Playlists username={this.state.data.username}/>
         <FollowButton />
       </div>
     )
@@ -100,7 +100,7 @@ var Playlists = React.createClass({
 
   render: function() {
     var createLink = '';
-    if(Locals.userid){
+    if(Locals.username===this.props.username){
       createLink = (<Link to="createPlaylist">{' + Create New Playlist'}</Link>);
     }
     return (
