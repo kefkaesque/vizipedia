@@ -23,6 +23,20 @@ module.exports = {
     });
   },
 
+  getPlaylist: function(playlistId) {
+    $.ajax({
+      url: '/api/playlist?id='+playlistId,
+      dataType: 'json',
+      success: function(data) {
+        console.log("getPlaylist: ", data);
+        // PlaylistActions.dispatchEdit(data);
+      },
+      error: function(xhr, status, err) {
+        console.error('/api/playlist', status, err.toString());
+      }
+    });
+  },
+
   addItem: function(item, playlistId) {
     var playlistData = { //May need to change depending on api
       item: item,
