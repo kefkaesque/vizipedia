@@ -22,15 +22,20 @@ router.get('/:topic', function(req, res) {
       redirect(res, article.title);
     }
     else if(article) {
+      res.locals.Locals.articleid = article.id;
       if(res.locals.user.id){
         VisitedArticle.visitIfUnvisited(res.locals.user.id, article.id);
       }
-      res.locals.article = article.content;
-      var data = {
-        id: article.id,
-        content: article.content
-      };
-      res.send(JSON.stringify(data));
+      VisitedArticle.numRec()
+      .then(function(count) {
+        var data = {
+          id: article.id,
+          content: article.content,
+          recommends: count
+        };
+        res.send(JSON.stringify(data));
+      });
+      // res.locals.article = article.content;
       // res.render("article");
     } else {
       queue(req, res);
