@@ -47,7 +47,7 @@ function getPlaylist(playlistId) {
 
 function getUserPlaylists(userId) {
   return Playlist.findAll({
-    where: {id: userId},
+    where: {userId: userId},
     include: [PlaylistItem]
   })
   .then(function(playlists) {
@@ -56,7 +56,7 @@ function getUserPlaylists(userId) {
 };
 
 function createPlaylist(name, userId) {
-  return Playlist.create({name: name, user_id: userId})
+  return Playlist.create({name: name, userId: userId})
   .then(function(playlist) {
     playlist.playlistitems = [];
     return playlist;
