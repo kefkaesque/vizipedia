@@ -1,7 +1,6 @@
-
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user.js');
+var User = require('../models/User');
 var visitedArticle = require('../models/visitedArticle.js');
 var relation = require('../models/relation.js');
 
