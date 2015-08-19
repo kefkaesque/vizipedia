@@ -1,7 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var WikiUtils = require('./utils/WikiUtils');
-
+var Race = require('./components/Race.react');
 
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
@@ -14,6 +14,7 @@ var App = React.createClass({
     return (
       <div className="app">
         <Header/>
+        <Race/>
         <RouteHandler/>
         <Link to="feed">
           {'this links to ... Feed'}
@@ -30,7 +31,6 @@ var Landing = require('./components/Landing.react');
 var CreatePlaylist = require('./components/CreatePlaylist.react');
 var EditPlaylist = require('./components/EditPlaylist.react');
 var Feed = require('./components/Feed.react');
-var Race = require('./components/Race.react');
 
 
 // --------------------------------------------------------------------------------
@@ -43,7 +43,6 @@ var routes = (
     <Route name="createPlaylist" path='/playlist/create' handler={CreatePlaylist}/>
     <Route name="editPlaylist" path='/playlist/edit/:playlistName' handler={EditPlaylist}/>
     <Route name="feed" path='/feed' handler={Feed}/>
-    <Route name="race" path='/race' handler={Race}/>
   </Route>
 );
 

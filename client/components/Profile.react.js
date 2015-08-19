@@ -4,6 +4,7 @@ var Recommend = require('./Recommend.react');
 var ProfileActions = require('../actions/ProfileActions');
 var Router = require('react-router');
 var Link = Router.Link;
+var RaceActions = require('../actions/RaceActions');
 
 var Profile = React.createClass({
 
@@ -37,7 +38,7 @@ var Profile = React.createClass({
         <CommentsMade />
         <Playlists username={this.state.username} playlists={this.state.playlists} />
         {followButton}
-        <Link to="race">{'WikiRace!'}</Link>
+        <RaceButton/>
       </div>
     )
   },
@@ -152,6 +153,21 @@ var FollowButton = React.createClass({
       <div className="item">
         <button onClick={this.handlePress}>
           Follow
+        </button>
+      </div>
+    );
+  }
+});
+
+var RaceButton = React.createClass({
+  handlePress: function(e) {
+    RaceActions.dispatchRacing({racing:true});
+  },
+  render: function() {
+    return (
+      <div className="item">
+        <button onClick={this.handlePress}>
+          Race!
         </button>
       </div>
     );

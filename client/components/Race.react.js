@@ -1,14 +1,30 @@
 var React = require('react');
-var WikiUtils = require('../utils/WikiUtils');
+var RaceStore = require('../stores/RaceStore');
 
 var Race = React.createClass({
-
+  getInitialState: function() {
+    return {
+      racing: false
+    };
+  },
+  componentDidMount: function() {
+    RaceStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    RaceStore.removeChangeListener(this._onChange);
+  },
   render: function() {
-    return (
-      <div className="race">
-        Race!
-      </div>
-    );
+    if(this.state.racing) {
+      return (
+        <div className="race">
+          Race!
+        </div>
+      );
+    }
+    return (<div className="race"></div>)
+  },
+  _onChange: function() {
+    this.setState(RaceStore.getData());
   }
 
 });
