@@ -82,6 +82,7 @@ var UserSearch = React.createClass({
     }
 
     var goProfile = (function(data) {
+      ProfileUtils.getUserPlaylists(data.id);
       this.transitionTo('profile', {username: text});
     }).bind(this);
 

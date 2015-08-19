@@ -60,7 +60,7 @@ function getUserPlaylists(userId) {
 function createPlaylist(name, userId) {
   return Playlist.create({name: name, userId: userId})
   .then(function(playlist) {
-    playlist.playlistitems = [];
+    playlist.dataValues.playlistitems = [];
     return playlist;
   });
 };
