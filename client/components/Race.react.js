@@ -13,6 +13,12 @@ var Race = React.createClass({
   componentWillUnmount: function() {
     RaceStore.removeChangeListener(this._onChange);
   },
+  componentDidUpdate: function() {
+    console.log("Race Component updated", this.state);
+    if(this.state.end===this.state.currentArticle) {
+      console.log("COMPLETED RACE!");
+    }
+  },
   render: function() {
     if(this.state.racing) {
       return (
