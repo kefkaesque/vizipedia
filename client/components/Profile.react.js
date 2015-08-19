@@ -37,6 +37,7 @@ var Profile = React.createClass({
         <CommentsMade />
         <Playlists username={this.state.username} playlists={this.state.playlists} />
         {followButton}
+        <Link to="race">{'WikiRace!'}</Link>
       </div>
     )
   },

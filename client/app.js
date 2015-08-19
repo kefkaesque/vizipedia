@@ -30,6 +30,7 @@ var Landing = require('./components/Landing.react');
 var CreatePlaylist = require('./components/CreatePlaylist.react');
 var EditPlaylist = require('./components/EditPlaylist.react');
 var Feed = require('./components/Feed.react');
+var Race = require('./components/Race.react');
 
 
 // --------------------------------------------------------------------------------
@@ -42,6 +43,7 @@ var routes = (
     <Route name="createPlaylist" path='/playlist/create' handler={CreatePlaylist}/>
     <Route name="editPlaylist" path='/playlist/edit/:playlistName' handler={EditPlaylist}/>
     <Route name="feed" path='/feed' handler={Feed}/>
+    <Route name="race" path='/race' handler={Race}/>
   </Route>
 );
 
