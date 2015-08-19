@@ -160,12 +160,16 @@ var FollowButton = React.createClass({
 });
 
 var RaceButton = React.createClass({
+  mixins: [ Router.Navigation ],
+
   handlePress: function(e) {
     RaceActions.dispatchRacing({
       racing:true,
       start: 2, //article id for cat in my db
-      end: 8 //article id for dog in my db
+      end: 8, //article id for dog in my db
     });
+    this.transitionTo('wiki', {topic: 'Cat'}); //hardcoded in...should get from article id
+
   },
   render: function() {
     return (

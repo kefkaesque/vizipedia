@@ -4,16 +4,20 @@ var FluxConstants = require('../constants/FluxConstants');
 
 var _ = require('underscore');
 
-var raceData = {};
+var raceData = {
+  articlePath: []
+};
 
 function loadData(data) {
   console.log('raceStore loading data', data);
-  raceData = data;
+  raceData.racing = data.racing;
+  raceData.start = data.start;
+  raceData.end = data.end;
 }
 
-function getCurrentArticle(data) {
-  console.log(data);
+function setCurrentArticle(data) {
   raceData.currentArticle = data.id;
+  raceData.articlePath.push(data.id);
 }
 
 var RaceStore = _.extend({}, EventEmitter.prototype, {
@@ -38,7 +42,7 @@ AppDispatcher.register(function(action) {
       loadData(action.data);
       break;
     case FluxConstants.VIZI_SEARCH:
-      getCurrentArticle(action.data);
+      setCurrentArticle(action.data);
       break;
     default:
       // none

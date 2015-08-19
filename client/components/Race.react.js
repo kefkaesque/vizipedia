@@ -5,7 +5,8 @@ var Race = React.createClass({
   getInitialState: function() {
     return {
       racing: false,
-      finished: false
+      finished: false,
+      articlePath: []
     };
   },
   componentDidMount: function() {
