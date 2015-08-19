@@ -27,10 +27,11 @@ var ArticleStore = _.extend({}, EventEmitter.prototype, {
   }
 });
 
-AppDispatcher.register(function(action) {
-  var text;
+AppDispatcher.register(function(payload) {
+  var action = payload.action;
   switch(action.actionType) {
     case FluxConstants.VIZI_SEARCH:
+      console.log(action);
       loadData(action.data);
       break;
     case FluxConstants.UPDATE_REC:
