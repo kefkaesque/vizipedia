@@ -161,7 +161,11 @@ var FollowButton = React.createClass({
 
 var RaceButton = React.createClass({
   handlePress: function(e) {
-    RaceActions.dispatchRacing({racing:true});
+    RaceActions.dispatchRacing({
+      racing:true,
+      start: 2, //article id for cat in my db
+      end: 8 //article id for dog in my db
+    });
   },
   render: function() {
     return (

@@ -11,6 +11,11 @@ function loadData(data) {
   raceData = data;
 }
 
+function getCurrentArticle(data) {
+  console.log(data);
+  raceData.currentArticle = data.id;
+}
+
 var RaceStore = _.extend({}, EventEmitter.prototype, {
 
   getData: function() {
@@ -31,6 +36,9 @@ AppDispatcher.register(function(action) {
   switch(action.actionType) {
     case FluxConstants.RACING:
       loadData(action.data);
+      break;
+    case FluxConstants.VIZI_SEARCH:
+      getCurrentArticle(action.data);
       break;
     default:
       // none

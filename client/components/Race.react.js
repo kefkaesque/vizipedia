@@ -18,6 +18,8 @@ var Race = React.createClass({
       return (
         <div className="race">
           Race!
+          <p>{this.state.currentArticle || 'no current article'}</p>
+          <p>From {this.state.start || '?'} to {this.state.end || '?'}</p>
         </div>
       );
     }
