@@ -15,7 +15,7 @@ var Race = React.createClass({
   },
   componentDidUpdate: function() {
     console.log("Race Component updated", this.state);
-    if(this.state.end===this.state.currentArticle) {
+    if(this.state.end && this.state.end===this.state.currentArticle) {
       console.log("COMPLETED RACE!");
     }
   },
