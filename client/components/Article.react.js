@@ -15,11 +15,9 @@ function getArticleState() {
 var Article = React.createClass({
 
   getInitialState: function() {
-    console.log('article getInitialState!!')
     return {data: '', loaded: false};
   },
   componentDidMount: function() {
-    console.log('article componentDidMount!!')
     ArticleStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
