@@ -12,7 +12,7 @@ function getProfileState() {
 
 var Profile = React.createClass({
   getInitialState: function() {
-     return getProfileState();
+    return getProfileState();
   },
   componentDidMount: function() {
     ProfileStore.addChangeListener(this._onChange);
@@ -31,7 +31,7 @@ var Profile = React.createClass({
         <ReadCompletion numArticle={this.state.data.numArticle}/>
         <RecommendedArticles />
         <CommentsMade />
-        <Playlists username={this.state.data.username}/>
+        <Playlists username={this.state.data.username} playlists={this.state.data.playlists} />
         {followButton}
       </div>
     )
@@ -99,24 +99,41 @@ var CommentsMade = React.createClass({
 });
 
 var Playlists = React.createClass({
-
   render: function() {
     var createLink = '';
     if(Locals.username===this.props.username){
       createLink = (<Link to="createPlaylist">{' + Create New Playlist'}</Link>);
     }
+
+    var itemNodes;
+    if(this.props.playlists){
+      // console.log('playlists component: ',this.props.playlists); //leave here to show future info
+      itemNodes = this.props.playlists.map(function(list, index) {
+        return (
+          <PlaylistItem name={list.name} key={index} />
+        );
+      });
+    }
+
     return (
       <div className="playlists">
         <h3>Playlists</h3>
         <div>
           {createLink}
         </div>
-        <ul>
-          <li>Data Structures</li>
-          <li>Road trip to NYC</li>
-        </ul>
+        {itemNodes}
       </div>
     )
+  }
+});
+
+var PlaylistItem = React.createClass({
+  render: function() {
+    return (
+      <div className="playlistItem">
+        {this.props.name}
+      </div>
+    );
   }
 });
 

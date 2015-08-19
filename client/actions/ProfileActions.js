@@ -10,6 +10,13 @@ var ProfileActions = {
       actionType: FluxConstants.PROFILE_LOAD_DATA,
       data: data
     });
+  },
+
+  dispatchUserPlaylists: function(data) {
+    AppDispatcher.dispatch({
+      actionType: FluxConstants.PROFILE_LOAD_PLAYLISTS,
+      data: data
+    });
   }
 
 };
