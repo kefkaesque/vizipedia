@@ -41,9 +41,6 @@ function getPlaylist(playlistId) {
   return Playlist.findOne({
     where: {id: playlistId},
     include: [PlaylistItem]
-  })
-  .then(function(playlists) {
-    return playlists;
   });
 };
 
@@ -51,9 +48,6 @@ function getUserPlaylists(userId) {
   return Playlist.findAll({
     where: {userId: userId},
     include: [PlaylistItem]
-  })
-  .then(function(playlists) {
-    return playlists;
   });
 };
 
