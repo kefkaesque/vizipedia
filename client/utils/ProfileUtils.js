@@ -14,9 +14,9 @@ module.exports = {
       error: function(data) {
         console.log('failed');
       }
-    })
+    });
   },
-
+//following someone
   postProfileData: function(user) {
     var userData = {
       user:user

@@ -4,8 +4,10 @@ var ProfileAPI = require('../utils/ProfileAPI.js');
 
 var ProfileActions = {
   dispatchProfileData: function(data) {
+    var that = this;
     ProfileAPI.getProfileData(data)
     .then(function(profile) {
+      that.dispatchUserPlaylists(profile.id);
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.PROFILE_LOAD_DATA,
         data: profile
@@ -33,7 +35,7 @@ var ProfileActions = {
         error: 'bad req'
       });
     });
-  }
+  },
 };
 
 module.exports = ProfileActions;
