@@ -36,6 +36,23 @@ var ProfileActions = {
       });
     });
   },
+
+  dispatchFollow: function(data) {
+    ProfileAPI.postFollow(data)
+    .then(function(profile) {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.PROFILE_LOAD_DATA,
+        data: profile
+      });
+    })
+    .catch(function() {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.ERROR,
+        error: 'bad req'
+      });
+    });
+  }
+
 };
 
 module.exports = ProfileActions;

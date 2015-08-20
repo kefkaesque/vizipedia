@@ -16,7 +16,7 @@ module.exports = {
       }
     });
   },
-//following someone
+
   postProfileData: function(user) {
     var userData = {
       user:user

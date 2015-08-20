@@ -2,6 +2,7 @@ var Promise = require('es6-promise').Promise;
 var request = require('superagent');
 
 module.exports = {
+
   getProfileData: function(user) {
     return new Promise(function(resolve, reject) {
       request
@@ -15,6 +16,7 @@ module.exports = {
         });
     });
   },
+
   getUserPlaylists: function(userId) {
     return new Promise(function(resolve, reject) {
       request
@@ -28,7 +30,8 @@ module.exports = {
         });
     });
   },
-  postProfileData: function(user) {
+
+  postFollow: function(user) {
     var userData = {
       user:user
     };
