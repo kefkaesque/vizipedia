@@ -32,6 +32,10 @@ After you have a rabbitmq server, you can run the worker.js file with:
 node worker.js
 ```
 
+## API Endpoints ##
+
+``` /api/playlists ```
+
 ## Testing ##
 
 This repo uses mocha + chai for testing. Ensure that mocha is installed with:
