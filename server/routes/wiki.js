@@ -6,7 +6,7 @@ module.exports = router;
 var amqp = require('amqplib');
 var when = require('when');
 var uuid = require('node-uuid');
-var WikiArticle = require('../models/wikiArticle.js');
+var WikiArticle = require('../models/WikiArticle.js');
 var VisitedArticle = require('../models/visitedArticle.js');
 var configEnv = require('../config/env.js');
 

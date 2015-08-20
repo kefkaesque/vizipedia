@@ -6,7 +6,7 @@ var Header = React.createClass({
 
   render: function() {
     return (
-      <div className="header">
+      <div className="filled"><div className="header">
         <div className="menu">
           <LoginButton/>
           <SignupButton/>
@@ -14,7 +14,7 @@ var Header = React.createClass({
         <div className="logo serif">vizipedia</div>
         <HeaderForm />
         <UserSearch />
-      </div>
+      </div></div>
     )
   }
 });
@@ -22,11 +22,11 @@ var Header = React.createClass({
 var LoginButton = React.createClass({
   render: function() {
     return (
-      <div className="item">
-        <a href='/login'>
+      <a href='/login'>
+        <div className="item">
           Login
-        </a>
-      </div>
+        </div>
+      </a>
     );
   }
 });
@@ -34,11 +34,11 @@ var LoginButton = React.createClass({
 var SignupButton = React.createClass({
   render: function() {
     return (
-      <div className="item">
-        <a href='/signup'>
+      <a href='/signup'>
+        <div className="item">
           Signup
-        </a>
-      </div>
+        </div>
+      </a>
     );
   }
 });
