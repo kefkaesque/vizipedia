@@ -31,6 +31,7 @@ var Article = React.createClass({
     return {__html: this.state.data.content};
   },
   render: function() {
+    console.log(this.state.data);
     return (
       <div className="filled">
         <Loader loaded={this.state.loaded} lines={13} length={30} width={15} radius={80}
