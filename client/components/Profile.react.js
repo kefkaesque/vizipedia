@@ -34,7 +34,7 @@ var Profile = React.createClass({
         <ProfileHeader data={this.state}/>
         <UserInfo data={this.state} numArticle={this.state.numArticle}/>
         <div className="profile__row">
-          <RecommendedArticles />
+          <RecommendedArticles userId={this.state.id}/>
           <CommentsMade />
         </div>
         <div className="profile__row">
@@ -82,23 +82,30 @@ var UserInfo = React.createClass({
 
 var RecommendedArticles = React.createClass({
   getInitialState: function() {
-    return {};
+    return {}
   },
   componentWillMount: function() {
     RecommendStore.addChangeListener(this._onChange);
-  },
-  componentDidMount: function() {
-    RecActions.dispatchUserRecs(this.props.userId);
+    RecActions.dispatchUserRecs(1);
   },
   componentWillUnmount: function() {
     RecommendStore.removeChangeListener(this._onChange);
   },
   render: function() {
+    if (this.props.userRec) {
+      var itemNodes = this.props.userRec(function(item, index) {
+        return (
+         <RecItem articleId={item.articleId} key={index} />
+        );
+      });
+    } else {
+      itemNodes = '';
+    }
     return (
       <div className="recommended profile__item">
         <h3>Recommended Articles</h3>
         <ul>
-          <li>{this.state}</li>
+          <li>{itemNodes}</li>
         </ul>
       </div>
     )
@@ -106,6 +113,16 @@ var RecommendedArticles = React.createClass({
   _onChange: function() {
     this.setState(
       RecommendStore.getData()
+    );
+  }
+});
+
+var RecItem = React.createClass({
+  render: function() {
+    return (
+      <div>
+        {this.props.articleId}
+      </div>
     );
   }
 });

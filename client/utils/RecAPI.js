@@ -6,7 +6,7 @@ module.exports = {
   getUserRecs: function(userId) {
     return new Promise(function(resolve, reject) {
       request
-        .get('/api/recommend/'+userId)
+        .get('/api/recommend?userid='+userId)
         .end(function(err, res) {
           if (err) {
             reject();
@@ -20,7 +20,7 @@ module.exports = {
   getArticleRecs: function(articleId) {
     return new Promise(function(resolve, reject) {
       request
-        .get('/api/recommend/'+articleId)
+        .get('/api/recommend?articleid='+articleId)
         .end(function(err, res) {
           if (err) {
             reject();
