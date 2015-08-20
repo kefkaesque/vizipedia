@@ -5,6 +5,9 @@ var ProfileActions = require('../actions/ProfileActions');
 var Router = require('react-router');
 var Link = Router.Link;
 var RaceActions = require('../actions/RaceActions');
+var RecommendStore = require('../stores/RecommendStore');
+var RecActions = require('../actions/RecActions');
+
 
 var Profile = React.createClass({
 
@@ -16,8 +19,6 @@ var Profile = React.createClass({
   },
   componentDidMount: function() {
     var query = window.location.pathname.split('/')[2];
-    console.log(query);
-    console.log('mount props ,', this.props);
     ProfileActions.dispatchProfileData(query);
   },
   componentWillReceiveProps: function() {
@@ -80,7 +81,18 @@ var UserInfo = React.createClass({
 });
 
 var RecommendedArticles = React.createClass({
-
+  getInitialState: function() {
+    return {};
+  },
+  componentWillMount: function() {
+    RecommendStore.addChangeListener(this._onChange);
+  },
+  componentDidMount: function() {
+    RecActions.dispatchUserRecs(this.props.userId);
+  },
+  componentWillUnmount: function() {
+    RecommendStore.removeChangeListener(this._onChange);
+  },
   render: function() {
     return (
       <div className="recommended profile__item">
@@ -90,6 +102,11 @@ var RecommendedArticles = React.createClass({
         </ul>
       </div>
     )
+  },
+  _onChange: function() {
+    this.setState(
+      RecommendStore.getData()
+    );
   }
 });
 

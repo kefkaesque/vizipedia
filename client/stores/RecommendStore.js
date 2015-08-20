@@ -31,6 +31,8 @@ AppDispatcher.register(function(payload) {
     case FluxConstants.USER_RECS:
       loadData(action.data);
       break;
+    case FluxConstants.UPDATE_RECS:
+      loadData(action.data);
     default:
       // none
   }
