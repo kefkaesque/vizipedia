@@ -74,20 +74,14 @@ var UserSearch = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
     var text = React.findDOMNode(this.refs.text).value.trim();
-
     if (!text) {
       return;
     }
-
-    var goProfile = (function(data) {
-      ProfileUtils.getUserPlaylists(data.id);
-      this.transitionTo('profile', {username: text});
-    }).bind(this);
-
-    ProfileUtils.getProfileData(text, goProfile);
+    this.transitionTo('profile', {username: text});
     React.findDOMNode(this.refs.text).value = '';
-
+    return;
   },
+
   render: function() {
     return (
       <form className="headerForm" onSubmit={this.handleSubmit}>
