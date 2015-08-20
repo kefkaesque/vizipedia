@@ -26,19 +26,18 @@ var Profile = React.createClass({
     ProfileStore.removeChangeListener(this._onChange);
   },
   render: function() {
-    var followButton ='';
-    if(Locals.username && Locals.username !== this.state.username){
-      followButton = (<FollowButton username={this.state.username}/>);
-    }
     return (
-      <div className="mainProfile">
+      <div className="profile">
         <ProfileHeader data={this.state}/>
-        <ReadCompletion numArticle={this.state.numArticle}/>
-        <RecommendedArticles />
-        <CommentsMade />
-        <Playlists username={this.state.username} playlists={this.state.playlists} />
-        {followButton}
-        <RaceButton/>
+        <UserInfo data={this.state} numArticle={this.state.numArticle}/>
+        <div className="profile__row">
+          <RecommendedArticles />
+          <CommentsMade />
+        </div>
+        <div className="profile__row">
+          <Playlists username={this.state.username} playlists={this.state.playlists} />
+          <RaceButton/>
+        </div>
       </div>
     )
   },
@@ -52,22 +51,27 @@ var Profile = React.createClass({
 var ProfileHeader = React.createClass({
 
   render: function() {
+    var followButton ='';
+    if(Locals.username && Locals.username !== this.props.data.username){
+      followButton = (<FollowButton username={this.props.data.username}/>);
+    }
     return (
       <div className="profileheader">
         <h1>{this.props.data.username}</h1>
-        <h2>Followed by {this.props.data.followedBy}</h2>
-        <h2>Following {this.props.data.following}</h2>
+          {followButton}
       </div>
     )
   }
 });
 
-var ReadCompletion = React.createClass({
+var UserInfo = React.createClass({
 
   render: function() {
     return (
-      <div className="completion">
-        <p>Number of Articles Completed : {this.props.numArticle}</p>
+      <div className="profile__row">
+        <div className="profile__item">Followed by {this.props.data.followedBy}</div>
+        <div className="profile__item">Following {this.props.data.following}</div>
+        <div className="profile__item">Articles Read : {this.props.numArticle}</div>
       </div>
     )
   }
@@ -77,7 +81,7 @@ var RecommendedArticles = React.createClass({
 
   render: function() {
     return (
-      <div className="recommended">
+      <div className="recommended profile__item">
         <h3>Recommended Articles</h3>
         <ul>
           <li>Dog</li>
@@ -93,8 +97,8 @@ var CommentsMade = React.createClass({
 
   render: function() {
     return (
-      <div className="commentsMade">
-        <h3>Comments Made</h3>
+      <div className="commentsMade profile__item">
+        <h3>Activity Feed</h3>
         <ul>
           <li>
             <span>carterchung commented on article "Morocco"</span>
@@ -123,7 +127,7 @@ var Playlists = React.createClass({
     }
 
     return (
-      <div className="playlists">
+      <div className="playlists profile__item">
         <h3>Playlists</h3>
         <div>
           {createLink}
@@ -150,7 +154,7 @@ var FollowButton = React.createClass({
   },
   render: function() {
     return (
-      <div className="item">
+      <div className="followButton">
         <button onClick={this.handlePress}>
           Follow
         </button>
@@ -173,7 +177,7 @@ var RaceButton = React.createClass({
   },
   render: function() {
     return (
-      <div className="item">
+      <div className="raceButton profile__item">
         <button onClick={this.handlePress}>
           Race!
         </button>
