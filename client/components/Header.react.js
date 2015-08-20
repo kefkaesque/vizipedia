@@ -52,6 +52,7 @@ var HeaderForm = React.createClass({
       return;
     }
     this.transitionTo('wiki', {topic: text});
+    React.findDOMNode(this.refs.text).value = '';
     return;
   },
   render: function() {

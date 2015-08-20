@@ -5,6 +5,9 @@ var ProfileActions = require('../actions/ProfileActions');
 var Router = require('react-router');
 var Link = Router.Link;
 var RaceActions = require('../actions/RaceActions');
+var RecommendStore = require('../stores/RecommendStore');
+var RecActions = require('../actions/RecActions');
+
 
 var Profile = React.createClass({
 
@@ -31,7 +34,7 @@ var Profile = React.createClass({
         <ProfileHeader data={this.state}/>
         <UserInfo data={this.state} numArticle={this.state.numArticle}/>
         <div className="profile__row">
-          <RecommendedArticles />
+          <RecommendedArticles userId={this.state.id}/>
           <CommentsMade />
         </div>
         <div className="profile__row">
@@ -78,18 +81,49 @@ var UserInfo = React.createClass({
 });
 
 var RecommendedArticles = React.createClass({
-
+  getInitialState: function() {
+    return {}
+  },
+  componentWillMount: function() {
+    RecommendStore.addChangeListener(this._onChange);
+    RecActions.dispatchUserRecs(1);
+  },
+  componentWillUnmount: function() {
+    RecommendStore.removeChangeListener(this._onChange);
+  },
   render: function() {
+    if (this.props.userRec) {
+      var itemNodes = this.props.userRec(function(item, index) {
+        return (
+         <RecItem articleId={item.articleId} key={index} />
+        );
+      });
+    } else {
+      itemNodes = '';
+    }
     return (
       <div className="recommended profile__item">
         <h3>Recommended Articles</h3>
         <ul>
-          <li>Dog</li>
-          <li>Cat</li>
-          <li>San Francisco</li>
+          <li>{itemNodes}</li>
         </ul>
       </div>
     )
+  },
+  _onChange: function() {
+    this.setState(
+      RecommendStore.getData()
+    );
+  }
+});
+
+var RecItem = React.createClass({
+  render: function() {
+    return (
+      <div>
+        {this.props.articleId}
+      </div>
+    );
   }
 });
 

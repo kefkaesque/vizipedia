@@ -6,7 +6,11 @@ var _ = require('underscore');
 
 var rec = {};
 function loadData(data) {
-  rec = data;
+  rec.recs = data;
+}
+function loadUserRec(data) {
+  console.log(data);
+  rec.userRec = data;
 }
 
 var RecommendStore = _.extend({}, EventEmitter.prototype, {
@@ -25,10 +29,13 @@ var RecommendStore = _.extend({}, EventEmitter.prototype, {
   }
 });
 
-AppDispatcher.register(function(action) {
-  var text;
+AppDispatcher.register(function(payload) {
+  var action = payload.action;
   switch(action.actionType) {
-    case FluxConstants.UPDATE_REC:
+    case FluxConstants.USER_RECS:
+      loadUserRec(action.data);
+      break;
+    case FluxConstants.UPDATE_RECS:
       loadData(action.data);
       break;
     default:

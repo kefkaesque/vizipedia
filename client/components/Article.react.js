@@ -31,6 +31,7 @@ var Article = React.createClass({
     return {__html: this.state.data.content};
   },
   render: function() {
+    console.log(this.state.data);
     return (
       <div className="filled">
         <Loader loaded={this.state.loaded} lines={13} length={30} width={15} radius={80}
@@ -38,8 +39,8 @@ var Article = React.createClass({
         trail={60} shadow={false} hwaccel={false} className="spinner"
         zIndex={2e9} top="50%" left="50%" scale={1.00} >
           <div className="wrapper article serif">
-            <Recommend articleId={this.state.data.id} />
-          <div dangerouslySetInnerHTML={this.createMarkup()} />
+            <Recommend articleId={this.state.data.id}/>
+            <div dangerouslySetInnerHTML={this.createMarkup()} />
           </div>
         </Loader>
       </div>

@@ -1,39 +1,32 @@
 var React = require('react');
-var RecUtils = require('../utils/RecUtils');
-var ArticleStore = require('../stores/ArticleStore');
-
-function getRecommendState() {
-  console.log('getting recommended state');
-  return {
-    data: ArticleStore.getData(),
-  };
-}
+var RecommendStore = require('../stores/RecommendStore');
+var RecActions = require('../actions/RecActions');
 
 var RecommendButton = React.createClass({
   getInitialState: function() {
-    return getRecommendState();
+    return {};
   },
   componentDidMount: function() {
-    ArticleStore.addChangeListener(this._onChange);
+    RecommendStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
-    ArticleStore.removeChangeListener(this._onChange);
+    RecommendStore.removeChangeListener(this._onChange);
   },
   handlePress: function(articleId) {
-    RecUtils.getRecData(articleId);
+    RecActions.dispatchRec(articleId);
   },
   render: function() {
     return (
       <div className="item">
-        <button className="recommend" onClick={this.handlePress.bind(this, this.state.data.id)}>
-        Recommend {this.state.data.recs}
+        <button className="recommend" onClick={this.handlePress.bind(this, this.props.articleId)}>
+        Recommend
         </button>
         <span className="rCount"></span>
       </div>
     );
   },
   _onChange: function() {
-    this.setState(getRecommendState());
+    this.setState(RecommendStore.getData());
   }
 });
 
