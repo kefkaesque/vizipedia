@@ -98,7 +98,7 @@ var CommentsMade = React.createClass({
   render: function() {
     return (
       <div className="commentsMade profile__item">
-        <h3>Comments Made</h3>
+        <h3>Activity Feed</h3>
         <ul>
           <li>
             <span>carterchung commented on article "Morocco"</span>
