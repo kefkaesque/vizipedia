@@ -31,4 +31,4 @@ function addPlaylistItem(playlistId, topic) {
       include: [PlaylistItem]
     });
   });
-};
+}

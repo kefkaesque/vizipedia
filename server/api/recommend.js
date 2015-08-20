@@ -36,14 +36,14 @@ router.post('/', function(req, res) {
 // --------------------------------------------------------------------------------
 
 function getUserRecommends(userId) {
-  return Playlist.findAll({
+  return Recommend.findAll({
     where: {userId: userId},
     include: []
   });
 }
 
 function getArticleRecommends(articleId) {
-  return Playlist.findAll({
+  return Recommend.findAll({
     where: {articleId: articleId},
     include: []
   });
