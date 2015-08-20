@@ -14,7 +14,7 @@ module.exports = {
       error: function(data) {
         console.log('failed');
       }
-    })
+    });
   },
 
   postProfileData: function(user) {

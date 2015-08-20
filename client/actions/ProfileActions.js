@@ -4,8 +4,10 @@ var ProfileAPI = require('../utils/ProfileAPI.js');
 
 var ProfileActions = {
   dispatchProfileData: function(data) {
+    var that = this;
     ProfileAPI.getProfileData(data)
     .then(function(profile) {
+      that.dispatchUserPlaylists(profile.id);
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.PROFILE_LOAD_DATA,
         data: profile
@@ -33,7 +35,24 @@ var ProfileActions = {
         error: 'bad req'
       });
     });
+  },
+
+  dispatchFollow: function(data) {
+    ProfileAPI.postFollow(data)
+    .then(function(profile) {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.PROFILE_LOAD_DATA,
+        data: profile
+      });
+    })
+    .catch(function() {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.ERROR,
+        error: 'bad req'
+      });
+    });
   }
+
 };
 
 module.exports = ProfileActions;

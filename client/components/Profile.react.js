@@ -8,7 +8,7 @@ var Link = Router.Link;
 var Profile = React.createClass({
 
   getInitialState: function() {
-    return ProfileStore.getData();
+    return {};
   },
   componentWillMount: function() {
     ProfileStore.addChangeListener(this._onChange);
@@ -113,7 +113,6 @@ var Playlists = React.createClass({
 
     var itemNodes;
     if(this.props.playlists){
-      // console.log('playlists component: ',this.props.playlists); //leave here to show future info
       itemNodes = this.props.playlists.map(function(list, index) {
         return (
           <PlaylistItem name={list.name} key={index} />
@@ -145,7 +144,7 @@ var PlaylistItem = React.createClass({
 
 var FollowButton = React.createClass({
   handlePress: function(e) {
-    console.log('follow');
+    ProfileActions.dispatchFollow(this.props.username);
   },
   render: function() {
     return (
