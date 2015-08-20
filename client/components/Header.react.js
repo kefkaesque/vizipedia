@@ -13,6 +13,7 @@ var Header = React.createClass({
         </div>
         <div className="logo serif">vizipedia</div>
         <HeaderForm />
+        <UserSearch />
       </div></div>
     )
   }
