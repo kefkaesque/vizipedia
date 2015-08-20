@@ -4,7 +4,7 @@ var FluxConstants = require('../constants/FluxConstants.js');
 var RaceActions = {
 
   dispatchRacing: function(data) {
-    AppDispatcher.dispatch({
+    AppDispatcher.handleViewAction({
       actionType: FluxConstants.RACING,
       data: data
     });

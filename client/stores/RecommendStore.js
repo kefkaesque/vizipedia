@@ -25,10 +25,10 @@ var RecommendStore = _.extend({}, EventEmitter.prototype, {
   }
 });
 
-AppDispatcher.register(function(action) {
-  var text;
+AppDispatcher.register(function(payload) {
+  var action = payload.action;
   switch(action.actionType) {
-    case FluxConstants.UPDATE_REC:
+    case FluxConstants.USER_RECS:
       loadData(action.data);
       break;
     default:
