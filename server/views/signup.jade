@@ -1,14 +1,17 @@
 doctype html
 html
   head
+    include style.jade
   body
-    form(action="/signup",method="post")
-      | Sign Up
-      br
-      input(type="text",name="username",placeholder="username")
-      br
-      input(type="password",name="password",placeholder="password")
-      br
-      input(type="text",name="email",placeholder="email")
-      br
-      input(type="submit")
+    div.login
+      div.spacer
+      form(action="/signup",method="post")
+        div.logo.serif vizipedia
+        div.caption.serif Sign Up
+        input(type="text",name="username",placeholder="username")
+        br
+        input(type="password",name="password",placeholder="password")
+        br
+        input(type="text",name="email",placeholder="email")
+        br
+        input(type="submit",value="Sign Up")
