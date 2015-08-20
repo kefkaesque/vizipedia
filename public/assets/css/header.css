@@ -35,17 +35,23 @@
 
 .header .logo {
   padding:0 1.3em 0 1em;
+  #background:url("../img/logo.png") no-repeat;
+  background-size:auto 100%;
 }
 
 .header form {
-  line-height:1em;
+  #line-height:1em;
+  padding-left:.5em;
+  background:rgba(255,255,255,.06);
+  border-left:1px solid rgba(255,255,255,.4);
+  border-right:1px solid rgba(255,255,255,.4);
 }
 
 .header input {
   width:260px;
   padding:.38em .8em;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.38);
+  background:transparent;
+  #border:1px solid rgba(255,255,255,.38);
   border-radius:.24em;
   color:#fff;
 }
@@ -97,7 +103,7 @@
 }
 
 .filled .header input {
-  background:#7fc400;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.12);
+  #background:#7fc400;
+  #background:rgba(255,255,255,.03);
+  #border:1px solid rgba(255,255,255,.12);
 }	
