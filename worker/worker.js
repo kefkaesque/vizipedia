@@ -1,7 +1,7 @@
 var amqp = require('amqplib');
 var request = require('request');
 var Vizifier = require("./vizifier.js");
-var WikiArticle = require('../server/models/wikiArticle.js');
+var WikiArticle = require('../server/models/WikiArticle.js');
 var configEnv = require('../server/config/env.js');
 
 function getWikiPage(topic, cb) {
