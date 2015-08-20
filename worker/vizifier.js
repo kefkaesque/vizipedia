@@ -22,8 +22,9 @@ function addImages(article, title, callback) {
   console.log('Adding Images!')
   var endPoint = 'http://ajax.googleapis.com/ajax/services/search/images?';
   var reqParam = 'v=1.0&q=' + encodeURI(title);
+  var params = '&imgsz=huge&rsz=1';
   // var imgNum = '&rsz=8' //'rsz=[1-8]'
-  var reqUrl = endPoint + reqParam;
+  var reqUrl = endPoint + reqParam + params;
   request(reqUrl, function(error, response, body) {
     if (error) {
       // handle 404 page here.
@@ -31,7 +32,7 @@ function addImages(article, title, callback) {
     } else {
       body = JSON.parse(body);
       for (var i=0; i<body.responseData.results.length; i++) {
-        article = article + '<img src="' + body.responseData.results[i].url+'">'; 
+        article = '<div class="hero"><img src="' + body.responseData.results[i].url+'"></div>'+article; 
       }
       console.log('article:', article)
       callback(article);
