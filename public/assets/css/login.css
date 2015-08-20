@@ -1,0 +1,55 @@
+.login {
+  background:url("../img/login.jpg"), #333;
+  background-size:cover;
+  height:100%;
+  text-align:center;
+}
+
+.login > * {
+  display:inline-block;
+  vertical-align:middle;
+}
+
+.spacer {
+  height:100%;
+}
+
+.login form {
+  position:relative;
+  top:-5%;
+  padding:1em 1.6em;
+
+  background:#fff;
+  background:rgba(0,0,0,.6);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:.24em;
+
+  font-size:1.3em;
+  color:#fff;
+}
+
+.login .logo {
+  font-size:2.5em;
+}
+
+.login .caption {
+  padding:1.6em 0 .5em;
+  text-transform:uppercase;
+  font-style:italic;
+  font-size:.7em;
+}
+
+.login input {
+  width:300px;
+  padding:.24em .62em;
+  border-radius:.15em;
+  margin-bottom:.38em;
+  font-size:.8em;
+}
+
+.login input[type="submit"] {
+  margin:.5em 0 0;
+  background:rgba(0,0,0,.1);
+  border:1px solid #fff;
+  color:#fff;
+}

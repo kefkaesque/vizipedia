@@ -34,9 +34,10 @@
 }
 
 .header .logo {
+  #margin-left:1em;
   padding:0 1.3em 0 1em;
-  #background:url("../img/logo.png") no-repeat;
-  background-size:auto 100%;
+  #background:url("../img/logo.png") left center no-repeat;
+  background-size:auto 60%;
 }
 
 .header form {
@@ -84,7 +85,7 @@
 .filled .header {
   position:absolute;
   #padding-top:.24em;
-  background:rgba(0,0,0,.62);
+  background:rgba(0,0,0,.6);
 }
 
 .filled .header:after {
