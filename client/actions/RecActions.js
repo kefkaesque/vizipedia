@@ -20,10 +20,10 @@ var RecActions = {
   },
   dispatchArticleRecs: function(articleId) {
     RecAPI.getArticleRecs(articleId)
-    .then(function(articles) {
+    .then(function(numRec) {
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.UPDATE_REC,
-        data: articles
+        data: numRec
       });
     })
     .catch(function() {
@@ -37,7 +37,7 @@ var RecActions = {
     RecAPI.postRec(articleId)
     .then(function(articles) {
       AppDispatcher.handleViewAction({
-        actionType: FluxConstants.UPDATE_REC,
+        actionType: FluxConstants.MAKE_REC,
         data: articles
       });
     })
@@ -47,7 +47,38 @@ var RecActions = {
         error: 'bad req'
       });
     });
-  }
+  },
+  dispatchUnrec: function(articleId) {
+    RecAPI.unRecommend(articleId)
+    .then(function(articles) {
+      console.log(articles);
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.MAKE_REC,
+        data: articles
+      });
+    })
+    .catch(function() {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.ERROR,
+        error: 'bad req'
+      });
+    });
+  },
+  dispathRecState: function(userId, articleId) {
+    RecAPI.recommendState(userId, articleId)
+    .then(function(articles) {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.MAKE_REC,
+        data: articles
+      });
+    })
+    .catch(function() {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.ERROR,
+        error: 'bad req'
+      });
+    });
+  },
 
 };
 

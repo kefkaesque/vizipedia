@@ -6,7 +6,7 @@ var _ = require('underscore');
 
 var rec = {};
 function loadData(data) {
-  rec.recs = data;
+  rec.num = data;
 }
 function loadUserRec(data) {
   rec.userRec = data;
@@ -34,7 +34,7 @@ AppDispatcher.register(function(payload) {
     case FluxConstants.USER_RECS:
       loadUserRec(action.data);
       break;
-    case FluxConstants.UPDATE_RECS:
+    case FluxConstants.UPDATE_REC:
       loadData(action.data);
       break;
     default:

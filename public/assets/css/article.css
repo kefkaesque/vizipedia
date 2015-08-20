@@ -11,10 +11,6 @@
   height:50vh;
 }
 
-.article .item {
-  display:none;
-}
-
 .article .hero {
   position:absolute;
   overflow:hidden;
