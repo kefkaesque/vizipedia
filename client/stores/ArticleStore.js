@@ -31,7 +31,6 @@ AppDispatcher.register(function(payload) {
   var action = payload.action;
   switch(action.actionType) {
     case FluxConstants.VIZI_SEARCH:
-      console.log(action);
       loadData(action.data);
       break;
     case FluxConstants.UPDATE_REC:

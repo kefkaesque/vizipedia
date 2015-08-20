@@ -17,7 +17,10 @@ var Article = React.createClass({
     ArticleActions.dispatchArticle(query);
   },
   componentWillReceiveProps: function() {
-    this.setState({content: ''});
+    this.setState({
+      data: '',
+      loaded: false
+    });
     var query = window.location.pathname.split('/')[2];
     ArticleActions.dispatchArticle(query);
   },
@@ -25,7 +28,7 @@ var Article = React.createClass({
     ArticleStore.removeChangeListener(this._onChange);
   },
   createMarkup: function() {
-    return {__html: this.state.content};
+    return {__html: this.state.data.content};
   },
   render: function() {
     return (
@@ -35,7 +38,7 @@ var Article = React.createClass({
         trail={60} shadow={false} hwaccel={false} className="spinner"
         zIndex={2e9} top="50%" left="50%" scale={1.00} >
           <div className="wrapper article serif">
-            <Recommend articleId={this.state.id} />
+            <Recommend articleId={this.state.data.id} />
           <div dangerouslySetInnerHTML={this.createMarkup()} />
           </div>
         </Loader>
@@ -43,9 +46,10 @@ var Article = React.createClass({
     );
   },
   _onChange: function() {
-    this.setState(
-      ArticleStore.getData()
-    );
+    this.setState({
+      data: ArticleStore.getData(),
+      loaded: true
+    });
   }
 });
 
