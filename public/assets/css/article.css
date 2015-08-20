@@ -35,7 +35,7 @@
   position:absolute;
   top:0; left:0;
   width:100%; height:100%;
-  background:radial-gradient(rgba(0,0,0,.5),#000);
+  background:radial-gradient(rgba(0,0,0,0),#000);
 }
 
 .article .hero img {
@@ -46,8 +46,8 @@
   transform: translateY(-50%);
   max-width:100%;
 
--webkit-filter: grayscale(.8) sepia(0.4);
-filter: grayscale(80%) sepia(40%);
+##-webkit-filter: grayscale(.3) sepia(0.2);
+filter: grayscale(10%) sepia(10%);
 }
 
 .article h1 {
