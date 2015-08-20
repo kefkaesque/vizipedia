@@ -145,7 +145,6 @@ var PlaylistItem = React.createClass({
 
 var FollowButton = React.createClass({
   handlePress: function(e) {
-    // ProfileUtils.postProfileData(this.props.username);
     console.log('follow');
   },
   render: function() {

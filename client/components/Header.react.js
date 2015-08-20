@@ -1,6 +1,4 @@
 var React = require('react');
-var WikiUtils = require('../utils/WikiUtils');
-var ProfileUtils = require('../utils/ProfileUtils');
 var Router = require('react-router');
 var Link = Router.Link;
 

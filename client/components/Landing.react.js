@@ -1,5 +1,4 @@
 var React = require('react');
-var WikiUtils = require('../utils/WikiUtils');
 var Router = require('react-router');
 
 var Landing = React.createClass({
