@@ -1,6 +1,4 @@
 var React = require('react');
-var WikiUtils = require('../utils/WikiUtils');
-var ProfileUtils = require('../utils/ProfileUtils');
 var Router = require('react-router');
 var Link = Router.Link;
 
@@ -50,25 +48,23 @@ var HeaderForm = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
-    var text = React.findDOMNode(this.refs.text).value.trim();// get the value
-
+    var text = React.findDOMNode(this.refs.text).value.trim();
     if (!text) {
       return;
     }
-
-    WikiUtils.getArticleData(text);
-    React.findDOMNode(this.refs.text).value = '';// clean the value
     this.transitionTo('wiki', {topic: text});
+    return;
   },
   render: function() {
     return (
       <form className="headerForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Search Articles" ref="text" />
-        <button type="submit"><span className="fa fa-search"></span></button>
+        <input type="text" placeholder="Search..." ref="text" />
+        <button type="submit"><span className="fa fa-fw fa-search"></span></button>
       </form>
     );
   }
 });
+
 
 var UserSearch = React.createClass({
   mixins: [ Router.Navigation ],
@@ -76,20 +72,14 @@ var UserSearch = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
     var text = React.findDOMNode(this.refs.text).value.trim();
-
     if (!text) {
       return;
     }
-
-    var goProfile = (function(data) {
-      ProfileUtils.getUserPlaylists(data.id);
-      this.transitionTo('profile', {username: text});
-    }).bind(this);
-
-    ProfileUtils.getProfileData(text, goProfile);
+    this.transitionTo('profile', {username: text});
     React.findDOMNode(this.refs.text).value = '';
-
+    return;
   },
+
   render: function() {
     return (
       <form className="headerForm" onSubmit={this.handleSubmit}>

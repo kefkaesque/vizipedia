@@ -1,43 +1,49 @@
 var React = require('react');
 var ProfileStore = require('../stores/ProfileStore');
-var ProfileUtils = require('../utils/ProfileUtils');
+var Recommend = require('./Recommend.react');
+var ProfileActions = require('../actions/ProfileActions');
 var Router = require('react-router');
 var Link = Router.Link;
 
-function getProfileState() {
-  return {
-    data: ProfileStore.getData(),
-  };
-}
-
 var Profile = React.createClass({
+
   getInitialState: function() {
-    return getProfileState();
+    return ProfileStore.getData();
+  },
+  componentWillMount: function() {
+    ProfileStore.addChangeListener(this._onChange);
   },
   componentDidMount: function() {
-    ProfileStore.addChangeListener(this._onChange);
+    var query = window.location.pathname.split('/')[2];
+    ProfileActions.dispatchProfileData(query);
+  },
+  componentWillReceiveProps: function() {
+    var query = window.location.pathname.split('/')[2];
+    ProfileActions.dispatchProfileData(query);
   },
   componentWillUnmount: function() {
     ProfileStore.removeChangeListener(this._onChange);
   },
   render: function() {
     var followButton ='';
-    if(Locals.username && Locals.username !== this.state.data.username){
-      followButton = (<FollowButton username={this.state.data.username}/>);
+    if(Locals.username && Locals.username !== this.state.username){
+      followButton = (<FollowButton username={this.state.username}/>);
     }
     return (
       <div className="mainProfile">
-        <ProfileHeader data={this.state.data}/>
-        <ReadCompletion numArticle={this.state.data.numArticle}/>
+        <ProfileHeader data={this.state}/>
+        <ReadCompletion numArticle={this.state.numArticle}/>
         <RecommendedArticles />
         <CommentsMade />
-        <Playlists username={this.state.data.username} playlists={this.state.data.playlists} />
+        <Playlists username={this.state.username} playlists={this.state.playlists} />
         {followButton}
       </div>
     )
   },
   _onChange: function() {
-    this.setState(getProfileState());
+    this.setState(
+      ProfileStore.getData()
+    );
   }
 });
 
@@ -139,13 +145,13 @@ var PlaylistItem = React.createClass({
 
 var FollowButton = React.createClass({
   handlePress: function(e) {
-    ProfileUtils.postProfileData(this.props.username);
+    console.log('follow');
   },
   render: function() {
     return (
       <div className="item">
         <button onClick={this.handlePress}>
-          Follow 
+          Follow
         </button>
       </div>
     );

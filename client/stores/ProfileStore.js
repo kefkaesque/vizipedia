@@ -31,8 +31,8 @@ var ProfileStore = _.extend({}, EventEmitter.prototype, {
   }
 });
 
-AppDispatcher.register(function(action) {
-  var text;
+AppDispatcher.register(function(payload) {
+  var action = payload.action;
   switch(action.actionType) {
     case FluxConstants.PROFILE_LOAD_DATA:
       storeProfileData(action.data);

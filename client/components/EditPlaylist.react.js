@@ -1,22 +1,20 @@
 var React = require('react');
-var PlaylistUtils = require('../utils/PlaylistUtils');
+var PlaylistActions = require('../actions/PlaylistActions');
 var PlaylistStore = require('../stores/PlaylistStore');
 var Router = require('react-router');
 var Link = Router.Link;
 
-function getCurrentPlaylist() {
-  return {
-    data: PlaylistStore.getPlaylistInfo(),
-  };
-}
-
 var EditPlaylist = React.createClass({
 
   getInitialState: function() {
-    return getCurrentPlaylist();
+    return {};
+  },
+  componentWillMount: function() {
+    PlaylistStore.addChangeListener(this._onChange);
   },
   componentDidMount: function() {
-    PlaylistStore.addChangeListener(this._onChange);
+    var query = window.location.pathname.split('/')[3];
+    PlaylistActions.dispatchCreate(query);
   },
   componentWillUnmount: function() {
     PlaylistStore.removeChangeListener(this._onChange);
@@ -24,15 +22,17 @@ var EditPlaylist = React.createClass({
   render: function() {
     return (
       <div>
-        Edit Playlist {this.state.data.name} ({this.state.data.id})
-        <AddPlaylistItem playlistId={this.state.data.id} />
-        <CurrentPlaylist playlistitems={this.state.data.playlistitems} />
+        Edit Playlist {this.state.name} ({this.state.id})
+        <AddPlaylistItem playlistId={this.state.id} />
+        <CurrentPlaylist playlistitems={this.state.playlistitems} />
         <Link to="profile" params={{username: Locals.username}}>{'Return to profile'}</Link>
       </div>
     );
   },
   _onChange: function() {
-    this.setState(getCurrentPlaylist());
+    this.setState(
+      PlaylistStore.getPlaylistInfo()
+    );
   }
 });
 
@@ -43,7 +43,7 @@ var AddPlaylistItem = React.createClass({
     if (!text) {
       return;
     }
-    PlaylistUtils.addItem(text, this.props.playlistId);
+    PlaylistActions.dispatchEdit(text, this.props.playlistId);
     React.findDOMNode(this.refs.text).value = '';
   },
   render: function() {
@@ -61,11 +61,15 @@ var AddPlaylistItem = React.createClass({
 
 var CurrentPlaylist = React.createClass({
   render: function() {
-    var itemNodes = this.props.playlistitems.map(function(item, index) {
-      return (
-        <PlaylistItem topic={item.topic} key={index} />
-      );
-    });
+    if (this.props.playlistitems) {
+      var itemNodes = this.props.playlistitems.map(function(item, index) {
+        return (
+         <PlaylistItem topic={item.topic} key={index} />
+        );
+      });
+    } else {
+      itemNodes = '';
+    }
     return (
       <div>
         <h2>Current Playlist</h2>

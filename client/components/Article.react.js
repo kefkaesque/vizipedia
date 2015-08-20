@@ -1,29 +1,31 @@
 var React = require('react');
 var ArticleStore = require('../stores/ArticleStore');
-var WikiUtils = require('../utils/WikiUtils');
 var Recommend = require('./Recommend.react');
-var RecUtils = require('../utils/RecUtils');
 var Loader = require('react-loader');
-
-function getArticleState() {
-  return {
-    data: ArticleStore.getData(),
-    loaded: true
-  };
-}
+var ArticleActions = require('../actions/ArticleActions');
 
 var Article = React.createClass({
 
   getInitialState: function() {
-    console.log('article getInitialState!!')
     return {data: '', loaded: false};
   },
-  componentDidMount: function() {
-    console.log('article componentDidMount!!')
+  componentWillMount: function() {
     ArticleStore.addChangeListener(this._onChange);
+  },
+  componentDidMount: function() {
+    var query = window.location.pathname.split('/')[2];
+    ArticleActions.dispatchArticle(query);
+  },
+  componentWillReceiveProps: function() {
+    this.setState({content: ''});
+    var query = window.location.pathname.split('/')[2];
+    ArticleActions.dispatchArticle(query);
   },
   componentWillUnmount: function() {
     ArticleStore.removeChangeListener(this._onChange);
+  },
+  createMarkup: function() {
+    return {__html: this.state.content};
   },
   render: function() {
     return (
@@ -33,15 +35,17 @@ var Article = React.createClass({
         trail={60} shadow={false} hwaccel={false} className="spinner"
         zIndex={2e9} top="50%" left="50%" scale={1.00} >
           <div className="wrapper article serif">
-            <Recommend articleId={this.state.data.id} />
-          <div dangerouslySetInnerHTML={{__html: this.state.data.content}} />
+            <Recommend articleId={this.state.id} />
+          <div dangerouslySetInnerHTML={this.createMarkup()} />
           </div>
         </Loader>
       </div>
     );
   },
   _onChange: function() {
-    this.setState(getArticleState());
+    this.setState(
+      ArticleStore.getData()
+    );
   }
 });
 
