@@ -6,11 +6,22 @@ var Recommend = require('../models/Recommend.js');
 
 router.get('/', function(req, res) {
   var userId = req.query.userid;
+  var articleId = req.query.articleid;
 
-  getUserRecommends(userId)
-  .then(function(results) {
-    res.send(JSON.stringify(results));
-  });
+  if(userId) {
+    getUserRecommends(userId)
+    .then(function(results) {
+      res.send(JSON.stringify(results));
+    });
+  }
+  else if(articleId) {
+    getArticleRecommends(articleId)
+    .then(function(results) {
+      res.send(JSON.stringify(results));
+    });
+  }
+  else
+    res.send(404);
 });
 
 router.post('/', function(req, res) {
@@ -25,12 +36,19 @@ router.post('/', function(req, res) {
 // --------------------------------------------------------------------------------
 
 function getUserRecommends(userId) {
-  return Playlist.findOne({
+  return Playlist.findAll({
     where: {userId: userId},
     include: []
   });
-};
+}
+
+function getArticleRecommends(articleId) {
+  return Playlist.findAll({
+    where: {articleId: articleId},
+    include: []
+  });
+}
 
 function createRecommend(userId, articleId) {
   return Recommend.create({userId: userId, articleId: articleId});
-};
+}

@@ -19,4 +19,4 @@ Article.hasMany(Recommend, {foreignKey: "articleId"});
 Recommend.belongsTo(Article, {foreignKey: "articleId"});
 
 db.sync();
-module.exports = Playlist;
+module.exports = Recommend;
