@@ -27,12 +27,12 @@ var Profile = React.createClass({
     }
     return (
       <div className="mainProfile">
-          <ProfileHeader data={this.state.data}/>
-          <ReadCompletion numArticle={this.state.data.numArticle}/>
-          <RecommendedArticles />
-          <CommentsMade />
-          <Playlists username={this.state.data.username} playlists={this.state.data.playlists} />
-          {followButton}
+        <ProfileHeader data={this.state.data}/>
+        <ReadCompletion numArticle={this.state.data.numArticle}/>
+        <RecommendedArticles />
+        <CommentsMade />
+        <Playlists username={this.state.data.username} playlists={this.state.data.playlists} />
+        {followButton}
       </div>
     )
   },

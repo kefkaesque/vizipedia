@@ -7,10 +7,10 @@ var Landing = React.createClass({
     return (
       <div className="splash">
         <div className="spacer"></div>
-          <div>
-            <div className="logo serif">vizipedia</div>
-            <SearchBar />
-          </div>
+        <div>
+          <div className="logo serif">vizipedia</div>
+          <SearchBar />
+        </div>
       </div>
     )
   }
