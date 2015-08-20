@@ -18,9 +18,9 @@
   display:inline-block;
   position:absolute;
   width:100%;
-  padding:0 1em;
   #padding-top:.24em;
   background:rgba(0,0,0,.03);
+  border-bottom:1px solid rgba(255,255,255,.4);
   box-shadow:0px 1px 1px rgba(255,255,255,.1);
   color:#fff;
   line-height:2.6em;
@@ -34,7 +34,7 @@
 }
 
 .header .logo {
-  margin-right:1em;
+  padding:0 1.3em 0 1em;
 }
 
 .header form {
@@ -64,20 +64,21 @@
 }
 
 .header .item {
-  padding:.5em .8em;
-  margin-left:.62em;
+  padding:0 1.6em;
+  #margin-left:.62em;
   background:rgba(255,255,255,.15);
-  border:1px solid rgba(255,255,255,.38);
-  border-radius:.24em;
+  #border:1px solid rgba(255,255,255,.38);
+  border-left:1px solid rgba(255,255,255,.3);
+  #border-radius:.24em;
   font-size:16px;
   font-weight:600;
-  line-height:normal;
+  #line-height:normal;
 }
 
 .filled .header {
-  position:relative;
+  position:absolute;
   #padding-top:.24em;
-  background:#222;
+  background:rgba(0,0,0,.62);
 }
 
 .filled .header:after {
@@ -92,11 +93,11 @@
 .filled .header .item {
   background:#7fc400;
   background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
+  #border:1px solid rgba(255,255,255,.12);
 }
 
 .filled .header input {
   background:#7fc400;
   background:rgba(255,255,255,.03);
   border:1px solid rgba(255,255,255,.12);
-}
+}	
