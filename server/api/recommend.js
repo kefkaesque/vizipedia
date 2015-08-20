@@ -25,7 +25,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-  var articleId = req.body.articleid;
+  var articleId = req.body.articleId;
   if(req.user)
     createRecommend(req.user.id, articleId)
     .then(function(results) {
@@ -50,5 +50,10 @@ function getArticleRecommends(articleId) {
 }
 
 function createRecommend(userId, articleId) {
-  return Recommend.create({userId: userId, articleId: articleId});
+  return Recommend.findOrCreate({
+    where: {
+      userId: userId,
+      articleId: articleId
+    }
+  });
 }

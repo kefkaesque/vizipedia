@@ -1,6 +1,6 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher.js');
 var FluxConstants = require('../constants/FluxConstants.js');
-var RecAPI = require('../utils/WikiAPI.js');
+var RecAPI = require('../utils/RecAPI.js');
 
 var RecActions = {
   dispatchUserRecs: function(userId) {
@@ -33,8 +33,8 @@ var RecActions = {
       });
     });
   },
-  dispatchRec: function() {
-    RecAPI.postRec()
+  dispatchRec: function(articleId) {
+    RecAPI.postRec(articleId)
     .then(function(articles) {
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.UPDATE_REC,

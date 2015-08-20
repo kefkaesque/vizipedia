@@ -16,6 +16,8 @@ var Profile = React.createClass({
   },
   componentDidMount: function() {
     var query = window.location.pathname.split('/')[2];
+    console.log(query);
+    console.log('mount props ,', this.props);
     ProfileActions.dispatchProfileData(query);
   },
   componentWillReceiveProps: function() {
@@ -84,9 +86,7 @@ var RecommendedArticles = React.createClass({
       <div className="recommended profile__item">
         <h3>Recommended Articles</h3>
         <ul>
-          <li>Dog</li>
-          <li>Cat</li>
-          <li>San Francisco</li>
+          <li>{this.state}</li>
         </ul>
       </div>
     )

@@ -31,10 +31,11 @@ module.exports = {
     });
   },
 
-  postRec: function() {
+  postRec: function(articleId) {
     return new Promise(function(resolve, reject) {
       request
-        .post('/')
+        .post('/api/recommend/')
+        .send({articleId: articleId})
         .end(function(err, res) {
           if (err) {
             reject();
