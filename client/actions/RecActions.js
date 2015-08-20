@@ -6,7 +6,6 @@ var RecActions = {
   dispatchUserRecs: function(userId) {
     RecAPI.getUserRecs(userId)
     .then(function(articles) {
-      console.log(articles);
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.USER_RECS,
         data: articles

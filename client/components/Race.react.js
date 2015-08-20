@@ -16,10 +16,8 @@ var Race = React.createClass({
     RaceStore.removeChangeListener(this._onChange);
   },
   componentDidUpdate: function() {
-    console.log("Race Component updated", this.state);
     if(!this.state.finished && this.state.end && this.state.end===this.state.currentArticle) {
       this.setState({finished:true});
-      console.log("COMPLETED RACE!", this.state);
     }
   },
   render: function() {

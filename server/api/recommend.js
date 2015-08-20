@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 module.exports = router;
+var Article = require('../models/WikiArticle.js');
 
 var Recommend = require('../models/Recommend.js');
 
@@ -38,7 +39,7 @@ router.post('/', function(req, res) {
 function getUserRecommends(userId) {
   return Recommend.findAll({
     where: {userId: userId},
-    include: []
+    include: [Article]
   });
 }
 

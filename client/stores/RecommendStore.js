@@ -9,7 +9,6 @@ function loadData(data) {
   rec.recs = data;
 }
 function loadUserRec(data) {
-  console.log(data);
   rec.userRec = data;
 }
 

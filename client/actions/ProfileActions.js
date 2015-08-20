@@ -1,6 +1,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher.js');
 var FluxConstants = require('../constants/FluxConstants.js');
 var ProfileAPI = require('../utils/ProfileAPI.js');
+var RecActions = require('./RecActions.js');
 
 var ProfileActions = {
   dispatchProfileData: function(data) {
@@ -8,6 +9,7 @@ var ProfileActions = {
     ProfileAPI.getProfileData(data)
     .then(function(profile) {
       that.dispatchUserPlaylists(profile.id);
+      RecActions.dispatchUserRecs(profile.id);
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.PROFILE_LOAD_DATA,
         data: profile
