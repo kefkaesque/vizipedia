@@ -1,7 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var WikiUtils = require('./utils/WikiUtils');
-
+var Race = require('./components/Race.react');
 
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
@@ -14,6 +14,7 @@ var App = React.createClass({
     return (
       <div className="app">
         <Header/>
+        <Race/>
         <RouteHandler/>
       </div>
     )
@@ -37,7 +38,7 @@ var routes = (
     <Route name="wiki" path='/wiki/:topic' handler={Article}/>
     <Route name="profile" path='/profile/:username' handler={Profile}/>
     <Route name="createPlaylist" path='/playlist/create' handler={CreatePlaylist}/>
-    <Route name="editPlaylist" path='/playlist/edit/:playlistId' handler={EditPlaylist}/>
+    <Route name="editPlaylist" path='/playlist/edit/:playlistName' handler={EditPlaylist}/>
     <Route name="feed" path='/feed' handler={Feed}/>
   </Route>
 );
