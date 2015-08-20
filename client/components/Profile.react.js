@@ -34,7 +34,7 @@ var Profile = React.createClass({
         <ProfileHeader data={this.state}/>
         <UserInfo data={this.state} numArticle={this.state.numArticle}/>
         <div className="profile__row">
-          <RecommendedArticles userId={this.state.id}/>
+          <RecommendedArticles/>
           <CommentsMade />
         </div>
         <div className="profile__row">
@@ -86,16 +86,19 @@ var RecommendedArticles = React.createClass({
   },
   componentWillMount: function() {
     RecommendStore.addChangeListener(this._onChange);
-    RecActions.dispatchUserRecs(1);
+  },
+  componentDidMount: function() {
+    console.log('logging state in mount ', this.props);
   },
   componentWillUnmount: function() {
     RecommendStore.removeChangeListener(this._onChange);
   },
   render: function() {
-    if (this.props.userRec) {
-      var itemNodes = this.props.userRec(function(item, index) {
+    if (this.state.userRec) {
+      console.log('userrec', this.state.userRec);
+      var itemNodes = this.state.userRec.map(function(item, index) {
         return (
-         <RecItem articleId={item.articleId} key={index} />
+         <RecItem article={item.wikiarticle} key={index} />
         );
       });
     } else {
@@ -119,9 +122,10 @@ var RecommendedArticles = React.createClass({
 
 var RecItem = React.createClass({
   render: function() {
+    console.log('recitem ', this.props);
     return (
       <div>
-        {this.props.articleId}
+        {this.props.article.title}
       </div>
     );
   }
