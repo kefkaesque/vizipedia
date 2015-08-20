@@ -1,7 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var WikiUtils = require('./utils/WikiUtils');
-
+var Race = require('./components/Race.react');
 
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
@@ -14,6 +14,7 @@ var App = React.createClass({
     return (
       <div className="app">
         <Header/>
+        <Race/>
         <RouteHandler/>
         <Link to="feed">
           {'this links to ... Feed'}

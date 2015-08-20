@@ -5,5 +5,6 @@ module.exports = keyMirror({
   PROFILE_LOAD_DATA: null,
   PLAYLIST_EDITED: null,
   FEED_LOAD_DATA: null,
-  UPDATE_REC: null
+  UPDATE_REC: null,
+  RACING: null
 });
