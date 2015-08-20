@@ -87,15 +87,11 @@ var RecommendedArticles = React.createClass({
   componentWillMount: function() {
     RecommendStore.addChangeListener(this._onChange);
   },
-  componentDidMount: function() {
-    console.log('logging state in mount ', this.props);
-  },
   componentWillUnmount: function() {
     RecommendStore.removeChangeListener(this._onChange);
   },
   render: function() {
     if (this.state.userRec) {
-      console.log('userrec', this.state.userRec);
       var itemNodes = this.state.userRec.map(function(item, index) {
         return (
          <RecItem article={item.wikiarticle} key={index} />
@@ -122,7 +118,6 @@ var RecommendedArticles = React.createClass({
 
 var RecItem = React.createClass({
   render: function() {
-    console.log('recitem ', this.props);
     return (
       <div>
         {this.props.article.title}
