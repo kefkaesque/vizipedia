@@ -1,0 +1,13 @@
+.profile {
+  border: solid 1px #e7e7e7;
+}
+
+.profile__row {
+  display: flex;
+}
+
+.profile__item {
+  flex: 1;
+  padding: 12px;
+  border: solid 1px #e7e7e7;
+}

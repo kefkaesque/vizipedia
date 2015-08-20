@@ -26,8 +26,8 @@ classMethods.visitIfUnvisited = function(userId, articleId) {
     }
   });
 };
-
-classMethods.toggleRec = function(userId, articleId) {
+// recommend
+classMethods.rec = function(userId, articleId) {
   return visitedArticle.findOne({
      where: {
       userId: userId,
@@ -35,10 +35,21 @@ classMethods.toggleRec = function(userId, articleId) {
     }
   })
   .then(function(visited) {
-    visited.update({recommended: !visited.recommended});
+    visited.update({recommended: true});
   });
 };
-
+// unrecommend
+classMethods.unRec = function(userId, articleId) {
+  return visitedArticle.findOne({
+     where: {
+      userId: userId,
+      articleId: articleId
+    }
+  })
+  .then(function(visited) {
+    visited.update({recommended: false});
+  });
+};
 classMethods.checkIfRec = function(userId, articleId) {
   return visitedArticle.findOne({
      where: {
@@ -63,6 +74,18 @@ classMethods.numRec = function(articleId) {
   });
 };
 
+/* I just wrote this not tested */
+classMethods.numRead = function(userId) {
+  return visitedArticle.findAndCountAll({
+     where: {
+      userId: userId
+    }
+  })
+  .then(function(result) {
+    console.log('numRead',result);
+    return result.count;
+  });
+};
 // Return the most recent articles visited by user; "limit" will determine the number returned.
 // Returns an array of visitedArticle instances with userId, articleId, recommended, createdAt, updatedAt
 classMethods.getHistory = function(userId, limit) {
@@ -79,6 +102,5 @@ classMethods.getHistory = function(userId, limit) {
 };
 
 var visitedArticle = db.define('visitedArticles', schema, {classMethods: classMethods});
-
 db.sync();
 module.exports = visitedArticle;

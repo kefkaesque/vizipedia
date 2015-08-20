@@ -4,8 +4,12 @@ html
     title Kefkaesque greets you...!
     include style.jade
   body
-    include header.jade
-    div.splash
+    script(type="text/javascript").
+      var Locals = !{JSON.stringify(Locals)};
+    div.app
+    script(type="text/javascript",src="/assets/js/app.js")
+    //include header.jade
+    //div.splash
       div.spacer
       div
         div.logo.serif vizipedia
