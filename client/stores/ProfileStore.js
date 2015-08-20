@@ -8,7 +8,6 @@ var profileData = {
 };
 
 function storeProfileData(data) {
-  console.log('storedata ', data);
   profileData = data;
 }
 
@@ -36,7 +35,6 @@ AppDispatcher.register(function(payload) {
   var action = payload.action;
   switch(action.actionType) {
     case FluxConstants.PROFILE_LOAD_DATA:
-      console.log('got action');
       storeProfileData(action.data);
       break;
     case FluxConstants.PROFILE_LOAD_PLAYLISTS:

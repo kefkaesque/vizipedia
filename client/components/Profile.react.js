@@ -19,7 +19,6 @@ var Profile = React.createClass({
   },
   componentWillReceiveProps: function() {
     var query = window.location.pathname.split('/')[2];
-    console.log('receiving props');
     ProfileActions.dispatchProfileData(query);
   },
   componentWillUnmount: function() {

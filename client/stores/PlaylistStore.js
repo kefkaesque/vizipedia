@@ -25,8 +25,8 @@ var PlaylistStore = _.extend({}, EventEmitter.prototype, {
   }
 });
 
-AppDispatcher.register(function(action) {
-  var text;
+AppDispatcher.register(function(payload) {
+  var action = payload.action;
   switch(action.actionType) {
     case FluxConstants.PLAYLIST_EDITED:
       loadData(action.data);
