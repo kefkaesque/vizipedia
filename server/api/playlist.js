@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 module.exports = router;
 
+var Article = require('../models/WikiArticle.js');
 var Playlist = require('../models/Playlist.js');
 var PlaylistItem = require('../models/PlaylistItem.js');
 
@@ -40,7 +41,10 @@ router.post('/', function(req, res) {
 function getPlaylist(playlistId) {
   return Playlist.findOne({
     where: {id: playlistId},
-    include: [PlaylistItem]
+    include: [{
+      model: PlaylistItem,
+      include: [Article]
+    }]
   });
 };
 
