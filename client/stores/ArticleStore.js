@@ -33,7 +33,7 @@ AppDispatcher.register(function(payload) {
     case FluxConstants.VIZI_SEARCH:
       loadData(action.data);
       break;
-    case FluxConstants.UPDATE_REC:
+    case FluxConstants.GET_REC:
       loadRecData(action.data);
       break;
     default:

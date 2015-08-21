@@ -38,7 +38,7 @@ var Article = React.createClass({
         trail={60} shadow={false} hwaccel={false} className="spinner"
         zIndex={2e9} top="50%" left="50%" scale={1.00} >
           <div className="wrapper article serif">
-            <Recommend articleId={this.state.data.id}/>
+            <Recommend info={this.state.data}/>
             <div dangerouslySetInnerHTML={this.createMarkup()} />
           </div>
         </Loader>

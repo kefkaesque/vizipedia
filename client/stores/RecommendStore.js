@@ -11,6 +11,9 @@ function loadData(data) {
 function loadUserRec(data) {
   rec.userRec = data;
 }
+function loadState(data) {
+  rec.state = data;
+}
 
 var RecommendStore = _.extend({}, EventEmitter.prototype, {
 
@@ -34,9 +37,17 @@ AppDispatcher.register(function(payload) {
     case FluxConstants.USER_RECS:
       loadUserRec(action.data);
       break;
-    case FluxConstants.UPDATE_REC:
+    case FluxConstants.GET_REC:
       loadData(action.data);
       break;
+    case FluxConstants.MAKE_REC:
+      rec.num++;
+      break;
+    case FluxConstants.UN_REC:
+      rec.num--;
+      break;
+    case FluxConstants.STATE:
+      loadState(action.data);
     default:
       // none
   }

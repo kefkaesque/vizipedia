@@ -64,7 +64,7 @@ module.exports = {
   recommendState: function(userId, articleId) {
     return new Promise(function(resolve, reject) {
       request
-        .get('/api/recommend?userid='+userId+'?articleid='+articleId)
+        .get('/api/recommend?userid='+userId+'&articleid='+articleId)
         .end(function(err, res) {
           if (err) {
             reject();

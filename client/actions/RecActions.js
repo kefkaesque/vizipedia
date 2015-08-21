@@ -22,7 +22,7 @@ var RecActions = {
     RecAPI.getArticleRecs(articleId)
     .then(function(numRec) {
       AppDispatcher.handleViewAction({
-        actionType: FluxConstants.UPDATE_REC,
+        actionType: FluxConstants.GET_REC,
         data: numRec
       });
     })
@@ -51,9 +51,8 @@ var RecActions = {
   dispatchUnrec: function(articleId) {
     RecAPI.unRecommend(articleId)
     .then(function(articles) {
-      console.log(articles);
       AppDispatcher.handleViewAction({
-        actionType: FluxConstants.MAKE_REC,
+        actionType: FluxConstants.UN_REC,
         data: articles
       });
     })
@@ -64,11 +63,11 @@ var RecActions = {
       });
     });
   },
-  dispathRecState: function(userId, articleId) {
+  dispatchRecState: function(userId, articleId) {
     RecAPI.recommendState(userId, articleId)
     .then(function(articles) {
       AppDispatcher.handleViewAction({
-        actionType: FluxConstants.MAKE_REC,
+        actionType: FluxConstants.STATE,
         data: articles
       });
     })

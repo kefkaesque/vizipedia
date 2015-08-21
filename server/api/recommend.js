@@ -8,8 +8,8 @@ var Recommend = require('../models/Recommend.js');
 router.get('/', function(req, res) {
   var userId = req.query.userid;
   var articleId = req.query.articleid;
-
   if(userId && articleId) {
+    userId = res.locals.Locals.userid;
     isArticleRecommended(userId, articleId)
     .then(function(results) {
       res.send(JSON.stringify(results));

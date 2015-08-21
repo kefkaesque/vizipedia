@@ -6,6 +6,8 @@ module.exports = keyMirror({
   PLAYLIST_EDITED: null,
   FEED_LOAD_DATA: null,
   USER_RECS: null,
-  UPDATE_REC: null,
-  RACING: null
+  GET_REC: null,
+  RACING: null,
+  UN_REC: null,
+  STATE: null
 });
