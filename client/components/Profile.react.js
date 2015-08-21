@@ -30,17 +30,11 @@ var Profile = React.createClass({
   },
   render: function() {
     return (
-      <div className="profile">
+      <div className="profile wrapper">
         <ProfileHeader data={this.state}/>
-        <UserInfo data={this.state} numArticle={this.state.numArticle}/>
-        <div className="profile__row">
           <RecommendedArticles/>
           <CommentsMade />
-        </div>
-        <div className="profile__row">
           <Playlists username={this.state.username} playlists={this.state.playlists} />
-          <RaceButton/>
-        </div>
       </div>
     )
   },
@@ -60,21 +54,32 @@ var ProfileHeader = React.createClass({
     }
     return (
       <div className="profileheader">
-        <h1>{this.props.data.username}</h1>
-          {followButton}
-      </div>
-    )
-  }
-});
+        <div className="profile__row">
+          <div className="profile__item">
+            {this.props.data.username}
+          </div>
+        </div>
+        <div className="profile__row">
+          <div className="profile__item">
+            <p>Followers</p>
+            <p>{this.props.data.followedBy}</p>
+          </div>
+          <div className="profile__item">
+            <p>Following</p>
+            <p>{this.props.data.following}</p>
+          </div>
+          <div className="profile__item">
+            <p>Articles Read</p>
+            <p>{this.props.data.numArticle}</p>
+          </div>
+        </div>
+        <div className="profile__row">
+          <div className="profile__item">{followButton}</div>
+          <div className="profile__item">
+            <RaceButton/>
+          </div>
+        </div>
 
-var UserInfo = React.createClass({
-
-  render: function() {
-    return (
-      <div className="profile__row">
-        <div className="profile__item">Followed by {this.props.data.followedBy}</div>
-        <div className="profile__item">Following {this.props.data.following}</div>
-        <div className="profile__item">Articles Read : {this.props.numArticle}</div>
       </div>
     )
   }
@@ -101,11 +106,11 @@ var RecommendedArticles = React.createClass({
       itemNodes = '';
     }
     return (
-      <div className="recommended profile__item">
-        <h3>Recommended Articles</h3>
-        <ul>
-          <li>{itemNodes}</li>
-        </ul>
+      <div className="recommended">
+        <h3>Recommended</h3>
+        <div className="profile__container">
+          {itemNodes}
+        </div>
       </div>
     )
   },
@@ -119,7 +124,7 @@ var RecommendedArticles = React.createClass({
 var RecItem = React.createClass({
   render: function() {
     return (
-      <div>
+      <div className="profile__box">
         {this.props.article.title}
       </div>
     );
@@ -130,14 +135,22 @@ var CommentsMade = React.createClass({
 
   render: function() {
     return (
-      <div className="commentsMade profile__item">
-        <h3>Activity Feed</h3>
-        <ul>
-          <li>
-            <span>carterchung commented on article "Morocco"</span>
-            <p>Great description of the city. I had no idea!</p>
-          </li>
-        </ul>
+      <div className="commentsMade">
+        <h3>Comments</h3>
+        <div className="profile__container">
+          <div className="profile__box">
+            carterchung commented on article "Morocco"
+          </div>
+          <div className="profile__box">
+            carterchung commented on article "Morocco"
+          </div>
+          <div className="profile__box">
+            carterchung commented on article "Morocco"
+          </div>
+          <div className="profile__box">
+            carterchung commented on article "Morocco"
+          </div>
+        </div>
       </div>
     )
   }
@@ -160,12 +173,15 @@ var Playlists = React.createClass({
     }
 
     return (
-      <div className="playlists profile__item">
+      <div className="playlists">
         <h3>Playlists</h3>
         <div>
           {createLink}
         </div>
-        {itemNodes}
+        <div className="profile__container">
+          {itemNodes}
+        </div>
+        <div>...</div>
       </div>
     )
   }
@@ -174,7 +190,7 @@ var Playlists = React.createClass({
 var PlaylistItem = React.createClass({
   render: function() {
     return (
-      <div className="playlistItem">
+      <div className="playlistItem profile__box">
         {this.props.name}
       </div>
     );
@@ -210,7 +226,7 @@ var RaceButton = React.createClass({
   },
   render: function() {
     return (
-      <div className="raceButton profile__item">
+      <div className="raceButton">
         <button onClick={this.handlePress}>
           Race!
         </button>

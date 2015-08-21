@@ -1,13 +1,40 @@
 .profile {
+  padding-top: 2em;
   border: solid 1px #e7e7e7;
 }
 
 .profile__row {
   display: flex;
+  /*align-items: center;*/
+  text-align: center;
+  flex-direction: column;
 }
 
 .profile__item {
   flex: 1;
-  padding: 12px;
+  padding: 20px;
   border: solid 1px #e7e7e7;
+}
+
+@media all and ( min-width: 480px ) {
+
+  .profile__row {
+    flex-direction: row;
+  }
+
+}
+
+.profile__box {
+  display:inline-block;
+  height:180px;
+  width:180px;
+  border: solid 1px #e7e7e7;
+}
+
+.profile__container {
+  text-align: center;
+}
+
+.username {
+  text-align: center;
 }
