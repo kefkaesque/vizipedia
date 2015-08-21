@@ -8,6 +8,7 @@ var when = require('when');
 var uuid = require('node-uuid');
 var WikiArticle = require('../models/WikiArticle.js');
 var VisitedArticle = require('../models/visitedArticle.js');
+var Recommend = require('../models/Recommend.js');
 var configEnv = require('../config/env.js');
 
 
@@ -26,12 +27,16 @@ router.get('/:topic', function(req, res) {
       if(res.locals.user.id){
         VisitedArticle.visitIfUnvisited(res.locals.user.id, article.id);
       }
-      VisitedArticle.numRec()
-      .then(function(count) {
+      Recommend.findAndCountAll({
+        where: {
+          articleId: article.id
+        }
+      })
+      .then(function(results) {
         var data = {
           id: article.id,
           content: article.content,
-          recommends: count
+          recommends: results.count
         };
         res.send(JSON.stringify(data));
       });

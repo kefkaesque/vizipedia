@@ -25,7 +25,7 @@ module.exports = {
           if (err) {
             reject();
           } else {
-            resolve(JSON.parse(res.text));
+            resolve(JSON.parse(res.text).length);
           }
         });
     });
@@ -41,6 +41,35 @@ module.exports = {
             reject();
           } else {
             resolve(JSON.parse(res.text));
+          }
+        });
+    });
+  },
+
+  unRecommend: function(articleId) {
+    return new Promise(function(resolve, reject) {
+      request
+        .del('/api/recommend/')
+        .send({articleId: articleId})
+        .end(function(err, res) {
+          if (err) {
+            reject();
+          } else {
+            resolve(JSON.parse(res.text));
+          }
+        });
+    });
+  },
+
+  recommendState: function(userId, articleId) {
+    return new Promise(function(resolve, reject) {
+      request
+        .get('/api/recommend?userid='+userId+'&articleid='+articleId)
+        .end(function(err, res) {
+          if (err) {
+            reject();
+          } else {
+            resolve(JSON.parse(res.text).length);
           }
         });
     });
