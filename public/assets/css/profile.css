@@ -1,40 +1,68 @@
 .profile {
-  padding-top: 2em;
-  border: solid 1px #e7e7e7;
+  padding-top: 3em;
 }
 
-.profile__row {
+.profile .row {
   display: flex;
-  /*align-items: center;*/
   text-align: center;
   flex-direction: column;
 }
 
-.profile__item {
-  flex: 1;
-  padding: 20px;
-  border: solid 1px #e7e7e7;
+.profile .username {
+  font-size: 60px;
+  padding-bottom: 20px;
 }
 
-@media all and ( min-width: 480px ) {
+.profile .info {
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 15px;
+}
 
-  .profile__row {
+.profile .stat {
+  font-size: 30px;
+}
+
+@media all and ( min-width: 700px ) {
+
+  .profile .row {
     flex-direction: row;
   }
 
 }
 
-.profile__box {
-  display:inline-block;
+.profile .item {
+  flex: 1;
+}
+
+.profile .container {
+  text-align: center;
+}
+
+.profile .box {
+  display:inline-flex;
+  align-items: center;
+  justify-content: space-around;
   height:180px;
   width:180px;
   border: solid 1px #e7e7e7;
 }
 
-.profile__container {
-  text-align: center;
+.profile .section {
+  padding-top: 50px
 }
 
-.username {
-  text-align: center;
+.profile h3 {
+  padding-bottom: 15px;
+}
+
+.profile .button {
+  border: solid 2px black;
+  border-radius: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.profile .headerbutton {
+  margin-top: 20px;
 }
