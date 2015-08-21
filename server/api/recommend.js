@@ -37,20 +37,26 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   var articleId = req.body.articleId;
-  if(req.user)
+  if(req.user) {
     createRecommend(req.user.id, articleId)
     .then(function(results) {
       res.send(JSON.stringify(results));
     });
+  } else {
+    res.send('[]');
+  }
 });
 
 router.delete('/', function(req, res) {
   var articleId = req.body.articleId;
-  if(req.user)
+  if(req.user) {
     deleteRecommend(req.user.id, articleId)
     .then(function(results) {
       res.send(JSON.stringify(results));
     });
+  } else {
+    res.send('[]');
+  }
 });
 
 // --------------------------------------------------------------------------------
