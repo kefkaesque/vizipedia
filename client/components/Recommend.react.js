@@ -3,8 +3,8 @@ var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
 
 var RecommendButton = React.createClass({
+  disable: false,
   flag: false,
-  flag2: false,
   getInitialState: function() {
     return {};
   },
@@ -17,14 +17,11 @@ var RecommendButton = React.createClass({
     RecommendStore.removeChangeListener(this._onChange);
   },
   handleButton: function(articleId) {
-    if (this.flag) {
-      return;
-    }
-    this.flag = true;
-    if (this.flag2) {
-      RecActions.dispatchUnrec(articleId)
+    this.disabled = true;
+    if ((this.state.state || this.flag) && !(this.state.state && this.flag)) {
+      RecActions.dispatchRec(articleId);
     } else {
-      RecActions.dispatchRec(articleId)
+      RecActions.dispatchUnrec(articleId);
     }
     //RecActions.dispatchRecState(this.props.info.id, this.props.info.id);
   },
@@ -32,16 +29,16 @@ var RecommendButton = React.createClass({
   render: function() {
     return (
       <div className="item">
-        <button className="recommend" disabled={this.flag} onClick={this.handleButton.bind(this, this.props.info.id)}>
+        <button className="recommend" disabled={this.disable} onClick={this.handleButton.bind(this, this.props.info.id)}>
         Recommend
-        <span>{this.state.num}</span>
         </button>
+        <span>{this.state.num}</span>
       </div>
     );
   },
   _onChange: function() {
-    this.flag = false;
-    this.flag2 = !this.flag2;
+    this.disable = false;
+    this.flag = !this.flag;
     this.setState(RecommendStore.getData());
   }
 });
