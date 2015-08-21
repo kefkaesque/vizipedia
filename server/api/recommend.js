@@ -9,8 +9,11 @@ router.get('/', function(req, res) {
   var userId = req.query.userid;
   var articleId = req.query.articleid;
   if(userId && articleId) {
-    userId = res.locals.Locals.userid;
-    isArticleRecommended(userId, articleId)
+    actualId = res.locals.Locals.userid;
+    if(actualId === undefined) {
+      res.send('0');
+    }
+    isArticleRecommended(actualId, articleId)
     .then(function(results) {
       res.send(JSON.stringify(results));
     });
