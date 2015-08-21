@@ -3,9 +3,9 @@
 }
 
 .profile .row {
-  display: flex;
-  text-align: center;
-  flex-direction: column;
+  display:flex;
+  text-align:center;
+  flex-direction:column;
 }
 
 .profile .username {
@@ -40,11 +40,11 @@
 }
 
 .profile .box {
-  display:inline-flex;
+  display: inline-flex;
   align-items: center;
   justify-content: space-around;
-  height:180px;
-  width:180px;
+  height: 180px;
+  width: 180px;
   border: solid 1px #e7e7e7;
 }
 
