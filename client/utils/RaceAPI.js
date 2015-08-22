@@ -27,9 +27,9 @@ module.exports = {
   postFinish: function(data) {
     // this is what data should look like
     // data: {
-    //  raceID
-    //  startID
-    //  endID
+    //  finishTime
+    //  raceId
+    //  path
     // }
     return new Promise(function(resolve, reject) {
       request
