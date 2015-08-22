@@ -23,6 +23,21 @@ var RecActions = {
     .then(function(numRec) {
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.GET_REC,
+        data: numRec.length
+      });
+    })
+    .catch(function() {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.ERROR,
+        error: 'bad req'
+      });
+    });
+  },
+  dispatchAllRecs: function(articleId) {
+    RecAPI.getArticleRecs(articleId)
+    .then(function(numRec) {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.GET_ALL,
         data: numRec
       });
     })

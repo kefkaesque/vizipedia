@@ -3,11 +3,11 @@ var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
 
 var RecommendButton = React.createClass({
-
   disable: false,
   flag: false,
   getInitialState: function() {
-    return {};
+    return {
+    };
   },
   componentWillMount: function() {
     RecommendStore.addChangeListener(this._onChange);
@@ -32,7 +32,6 @@ var RecommendButton = React.createClass({
     } else {
       window.location.href = "/login";
     }
-    //RecActions.dispatchRecState(this.props.info.id, this.props.info.id);
   },
 
   render: function() {
@@ -41,7 +40,7 @@ var RecommendButton = React.createClass({
         <button className="recommend" disabled={this.disable} onClick={this.handleButton.bind(this, this.props.info.id)}>
         Recommend
         </button>
-        <span>{this.state.num}</span>
+        <Modal data={this.props}></Modal>
       </div>
     );
   },
@@ -51,5 +50,48 @@ var RecommendButton = React.createClass({
     this.setState(RecommendStore.getData());
   }
 });
+
+
+var Modal = React.createClass({
+  getInitialState: function() {
+    return {
+      modalOpen: false
+    };
+  },
+  componentWillMount: function() {
+    RecommendStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    RecommendStore.removeChangeListener(this._onChange);
+  },
+  handleButton: function() {
+    RecActions.dispatchAllRecs(this.props.data.info.id);
+  },
+  openModal: function() {
+    this.setState({modalOpen: true});
+  },
+  closeModal: function() {
+    this.setState({modalOpen: false});
+  },
+  render: function() {
+    console.log(this.state);
+    if (this.props.modalOpen) {
+      return (
+        <div>
+        {this.state.all}
+        </div>
+      );
+    } else {
+      return (
+        <span>
+        <button onClick={this.handleButton.bind(this, this.props.data.info.id)}>{this.props.data.info.recommends}</button>
+        </span>
+      );
+    }
+  },
+  _onChange: function() {
+    this.setState(RecommendStore.getData());
+  }
+})
 
 module.exports = RecommendButton;
