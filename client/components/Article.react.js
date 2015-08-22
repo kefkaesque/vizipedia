@@ -4,8 +4,11 @@ var Recommend = require('./Recommend.react');
 var Loader = require('./Loader.react');
 var ArticleActions = require('../actions/ArticleActions');
 var $ = require('jquery');
+var Router = require('react-router');
+
 
 var Article = React.createClass({
+  mixins: [ Router.Navigation ],
 
   getInitialState: function() {
     return {data: '', loaded: false};
@@ -33,23 +36,23 @@ var Article = React.createClass({
   },
   parseDom: function() {
     var article = this;
-    console.log("clicking on article content", this.state.loaded);
+    console.log("parsing dom", this.state.loaded);
     $("a[href^='/wiki']")
        .each(function()
        {
-          article.convertToTransition(this);
+          article.convertToTransition($(this));
        });
   },
   convertToTransition: function(link) {
-
-    link.click(function(event) {
+    var article = this;
+    link.unbind().on('click', function(event) {
       event.preventDefault();
 
-      var currentLink = link.href;
-      var query = currentLink.split('/')[4];
-      // ArticleActions.dispatchArticle(query);
+      var currentLink = link.attr('href');
+      var query = currentLink.split('/')[2];
+      article.transitionTo('wiki', {topic: query});
       console.log(query);
-    })
+    });
   },
   render: function() {
     return (
@@ -64,11 +67,12 @@ var Article = React.createClass({
     );
   },
   _onChange: function() {
-    this.parseDom();
     this.setState({
       data: ArticleStore.getData(),
       loaded: true
     });
+
+    this.parseDom();
   }
 });
 
