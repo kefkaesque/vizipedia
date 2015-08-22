@@ -15,8 +15,6 @@ var PlaylistItems = React.createClass({
     PlaylistStore.addChangeListener(this._onChange);
   },
   componentDidMount: function() {
-    var query = window.location.pathname.split('/')[3];
-    // console.log('playlistitems react', this.props.query.playlistId);
     PlaylistActions.dispatchLoad(this.props.query.playlistId)
   },
   componentWillUnmount: function() {
