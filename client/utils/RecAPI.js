@@ -25,7 +25,7 @@ module.exports = {
           if (err) {
             reject();
           } else {
-            resolve(JSON.parse(res.text).length);
+            resolve(JSON.parse(res.text));
           }
         });
     });

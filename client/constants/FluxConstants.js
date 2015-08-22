@@ -9,5 +9,6 @@ module.exports = keyMirror({
   GET_REC: null,
   RACING: null,
   UN_REC: null,
-  STATE: null
+  STATE: null,
+  GET_ALL: null
 });
