@@ -3,6 +3,7 @@ var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
 
 var RecommendButton = React.createClass({
+
   disable: false,
   flag: false,
   getInitialState: function() {
@@ -13,17 +14,23 @@ var RecommendButton = React.createClass({
   },
   componentDidMount: function() {
     RecActions.dispatchArticleRecs(this.props.info.id);
-    RecActions.dispatchRecState(this.props.info.id, this.props.info.id);
+    if (Locals.userid) {
+      RecActions.dispatchRecState(Locals.userid, this.props.info.id);
+    }
   },
   componentWillUnmount: function() {
     RecommendStore.removeChangeListener(this._onChange);
   },
   handleButton: function(articleId) {
     this.disabled = true;
-    if ((this.state.state || this.flag) && !(this.state.state && this.flag)) {
-      RecActions.dispatchRec(articleId);
+    if (Locals.userid) {
+      if ((this.state.state || this.flag) && !(this.state.state && this.flag)) {
+        RecActions.dispatchRec(articleId);
+      } else {
+        RecActions.dispatchUnrec(articleId);
+      }
     } else {
-      RecActions.dispatchUnrec(articleId);
+      window.location.href = "/login";
     }
     //RecActions.dispatchRecState(this.props.info.id, this.props.info.id);
   },
