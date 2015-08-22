@@ -169,7 +169,6 @@ var Playlists = React.createClass({
     }
     var username = this.props.username;
     var itemNodes;
-    console.log('this.props:',this.props)
     if(this.props.playlists){
       itemNodes = this.props.playlists.map(function(list, index) {
         console.log('list:', username);
@@ -235,7 +234,7 @@ var RaceButton = React.createClass({
     //   start: 2, //article id for cat in my db
     //   end: 8, //article id for dog in my db
     // });
-    this.transitionTo('createRace'); //hardcoded in...should get from article id
+    this.transitionTo('createRace');
 
   },
   render: function() {

@@ -9,7 +9,7 @@ var CreateRace = React.createClass({
       endTopic: 'Dog'
     };
 
-    RaceActions.dispatchStart(data);
+    RaceActions.createAndDispatch(data);
   },
   endRace: function() {
     var data = {
@@ -18,7 +18,7 @@ var CreateRace = React.createClass({
       path: [1,2,3]
     };
 
-    RaceActions.dispatchFinish(data);
+    RaceActions.finishAndDispatch(data);
   },
   render: function() {
     return (

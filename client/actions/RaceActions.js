@@ -4,7 +4,7 @@ var RaceAPI = require('../utils/RaceAPI.js');
 
 var RaceActions = {
 
-  dispatchStart: function(data) {
+  createAndDispatch: function(data) {
     RaceAPI.postRace(data)
     .then(function(race) {
       AppDispatcher.handleViewAction({
@@ -20,7 +20,7 @@ var RaceActions = {
     })
   },
 
-  dispatchFinish: function(data) {
+  finishAndDispatch: function(data) {
     RaceAPI.postFinish(data)
     .then(function(race) {
       AppDispatcher.handleViewAction({
@@ -36,7 +36,7 @@ var RaceActions = {
     })
   },
 
-  dispatchRace: function(data) {
+  getRaceDataAndDispatch: function(data) {
     RaceAPI.getRaceData(data)
     .then(function(race) {
       AppDispatcher.handleViewAction({
