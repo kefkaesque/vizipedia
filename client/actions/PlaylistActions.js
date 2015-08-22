@@ -35,6 +35,22 @@ var PlaylistActions = {
       });
     });
   },
+
+  dispatchLoad: function(playlistId) {
+    PlaylistAPI.getPlaylistItems(playlistId)
+    .then(function(playlist) {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.PLAYLIST_EDITED,
+        data: playlist
+      });
+    })
+    .catch(function() {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.ERROR,
+        error: 'bad req'
+      });
+    });
+  }
 };
 
 module.exports = PlaylistActions;

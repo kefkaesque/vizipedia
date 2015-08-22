@@ -7,27 +7,26 @@ var Link = Router.Link;
 var PlaylistItems = React.createClass({
 
   getInitialState: function() {
-    console.log('In playlistitems !!!', this.props);
+    // console.log('In playlistitems !!! this.props.playlistId', this.props.playlistId);
 
     return {};
   },
   componentWillMount: function() {
-    // PlaylistStore.addChangeListener(this._onChange);
+    PlaylistStore.addChangeListener(this._onChange);
   },
   componentDidMount: function() {
-    var query = window.location.pathname.split('/')[4];
-    console.log('query in playlistitems', query);
-    // PlaylistActions.dispatchCreate(query);
+    var query = window.location.pathname.split('/')[3];
+    // console.log('playlistitems react', this.props.query.playlistId);
+    PlaylistActions.dispatchLoad(this.props.query.playlistId)
   },
   componentWillUnmount: function() {
-    // PlaylistStore.removeChangeListener(this._onChange);
+    PlaylistStore.removeChangeListener(this._onChange);
   },
   render: function() {
     return (
       <div>
-         Yo!!
-        // Edit Playlist {this.state.name} ({this.state.id})
-        // <CurrentPlaylist playlistitems={this.state.playlistitems} />
+        <CurrentPlaylist playlistitems={this.state.playlistitems} />
+        <Link to="profile" params={{username: this.props.query.username}}>{'Return to profile'}</Link>
       </div>
     );
   },
@@ -43,7 +42,9 @@ var CurrentPlaylist = React.createClass({
     if (this.props.playlistitems) {
       var itemNodes = this.props.playlistitems.map(function(item, index) {
         return (
-         <PlaylistItem topic={item.topic} key={index} />
+          <Link to="wiki" params={{topic: item.topic}}>
+          <PlaylistItem topic={item.topic} key={index} />
+          </Link>
         );
       });
     } else {
