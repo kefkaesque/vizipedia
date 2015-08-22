@@ -9,11 +9,15 @@ router.get('/', function(req, res) {
   var userId = req.query.userid;
   var articleId = req.query.articleid;
   if(userId && articleId) {
-    userId = res.locals.Locals.userid;
-    isArticleRecommended(userId, articleId)
-    .then(function(results) {
-      res.send(JSON.stringify(results));
-    });
+    actualId = res.locals.Locals.userid;
+    if(!actualId) {
+      res.send('[]');
+    } else {
+      isArticleRecommended(actualId, articleId)
+      .then(function(results) {
+        res.send(JSON.stringify(results));
+      });
+    }
   }
   else if(userId) {
     getUserRecommends(userId)
@@ -33,20 +37,26 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   var articleId = req.body.articleId;
-  if(req.user)
+  if(req.user) {
     createRecommend(req.user.id, articleId)
     .then(function(results) {
       res.send(JSON.stringify(results));
     });
+  } else {
+    res.send('[]');
+  }
 });
 
 router.delete('/', function(req, res) {
   var articleId = req.body.articleId;
-  if(req.user)
+  if(req.user) {
     deleteRecommend(req.user.id, articleId)
     .then(function(results) {
       res.send(JSON.stringify(results));
     });
+  } else {
+    res.send('[]');
+  }
 });
 
 // --------------------------------------------------------------------------------
