@@ -1,10 +1,12 @@
 .loader {
-  height: 50vh;
-}
-
-.sk-cube-grid {
+  position: absolute;
+  left: 50%;
+  margin-left: -80px;
+  top: 50%;
   margin-top: -80px;
-  display: inline-block;
+}
+.sk-cube-grid {
+  display: block;
   width: 160px;
   height: 160px;
 }
