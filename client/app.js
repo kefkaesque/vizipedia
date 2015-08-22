@@ -31,6 +31,7 @@ var Profile = require('./components/Profile.react');
 var Landing = require('./components/Landing.react');
 var CreatePlaylist = require('./components/CreatePlaylist.react');
 var EditPlaylist = require('./components/EditPlaylist.react');
+var PlaylistItems = require('./components/PlaylistItems.react');
 var Feed = require('./components/Feed.react');
 
 
@@ -43,6 +44,7 @@ var routes = (
     <Route name="profile" path='/profile/:username' handler={Profile}/>
     <Route name="createPlaylist" path='/playlist/create' handler={CreatePlaylist}/>
     <Route name="editPlaylist" path='/playlist/edit/:playlistName' handler={EditPlaylist}/>
+    <Route name="playlistItems" path='/playlist/items/:playlistName' handler={PlaylistItems}/>
     <Route name="feed" path='/feed' handler={Feed}/>
   </Route>
 );

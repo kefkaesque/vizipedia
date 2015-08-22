@@ -13,6 +13,7 @@ router.get('/', function(req, res) {
   if(playlistId) {
     getPlaylist(playlistId)
     .then(function(result) {
+      console.log('get playlist use playlistId', result)
       res.send(JSON.stringify(result));
     });
   }
@@ -42,8 +43,9 @@ function getPlaylist(playlistId) {
   return Playlist.findOne({
     where: {id: playlistId},
     include: [{
-      model: PlaylistItem,
-      include: [Article]
+      model: PlaylistItem
+      // ,
+      // include: [Article]
     }]
   });
 };

@@ -159,18 +159,25 @@ var CommentsMade = React.createClass({
   }
 });
 
-var Playlists = React.createClass({
+var Playlists = React.createClass({ 
   render: function() {
     var createLink = '';
     if(Locals.username===this.props.username){
       createLink = (<Link to="createPlaylist">{' + Create New Playlist'}</Link>);
     }
-
+    var username = this.props.username;
     var itemNodes;
+    console.log('this.props:',this.props)
     if(this.props.playlists){
       itemNodes = this.props.playlists.map(function(list, index) {
+        console.log('list:', username);
         return (
-          <PlaylistItem name={list.name} key={index} />
+          <div>
+          <Link to="playlistItems" params={{playlistName: list.name}} query={{ playlistId: list.id, userId: list.userId, username: username }}>
+            <PlaylistItem name={list.name} key={index} />
+          </Link>
+          <br/>
+          </div>
         );
       });
     }
@@ -190,6 +197,9 @@ var Playlists = React.createClass({
 });
 
 var PlaylistItem = React.createClass({
+  handlePress: function(e) {
+    console.log('PlaylistItem clicked!!!!!')
+  },
   render: function() {
     return (
       <div className="playlistItem box">

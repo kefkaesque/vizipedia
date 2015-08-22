@@ -4,10 +4,11 @@ var PlaylistStore = require('../stores/PlaylistStore');
 var Router = require('react-router');
 var Link = Router.Link;
 
-var EditPlaylist = React.createClass({
+var PlaylistItems = React.createClass({
 
   getInitialState: function() {
-    console.log('in EditPlaylist!!!')
+    // console.log('In playlistitems !!! this.props.playlistId', this.props.playlistId);
+
     return {};
   },
   componentWillMount: function() {
@@ -15,7 +16,8 @@ var EditPlaylist = React.createClass({
   },
   componentDidMount: function() {
     var query = window.location.pathname.split('/')[3];
-    PlaylistActions.dispatchCreate(query);
+    // console.log('playlistitems react', this.props.query.playlistId);
+    PlaylistActions.dispatchLoad(this.props.query.playlistId)
   },
   componentWillUnmount: function() {
     PlaylistStore.removeChangeListener(this._onChange);
@@ -23,10 +25,8 @@ var EditPlaylist = React.createClass({
   render: function() {
     return (
       <div>
-        Edit Playlist {this.state.name} ({this.state.id})
-        <AddPlaylistItem playlistId={this.state.id} />
         <CurrentPlaylist playlistitems={this.state.playlistitems} />
-        <Link to="profile" params={{username: Locals.username}}>{'Return to profile'}</Link>
+        <Link to="profile" params={{username: this.props.query.username}}>{'Return to profile'}</Link>
       </div>
     );
   },
@@ -37,35 +37,14 @@ var EditPlaylist = React.createClass({
   }
 });
 
-var AddPlaylistItem = React.createClass({
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var text = React.findDOMNode(this.refs.text).value.trim();
-    if (!text) {
-      return;
-    }
-    PlaylistActions.dispatchEdit(text, this.props.playlistId);
-    React.findDOMNode(this.refs.text).value = '';
-  },
-  render: function() {
-    return (
-      <div>
-        <h2>Add Playlist Item</h2>
-        <form className="addPlaylistItem" onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Enter playlist item..." ref="text" />
-          <button type="submit">Add to playlist</button>
-        </form>
-      </div>
-    );
-  }
-});
-
 var CurrentPlaylist = React.createClass({
   render: function() {
     if (this.props.playlistitems) {
       var itemNodes = this.props.playlistitems.map(function(item, index) {
         return (
-         <PlaylistItem topic={item.topic} key={index} />
+          <Link to="wiki" params={{topic: item.topic}}>
+          <PlaylistItem topic={item.topic} key={index} />
+          </Link>
         );
       });
     } else {
@@ -90,4 +69,4 @@ var PlaylistItem = React.createClass({
   }
 })
 
-module.exports = EditPlaylist;
+module.exports = PlaylistItems;
