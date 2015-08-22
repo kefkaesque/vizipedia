@@ -1,7 +1,7 @@
 var React = require('react');
 var ArticleStore = require('../stores/ArticleStore');
 var Recommend = require('./Recommend.react');
-var Loader = require('react-loader');
+var Loader = require('./Loader.react');
 var ArticleActions = require('../actions/ArticleActions');
 
 var Article = React.createClass({
