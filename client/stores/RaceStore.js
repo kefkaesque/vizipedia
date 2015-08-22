@@ -39,7 +39,7 @@ var RaceStore = _.extend({}, EventEmitter.prototype, {
 AppDispatcher.register(function(payload) {
   var action = payload.action;
   switch(action.actionType) {
-    case FluxConstants.RACING:
+    case FluxConstants.RACE_STARTED:
       loadData(action.data);
       break;
     case FluxConstants.VIZI_SEARCH:

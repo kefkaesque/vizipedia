@@ -1,15 +1,18 @@
 var React = require('react');
 var RaceActions = require('../actions/RaceActions');
+var Router = require('react-router');
 
 var CreateRace = React.createClass({
+  mixins: [ Router.Navigation ],
 
-  handlePress: function() {
+  createRace: function() {
     var data = {
       startTopic: 'Cat',
       endTopic: 'Dog'
     };
 
     RaceActions.createAndDispatch(data);
+    this.transitionTo('startRace');
   },
   endRace: function() {
     var data = {
@@ -25,7 +28,7 @@ var CreateRace = React.createClass({
       <div>
         <div style={{height:200+'px'}}></div>
         <p>Create Race</p>
-        <span className="button" onClick={this.handlePress}>
+        <span className="button" onClick={this.createRace}>
           Create
         </span>
 

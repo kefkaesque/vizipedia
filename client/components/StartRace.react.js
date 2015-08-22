@@ -1,15 +1,16 @@
 var React = require('react');
 var RaceActions = require('../actions/RaceActions');
+var Router = require('react-router');
 
 var StartRace = React.createClass({
   mixins: [ Router.Navigation ],
 
   startRace: function() {
-    // RaceActions.dispatchRacing({
-    //   racing:true,
-    //   start: 2, //article id for cat in my db
-    //   end: 8, //article id for dog in my db
-    // });
+    RaceActions.startAndDispatch({
+      racing:true,
+      start: 2, //article id for cat in my db
+      end: 8, //article id for dog in my db
+    });
     this.transitionTo('wiki', {topic: 'Cat'}); //hardcoded in, replace
   },
   render: function() {
