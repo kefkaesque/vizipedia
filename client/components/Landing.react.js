@@ -2,7 +2,7 @@ var React = require('react');
 var Router = require('react-router');
 
 var Landing = React.createClass({
-  render() {
+  render: function() {
     return (
       <div className="splash">
         <div className="spacer"></div>
