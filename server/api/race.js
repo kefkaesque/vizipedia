@@ -8,7 +8,7 @@ var Article = require('../models/WikiArticle.js');
 
 router.post('/', function(req, res) {
 
-  var userId = req.query.userid;
+  var userId = req.user.id;
 
   if(!req.body.raceId) {
     //if the race id is not provided, create a race
