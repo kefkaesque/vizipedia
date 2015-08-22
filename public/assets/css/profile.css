@@ -10,6 +10,7 @@
 
 .profile .username {
   font-size: 60px;
+  font-family: Lora, serif;
   padding-bottom: 20px;
 }
 
@@ -17,6 +18,7 @@
   padding-left: 20px;
   padding-right: 20px;
   font-size: 15px;
+  font-family:"lucida sans";
 }
 
 .profile .stat {
@@ -49,11 +51,12 @@
 }
 
 .profile .section {
-  padding-top: 50px
+  padding-top: 50px;
 }
 
 .profile h3 {
   padding-bottom: 15px;
+  font-family: "Lucida Sans Unicode";
 }
 
 .profile .button {
@@ -65,4 +68,45 @@
 
 .profile .headerbutton {
   margin-top: 20px;
+}
+
+/* remove later */
+.profile .box {
+  background-size: 180px 180px;
+  background-repeat: no-repeat;
+  color: white;
+  text-shadow:  2px 2px black;
+  font-family: "Lucida Sans Unicode";
+}
+
+.profile .morocco {
+  background-image: url('http://www.liberty-int.com/Public/Kasbah_Ruins_Ait_Benhaddou_Morocco.jpg');
+}
+
+.profile .warriors {
+  background-image: url('http://isportsweb.com/wp-content/uploads//2014/03/golden-state-warriors.gif');
+}
+
+.profile .basketball {
+  background-image: url('http://jacksonsportsacademy.net/wp-content/uploads/2013/09/112012_generic-basketball_400.jpg');
+}
+
+.profile .mks {
+  background-image: url('https://avatars0.githubusercontent.com/u/4218375?v=3&s=200');
+}
+
+.profile .sound {
+  background-image: url('http://www.hercampus.com/sites/default/files/2015/03/03/julie.jpg');
+}
+
+.profile .niagara {
+  background-image: url('http://www.niagarafallslive.com/images/HorseshoefromSkylon.jpg');
+}
+
+.profile .sky {
+  background-image: url('http://img00.deviantart.net/83d4/i/2010/249/8/f/funny_sky_by_miffliness_stock-d2y71pa.jpg');
+}
+
+.profile .cat {
+  background-image: url('http://www.mycatspace.com/wp-content/uploads/2013/08/adopting-a-cat.jpg');
 }

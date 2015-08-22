@@ -141,17 +141,17 @@ var CommentsMade = React.createClass({
       <div className="commentsMade section">
         <h3>Comments</h3>
         <div className="container">
-          <div className="box">
-            Morocco
+          <div className="sky box">
+            Sky
           </div>
-          <div className="box">
-            Basketball
+          <div className="cat box">
+            Cat
           </div>
-          <div className="box">
-            San Francisco Giants
+          <div className="niagara box">
+            Niagara Falls
           </div>
-          <div className="box">
-            Socks
+          <div className="sound box">
+            Sound of Music
           </div>
         </div>
       </div>
@@ -217,7 +217,7 @@ var FollowButton = React.createClass({
     return (
       <div className="headerbutton">
         <span className="button" onClick={this.handlePress}>
-          FOLLOWING
+          FOLLOW
         </span>
       </div>
     );
@@ -240,7 +240,7 @@ var RaceButton = React.createClass({
     return (
       <div className="headerbutton">
         <span className="button" onClick={this.handlePress}>
-          CHALLENGE!
+          RACE!
         </span>
       </div>
     );
