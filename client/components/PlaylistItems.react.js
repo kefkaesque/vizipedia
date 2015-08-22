@@ -22,9 +22,11 @@ var PlaylistItems = React.createClass({
   },
   render: function() {
     return (
-      <div>
+      <div className="playlistitems wrapper">
         <CurrentPlaylist playlistitems={this.state.playlistitems} />
+        <div className="circle">
         <Link to="profile" params={{username: this.props.query.username}}>{'Return to profile'}</Link>
+        </div>
       </div>
     );
   },
@@ -50,7 +52,7 @@ var CurrentPlaylist = React.createClass({
     }
     return (
       <div>
-        <h2>Current Playlist</h2>
+        <h2 className="head">Current Playlist</h2>
         {itemNodes}
       </div>
     );
@@ -60,7 +62,7 @@ var CurrentPlaylist = React.createClass({
 var PlaylistItem = React.createClass({
   render: function() {
     return (
-      <div>
+      <div className="box">
         {this.props.topic}
       </div>
     );
