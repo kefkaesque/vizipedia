@@ -7,7 +7,12 @@ module.exports = keyMirror({
   FEED_LOAD_DATA: null,
   USER_RECS: null,
   GET_REC: null,
-  RACING: null,
+
+  RACE_CREATED: null,
+  RACE_FINISHED: null,
+  RACE_DATA_RETRIEVED: null,
+  RACE_STARTED: null,
+
   UN_REC: null,
   STATE: null,
   GET_ALL: null
