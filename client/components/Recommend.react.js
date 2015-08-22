@@ -1,10 +1,8 @@
 var React = require('react');
 var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
-var Router = require('react-router');
 
 var RecommendButton = React.createClass({
-  mixins: [ Router.Navigation ],
 
   disable: false,
   flag: false,
