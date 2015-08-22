@@ -12,7 +12,6 @@ var RecommendButton = React.createClass({
     RecommendStore.addChangeListener(this._onChange);
   },
   componentDidMount: function() {
-    console.log(this.props);
     RecActions.dispatchArticleRecs(this.props.info.id);
     RecActions.dispatchRecState(this.props.info.id, this.props.info.id);
   },
