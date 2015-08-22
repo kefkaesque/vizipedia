@@ -165,14 +165,17 @@ var Playlists = React.createClass({
     if(Locals.username===this.props.username){
       createLink = (<Link to="createPlaylist">{' + Create New Playlist'}</Link>);
     }
-
+    var username = this.props.username;
     var itemNodes;
     console.log('this.props:',this.props)
     if(this.props.playlists){
       itemNodes = this.props.playlists.map(function(list, index) {
+        console.log('list:', username);
         return (
           <div>
-          <Link to="playlistItems" params={{playlistName: list.name, userId: list.userId}} query={{ playlist: list }}><b>{list.name}</b></Link>
+          <Link to="playlistItems" params={{playlistName: list.name}} query={{ playlistId: list.id, userId: list.userId, username: username }}>
+            <PlaylistItem name={list.name} key={index} />
+          </Link>
           <br/>
           </div>
         );

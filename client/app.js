@@ -44,7 +44,7 @@ var routes = (
     <Route name="profile" path='/profile/:username' handler={Profile}/>
     <Route name="createPlaylist" path='/playlist/create' handler={CreatePlaylist}/>
     <Route name="editPlaylist" path='/playlist/edit/:playlistName' handler={EditPlaylist}/>
-    <Route name="playlistItems" path='/playlist/items/:userId/:playlistName' handler={PlaylistItems}/>
+    <Route name="playlistItems" path='/playlist/items/:playlistName' handler={PlaylistItems}/>
     <Route name="feed" path='/feed' handler={Feed}/>
   </Route>
 );
