@@ -25,9 +25,11 @@ router.use('/profile', profile);
 var apiRecommend = require('./api/recommend');
 var apiPlaylist = require('./api/playlist');
 var apiPlaylistItem = require('./api/playlistitem');
+var apiRace = require('./api/race');
 
 // ---------------------------------------------------------------------------
 
 router.use('/api/playlist', apiPlaylist);
 router.use('/api/playlistitem', apiPlaylistItem);
 router.use('/api/recommend', apiRecommend);
+router.use('/api/race', apiRace);
