@@ -102,7 +102,9 @@ var RecommendedArticles = React.createClass({
     if (this.state.userRec) {
       var itemNodes = this.state.userRec.map(function(item, index) {
         return (
-         <RecItem article={item.wikiarticle} key={index} />
+          <Link to="wiki" params={{topic: item.wikiarticle.title}}>
+          <RecItem article={item.wikiarticle} key={index} />
+          </Link>
         );
       });
     } else {
