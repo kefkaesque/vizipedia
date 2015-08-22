@@ -2,38 +2,85 @@ var express = require('express');
 var router = express.Router();
 module.exports = router;
 
-//Require the associated models (Race, Racer)
+var Race = require('../models/Race.js');
+var Racer = require('../models/Racer.js');
+var Article = require('../models/WikiArticle.js');
 
 router.post('/', function(req, res) {
 
-  if(req.body.raceId) {
-  // If race exists, indicate that user has finished
-    // incoming: raceId, finishTime, path (array of articleId)
-    // user id stored in locals
+  var userId = req.query.userid;
 
-    // set finishTime and path of racer model corresponding to user id
-    // get racer models of everyone who is done
+  if(!req.body.raceId) {
+    //if the race id is not provided, create a race
+    var startTopic = req.body.startTopic;
+    var endTopic = req.body.endTopic;
+    var raceInfo = {};
 
-    // send back array of objects of everyone who is done (racer models)
-    // each object has a username, path (array of article topics), and finishTime
+    getArticleId(startTopic)
+    .then(function(startArticle) {
+      raceInfo.startId = startArticle.id;
+      return getArticleId(endTopic);
+    })
+    .then(function(endArticle) {
+      raceInfo.endId = endArticle.id;
+    })
+    .then(function() {
+      return createRace(raceInfo.startId, raceInfo.endId)
+    })
+    .then(function(race) {
+      raceInfo.raceId = race.id;
+      res.send(JSON.stringify(raceInfo));
+    })
   } else {
-  // Create a race
-    // incoming: startTopic, endTopic, users (array of usernames)
-    // user id stored in locals
+    //if the race id is provided, post results
+    var raceId = req.body.raceId;
+    var finishTime = req.body.finishTime;
+    var path = req.body.path;
 
-    // create new race model with startTopic, endTopic
-    // then, for each user, including logged in user, create new racer models with raceId from above
-    // need to get user ids from usernames
-    // finish time: null, path: null
-
-    // send back raceId, startId, endId
+    createRacer(raceId, userId, finishTime, path)
+      .then(function(){
+        return getRacerInfo(raceId);
+      })
+      .then(function(racerInfo) {
+        res.send(JSON.stringify(racerInfo));
+      });
   }
+
 });
 
 router.get('/:raceId', function(req, res) {
   var raceId = req.query.raceId;
-  // get racer models of everyone who is done corresponding to raceId
-
-  // send back array of objects of everyone who is done (racer models)
+  getRacerInfo(raceId)
+  .then(function(racerInfo) {
+    res.send(JSON.stringify(racerInfo));
+  })
 });
 // --------------------------------------------------------------------------------
+
+function getArticleId(topic) {
+  return Article.findOne({
+    where: {title: topic}
+  });
+};
+
+function createRace(startId, endId) {
+  return Race.create({
+    startId: startId,
+    endId: endId
+  });
+}
+
+function createRacer(raceId, userId, finishTime, path) {
+  return Racer.create({
+    raceId: raceId,
+    userId: userId,
+    finishTime: finishTime,
+    path: JSON.stringify(path)
+  });
+}
+
+function getRacerInfo(raceId) {
+  return Racer.findAll({
+    where: {raceId: raceId}
+  });
+}
