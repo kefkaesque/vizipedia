@@ -3,7 +3,6 @@ var Router = require('react-router');
 var Link = Router.Link;
 
 var Header = React.createClass({
-
   render: function() {
     return (
       <div className="filled"><div className="header">
@@ -11,7 +10,7 @@ var Header = React.createClass({
           <LoginButton/>
           <SignupButton/>
         </div>
-        <div className="logo serif">vizipedia</div>
+        <Link to="landing"><div className="logo serif">vizipedia</div></Link>
         <HeaderForm />
         <UserSearch />
       </div></div>
