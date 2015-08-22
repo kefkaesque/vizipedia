@@ -111,8 +111,22 @@ var RecommendedArticles = React.createClass({
     return (
       <div className="recommended section">
         <h3>Recommended</h3>
-        <div className="container">
+        {/*<div className="container">
           {itemNodes}
+        </div>*/}
+        <div className="container">
+          <div className="morocco box">
+            Morocco
+          </div>
+          <div className="basketball box">
+            Basketball
+          </div>
+          <div className="warriors box">
+            Golden State Warriors
+          </div>
+          <div className="socks box">
+            Socks
+          </div>
         </div>
       </div>
     )
