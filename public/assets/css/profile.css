@@ -66,3 +66,27 @@
 .profile .headerbutton {
   margin-top: 20px;
 }
+
+/* remove later */
+.profile .box {
+  background-size: 180px 180px;
+  background-repeat: no-repeat;
+  color: white;
+  text-shadow: 2px 2px black;
+}
+
+.profile .morocco {
+  background-image: url('http://www.liberty-int.com/Public/Kasbah_Ruins_Ait_Benhaddou_Morocco.jpg');
+}
+
+.profile .warriors {
+  background-image: url('http://isportsweb.com/wp-content/uploads//2014/03/golden-state-warriors.gif');
+}
+
+.profile .basketball {
+  background-image: url('http://jacksonsportsacademy.net/wp-content/uploads/2013/09/112012_generic-basketball_400.jpg');
+}
+
+.profile .socks {
+  background-image: url('http://giantnortheast.com/wp-content/uploads/2014/03/socks.jpg');
+}
