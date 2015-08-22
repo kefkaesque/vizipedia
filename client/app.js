@@ -1,6 +1,5 @@
 var React = require('react');
 var Router = require('react-router');
-var WikiUtils = require('./utils/WikiUtils');
 var Race = require('./components/Race.react');
 
 var Route = Router.Route;
