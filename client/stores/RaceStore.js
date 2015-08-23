@@ -51,8 +51,11 @@ AppDispatcher.register(function(payload) {
     case FluxConstants.RACE_CREATED:
       loadRaceCreate(action.data);
       break;
+    case FluxConstants.RACE_FINISHED:
+      //don't need to do anything?
+      break;
     case FluxConstants.VIZI_SEARCH:
-      setCurrentArticle(action.data);
+        setCurrentArticle(action.data);
       break;
     default:
       // none

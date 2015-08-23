@@ -4,12 +4,7 @@ var request = require('superagent');
 module.exports = {
 
   postRace: function(data) {
-    // this is what data should look like
-    // data: {
-    //   startTopic:
-    //   endTopic:
-    //   users: []
-    // }
+
     return new Promise(function(resolve, reject) {
       request
         .post('/api/race')
@@ -25,12 +20,7 @@ module.exports = {
   },
 
   postFinish: function(data) {
-    // this is what data should look like
-    // data: {
-    //  finishTime
-    //  raceId
-    //  path
-    // }
+
     return new Promise(function(resolve, reject) {
       request
         .post('/api/race')

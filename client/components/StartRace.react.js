@@ -18,14 +18,12 @@ var StartRace = React.createClass({
       end: this.state.end,
     });
 
-    this.transitionTo('wiki', {topic: 'Cat'}); //hardcoded in, replace
+    this.transitionTo('wiki', {topic: this.state.start}); //hardcoded in, replace
   },
   render: function() {
     return (
       <div>
         <div style={{height:200+'px'}}></div>
-
-        <p>"Start Race"</p>
         <span className="button" onClick={this.startRace}>
           Start
         </span>
