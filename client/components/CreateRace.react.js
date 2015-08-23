@@ -11,8 +11,11 @@ var CreateRace = React.createClass({
       endTopic: 'Dog'
     };
 
-    RaceActions.createAndDispatch(data);
-    this.transitionTo('startRace');
+    var creator = this;
+    RaceActions.createAndDispatch(data)
+    .then(function() {
+      creator.transitionTo('startRace');
+    })
   },
   // endRace: function() {
   //   var data = {

@@ -59,6 +59,8 @@ var Timer = React.createClass({
     tick: function(){
       if(!this.props.finished){
         this.setState({elapsed: new Date() - this.state.start});
+      } else {
+        clearInterval(this.timer);
       }
     },
 
