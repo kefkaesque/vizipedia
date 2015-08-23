@@ -12,7 +12,7 @@ module.exports = {
     // }
     return new Promise(function(resolve, reject) {
       request
-        .post('/race')
+        .post('/api/race')
         .send(data)
         .end(function(err, res) {
           if (err) {
@@ -33,7 +33,7 @@ module.exports = {
     // }
     return new Promise(function(resolve, reject) {
       request
-        .post('/race')
+        .post('/api/race')
         .send(data)
         .end(function(err, res) {
           if (err) {
@@ -48,7 +48,7 @@ module.exports = {
   getRaceData: function(raceId) {
     return new Promise(function(resolve, reject) {
       request
-        .get('/race/'+raceId)
+        .get('api/race/'+raceId)
         .end(function(err, res) {
           if (err) {
             reject();

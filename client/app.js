@@ -33,6 +33,8 @@ var CreatePlaylist = require('./components/CreatePlaylist.react');
 var EditPlaylist = require('./components/EditPlaylist.react');
 var PlaylistItems = require('./components/PlaylistItems.react');
 var Feed = require('./components/Feed.react');
+var CreateRace = require('./components/CreateRace.react');
+var StartRace = require('./components/StartRace.react');
 
 
 // --------------------------------------------------------------------------------
@@ -46,6 +48,8 @@ var routes = (
     <Route name="editPlaylist" path='/playlist/edit/:playlistName' handler={EditPlaylist}/>
     <Route name="playlistItems" path='/playlist/items/:playlistName' handler={PlaylistItems}/>
     <Route name="feed" path='/feed' handler={Feed}/>
+    <Route name="createRace" path='/race/create' handler={CreateRace}/>
+    <Route name="startRace" path='/race/start' handler={StartRace}/>
   </Route>
 );
 

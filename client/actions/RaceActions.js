@@ -4,11 +4,12 @@ var RaceAPI = require('../utils/RaceAPI.js');
 
 var RaceActions = {
 
-  dispatchStart: function(data) {
+  createAndDispatch: function(data) {
     RaceAPI.postRace(data)
     .then(function(race) {
+      console.log('createAndDispatch: ', race);
       AppDispatcher.handleViewAction({
-        actionType: FluxConstants.RACING,
+        actionType: FluxConstants.RACE_CREATED,
         data: race
       });
     })
@@ -20,11 +21,12 @@ var RaceActions = {
     })
   },
 
-  dispatchFinish: function(data) {
+  finishAndDispatch: function(data) {
     RaceAPI.postFinish(data)
     .then(function(race) {
+      console.log('finishAndDispatch: ', race);
       AppDispatcher.handleViewAction({
-        actionType: FluxConstants.RACING,
+        actionType: FluxConstants.RACE_FINISHED,
         data: race
       });
     })
@@ -36,11 +38,12 @@ var RaceActions = {
     })
   },
 
-  dispatchRace: function(data) {
+  getRaceDataAndDispatch: function(data) {
     RaceAPI.getRaceData(data)
     .then(function(race) {
+      console.log('getRaceData: ', race);
       AppDispatcher.handleViewAction({
-        actionType: FluxConstants.RACING,
+        actionType: FluxConstants.RACE_DATA_RETRIEVED,
         data: race
       });
     })
@@ -49,6 +52,14 @@ var RaceActions = {
         actionType: FluxConstants.ERROR,
         error: 'bad req'
       });
+    });
+  },
+
+  startAndDispatch: function(data) {
+    console.log('startAndDispatch: ', data);
+    AppDispatcher.handleViewAction({
+      actionType: FluxConstants.RACE_STARTED,
+      data: data
     });
   }
 };
