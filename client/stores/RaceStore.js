@@ -25,7 +25,7 @@ function loadRaceCreate(data) {
 function setCurrentArticle(data) {
   console.log("setCurrentArticle: ", data);
   raceData.currentArticle = data.title;
-  raceData.articlePath.push(data.id); //change to title?
+  raceData.articlePath.push(data.title); //change to title?
 }
 
 var RaceStore = _.extend({}, EventEmitter.prototype, {
