@@ -35,6 +35,7 @@ router.get('/:topic', function(req, res) {
       .then(function(results) {
         var data = {
           id: article.id,
+          title: article.title,
           content: article.content,
           recommends: results.count
         };
