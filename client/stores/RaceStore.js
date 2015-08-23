@@ -13,14 +13,12 @@ function setRaceStart(data) {
 }
 
 function loadRaceCreate(data) {
-  console.log('loadRaceCreate', data);
   raceData.start = data.start;
   raceData.end = data.end;
   raceData.raceId = data.id;
 }
 
 function setCurrentArticle(data) {
-  console.log("setCurrentArticle: ", data);
   raceData.currentArticle = data.title;
   raceData.articlePath.push(data.title);
 }
@@ -28,7 +26,6 @@ function setCurrentArticle(data) {
 var RaceStore = _.extend({}, EventEmitter.prototype, {
 
   getData: function() {
-    console.log('getData', raceData);
     return raceData;
   },
   emitChange: function() {
