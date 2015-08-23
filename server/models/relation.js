@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 var db = require('../config/postgres.js');
-var VisitedArticle = require('./visitedArticle.js');
+var recommend = require('./Recommend.js');
 
 var schema = {
   follower: {
@@ -60,10 +60,9 @@ classMethods.getFollowingRecommended = function(userId) {
     return ids;
   })
   .then(function(res) {
-    return VisitedArticle.findAll({
+    return recommend.findAll({
       where: {
-        userId: res,
-        recommended: true
+        userId: res
       }
     })
     .then(function(recs) {
