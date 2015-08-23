@@ -14,23 +14,12 @@ router.post('/', function(req, res) {
     //if the race id is not provided, create a race
     var startTopic = req.body.startTopic;
     var endTopic = req.body.endTopic;
-    var raceInfo = {};
 
-    getArticleId(startTopic)
-    .then(function(startArticle) {
-      raceInfo.startId = startArticle.id;
-      return getArticleId(endTopic);
-    })
-    .then(function(endArticle) {
-      raceInfo.endId = endArticle.id;
-    })
-    .then(function() {
-      return createRace(raceInfo.startId, raceInfo.endId)
-    })
-    .then(function(race) {
-      raceInfo.raceId = race.id;
+    createRace(startTopic, endTopic)
+    .then(function(raceInfo) {
       res.send(JSON.stringify(raceInfo));
-    })
+    });
+
   } else {
     //if the race id is provided, post results
     var raceId = req.body.raceId;
@@ -57,16 +46,10 @@ router.get('/:raceId', function(req, res) {
 });
 // --------------------------------------------------------------------------------
 
-function getArticleId(topic) {
-  return Article.findOne({
-    where: {title: topic}
-  });
-};
-
-function createRace(startId, endId) {
+function createRace(start, end) {
   return Race.create({
-    startId: startId,
-    endId: endId
+    start: start,
+    end: end
   });
 }
 

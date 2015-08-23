@@ -13,18 +13,17 @@ var StartRace = React.createClass({
   startRace: function() {
     console.log("startrace state: ", this.state);
     RaceActions.startAndDispatch({
-      racing:true,
-      start: this.state.startId, //article id for cat in my db
-      end: this.state.endId, //article id for dog in my db
+      racing: true,
+      start: this.state.start,
+      end: this.state.end,
     });
-    this.transitionTo('wiki', {topic: 'Cat'}); //hardcoded in, replace
+
+    this.transitionTo('wiki', {topic: this.state.start}); //hardcoded in, replace
   },
   render: function() {
     return (
       <div>
         <div style={{height:200+'px'}}></div>
-
-        <p>"Start Race"</p>
         <span className="button" onClick={this.startRace}>
           Start
         </span>

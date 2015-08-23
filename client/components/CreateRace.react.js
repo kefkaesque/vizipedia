@@ -11,31 +11,19 @@ var CreateRace = React.createClass({
       endTopic: 'Dog'
     };
 
-    RaceActions.createAndDispatch(data);
-    this.transitionTo('startRace');
+    var creator = this;
+    RaceActions.createAndDispatch(data)
+    .then(function() {
+      creator.transitionTo('startRace');
+    });
   },
-  // endRace: function() {
-  //   var data = {
-  //     raceId: 1,
-  //     finishTime: 13,
-  //     path: [1,2,3]
-  //   };
-
-  //   RaceActions.finishAndDispatch(data);
-  // },
   render: function() {
     return (
       <div>
         <div style={{height:200+'px'}}></div>
-        <p>Create Race</p>
         <span className="button" onClick={this.createRace}>
           Create
         </span>
-
-        {/*<p>"End Race"</p>
-        <span className="button" onClick={this.endRace}>
-          End Race
-        </span>*/}
       </div>
     )
   }

@@ -2,8 +2,8 @@ var Sequelize = require('sequelize');
 var db = require('../config/postgres');
 
 var schema = {
-  startId: {type: Sequelize.INTEGER},
-  endId: {type: Sequelize.INTEGER}
+  start: {type: Sequelize.STRING},
+  end: {type: Sequelize.STRING}
 };
 
 // --------------------------------------------------------------------------------
