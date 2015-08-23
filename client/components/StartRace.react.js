@@ -14,9 +14,10 @@ var StartRace = React.createClass({
     console.log("startrace state: ", this.state);
     RaceActions.startAndDispatch({
       racing: true,
-      start: this.state.start, //article id for cat in my db
-      end: this.state.end, //article id for dog in my db
+      start: this.state.start,
+      end: this.state.end,
     });
+
     this.transitionTo('wiki', {topic: 'Cat'}); //hardcoded in, replace
   },
   render: function() {
