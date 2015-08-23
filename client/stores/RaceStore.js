@@ -15,14 +15,23 @@ function loadData(data) {
   raceData.end = data.end;
 }
 
+function loadRaceCreate(data) {
+  console.log('loadRaceCreate', data);
+  raceData.startId = data.startId;
+  raceData.endId = data.endId;
+  raceData.raceId = data.raceId;
+}
+
 function setCurrentArticle(data) {
-  raceData.currentArticle = data.id;
-  raceData.articlePath.push(data.id);
+  console.log("setCurrentArticle: ", data);
+  raceData.currentArticle = data.title;
+  raceData.articlePath.push(data.id); //change to title?
 }
 
 var RaceStore = _.extend({}, EventEmitter.prototype, {
 
   getData: function() {
+    console.log('getData', raceData);
     return raceData;
   },
   emitChange: function() {
@@ -41,6 +50,9 @@ AppDispatcher.register(function(payload) {
   switch(action.actionType) {
     case FluxConstants.RACE_STARTED:
       loadData(action.data);
+      break;
+    case FluxConstants.RACE_CREATED:
+      loadRaceCreate(action.data);
       break;
     case FluxConstants.VIZI_SEARCH:
       setCurrentArticle(action.data);

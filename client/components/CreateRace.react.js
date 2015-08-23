@@ -14,15 +14,15 @@ var CreateRace = React.createClass({
     RaceActions.createAndDispatch(data);
     this.transitionTo('startRace');
   },
-  endRace: function() {
-    var data = {
-      raceId: 1,
-      finishTime: 13,
-      path: [1,2,3]
-    };
+  // endRace: function() {
+  //   var data = {
+  //     raceId: 1,
+  //     finishTime: 13,
+  //     path: [1,2,3]
+  //   };
 
-    RaceActions.finishAndDispatch(data);
-  },
+  //   RaceActions.finishAndDispatch(data);
+  // },
   render: function() {
     return (
       <div>
@@ -32,10 +32,10 @@ var CreateRace = React.createClass({
           Create
         </span>
 
-        <p>"End Race"</p>
+        {/*<p>"End Race"</p>
         <span className="button" onClick={this.endRace}>
           End Race
-        </span>
+        </span>*/}
       </div>
     )
   }
