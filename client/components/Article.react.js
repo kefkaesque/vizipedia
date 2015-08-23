@@ -36,7 +36,6 @@ var Article = React.createClass({
   },
   parseDom: function() {
     var article = this;
-    console.log("parsing dom", this.state.loaded);
     $("a[href^='/wiki']")
        .each(function()
        {
@@ -51,7 +50,6 @@ var Article = React.createClass({
       var currentLink = link.attr('href');
       var query = currentLink.split('/')[2];
       article.transitionTo('wiki', {topic: query});
-      console.log(query);
     });
   },
   render: function() {
