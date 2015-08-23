@@ -1,5 +1,6 @@
 var React = require('react');
 var RaceStore = require('../stores/RaceStore');
+var RaceActions = require('../actions/RaceActions');
 
 var Race = React.createClass({
   getInitialState: function() {
@@ -20,6 +21,15 @@ var Race = React.createClass({
       this.setState({finished:true});
     }
   },
+  endRace: function(finishTime) {
+    var data = {
+      raceId: this.state.raceId,
+      finishTime: finishTime,
+      path: this.state.articlePath
+    };
+    console.log(data);
+    RaceActions.finishAndDispatch(data);
+  },
   render: function() {
     if(this.state.racing) {
       return (
@@ -27,7 +37,7 @@ var Race = React.createClass({
           Race!
           <p>{this.state.currentArticle || 'no current article'}</p>
           <p>From {this.state.start || '?'} to {this.state.end || '?'}</p>
-          <Timer finished={this.state.finished} />
+          <Timer finished={this.state.finished} endRace={this.endRace} />
         </div>
       );
     }
@@ -60,7 +70,9 @@ var Timer = React.createClass({
       if(!this.props.finished){
         this.setState({elapsed: new Date() - this.state.start});
       } else {
+        console.log('tick', this.state);
         clearInterval(this.timer);
+        this.props.endRace(Math.round(this.state.elapsed/1000));
       }
     },
 
