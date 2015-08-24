@@ -8,7 +8,7 @@ var Race = React.createClass({
       racing: false,
       finished: false,
       articlePath: []
-    };
+    }
   },
   componentDidMount: function() {
     RaceStore.addChangeListener(this._onChange);
