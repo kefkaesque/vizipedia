@@ -34,8 +34,6 @@ var Profile = React.createClass({
     ProfileStore.removeChangeListener(this._onChange);
   },
   render: function() {
-    console.log(this.state);
-    console.log(this.props);
     return (
       <Loader loaded={this.state.loaded}>
       <Haiku user={this.state}>
