@@ -1,0 +1,14 @@
+script(type="text/javascript").
+  var Locals = !{JSON.stringify(Locals)};
+div.header
+  div.menu
+    a(href="/login")
+      div.item Login
+    a(href="/signup")
+      div.item Sign Up
+  div.logo.serif vizipedia
+  form
+    input(type="text", placeholder="Search...")
+    button(type="submit")
+      span(class="fa fa-fw fa-search")
+  form

@@ -1,0 +1,89 @@
+.mockup .top {
+  position:relative;
+  z-index:-1;
+  padding-top:calc(52px + 0em);
+  width:100%;
+  #height:62vh;
+  margin-bottom:2.6em;
+  background:url('../img/profile.jpg');
+  background-size:cover;
+  text-align:center;
+}
+
+.mockup .top:after {
+  content:"";
+  z-index:-1;
+  display:block;
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:radial-gradient(rgba(0,0,0,.5) 20%,rgba(0,0,0,.95) 95%);
+}
+
+
+.mockup .spacer,
+.mockup .stuff {
+  display:inline-block;
+  vertical-align:bottom;
+}
+
+.mockup .stuff {
+  color:#fff;
+}
+
+.mockup .name {
+  margin:1.6em 0 1em;
+  #font-family:abril fatface;
+  font-size:3em;
+}
+
+.mockup .items {
+  width:100%;
+  margin:2em 0;
+  font-size:.65em;
+}
+
+.mockup span {
+  font-size:1.8em;
+}
+
+.mockup .items .item {
+  display:inline-block;
+  width:120px;
+}
+
+.mockup .actions .item {
+  display:inline-block;
+  margin:0 .62em;
+  margin-bottom:2.6em;
+  padding:0 1.3em;
+  line-height:2.6em;
+
+  #background:rgba(0,0,0,.8);
+  border:1px solid rgba(255,255,255,1);
+  border-radius:1.3em;
+
+  font-size:.65em;
+}
+
+.mockup .box {
+  display:inline-block;
+  margin-top:1em;
+  background-size:cover !important;
+  background-position:center !important;
+  width:calc((100% - 3 * .62em) / 4);
+}
+
+.mockup .box:nth-child(n+2) {
+  margin-left:.62em;
+}
+
+.mockup .box img {
+  max-width:100%;
+}
+
+.mockup .box .text {
+  margin-top:10em;
+  padding:.62em 1em;
+  background:#fff;
+}

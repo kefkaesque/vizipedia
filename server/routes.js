@@ -7,6 +7,10 @@ var auth = require('./routes/auth');
 
 // ---------------------------------------------------------------------------
 
+router.get('/mockup', function(req, res) {
+  res.render('mockup');
+});
+
 router.use('/', landing);
 router.use('/', auth);
 router.use('/feed', landing);
