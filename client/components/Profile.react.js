@@ -8,11 +8,15 @@ var RaceActions = require('../actions/RaceActions');
 var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
 var Haiku = require('./404.react');
+var Loader = require('./Loader.react');
 
 var Profile = React.createClass({
 
   getInitialState: function() {
-    return {};
+    return {
+      data: '',
+      loaded: false
+    }
   },
   componentWillMount: function() {
     ProfileStore.addChangeListener(this._onChange);
@@ -22,6 +26,7 @@ var Profile = React.createClass({
     ProfileActions.dispatchProfileData(query);
   },
   componentWillReceiveProps: function() {
+    // this.setState({username: null, loaded: false});
     var query = window.location.pathname.split('/')[2];
     ProfileActions.dispatchProfileData(query);
   },
@@ -29,27 +34,26 @@ var Profile = React.createClass({
     ProfileStore.removeChangeListener(this._onChange);
   },
   render: function() {
-    if (this.state.username) {
-      return (
-        <div className="profile wrapper">
-          <ProfileHeader data={this.state}/>
-            <RecommendedArticles/>
-            <CommentsMade />
-            <Playlists username={this.state.username} playlists={this.state.playlists} />
-        </div>
-      )
-    } else {
-      return (
-        <div className="profile wrapper">
-          <Haiku user={this.props.params.username}/>
-        </div>
-      )
-    }
+    console.log(this.state);
+    console.log(this.props);
+    return (
+      <Loader loaded={this.state.loaded}>
+      <Haiku user={this.state}>
+      <div className="profile wrapper">
+        <ProfileHeader data={this.state.data}/>
+          <RecommendedArticles/>
+          <CommentsMade />
+          <Playlists username={this.state.data.username} playlists={this.state.data.playlists} />
+      </div>
+      </Haiku>
+      </Loader>
+    );
   },
   _onChange: function() {
-    this.setState(
-      ProfileStore.getData()
-    );
+    this.setState({
+      data: ProfileStore.getData(),
+      loaded: true
+    });
   }
 });
 

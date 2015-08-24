@@ -8,12 +8,19 @@ var ProfileActions = {
     var that = this;
     ProfileAPI.getProfileData(data)
     .then(function(profile) {
+      if (profile.followedBy !== undefined) {
       that.dispatchUserPlaylists(profile.id);
       RecActions.dispatchUserRecs(profile.id);
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.PROFILE_LOAD_DATA,
         data: profile
       });
+      } else {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.PROFILE_LOAD_DATA,
+        data: profile
+      })
+      }
     })
     .catch(function() {
       AppDispatcher.handleViewAction({
