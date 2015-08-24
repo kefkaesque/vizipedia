@@ -39,7 +39,7 @@ var SignupButton = React.createClass({
     return (
       <a href='/signup'>
         <div className="item">
-          Signup
+          Sign Up
         </div>
       </a>
     );
