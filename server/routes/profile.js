@@ -21,6 +21,9 @@ router.post('/', function(req, res) {
     }
   })
   .then(function(user) {
+    // if (!user) {
+    //   res.send(JSON.stringify(''));
+    // }
     relation.follow(res.locals.user.id, user.dataValues.id)
     .then(function(relation) {
       getData(req.body.user, function(data) {
@@ -39,6 +42,10 @@ var getData = function(user , cb) {
     }
   })
   .then(function(user) {
+    if (!user) {
+      cb(data);
+    }
+    if (user) {
     data.id = user.dataValues.id;
     visitedArticle.numRead(user.dataValues.id)
     .then(function(numArticle) {
@@ -50,5 +57,6 @@ var getData = function(user , cb) {
           cb(data);
         })
     });
+    }
   });
 };
