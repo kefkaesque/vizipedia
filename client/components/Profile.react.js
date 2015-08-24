@@ -7,7 +7,7 @@ var Link = Router.Link;
 var RaceActions = require('../actions/RaceActions');
 var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
-
+var Haiku = require('./404.react');
 
 var Profile = React.createClass({
 
@@ -29,14 +29,22 @@ var Profile = React.createClass({
     ProfileStore.removeChangeListener(this._onChange);
   },
   render: function() {
-    return (
-      <div className="profile wrapper">
-        <ProfileHeader data={this.state}/>
-          <RecommendedArticles/>
-          <CommentsMade />
-          <Playlists username={this.state.username} playlists={this.state.playlists} />
-      </div>
-    )
+    if (this.state.username) {
+      return (
+        <div className="profile wrapper">
+          <ProfileHeader data={this.state}/>
+            <RecommendedArticles/>
+            <CommentsMade />
+            <Playlists username={this.state.username} playlists={this.state.playlists} />
+        </div>
+      )
+    } else {
+      return (
+        <div className="profile wrapper">
+          <Haiku user={this.props.params.username}/>
+        </div>
+      )
+    }
   },
   _onChange: function() {
     this.setState(
@@ -161,7 +169,7 @@ var CommentsMade = React.createClass({
   }
 });
 
-var Playlists = React.createClass({ 
+var Playlists = React.createClass({
   render: function() {
     var createLink = '';
     if(Locals.username===this.props.username){
@@ -171,7 +179,6 @@ var Playlists = React.createClass({
     var itemNodes;
     if(this.props.playlists){
       itemNodes = this.props.playlists.map(function(list, index) {
-        console.log('list:', username);
         return (
           <div>
           <Link to="playlistItems" params={{playlistName: list.name}} query={{ playlistId: list.id, userId: list.userId, username: username }}>
