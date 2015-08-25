@@ -38,7 +38,7 @@ module.exports = {
   getRaceData: function(raceId) {
     return new Promise(function(resolve, reject) {
       request
-        .get('api/race/'+raceId)
+        .get('/api/race/?raceid='+raceId)
         .end(function(err, res) {
           if (err) {
             reject();
