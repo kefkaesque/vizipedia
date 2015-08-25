@@ -38,7 +38,11 @@ var Profile = React.createClass({
       <Loader loaded={this.state.loaded}>
       <Haiku user={this.state}>
       <div className="profile wrapper">
+        <Link to="race" params={{raceId: 91}}>
+          this links to ... race 91
+        </Link>
         <ProfileHeader data={this.state.data}/>
+          <UserRaces />
           <RecommendedArticles/>
           <CommentsMade />
           <Playlists username={this.state.data.username} playlists={this.state.data.playlists} />
@@ -93,6 +97,54 @@ var ProfileHeader = React.createClass({
         </div>
       </div>
     )
+  }
+});
+
+var UserRaces = React.createClass({
+  getInitialState: function() {
+    return {};
+  },
+  componentWillMount: function() {
+    ProfileStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    ProfileStore.removeChangeListener(this._onChange);
+  },
+  render: function() {
+    if (this.state.races) {
+      var itemNodes = this.state.races.map(function(item, index) {
+        return (
+          <Link to="race" params={{raceId: item.raceId}}>
+            <RaceItem raceId={item.raceId} key={index} />
+          </Link>
+        );
+      });
+    } else {
+      itemNodes = '';
+    }
+    return (
+      <div className="race section">
+        <h3>Races</h3>
+        <div className="container">
+          {itemNodes}
+        </div>
+      </div>
+    )
+  },
+  _onChange: function() {
+    this.setState(
+      ProfileStore.getData()
+    );
+  }
+});
+
+var RaceItem = React.createClass({
+  render: function() {
+    return (
+      <div className="box">
+        {this.props.raceId}
+      </div>
+    );
   }
 });
 
@@ -240,13 +292,7 @@ var RaceButton = React.createClass({
   mixins: [ Router.Navigation ],
 
   handlePress: function(e) {
-    // RaceActions.dispatchRacing({
-    //   racing:true,
-    //   start: 2, //article id for cat in my db
-    //   end: 8, //article id for dog in my db
-    // });
     this.transitionTo('createRace');
-
   },
   render: function() {
     return (

@@ -13,14 +13,23 @@ function setRaceStart(data) {
 }
 
 function loadRaceCreate(data) {
-  raceData.start = data.start;
-  raceData.end = data.end;
-  raceData.raceId = data.id;
+  raceData.raceInfo = data;
 }
 
 function setCurrentArticle(data) {
   raceData.currentArticle = data.title;
   raceData.articlePath.push(data.title);
+}
+
+function setFinishedRacers(data) {
+  console.log('set finished racers data ', data);
+  raceData.racerInfo = data;
+}
+
+function loadRaceData (data) {
+  console.log("load race Data in store: ", data);
+  raceData.raceInfo = data.raceInfo;
+  raceData.racerInfo = data.racerInfo;
 }
 
 var RaceStore = _.extend({}, EventEmitter.prototype, {
@@ -49,7 +58,10 @@ AppDispatcher.register(function(payload) {
       loadRaceCreate(action.data);
       break;
     case FluxConstants.RACE_FINISHED:
-      //don't need to do anything?
+      setFinishedRacers(action.data);
+      break;
+    case FluxConstants.RACE_DATA_RETRIEVED:
+      loadRaceData(action.data);
       break;
     case FluxConstants.VIZI_SEARCH:
         setCurrentArticle(action.data);
