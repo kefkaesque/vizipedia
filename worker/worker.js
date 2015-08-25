@@ -38,6 +38,14 @@ amqp.connect(url).then(function(conn) {
     function reply(msg) {
       var query = msg.content.toString();
       var response = getWikiPage(query, function(article, title) {
+        if (!title) {
+          ch.sendToQueue(msg.properties.replyTo,
+            new Buffer(JSON.stringify({
+              title: query
+            })),
+            {correlationId: msg.properties.correlationId});
+            return;
+        }
         var ntitle = title.replace(/ /g, '_');
 
         /*if(query === ntitle)

@@ -84,7 +84,11 @@ var queue = function(req, res) {
 
       return ok.then(function(data) {
         data = JSON.parse(data);
-        redirect(res, data.title);
+        if (data.article === undefined) {
+          res.send(JSON.stringify(data));
+        } else {
+          redirect(res, data.title);
+        }
         // res.locals.article = "FROM REQUEST"+data.article;
         // res.render("article");
       });

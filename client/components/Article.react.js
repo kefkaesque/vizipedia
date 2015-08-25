@@ -5,7 +5,7 @@ var Loader = require('./Loader.react');
 var ArticleActions = require('../actions/ArticleActions');
 var $ = require('jquery');
 var Router = require('react-router');
-
+var Haiku = require('./404.react');
 
 var Article = React.createClass({
   mixins: [ Router.Navigation ],
@@ -19,7 +19,7 @@ var Article = React.createClass({
   componentDidMount: function() {
     var query = window.location.pathname.split('/')[2];
     ArticleActions.dispatchArticle(query);
-    console.log(this.props.params.topic);
+    // console.log(this.props.params.topic);
   },
   componentWillReceiveProps: function() {
     this.setState({
@@ -54,13 +54,17 @@ var Article = React.createClass({
     });
   },
   render: function() {
+    console.log('!!!!!', this.props);
+    console.log('!!!!S', this.state);
     return (
       <div className="filled">
         <Loader loaded={this.state.loaded}>
+          <Haiku user={this.state}>
           <div className="wrapper article serif">
             <Recommend info={this.state.data}/>
             <div dangerouslySetInnerHTML={this.createMarkup()} />
           </div>
+          </Haiku>
         </Loader>
       </div>
     );
