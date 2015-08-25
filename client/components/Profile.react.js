@@ -58,11 +58,14 @@ var Profile = React.createClass({
 var ProfileHeader = React.createClass({
 
   render: function() {
+
+        console.log('Locals ', Locals);
+    console.log('Locals ', this.props);
+
     // var followButton ='';
     // if(Locals.username && Locals.username !== this.props.data.username){
     //   followButton = (<FollowButton username={this.props.data.username}/>);
     // }
-
     return (
       <div className="profileheader">
         <div className="row">
@@ -86,9 +89,12 @@ var ProfileHeader = React.createClass({
         </div>
         <hr/>
         <div className="row">
+        {Locals.username !== this.props.data.username ?
           <div className="item">
             <FollowButton username={this.props.data.username}/>
-          </div>
+          </div> :
+          <div></div>
+        }
           <div className="item">
             <RaceButton/>
           </div>
@@ -207,9 +213,6 @@ var Playlists = React.createClass({
 });
 
 var PlaylistItem = React.createClass({
-  handlePress: function(e) {
-    console.log('PlaylistItem clicked!!!!!')
-  },
   render: function() {
     return (
       <div className="playlistItem box">
