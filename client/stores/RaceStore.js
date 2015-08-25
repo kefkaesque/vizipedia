@@ -22,12 +22,10 @@ function setCurrentArticle(data) {
 }
 
 function setFinishedRacers(data) {
-  console.log('set finished racers data ', data);
   raceData.racerInfo = data;
 }
 
 function loadRaceData (data) {
-  console.log("load race Data in store: ", data);
   raceData.raceInfo = data.raceInfo;
   raceData.racerInfo = data.racerInfo;
 }

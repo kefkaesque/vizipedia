@@ -21,7 +21,6 @@ var Race = React.createClass({
   },
   userHasCompleted: function() {
     var currentUser = Locals.userid;
-    console.log('race state: ', this.state);
 
     // if anyone has finished the race
     if(this.state.racerInfo) { //.length?
@@ -32,7 +31,6 @@ var Race = React.createClass({
     }
   },
   render: function() {
-    console.log('rendering...', this.state);
     // display blank page if state is not yet loaded
     if(!this.state) {
       return (
@@ -43,7 +41,6 @@ var Race = React.createClass({
     };
     // if this user is among the finished racers
     if(this.userHasCompleted()) {
-      console.log('user has completed', this.state);
       // display finished racer data
       return (
         <div>
@@ -70,11 +67,9 @@ var Race = React.createClass({
 var StartRace = React.createClass({
   mixins: [ Router.Navigation ],
   getInitialState: function(){
-    console.log("race params: ", this.props.params);
     return RaceStore.getData();
   },
   startRace: function() {
-    console.log("startrace state: ", this.state);
     RaceActions.startAndDispatch({
       racing: true
     });
@@ -94,7 +89,6 @@ var StartRace = React.createClass({
 
 var EndRace = React.createClass({
   render: function() {
-    console.log('EndRace', this.props);
     return (
       <div>
           End

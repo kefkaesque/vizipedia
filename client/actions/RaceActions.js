@@ -7,7 +7,6 @@ var RaceActions = {
   createAndDispatch: function(data) {
     return RaceAPI.postRace(data)
     .then(function(race) {
-      console.log('createAndDispatch: ', race);
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.RACE_CREATED,
         data: race
@@ -24,7 +23,6 @@ var RaceActions = {
   finishAndDispatch: function(data) {
     return RaceAPI.postFinish(data)
     .then(function(race) {
-      console.log('finishAndDispatch: ', race);
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.RACE_FINISHED,
         data: race
@@ -41,7 +39,6 @@ var RaceActions = {
   getRaceDataAndDispatch: function(data) {
     return RaceAPI.getRaceData(data)
     .then(function(race) {
-      console.log('getRaceData: ', race);
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.RACE_DATA_RETRIEVED,
         data: race
@@ -56,7 +53,6 @@ var RaceActions = {
   },
 
   startAndDispatch: function(data) {
-    console.log('startAndDispatch: ', data);
     AppDispatcher.handleViewAction({
       actionType: FluxConstants.RACE_STARTED,
       data: data
