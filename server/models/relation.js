@@ -33,17 +33,6 @@ classMethods.follow = function(userId, followingId) {
     }
   });
 };
-classMethods.toggle = function(userId, followingId) {
-  console.log('!!!!!!', this.follow(userId, followingId));
-  if (this.follow(userId, followingId)) {
-    return Relation.create({
-      follower: userId,
-      following: followingId
-    });
-  } else {
-    return this.unFollow(userId, followingId);
-  }
-};
 // run if isFollowing method is true
 classMethods.unFollow = function(userId, followingId) {
   return Relation.destroy({
