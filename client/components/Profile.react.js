@@ -215,8 +215,15 @@ var PlaylistItem = React.createClass({
 });
 
 var FollowButton = React.createClass({
+
+  mixins: [ Router.Navigation ],
+
   handlePress: function(e) {
-    ProfileActions.dispatchFollow(this.props.username);
+    if (!Locals.username) {
+      window.location.href = "/login";
+    } else {
+      ProfileActions.dispatchFollow(this.props.username);
+    }
   },
   render: function() {
     return (
