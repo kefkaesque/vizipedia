@@ -6,7 +6,16 @@ var _ = require('underscore');
 
 var feed = {};
 function loadData(data) {
-  feed = data;
+  console.log('FeedStore data:', data);
+  // var followingUsers = {};
+  // for (var i=0; i<data.length; i++) {
+  //     followingUsers[data[i].username] = followingUsers[data[i].username]||[];
+  //     followingUsers[data[i].username].push(data[i].title)
+  // }
+  // console.log('followingUsers',followingUsers);
+
+
+  feed = {data:data};
 }
 
 var FeedStore = _.extend({}, EventEmitter.prototype, {
@@ -25,8 +34,8 @@ var FeedStore = _.extend({}, EventEmitter.prototype, {
   }
 });
 
-AppDispatcher.register(function(action) {
-  var text;
+AppDispatcher.register(function(payload) {
+  var action = payload.action;
   switch(action.actionType) {
     case FluxConstants.FEED_LOAD_DATA:
       loadData(action.data);
