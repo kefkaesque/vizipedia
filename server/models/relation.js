@@ -1,6 +1,8 @@
 var Sequelize = require('sequelize');
 var db = require('../config/postgres.js');
 var recommend = require('./Recommend.js');
+var User = require('./User');
+var Article = require('./WikiArticle');
 
 var schema = {
   follower: {
@@ -66,11 +68,29 @@ classMethods.getFollowingRecommended = function(userId) {
       }
     })
     .then(function(recs) {
-      var articleIds = [];
+      var recIds = [];
       for (var j = 0; j < recs.length; j++) {
-        articleIds.push(recs[j].get('articleId'));
+           recIds.push(recs[j].get('id'));
       }
-      return articleIds;
+      // find all of the users and article titles
+      return recommend.findAll({
+        where: {
+          id: recIds
+        },
+        include: [{
+          model: Article
+        },
+        {
+          model: User
+        }]
+      })
+      .then(function(results) {
+        var data = [];
+        for (var k = 0; k<results.length; k++) {
+          data.push({username: results[k].user.dataValues.username, title:results[k].wikiarticle.dataValues.title, createdAt: results[k].dataValues.createdAt})
+        }
+        return data;
+      })
     });
   });
 };
