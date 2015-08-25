@@ -17,8 +17,10 @@ function loadRaceCreate(data) {
 }
 
 function setCurrentArticle(data) {
-  raceData.currentArticle = data.title;
-  raceData.articlePath.push(data.title);
+  if(raceData.racing) {
+    raceData.currentArticle = data.title;
+    raceData.articlePath.push(data.title);
+  }
 }
 
 function setFinishedRacers(data) {

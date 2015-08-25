@@ -4,12 +4,7 @@ var Router = require('react-router');
 var RaceStore = require('../stores/RaceStore');
 
 var Race = React.createClass({
-  getInitialState: function() {
-    return {
-      racing: false,
-      finished: false,
-      articlePath: []
-    }
+
   componentWillMount: function (){
     RaceStore.addChangeListener(this._onChange);
   },
@@ -31,6 +26,7 @@ var Race = React.createClass({
     }
   },
   render: function() {
+    console.log('race component ', this.state);
     // display blank page if state is not yet loaded
     if(!this.state) {
       return (
