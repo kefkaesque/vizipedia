@@ -89,11 +89,25 @@ var StartRace = React.createClass({
 
 var EndRace = React.createClass({
   render: function() {
+    console.log("endrace props ", this.props);
+    if (this.props.racerInfo) {
+      var itemNodes = this.props.racerInfo.map(function(item, index) {
+        return (
+          <div>
+            <p> User ID: {item.userId} </p>
+            <p> Finish Time: {item.finishTime} </p>
+            <p> Path: {item.path} </p>
+          </div>
+        );
+      });
+    } else {
+      itemNodes = '';
+    }
+
     return (
       <div>
           End
-          <p> Finish Time: {this.props.racerInfo[0].finishTime} </p>
-          <p> Path: {this.props.racerInfo[0].path} </p>
+          {itemNodes}
       </div>
     )
   }
