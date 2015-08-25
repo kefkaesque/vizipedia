@@ -91,16 +91,27 @@ var Timer = React.createClass({
         this.setState({elapsed: new Date() - this.state.start});
       } else {
         clearInterval(this.timer);
-        this.props.endRace(Math.round(this.state.elapsed/1000));
+        var elapsed = Math.round(this.state.elapsed / 100);
+        var seconds = (elapsed / 10).toFixed(2);
+        this.props.endRace(seconds);
       }
     },
 
     render: function() {
-        var elapsed = Math.round(this.state.elapsed / 100);
-        // This will give a number with one digit after the decimal dot (xx.x):
-        var seconds = (elapsed / 10).toFixed(1);
+        var elapsed = Math.round(this.state.elapsed/10);
+        var min = Math.floor(elapsed/6000);
+        var seconds = Math.floor(elapsed/100 - 60 * min);
+        var centiseconds = elapsed - 100 * seconds - 6000 * min;
 
-        return <p>Time elapsed: <b>{seconds} seconds</b> </p>;
+        if(seconds.toString().length < 2) {
+          seconds = "0" + seconds;
+        }
+
+        if(centiseconds.toString().length < 2) {
+          centiseconds = "0" + centiseconds;
+        }
+
+        return <p>Time elapsed: <b> {min}:{seconds}:{centiseconds}</b> </p>;
     }
 });
 
