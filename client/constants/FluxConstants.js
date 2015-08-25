@@ -12,6 +12,7 @@ module.exports = keyMirror({
   RACE_FINISHED: null,
   RACE_DATA_RETRIEVED: null,
   RACE_STARTED: null,
+  PROFILE_LOAD_RACES: null,
 
   UN_REC: null,
   STATE: null,

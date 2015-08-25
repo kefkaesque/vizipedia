@@ -1,21 +1,26 @@
 var React = require('react');
 var RaceActions = require('../actions/RaceActions');
 var Router = require('react-router');
+var RaceStore = require('../stores/RaceStore');
 
 var CreateRace = React.createClass({
   mixins: [ Router.Navigation ],
-
+  componentDidMount: function() {
+    RaceStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    RaceStore.removeChangeListener(this._onChange);
+  },
   createRace: function() {
     var data = {
       startTopic: 'Cat',
       endTopic: 'Dog'
     };
 
-    var creator = this;
     RaceActions.createAndDispatch(data)
-    .then(function() {
-      creator.transitionTo('startRace');
-    });
+  },
+  transitionToStart: function() {
+    this.transitionTo('race', {raceId: this.state.raceInfo.id});
   },
   render: function() {
     return (
@@ -26,6 +31,12 @@ var CreateRace = React.createClass({
         </span>
       </div>
     )
+  },
+  _onChange: function() {
+    this.setState(RaceStore.getData());
+    if (this.state.raceInfo.id) {
+      this.transitionToStart();
+    }
   }
 });
 

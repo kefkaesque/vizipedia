@@ -1,88 +1,112 @@
 var React = require('react');
-var RaceStore = require('../stores/RaceStore');
 var RaceActions = require('../actions/RaceActions');
+var Router = require('react-router');
+var RaceStore = require('../stores/RaceStore');
 
 var Race = React.createClass({
-  getInitialState: function() {
-    return {
-      racing: false,
-      finished: false,
-      articlePath: []
-    }
+
+  componentWillMount: function (){
+    RaceStore.addChangeListener(this._onChange);
   },
   componentDidMount: function() {
-    RaceStore.addChangeListener(this._onChange);
+    RaceActions.getRaceDataAndDispatch(this.props.params.raceId);
   },
   componentWillUnmount: function() {
     RaceStore.removeChangeListener(this._onChange);
   },
-  componentDidUpdate: function() {
-    if(!this.state.finished && this.state.end && this.state.end===this.state.currentArticle) {
-      this.setState({finished:true});
+  userHasCompleted: function() {
+    var currentUser = Locals.userid;
+
+    // if anyone has finished the race
+    if(this.state.racerInfo) { //.length?
+      // see if the current user has finished the race
+      return this.state.racerInfo.reduce(function(previousValue, currentValue) {
+        return previousValue || currentValue.userId === currentUser;
+      }, false);
     }
-  },
-  endRace: function(finishTime) {
-    var data = {
-      raceId: this.state.raceId,
-      finishTime: finishTime,
-      path: this.state.articlePath
-    };
-    console.log(data);
-    RaceActions.finishAndDispatch(data);
   },
   render: function() {
-    if(this.state.racing) {
+    console.log('race component ', this.state);
+    // display blank page if state is not yet loaded
+    if(!this.state) {
       return (
-        <div className="race">
-          Race!
-          <p>{this.state.currentArticle || 'no current article'}</p>
-          <p>From {this.state.start || '?'} to {this.state.end || '?'}</p>
-          <Timer finished={this.state.finished} endRace={this.endRace} />
+        <div>
+          loading...
         </div>
-      );
+      )
+    };
+    // if this user is among the finished racers
+    if(this.userHasCompleted()) {
+      // display finished racer data
+      return (
+        <div>
+          <div style={{height:200+'px'}}></div>
+          <EndRace racerInfo={this.state.racerInfo} />
+        </div>
+      )
+    // otherwise
+    } else {
+      // display start page
+      return (
+        <div>
+          <div style={{height:200+'px'}}></div>
+          <StartRace start={this.state.raceInfo.start} />
+        </div>
+      )
     }
-    return (<div className="race"></div>)
   },
   _onChange: function() {
     this.setState(RaceStore.getData());
   }
-
 });
 
-var Timer = React.createClass({
+var StartRace = React.createClass({
+  mixins: [ Router.Navigation ],
+  getInitialState: function(){
+    return RaceStore.getData();
+  },
+  startRace: function() {
+    RaceActions.startAndDispatch({
+      racing: true
+    });
 
-    getInitialState: function(){
-        return {
-          elapsed: 0,
-          start: Date.now()
-        };
-    },
+    this.transitionTo('wiki', {topic: this.props.start});
+  },
+  render: function() {
+    return (
+      <div>
+        <span className="button" onClick={this.startRace}>
+          Start
+        </span>
+      </div>
+    )
+  }
+});
 
-    componentDidMount: function(){
-        this.timer = setInterval(this.tick, 50);
-    },
-
-    componentWillUnmount: function(){
-        clearInterval(this.timer);
-    },
-
-    tick: function(){
-      if(!this.props.finished){
-        this.setState({elapsed: new Date() - this.state.start});
-      } else {
-        console.log('tick', this.state);
-        clearInterval(this.timer);
-        this.props.endRace(Math.round(this.state.elapsed/1000));
-      }
-    },
-
-    render: function() {
-        var elapsed = Math.round(this.state.elapsed / 100);
-        // This will give a number with one digit after the decimal dot (xx.x):
-        var seconds = (elapsed / 10).toFixed(1);
-
-        return <p>Time elapsed: <b>{seconds} seconds</b> </p>;
+var EndRace = React.createClass({
+  render: function() {
+    console.log("endrace props ", this.props);
+    if (this.props.racerInfo) {
+      var itemNodes = this.props.racerInfo.map(function(item, index) {
+        return (
+          <div>
+            <p> User ID: {item.userId} </p>
+            <p> Finish Time: {item.finishTime} </p>
+            <p> Path: {item.path} </p>
+          </div>
+        );
+      });
+    } else {
+      itemNodes = '';
     }
-});
+
+    return (
+      <div>
+          End
+          {itemNodes}
+      </div>
+    )
+  }
+})
 
 module.exports = Race;

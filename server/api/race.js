@@ -37,12 +37,29 @@ router.post('/', function(req, res) {
 
 });
 
-router.get('/:raceId', function(req, res) {
-  var raceId = req.query.raceId;
-  getRacerInfo(raceId)
-  .then(function(racerInfo) {
-    res.send(JSON.stringify(racerInfo));
-  })
+router.get('/', function(req, res) {
+  var raceId = req.query.raceid;
+  var userId = req.query.userid;
+  var result = {};
+  if(raceId) {
+
+    getRaceInfo(raceId)
+    .then(function(raceInfo) {
+      result.raceInfo = raceInfo;
+      return getRacerInfo(raceId);
+    })
+    .then(function(racerInfo) {
+      result.racerInfo = racerInfo;
+      res.send(JSON.stringify(result));
+    });
+
+  }else if(userId) {
+    getUserRaces(userId)
+    .then(function(raceInfo) {
+      res.send(JSON.stringify(raceInfo));
+    })
+  }
+
 });
 // --------------------------------------------------------------------------------
 
@@ -62,8 +79,20 @@ function createRacer(raceId, userId, finishTime, path) {
   });
 }
 
+function getRaceInfo(raceId) {
+  return Race.findOne({
+    where: {id: raceId}
+  });
+}
+
 function getRacerInfo(raceId) {
   return Racer.findAll({
     where: {raceId: raceId}
   });
 }
+
+function getUserRaces(userId) {
+  return Racer.findAll({
+    where: {userId: userId}
+  });
+};

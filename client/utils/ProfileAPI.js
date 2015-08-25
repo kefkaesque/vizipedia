@@ -31,6 +31,20 @@ module.exports = {
     });
   },
 
+  getUserRaces: function(userId) {
+    return new Promise(function(resolve, reject) {
+      request
+        .get('/api/race?userid='+userId)
+        .end(function(err, res) {
+          if (err) {
+            reject();
+          } else {
+            resolve(JSON.parse(res.text));
+          }
+        });
+    });
+  },
+
   postFollow: function(user) {
     var userData = {
       user:user

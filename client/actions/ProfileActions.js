@@ -10,6 +10,7 @@ var ProfileActions = {
     .then(function(profile) {
       if (profile.followedBy !== undefined) {
       that.dispatchUserPlaylists(profile.id);
+      that.dispatchUserRaces(profile.id);
       RecActions.dispatchUserRecs(profile.id);
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.PROFILE_LOAD_DATA,
@@ -36,6 +37,22 @@ var ProfileActions = {
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.PROFILE_LOAD_PLAYLISTS,
         data: playlist
+      });
+    })
+    .catch(function() {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.ERROR,
+        error: 'bad req'
+      });
+    });
+  },
+
+  dispatchUserRaces: function(data) {
+    ProfileAPI.getUserRaces(data)
+    .then(function(race) {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.PROFILE_LOAD_RACES,
+        data: race
       });
     })
     .catch(function() {

@@ -5,7 +5,7 @@ var Race = require('../models/Race.js');
 var schema = {
   raceId: {type: Sequelize.INTEGER},
   userId: {type: Sequelize.INTEGER},
-  finishTime: {type: Sequelize.INTEGER},
+  finishTime: {type: Sequelize.FLOAT},
   path: {type: Sequelize.TEXT}
 };
 
