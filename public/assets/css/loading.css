@@ -5,6 +5,13 @@
   top: 50%;
   margin-top: -80px;
 }
+
+.haiku {
+  position: absolute;
+  left: 20%;
+  top: 30%;
+}
+
 .sk-cube-grid {
   display: block;
   width: 160px;

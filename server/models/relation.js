@@ -16,10 +16,20 @@ var schema = {
 var classMethods = {};
 // run if isFollowing is False
 classMethods.follow = function(userId, followingId) {
-  return Relation.findOrCreate({
+  return Relation.findOne({
     where: {
       follower: userId,
       following: followingId
+    }
+  })
+  .then(function(user) {
+    if (user) {
+      return this.unFollow(userId, followingId);
+    } else {
+      return Relation.create({
+        follower: userId,
+        following: followingId
+      });
     }
   });
 };
