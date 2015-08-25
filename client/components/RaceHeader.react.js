@@ -25,17 +25,14 @@ var RaceHeader = React.createClass({
         this.setState({finished: true});
       }
     }
-    console.log('with or without finished racers: ', this.state);
 
     if(this.state.finished && this.userHasCompleted()) {
-      console.log('finished racers state: ', this.state);
       this.transitionTo('race', {raceId: this.state.raceInfo.id});
       this.replaceState(this.getInitialState());
     }
   },
   userHasCompleted: function() {
     var currentUser = Locals.userid;
-    console.log('race state: ', this.state);
 
     // if anyone has finished the race
     if(this.state.racerInfo) { //.length?
@@ -51,11 +48,9 @@ var RaceHeader = React.createClass({
       finishTime: finishTime,
       path: this.state.articlePath
     };
-    console.log("end race state ", this.state);
     RaceActions.finishAndDispatch(data);
   },
   render: function() {
-    console.log('raceheader infinite loop?')
     if(this.state.racing) {
       return (
         <div className="race">
@@ -95,7 +90,6 @@ var Timer = React.createClass({
       if(!this.props.finished){
         this.setState({elapsed: new Date() - this.state.start});
       } else {
-        console.log('tick', this.state);
         clearInterval(this.timer);
         this.props.endRace(Math.round(this.state.elapsed/1000));
       }

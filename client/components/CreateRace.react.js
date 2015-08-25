@@ -35,7 +35,6 @@ var CreateRace = React.createClass({
   _onChange: function() {
     this.setState(RaceStore.getData());
     if (this.state.raceInfo.id) {
-      console.log("on change state", this.state);
       this.transitionToStart();
     }
   }
