@@ -92,7 +92,7 @@ function getRacerInfo(raceId) {
 }
 
 function getUserRaces(userId) {
-  return Race.findAll({
+  return Racer.findAll({
     where: {userId: userId}
   });
 };
