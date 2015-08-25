@@ -3,7 +3,6 @@ var React = require('react');
 var Haiku = React.createClass({
 
   render: function() {
-    console.log('this haiku props ,', this.props);
     return (
       <div className="filled">
       { this.props.user.data.following !== undefined || this.props.user.data.content !== undefined ? this.props.children :

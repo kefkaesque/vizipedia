@@ -54,8 +54,6 @@ var Article = React.createClass({
     });
   },
   render: function() {
-    console.log('!!!!!', this.props);
-    console.log('!!!!S', this.state);
     return (
       <div className="filled">
         <Loader loaded={this.state.loaded}>
