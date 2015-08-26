@@ -14,5 +14,19 @@ module.exports = {
           }
         });
     });
+  },
+
+  getArticleQuery: function(topic) {
+    return new Promise(function(resolve, reject) {
+      request
+        .get('/wiki/query/'+topic)
+        .end(function(err, res) {
+          if (err) {
+            reject();
+          } else {
+            resolve(JSON.parse(res.text));
+          }
+        });
+    });
   }
 };

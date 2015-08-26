@@ -11,7 +11,7 @@ var PlaylistItem = require('../models/PlaylistItem.js');
 router.post('/', function(req, res) {
   var playlistId = req.body.playlistId;
   var topic = req.body.topic;
-
+  console.log('!!!!!!!', topic);
   if(req.user)
     addPlaylistItem(playlistId, topic)
     .then(function(playlist) {
