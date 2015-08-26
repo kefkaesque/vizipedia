@@ -46,7 +46,7 @@ var SignupButton = React.createClass({
 
 var FeedButton = React.createClass({
   mixins: [ Router.Navigation ],
-  
+
   handleClick: function(e) {
     e.preventDefault();
     this.transitionTo('feed');
@@ -54,11 +54,11 @@ var FeedButton = React.createClass({
   },
   render: function() {
     return (
-      <div className="item">        
+      <div className="item">
         <button onClick={this.handleClick}>
           Feed
         </button>
-      </div> 
+      </div>
     );
   }
 });
@@ -73,7 +73,15 @@ var HeaderForm = React.createClass({
     if (!text) {
       return;
     }
-    this.transitionTo('wiki', {topic: text});
+    if (text.substr(0,5) === 'user:') {
+      text = text.substr(5).trim();
+      if (!text) {
+        return;
+      }
+      this.transitionTo('profile', {username: text});
+    } else {
+      this.transitionTo('wiki', {topic: text});
+    }
     React.findDOMNode(this.refs.text).value = '';
     return;
   },
