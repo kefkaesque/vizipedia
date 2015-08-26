@@ -26,7 +26,6 @@ var Race = React.createClass({
     }
   },
   render: function() {
-    console.log('race component ', this.state);
     // display blank page if state is not yet loaded
     if(!this.state) {
       return (
@@ -85,7 +84,6 @@ var StartRace = React.createClass({
 
 var EndRace = React.createClass({
   render: function() {
-    console.log("endrace props ", this.props);
     if (this.props.racerInfo) {
       var itemNodes = this.props.racerInfo.map(function(item, index) {
         return (

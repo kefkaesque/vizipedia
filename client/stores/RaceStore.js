@@ -24,7 +24,9 @@ function setCurrentArticle(data) {
 }
 
 function setFinishedRacers(data) {
-  raceData.racerInfo = data;
+  raceData = {
+    racerInfo: data
+  }
 }
 
 function loadRaceData (data) {
