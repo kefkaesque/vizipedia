@@ -1,5 +1,6 @@
 var React = require('react');
 var Router = require('react-router');
+var RaceActions = require('../actions/RaceActions');
 
 var Search = React.createClass({
   mixins: [ Router.Navigation ],
@@ -10,6 +11,7 @@ var Search = React.createClass({
     if (!text) {
       return;
     }
+    RaceActions.cancelRace();
     if (text.substr(0,5) === 'user:') {
       text = text.substr(5).trim();
       if (!text) {
