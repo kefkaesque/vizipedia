@@ -58,6 +58,7 @@ var RaceHeader = React.createClass({
           <p>{this.state.currentArticle || 'no current article'}</p>
           <p>From {this.state.raceInfo.start || '?'} to {this.state.raceInfo.end || '?'}</p>
           <Timer finished={this.state.finished} endRace={this.endRace} />
+          <p>Path: {this.state.articlePath}</p>
         </div>
       );
     }
