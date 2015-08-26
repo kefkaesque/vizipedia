@@ -79,7 +79,7 @@ var RecActions = {
     });
   },
   dispatchRecState: function(userId, articleId) {
-    RecAPI.recommendState(userId, articleId)
+    return RecAPI.recommendState(userId, articleId)
     .then(function(articles) {
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.STATE,

@@ -5,7 +5,6 @@ var RecActions = require('../actions/RecActions');
 var RecommendButton = React.createClass({
 
   disable: false,
-  flag: false,
   getInitialState: function() {
     return {};
   },
@@ -22,21 +21,26 @@ var RecommendButton = React.createClass({
     RecommendStore.removeChangeListener(this._onChange);
   },
   handleButton: function(articleId) {
+    // this.state.num = num of recommends
+    // this.state.state is whether logged in user has already recommended
+    // when click dispatch to change the state.
     this.disabled = true;
-    if (Locals.userid) {
-      if ((this.state.state || this.flag) && !(this.state.state && this.flag)) {
-        RecActions.dispatchRec(articleId);
-      } else {
-        RecActions.dispatchUnrec(articleId);
-      }
+    if (!Locals.userid) {
+      window.location.href= '/login';
     } else {
-      window.location.href = "/login";
+      if (this.state.state) {
+        RecActions.dispatchUnrec(articleId);
+      } else {
+        RecActions.dispatchRec(articleId);
+      }
     }
   },
 
   render: function() {
+    console.log('!',this.state);
     return (
       <div className="item">
+        <Heart className="recommend" disabled={this.disable} state={this.state}/>
         <button className="recommend" disabled={this.disable} onClick={this.handleButton.bind(this, this.props.info.id)}>
         Recommend
         </button>
@@ -46,8 +50,36 @@ var RecommendButton = React.createClass({
   },
   _onChange: function() {
     this.disable = false;
-    this.flag = !this.flag;
     this.setState(RecommendStore.getData());
+  }
+});
+
+var Heart = React.createClass({
+  getInitialState: function() {
+    return {
+      classes: 'heart'
+    }
+  },
+  getClasses: function() {
+    console.log(this.props);
+    if (this.props.state.state) {
+      return this.state.classes + ' filled';
+    } else {
+      return this.state.classes + ' empty';
+    }
+  },
+
+  render: function() {
+    console.log(this.getClasses());
+    var classNames = this.getClasses();
+    return React.DOM.svg({
+      className: classNames,
+      viewBox: "-5 0 69 64",
+    }, [
+      React.DOM.path({
+        d: "M30.3,57.8L8.7,37c-0.3-0.2-7.9-7.2-7.9-15.5C0.8,11.3,7,5.2,17.3,5.2c6.1,0,11.7,4.8,14.5,7.5c2.7-2.7,8.4-7.5,14.5-7.5   c10.4,0,16.6,6.1,16.6,16.2c0,8.3-7.6,15.3-7.9,15.6L33.3,57.8c-0.4,0.4-1,0.6-1.5,0.6C31.3,58.4,30.7,58.2,30.3,57.8z"
+      })
+    ]);
   }
 });
 
