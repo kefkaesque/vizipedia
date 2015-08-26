@@ -7,15 +7,13 @@ var Link = Router.Link;
 var PlaylistItems = React.createClass({
 
   getInitialState: function() {
-    // console.log('In playlistitems !!! this.props.playlistId', this.props.playlistId);
-
     return {};
   },
   componentWillMount: function() {
     PlaylistStore.addChangeListener(this._onChange);
   },
   componentDidMount: function() {
-    PlaylistActions.dispatchLoad(this.props.query.playlistId)
+    PlaylistActions.dispatchLoad(this.props.query.playlistId);
   },
   componentWillUnmount: function() {
     PlaylistStore.removeChangeListener(this._onChange);
