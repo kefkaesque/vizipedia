@@ -94,7 +94,7 @@ filter: grayscale(10%) sepia(10%);
 }
 
 .heart {
-  max-width: 1.5em;
+  max-width: 2em;
   fill: #093c4f;
   stroke: #093c4f;
   stroke-width: 0.2em;

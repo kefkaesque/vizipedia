@@ -36,7 +36,8 @@ var RecommendButton = React.createClass({
     return (
       <div className="item">
         <Heart className="recommend" disabled={this.disable} state={this.state} click={this.handleButton.bind(this, this.props.info.id)}/>
-        <span>{this.state.num}</span>
+        {this.state.num ? <span> {this.state.num} </span> :
+          ''}
       </div>
     );
   },
