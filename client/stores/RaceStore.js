@@ -40,13 +40,11 @@ function clearRaceData () {
   raceData = {
     articlePath: []
   };
-  console.log("clear race called", raceData);
 }
 
 var RaceStore = _.extend({}, EventEmitter.prototype, {
 
   getData: function() {
-    console.log('racestore getting data ', raceData);
     return raceData;
   },
   emitChange: function() {
@@ -80,15 +78,11 @@ AppDispatcher.register(function(payload) {
       break;
     case FluxConstants.VIZI_SEARCH:
         setCurrentArticle(action.data);
-        if(raceData.racing) {
-          return;
-        }
       break;
     default:
       // none
   }
   RaceStore.emitChange();
-  console.log('race store emitting change');
 });
 
 module.exports = RaceStore;
