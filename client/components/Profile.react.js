@@ -189,7 +189,7 @@ var RecommendedArticles = React.createClass({
 var RecItem = React.createClass({
   render: function() {
     return (
-      <div className="box" style={{backgroundImage:'url('+this.props.article.image+')'  }}>
+      <div className="box" style={{backgroundImage:'url('+this.props.article.image+')' }}>
         {this.props.article.title}
       </div>
     );
@@ -248,7 +248,7 @@ var Playlists = React.createClass({
         <div>
           {createLink}
         </div>
-        <div className="container">
+        <div className="container" >
           {itemNodes}
         </div>
       </div>

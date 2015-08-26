@@ -19,6 +19,7 @@ var PlaylistItems = React.createClass({
     PlaylistStore.removeChangeListener(this._onChange);
   },
   render: function() {
+    console.log(this.state);
     return (
       <div className="playlistitems wrapper">
         <CurrentPlaylist playlistitems={this.state.playlistitems} />
