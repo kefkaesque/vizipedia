@@ -17,7 +17,7 @@ var Feed = React.createClass({
   },
   render: function() {
     return (
-      <div>
+      <div className="feed wrapper">
         <h1> FEED DATA </h1>
           <h3>Recommended Articles</h3>
           <FollowingUsers articles={this.state.data}/>
