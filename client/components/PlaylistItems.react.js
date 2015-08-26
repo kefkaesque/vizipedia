@@ -23,7 +23,7 @@ var PlaylistItems = React.createClass({
     if(this.state.viewing) {
       return (
         <div className="playlistitems wrapper">
-          <CurrentPlaylist playlistitems={this.state.playlistitems} />
+          <CurrentPlaylist playlistitems={this.state.current.playlistitems} />
           <div className="circle" onClick={this.closePlaylist}>
           </div>
         </div>

@@ -12,8 +12,11 @@ function loadQuery(data) {
   playlistInfo.query = data;
 }
 
-function setViewing() {
-  playlistInfo.viewing = true;
+function setViewing(playlist) {
+  playlistInfo = {
+    viewing: true,
+    current: playlist
+  }
 }
 
 function closePlaylist() {
@@ -45,7 +48,7 @@ AppDispatcher.register(function(payload) {
     case FluxConstants.QUERY:
       loadQuery(action.data);
     case FluxConstants.PLAYLIST_VIEWING:
-      setViewing();
+      setViewing(action.data);
       break;
     case FluxConstants.PLAYLIST_CLOSED:
       closePlaylist();
