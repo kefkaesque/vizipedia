@@ -20,7 +20,7 @@ var ProfileActions = {
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.PROFILE_LOAD_DATA,
         data: profile
-      })
+      });
       }
     })
     .catch(function() {

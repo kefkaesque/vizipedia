@@ -22,8 +22,7 @@ var CreateRace = React.createClass({
       startTopic: startText,
       endTopic: endText
     };
-
-    RaceActions.createAndDispatch(data)
+    RaceActions.createAndDispatch(data);
   },
   transitionToStart: function() {
     this.transitionTo('race', {raceId: this.state.raceInfo.id});
