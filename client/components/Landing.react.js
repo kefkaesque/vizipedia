@@ -27,8 +27,15 @@ var SearchBar = React.createClass({
     if (!text) {
       return;
     }
-    this.transitionTo('wiki', {topic: text});
-    return;
+    if (text.substr(0,5) === 'user:') {
+      text = text.substr(5).trim();
+      if (!text) {
+        return;
+      }
+      this.transitionTo('profile', {username: text});
+    } else {
+      this.transitionTo('wiki', {topic: text});
+    }
   },
   render: function() {
     return (
