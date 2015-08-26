@@ -12,6 +12,22 @@ function loadQuery(data) {
   playlistInfo.query = data;
 }
 
+function setViewing(playlist) {
+  playlistInfo = {
+    viewing: true,
+    current: playlist,
+    currentItem: 0
+  }
+}
+
+function setCurrentItem(index) {
+  playlistInfo.currentItem = index;
+}
+
+function closePlaylist() {
+  playlistInfo.viewing = false; //careful -- might need to clear rest of properties
+}
+
 var PlaylistStore = _.extend({}, EventEmitter.prototype, {
 
   getPlaylistInfo: function() {
@@ -36,6 +52,14 @@ AppDispatcher.register(function(payload) {
       break;
     case FluxConstants.QUERY:
       loadQuery(action.data);
+    case FluxConstants.PLAYLIST_VIEWING:
+      setViewing(action.data);
+      break;
+    case FluxConstants.PLAYLIST_CLOSED:
+      closePlaylist();
+      break;
+    case FluxConstants.PLAYLIST_NAV:
+      setCurrentItem(action.data);
       break;
     default:
       // none

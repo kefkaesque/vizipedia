@@ -5,6 +5,7 @@ var ProfileActions = require('../actions/ProfileActions');
 var Router = require('react-router');
 var Link = Router.Link;
 var RaceActions = require('../actions/RaceActions');
+var PlaylistActions = require('../actions/PlaylistActions');
 var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
 var Haiku = require('./404.react');
@@ -38,9 +39,6 @@ var Profile = React.createClass({
       <Loader loaded={this.state.loaded}>
       <Haiku user={this.state}>
       <div className="profile wrapper">
-        <Link to="race" params={{raceId: 91}}>
-          this links to ... race 91
-        </Link>
         <ProfileHeader data={this.state.data}/>
           <UserRaces />
           <RecommendedArticles/>
@@ -114,8 +112,8 @@ var UserRaces = React.createClass({
     if (this.state.races) {
       var itemNodes = this.state.races.map(function(item, index) {
         return (
-          <Link to="race" params={{raceId: item.raceId}}>
-            <RaceItem raceId={item.raceId} key={index} />
+          <Link to="race" params={{raceId: item.raceId}} key={index}>
+            <RaceItem raceId={item.raceId} />
           </Link>
         );
       });
@@ -162,8 +160,8 @@ var RecommendedArticles = React.createClass({
     if (this.state.userRec) {
       var itemNodes = this.state.userRec.map(function(item, index) {
         return (
-          <Link to="wiki" params={{topic: item.wikiarticle.title}}>
-          <RecItem article={item.wikiarticle} key={index} />
+          <Link to="wiki" params={{topic: item.wikiarticle.title}}  key={index}>
+          <RecItem article={item.wikiarticle} />
           </Link>
         );
       });
@@ -232,15 +230,13 @@ var Playlists = React.createClass({
     if(this.props.playlists){
       itemNodes = this.props.playlists.map(function(list, index) {
         return (
-          <div>
-          <Link to="playlistItems" params={{playlistName: list.name}} query={{ playlistId: list.id, userId: list.userId, username: username }}>
-            <PlaylistItem name={list.name} key={index} />
-          </Link>
-          <br/>
-          </div>
+          <PlaylistItem playlist={list} key={index} />
         );
       });
     }
+          // <Link to="playlistItems" params={{playlistName: list.name}} query={{ playlistId: list.id, userId: list.userId, username: username }} key={index} >
+          //   <PlaylistItem name={list.name} />
+          // </Link>
 
     return (
       <div className="playlists section">
@@ -257,10 +253,17 @@ var Playlists = React.createClass({
 });
 
 var PlaylistItem = React.createClass({
+  mixins: [ Router.Navigation ],
+
+  handlePress: function(e) {
+    PlaylistActions.dispatchViewing(this.props.playlist);
+    var topic = this.props.playlist.playlistitems[0].topic;
+    this.transitionTo('wiki', {topic: topic});
+  },
   render: function() {
     return (
-      <div className="playlistItem box">
-        {this.props.name}
+      <div className="playlistItem box" onClick={this.handlePress}>
+        {this.props.playlist.name}
       </div>
     );
   }

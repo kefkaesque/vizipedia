@@ -1,7 +1,6 @@
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
-var RaceActions = require('../actions/RaceActions');
 var Search = require('./Search.react');
 
 var Header = React.createClass({

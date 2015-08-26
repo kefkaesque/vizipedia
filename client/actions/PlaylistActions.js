@@ -51,6 +51,26 @@ var PlaylistActions = {
         error: 'bad req'
       });
     });
+  },
+
+  dispatchViewing: function(data) {
+    AppDispatcher.handleViewAction({
+      actionType: FluxConstants.PLAYLIST_VIEWING,
+      data: data
+    });
+  },
+
+  dispatchClose: function() {
+    AppDispatcher.handleViewAction({
+      actionType: FluxConstants.PLAYLIST_CLOSED
+    });
+  },
+
+  dispatchNav: function(data) {
+    AppDispatcher.handleViewAction({
+      actionType: FluxConstants.PLAYLIST_NAV,
+      data: data
+    });
   }
 };
 
