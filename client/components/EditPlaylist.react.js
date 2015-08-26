@@ -7,7 +7,6 @@ var Link = Router.Link;
 var EditPlaylist = React.createClass({
 
   getInitialState: function() {
-    console.log('in EditPlaylist!!!')
     return {};
   },
   componentWillMount: function() {
