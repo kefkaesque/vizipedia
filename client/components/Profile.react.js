@@ -114,8 +114,8 @@ var UserRaces = React.createClass({
     if (this.state.races) {
       var itemNodes = this.state.races.map(function(item, index) {
         return (
-          <Link to="race" params={{raceId: item.raceId}}>
-            <RaceItem raceId={item.raceId} key={index} />
+          <Link to="race" params={{raceId: item.raceId}} key={index}>
+            <RaceItem raceId={item.raceId} />
           </Link>
         );
       });
@@ -162,8 +162,8 @@ var RecommendedArticles = React.createClass({
     if (this.state.userRec) {
       var itemNodes = this.state.userRec.map(function(item, index) {
         return (
-          <Link to="wiki" params={{topic: item.wikiarticle.title}}>
-          <RecItem article={item.wikiarticle} key={index} />
+          <Link to="wiki" params={{topic: item.wikiarticle.title}}  key={index}>
+          <RecItem article={item.wikiarticle} />
           </Link>
         );
       });
@@ -232,12 +232,9 @@ var Playlists = React.createClass({
     if(this.props.playlists){
       itemNodes = this.props.playlists.map(function(list, index) {
         return (
-          <div>
-          <Link to="playlistItems" params={{playlistName: list.name}} query={{ playlistId: list.id, userId: list.userId, username: username }}>
-            <PlaylistItem name={list.name} key={index} />
+          <Link to="playlistItems" params={{playlistName: list.name}} query={{ playlistId: list.id, userId: list.userId, username: username }} key={index} >
+            <PlaylistItem name={list.name} />
           </Link>
-          <br/>
-          </div>
         );
       });
     }
