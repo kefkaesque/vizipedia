@@ -57,6 +57,12 @@ var RaceActions = {
       actionType: FluxConstants.RACE_STARTED,
       data: data
     });
+  },
+
+  cancelRace: function() {
+    AppDispatcher.handleViewAction({
+      actionType: FluxConstants.RACE_CANCELED,
+    });
   }
 };
 

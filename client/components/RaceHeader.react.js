@@ -26,7 +26,7 @@ var RaceHeader = React.createClass({
       }
     }
 
-    if(this.state.finished && this.userHasCompleted()) {
+    if(this.userHasCompleted()) {
       this.transitionTo('race', {raceId: this.state.raceInfo.id});
       this.replaceState(this.getInitialState());
     }
@@ -64,7 +64,7 @@ var RaceHeader = React.createClass({
     return (<div className="race"></div>)
   },
   _onChange: function() {
-    this.setState(RaceStore.getData());
+    this.replaceState(RaceStore.getData());
   }
 
 });

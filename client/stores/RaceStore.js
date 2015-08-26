@@ -24,14 +24,22 @@ function setCurrentArticle(data) {
 }
 
 function setFinishedRacers(data) {
+  var raceInfo = raceData.raceInfo;
   raceData = {
-    racerInfo: data
+    racerInfo: data,
+    raceInfo: raceInfo
   }
 }
 
 function loadRaceData (data) {
   raceData.raceInfo = data.raceInfo;
   raceData.racerInfo = data.racerInfo;
+}
+
+function clearRaceData () {
+  raceData = {
+    articlePath: []
+  };
 }
 
 var RaceStore = _.extend({}, EventEmitter.prototype, {
@@ -61,6 +69,9 @@ AppDispatcher.register(function(payload) {
       break;
     case FluxConstants.RACE_FINISHED:
       setFinishedRacers(action.data);
+      break;
+    case FluxConstants.RACE_CANCELED:
+      clearRaceData();
       break;
     case FluxConstants.RACE_DATA_RETRIEVED:
       loadRaceData(action.data);
