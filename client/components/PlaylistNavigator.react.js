@@ -4,7 +4,7 @@ var PlaylistStore = require('../stores/PlaylistStore');
 var Router = require('react-router');
 var Link = Router.Link;
 
-var PlaylistItems = React.createClass({
+var PlaylistNavigator = React.createClass({
 
   getInitialState: function() {
     return {};
@@ -72,4 +72,4 @@ var PlaylistItem = React.createClass({
   }
 })
 
-module.exports = PlaylistItems;
+module.exports = PlaylistNavigator;
