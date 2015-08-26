@@ -5,6 +5,7 @@ var ProfileActions = require('../actions/ProfileActions');
 var Router = require('react-router');
 var Link = Router.Link;
 var RaceActions = require('../actions/RaceActions');
+var PlaylistActions = require('../actions/PlaylistActions');
 var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
 var Haiku = require('./404.react');
@@ -229,12 +230,13 @@ var Playlists = React.createClass({
     if(this.props.playlists){
       itemNodes = this.props.playlists.map(function(list, index) {
         return (
-          <Link to="playlistItems" params={{playlistName: list.name}} query={{ playlistId: list.id, userId: list.userId, username: username }} key={index} >
-            <PlaylistItem name={list.name} />
-          </Link>
+          <PlaylistItem name={list.name} key={index} />
         );
       });
     }
+          // <Link to="playlistItems" params={{playlistName: list.name}} query={{ playlistId: list.id, userId: list.userId, username: username }} key={index} >
+          //   <PlaylistItem name={list.name} />
+          // </Link>
 
     return (
       <div className="playlists section">
@@ -251,9 +253,12 @@ var Playlists = React.createClass({
 });
 
 var PlaylistItem = React.createClass({
+  handlePress: function(e) {
+    PlaylistActions.dispatchViewing();
+  },
   render: function() {
     return (
-      <div className="playlistItem box">
+      <div className="playlistItem box" onClick={this.handlePress}>
         {this.props.name}
       </div>
     );

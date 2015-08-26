@@ -12,22 +12,26 @@ var PlaylistItems = React.createClass({
   componentWillMount: function() {
     PlaylistStore.addChangeListener(this._onChange);
   },
-  componentDidMount: function() {
-    PlaylistActions.dispatchLoad(this.props.query.playlistId);
-  },
+  // componentDidMount: function() {
+  //   PlaylistActions.dispatchLoad(this.props.query.playlistId);
+  // },
   componentWillUnmount: function() {
     PlaylistStore.removeChangeListener(this._onChange);
   },
   render: function() {
-    console.log(this.state);
-    return (
-      <div className="playlistitems wrapper">
-        <CurrentPlaylist playlistitems={this.state.playlistitems} />
-        <div className="circle">
-        <Link to="profile" params={{username: this.props.query.username}}>{'Return to profile'}</Link>
+
+    if(this.state.viewing) {
+      return (
+        <div className="playlistitems wrapper">
+          <CurrentPlaylist playlistitems={this.state.playlistitems} />
+          <div className="circle">
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+          // <Link to="profile" params={{username: this.props.query.username}}>{'Return to profile'}</Link>
+
+    return (<div></div>);
   },
   _onChange: function() {
     this.setState(

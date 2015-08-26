@@ -12,6 +12,10 @@ function loadQuery(data) {
   playlistInfo.query = data;
 }
 
+function setViewing() {
+  playlistInfo.viewing = true; //careful to clear data later
+}
+
 var PlaylistStore = _.extend({}, EventEmitter.prototype, {
 
   getPlaylistInfo: function() {
@@ -36,6 +40,8 @@ AppDispatcher.register(function(payload) {
       break;
     case FluxConstants.QUERY:
       loadQuery(action.data);
+    case FluxConstants.PLAYLIST_VIEWING:
+      setViewing();
       break;
     default:
       // none
