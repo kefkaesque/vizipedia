@@ -37,7 +37,6 @@ function addImages(article, title, callback) {
         url = body.responseData.results[i].url;
       }
       // console.log('article:', article);
-      console.log('!!!!!!', url);
       callback(article, url);
     }
   });
