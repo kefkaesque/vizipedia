@@ -231,7 +231,7 @@ var Playlists = React.createClass({
       console.log("profile playlists props ", this.props);
       itemNodes = this.props.playlists.map(function(list, index) {
         return (
-          <PlaylistItem name={list.name} playlistId={list.id} key={index} />
+          <PlaylistItem playlist={list} key={index} />
         );
       });
     }
@@ -254,14 +254,19 @@ var Playlists = React.createClass({
 });
 
 var PlaylistItem = React.createClass({
+  mixins: [ Router.Navigation ],
+
   handlePress: function(e) {
-    PlaylistActions.dispatchLoad(this.props.playlistId);
-    PlaylistActions.dispatchViewing();
+    // PlaylistActions.dispatchLoad(this.props.playlist.id);
+    PlaylistActions.dispatchViewing(this.props.playlist);
+    console.log('playlist item handle press ', this.props);
+    var topic = this.props.playlist.playlistitems[0].topic;
+    this.transitionTo('wiki', {topic: topic});
   },
   render: function() {
     return (
       <div className="playlistItem box" onClick={this.handlePress}>
-        {this.props.name}
+        {this.props.playlist.name}
       </div>
     );
   }

@@ -53,9 +53,10 @@ var PlaylistActions = {
     });
   },
 
-  dispatchViewing: function() {
+  dispatchViewing: function(data) {
     AppDispatcher.handleViewAction({
-      actionType: FluxConstants.PLAYLIST_VIEWING
+      actionType: FluxConstants.PLAYLIST_VIEWING,
+      data: data
     });
   },
 
