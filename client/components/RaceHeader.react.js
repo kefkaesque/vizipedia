@@ -32,7 +32,6 @@ var RaceHeader = React.createClass({
     }
   },
   userHasCompleted: function() {
-    console.log("raceheader user has completed called");
     var currentUser = Locals.userid;
 
     // if anyone has finished the race
