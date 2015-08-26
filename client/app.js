@@ -1,7 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var RaceHeader = require('./components/RaceHeader.react');
-var PlaylistItems = require('./components/PlaylistItems.react');
+var PlaylistNavigator = require('./components/PlaylistNavigator.react');
 
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
@@ -20,7 +20,7 @@ var App = React.createClass({
       <div className="app">
         <Header/>
         <RaceHeader/>
-        <PlaylistItems/>
+        <PlaylistNavigator/>
         <RouteHandler/>
       </div>
     )
@@ -47,7 +47,6 @@ var routes = (
     <Route name="profile" path='/profile/:username' handler={Profile}/>
     <Route name="createPlaylist" path='/playlist/create' handler={CreatePlaylist}/>
     <Route name="editPlaylist" path='/playlist/edit/:playlistName' handler={EditPlaylist}/>
-    // <Route name="playlistItems" path='/playlist/items/:playlistName' handler={PlaylistItems}/>
     <Route name="feed" path='/feed' handler={Feed}/>
     <Route name="race" path='/race/:raceId' handler={Race}/>
     <Route name="createRace" path='/createrace' handler={CreateRace}/>
