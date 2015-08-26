@@ -41,7 +41,7 @@ var CurrentPlaylist = React.createClass({
     if (this.props.playlistitems) {
       var itemNodes = this.props.playlistitems.map(function(item, index) {
         return (
-          <Link to="wiki" params={{topic: item.topic}}>
+          <Link to="wiki" params={{topic: item.topic}} key={index}>
           <PlaylistItem topic={item.topic} key={index} />
           </Link>
         );
