@@ -1,6 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
+var RaceActions = require('../actions/RaceActions');
 
 var Header = React.createClass({
   render: function() {
@@ -67,6 +68,7 @@ var HeaderForm = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
+    RaceActions.cancelRace();
     var text = React.findDOMNode(this.refs.text).value.trim();
     if (!text) {
       return;
@@ -91,6 +93,7 @@ var UserSearch = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
+    RaceActions.cancelRace();
     var text = React.findDOMNode(this.refs.text).value.trim();
     if (!text) {
       return;

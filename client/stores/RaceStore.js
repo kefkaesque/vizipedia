@@ -24,8 +24,10 @@ function setCurrentArticle(data) {
 }
 
 function setFinishedRacers(data) {
+  var raceInfo = raceData.raceInfo;
   raceData = {
-    racerInfo: data
+    racerInfo: data,
+    raceInfo: raceInfo
   }
 }
 
@@ -34,9 +36,17 @@ function loadRaceData (data) {
   raceData.racerInfo = data.racerInfo;
 }
 
+function clearRaceData () {
+  raceData = {
+    articlePath: []
+  };
+  console.log("clear race called", raceData);
+}
+
 var RaceStore = _.extend({}, EventEmitter.prototype, {
 
   getData: function() {
+    console.log('racestore getting data ', raceData);
     return raceData;
   },
   emitChange: function() {
@@ -62,16 +72,23 @@ AppDispatcher.register(function(payload) {
     case FluxConstants.RACE_FINISHED:
       setFinishedRacers(action.data);
       break;
+    case FluxConstants.RACE_CANCELED:
+      clearRaceData();
+      break;
     case FluxConstants.RACE_DATA_RETRIEVED:
       loadRaceData(action.data);
       break;
     case FluxConstants.VIZI_SEARCH:
         setCurrentArticle(action.data);
+        if(raceData.racing) {
+          return;
+        }
       break;
     default:
       // none
   }
   RaceStore.emitChange();
+  console.log('race store emitting change');
 });
 
 module.exports = RaceStore;

@@ -6,6 +6,7 @@ var ArticleActions = {
   dispatchArticle: function(topic) {
     WikiAPI.getArticleData(topic)
     .then(function(article) {
+      console.log("ArticleActions dispatching VIZI_SEARCH");
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.VIZI_SEARCH,
         data: article
