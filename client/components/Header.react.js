@@ -2,6 +2,7 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 var RaceActions = require('../actions/RaceActions');
+var Search = require('./Search.react');
 
 var Header = React.createClass({
   render: function() {
@@ -13,8 +14,7 @@ var Header = React.createClass({
           <FeedButton/>
         </div>
         <Link to="landing"><div className="logo serif">vizipedia</div></Link>
-        <HeaderForm />
-        <UserSearch />
+        <Search />
       </div></div>
     )
   }
@@ -46,7 +46,7 @@ var SignupButton = React.createClass({
 
 var FeedButton = React.createClass({
   mixins: [ Router.Navigation ],
-  
+
   handleClick: function(e) {
     e.preventDefault();
     this.transitionTo('feed');
@@ -54,61 +54,11 @@ var FeedButton = React.createClass({
   },
   render: function() {
     return (
-      <div className="item">        
+      <div className="item">
         <button onClick={this.handleClick}>
           Feed
         </button>
-      </div> 
-    );
-  }
-});
-
-var HeaderForm = React.createClass({
-  mixins: [ Router.Navigation ],
-
-  handleSubmit: function(e) {
-    e.preventDefault();
-    RaceActions.cancelRace();
-    var text = React.findDOMNode(this.refs.text).value.trim();
-    if (!text) {
-      return;
-    }
-    this.transitionTo('wiki', {topic: text});
-    React.findDOMNode(this.refs.text).value = '';
-    return;
-  },
-  render: function() {
-    return (
-      <form className="headerForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Search..." ref="text" />
-        <button type="submit"><span className="fa fa-fw fa-search"></span></button>
-      </form>
-    );
-  }
-});
-
-
-var UserSearch = React.createClass({
-  mixins: [ Router.Navigation ],
-
-  handleSubmit: function(e) {
-    e.preventDefault();
-    RaceActions.cancelRace();
-    var text = React.findDOMNode(this.refs.text).value.trim();
-    if (!text) {
-      return;
-    }
-    this.transitionTo('profile', {username: text});
-    React.findDOMNode(this.refs.text).value = '';
-    return;
-  },
-
-  render: function() {
-    return (
-      <form className="headerForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Search Users" ref="text" />
-        <button type="submit"><span className="fa fa-search"></span></button>
-      </form>
+      </div>
     );
   }
 });
