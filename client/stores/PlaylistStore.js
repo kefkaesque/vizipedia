@@ -15,8 +15,13 @@ function loadQuery(data) {
 function setViewing(playlist) {
   playlistInfo = {
     viewing: true,
-    current: playlist
+    current: playlist,
+    currentItem: 0
   }
+}
+
+function setCurrentItem(index) {
+  playlistInfo.currentItem = index;
 }
 
 function closePlaylist() {
@@ -52,6 +57,9 @@ AppDispatcher.register(function(payload) {
       break;
     case FluxConstants.PLAYLIST_CLOSED:
       closePlaylist();
+      break;
+    case FluxConstants.PLAYLIST_NAV:
+      setCurrentItem(action.data);
       break;
     default:
       // none
