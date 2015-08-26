@@ -12,9 +12,9 @@ var PlaylistItems = React.createClass({
   componentWillMount: function() {
     PlaylistStore.addChangeListener(this._onChange);
   },
-  // componentDidMount: function() {
-  //   PlaylistActions.dispatchLoad(this.props.query.playlistId);
-  // },
+  closePlaylist: function() {
+    PlaylistActions.dispatchClose();
+  },
   componentWillUnmount: function() {
     PlaylistStore.removeChangeListener(this._onChange);
   },
@@ -24,7 +24,7 @@ var PlaylistItems = React.createClass({
       return (
         <div className="playlistitems wrapper">
           <CurrentPlaylist playlistitems={this.state.playlistitems} />
-          <div className="circle">
+          <div className="circle" onClick={this.closePlaylist}>
           </div>
         </div>
       );

@@ -13,7 +13,11 @@ function loadQuery(data) {
 }
 
 function setViewing() {
-  playlistInfo.viewing = true; //careful to clear data later
+  playlistInfo.viewing = true;
+}
+
+function closePlaylist() {
+  playlistInfo.viewing = false; //careful -- might need to clear rest of properties
 }
 
 var PlaylistStore = _.extend({}, EventEmitter.prototype, {
@@ -42,6 +46,9 @@ AppDispatcher.register(function(payload) {
       loadQuery(action.data);
     case FluxConstants.PLAYLIST_VIEWING:
       setViewing();
+      break;
+    case FluxConstants.PLAYLIST_CLOSED:
+      closePlaylist();
       break;
     default:
       // none

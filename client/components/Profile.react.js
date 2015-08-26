@@ -228,9 +228,10 @@ var Playlists = React.createClass({
     var username = this.props.username;
     var itemNodes;
     if(this.props.playlists){
+      console.log("profile playlists props ", this.props);
       itemNodes = this.props.playlists.map(function(list, index) {
         return (
-          <PlaylistItem name={list.name} key={index} />
+          <PlaylistItem name={list.name} playlistId={list.id} key={index} />
         );
       });
     }
@@ -254,6 +255,7 @@ var Playlists = React.createClass({
 
 var PlaylistItem = React.createClass({
   handlePress: function(e) {
+    PlaylistActions.dispatchLoad(this.props.playlistId);
     PlaylistActions.dispatchViewing();
   },
   render: function() {
