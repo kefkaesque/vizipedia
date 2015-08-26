@@ -17,7 +17,17 @@ var ArticleActions = {
         error: 'bad req'
       });
     });
+  },
 
+  dispatchQuery: function(topic) {
+    return WikiAPI.getArticleQuery(topic)
+    .then(function(query) {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.QUERY,
+        data: query
+      });
+      return query;
+    });
   }
 };
 

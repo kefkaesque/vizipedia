@@ -3,6 +3,7 @@ var PlaylistActions = require('../actions/PlaylistActions');
 var PlaylistStore = require('../stores/PlaylistStore');
 var Router = require('react-router');
 var Link = Router.Link;
+var ArticleActions = require('../actions/ArticleActions');
 
 var EditPlaylist = React.createClass({
 
@@ -43,7 +44,10 @@ var AddPlaylistItem = React.createClass({
     if (!text) {
       return;
     }
-    PlaylistActions.dispatchEdit(text, this.props.playlistId);
+    var that = this;
+    ArticleActions.dispatchQuery(text).then(function(data) {
+      PlaylistActions.dispatchEdit(data, that.props.playlistId);
+    });
     React.findDOMNode(this.refs.text).value = '';
   },
   render: function() {

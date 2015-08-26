@@ -14,6 +14,7 @@ module.exports = keyMirror({
   RACE_STARTED: null,
   RACE_CANCELED: null,
   PROFILE_LOAD_RACES: null,
+  QUERY: null,
 
   UN_REC: null,
   STATE: null,
