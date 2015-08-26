@@ -5,7 +5,7 @@ function run(article, title, callback) {
   if(article == '')
     return callback('');
   article = addTitle(article, title);
-  console.log('article:',article)
+  console.log('article:',article);
   addImages(article, title, function(article) {
     callback(article);
   });
@@ -19,7 +19,7 @@ function addTitle(article, title) {
 
 function addImages(article, title, callback) {
   // TODO: add images to article
-  console.log('Adding Images!')
+  console.log('Adding Images!');
   var endPoint = 'http://ajax.googleapis.com/ajax/services/search/images?';
   var reqParam = 'v=1.0&q=' + encodeURI(title);
   var params = '&imgsz=huge&rsz=1';
@@ -32,11 +32,11 @@ function addImages(article, title, callback) {
     } else {
       body = JSON.parse(body);
       for (var i=0; i<body.responseData.results.length; i++) {
-        article = '<div class="hero"><img src="' + body.responseData.results[i].url+'"></div>'+article; 
+        article = '<div class="hero"><img src="' + body.responseData.results[i].url+'"></div>'+article;
       }
-      console.log('article:', article)
+      console.log('article:', article);
       callback(article);
     }
-  })
+  });
 }
 
