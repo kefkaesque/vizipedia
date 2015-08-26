@@ -5,6 +5,9 @@ var RaceStore = require('../stores/RaceStore');
 
 var CreateRace = React.createClass({
   mixins: [ Router.Navigation ],
+  getInitialState: function() {
+    return {};
+  },
   componentDidMount: function() {
     RaceStore.addChangeListener(this._onChange);
   },
@@ -41,7 +44,7 @@ var CreateRace = React.createClass({
   },
   _onChange: function() {
     this.setState(RaceStore.getData());
-    if (this.state.raceInfo.id) {
+    if (this.state.raceInfo) {
       this.transitionToStart();
     }
   }
