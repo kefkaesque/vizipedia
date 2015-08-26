@@ -45,9 +45,11 @@ AppDispatcher.register(function(payload) {
       break;
     case FluxConstants.MAKE_REC:
       rec.num++;
+      rec.state = !rec.state;
       break;
     case FluxConstants.UN_REC:
       rec.num--;
+      rec.state = !rec.state;
       break;
     case FluxConstants.STATE:
       loadState(action.data);

@@ -92,3 +92,20 @@ filter: grayscale(10%) sepia(10%);
 .navbox {
   display:none;
 }
+
+.heart {
+  max-width: 1.5em;
+  fill: #093c4f;
+  stroke: #093c4f;
+  stroke-width: 0.2em;
+  overflow: visible;
+}
+
+.filled {
+  fill-opacity: 1;
+}
+
+.empty {
+  fill-opacity: 0;
+}
+
