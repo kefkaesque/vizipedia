@@ -57,6 +57,12 @@ var PlaylistActions = {
     AppDispatcher.handleViewAction({
       actionType: FluxConstants.PLAYLIST_VIEWING
     });
+  },
+
+  dispatchClose: function() {
+    AppDispatcher.handleViewAction({
+      actionType: FluxConstants.PLAYLIST_CLOSED
+    });
   }
 };
 
