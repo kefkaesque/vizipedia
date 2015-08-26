@@ -55,9 +55,9 @@ amqp.connect(url).then(function(conn) {
         if(query !== ntitle)
           article = '';
 
-        Vizifier.vizify(article, title, function(article) {
+        Vizifier.vizify(article, title, function(article, url) {
         //console.log("******", query, title, article.substring(0,100));
-        WikiArticle.create({query: query, title: ntitle, content: article});
+        WikiArticle.create({query: query, title: ntitle, content: article, image: url});
         /*if(query !== ntitle) {
           WikiArticle.create({query: query, title: ntitle, content: ''});
           if(query !== title)
