@@ -8,6 +8,9 @@ var playlistInfo = {};
 function loadData(data) {
   playlistInfo = data;
 }
+function loadQuery(data) {
+  playlistInfo.query = data;
+}
 
 var PlaylistStore = _.extend({}, EventEmitter.prototype, {
 
@@ -30,6 +33,9 @@ AppDispatcher.register(function(payload) {
   switch(action.actionType) {
     case FluxConstants.PLAYLIST_EDITED:
       loadData(action.data);
+      break;
+    case FluxConstants.QUERY:
+      loadQuery(action.data);
       break;
     default:
       // none

@@ -21,6 +21,7 @@ var PlaylistActions = {
   },
 
   dispatchEdit: function(text, playlistId) {
+    console.log('!!!!', text);
     PlaylistAPI.addItem(text, playlistId)
     .then(function(playlist) {
       AppDispatcher.handleViewAction({

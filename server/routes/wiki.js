@@ -11,6 +11,16 @@ var VisitedArticle = require('../models/visitedArticle.js');
 var Recommend = require('../models/Recommend.js');
 var configEnv = require('../config/env.js');
 
+router.get('/query/:topic', function(req, res) {
+  request('https://en.wikipedia.org/w/api.php?action=query&format=json&titles='+req.params.topic, function(error, response, body) {
+    var query = JSON.parse(body);
+    if (query.query.normalized) {
+      res.send(JSON.stringify(query.query.normalized[0].to));
+    } else {
+      res.send(JSON.stringify(req.params.topic));
+    }
+  });
+});
 
 router.get('/:topic', function(req, res) {
   WikiArticle.findOne({
