@@ -38,9 +38,6 @@ var Profile = React.createClass({
       <Loader loaded={this.state.loaded}>
       <Haiku user={this.state}>
       <div className="profile wrapper">
-        <Link to="race" params={{raceId: 91}}>
-          this links to ... race 91
-        </Link>
         <ProfileHeader data={this.state.data}/>
           <UserRaces />
           <RecommendedArticles/>
