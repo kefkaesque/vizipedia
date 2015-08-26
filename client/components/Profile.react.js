@@ -16,7 +16,7 @@ var Profile = React.createClass({
     return {
       data: '',
       loaded: false
-    }
+    };
   },
   componentWillMount: function() {
     ProfileStore.addChangeListener(this._onChange);

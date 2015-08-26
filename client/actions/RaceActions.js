@@ -17,7 +17,7 @@ var RaceActions = {
         actionType: FluxConstants.ERROR,
         error: 'bad req'
       });
-    })
+    });
   },
 
   finishAndDispatch: function(data) {
@@ -33,7 +33,7 @@ var RaceActions = {
         actionType: FluxConstants.ERROR,
         error: 'bad req'
       });
-    })
+    });
   },
 
   getRaceDataAndDispatch: function(data) {

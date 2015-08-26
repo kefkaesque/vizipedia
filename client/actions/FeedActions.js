@@ -5,7 +5,6 @@ var FeedAPI = require('../utils/FeedAPI.js');
 var FeedActions = {
 
   dispatchFeedData: function(data) {
-    console.log('in FeedActions !!!')    
     FeedAPI.getFeedData(data)
     .then(function(feeddata) {
       console.log('FeedActions feeddata', feeddata);
