@@ -46,7 +46,6 @@ var AddPlaylistItem = React.createClass({
     }
     var that = this;
     ArticleActions.dispatchQuery(text).then(function(data) {
-      console.log('gettingdata', data);
       PlaylistActions.dispatchEdit(data, that.props.playlistId);
     });
     React.findDOMNode(this.refs.text).value = '';
