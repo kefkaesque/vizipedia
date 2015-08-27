@@ -63,6 +63,7 @@ var PlaylistNavigator = React.createClass({
     this.setState(
       PlaylistStore.getPlaylistInfo()
     );
+    console.log('playlist nav on change: ', this.state);
   }
 });
 
