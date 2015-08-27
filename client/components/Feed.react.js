@@ -17,17 +17,14 @@ var Feed = React.createClass({
   },
   render: function() {
     return (
-      <div>
+      <div className="feed wrapper">
         <h1> FEED DATA </h1>
-          <h3>Recommended Articles</h3>
-          <FollowingUsers articles={this.state.data}/>
+          <h3>Following Activities</h3>
+          <FollowingUsers activities={this.state.data}/>
       </div>
     );
   },
-        // <div> {this.state} </div>
   _onChange: function() {
-    console.log('feed data',FeedStore.getData())
-    // this.setState(getFeedState());
     this.setState(
       FeedStore.getData()
     );
@@ -37,50 +34,51 @@ var Feed = React.createClass({
 var FollowingUsers = React.createClass({
 
   render: function() {
-    console.log('FollowingUsers this.props',this.props)
-    if(this.props.articles){
-      var articles = this.props.articles.map(function(article, index) {
+    console.log('FollowingUsers this.props.activities',this.props.activities)
+    if(this.props.activities){
+      var activities = this.props.activities.map(function(activity, index) {
+        if (activity.title) {
         return (
           <div>
-          <Link to="wiki" params={{topic: article.title}}>
-            {article.username} recommended {article.title} {article.createdAt}
+          <Link to="wiki" params={{topic: activity.title}}>
+            {activity.username} recommended {activity.title} {activity.createdAt}
           </Link>
           </div>
-        );
+        )};
+        if (activity.follower) {
+        return (
+          <div>
+          <Link to="profile" params={{username: activity.following}}>
+            {activity.follower} followed {activity.following} {activity.createdAt}
+          </Link>
+          </div>
+        )};
+        if (activity.racer) {
+        return (
+          <div>
+          <Link to="race" params={{raceId: activity.raceId}}>
+            {activity.racer} played Wiki race start:{activity.start} end:{activity.end} {activity.createdAt}
+          </Link>
+          </div>
+        )};
+        if (activity.name) {
+        return (
+          <div>
+          <Link to="profile" params={{username: activity.username}}>
+            {activity.username} created playlist name:{activity.name} {activity.createdAt}
+          </Link>
+          </div>
+        )};
       });
     }
     return (
       <div className="follower section">
         <div className="container">
-          {articles}
+          {activities}
         </div>
       </div>
     )
   }
 });
-
-// var RecItem = React.createClass({
-
-//   render: function() {
-//     var articles = this.props.articles.map(function(article, index) {
-//       return (
-//         <div>
-//           <Link to="wiki" params={{topic: article}}>
-//             {article}
-//           </Link>
-//         </div>
-//       );
-//     });
-
-//     return (
-//       <div className="box">
-//         {articles}
-//       </div>
-//     );
-//   }
-// });
-
-
-
 
 module.exports = Feed;

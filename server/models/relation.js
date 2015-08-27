@@ -57,8 +57,9 @@ classMethods.isFollowing = function(userId, followingId) {
     return false;
   });
 };
-// get all recommended articles from all following
-classMethods.getFollowingRecommended = function(userId) {
+
+// get all following userIDs
+classMethods.getFollowing = function(userId) {
   return Relation.findAll({
     where: {
       follower: userId,
@@ -71,38 +72,99 @@ classMethods.getFollowingRecommended = function(userId) {
     }
     return ids;
   })
+};
+
+// get all recommended articles from all following
+classMethods.getFollowingRecommended = function(userIds) {
+  return Relation.findAll({
+    where: {
+      follower: userIds,
+    }
+  })
+  .then(function(following) {
+    var ids = [];
+    for (var i = 0; i < following.length; i++) {
+      ids.push(following[i].get('following'));
+    }
+    return ids;
+  })
   .then(function(res) {
     return recommend.findAll({
       where: {
-        userId: res
+        userId: userIds
       }
     })
-    .then(function(recs) {
-      var recIds = [];
-      for (var j = 0; j < recs.length; j++) {
-           recIds.push(recs[j].get('id'));
-      }
-      // find all of the users and article titles
-      return recommend.findAll({
-        where: {
-          id: recIds
-        },
-        include: [{
-          model: Article
-        },
-        {
-          model: User
-        }]
-      })
-      .then(function(results) {
-        var data = [];
-        for (var k = 0; k<results.length; k++) {
-          data.push({username: results[k].user.dataValues.username, title:results[k].wikiarticle.dataValues.title, createdAt: results[k].dataValues.createdAt})
+  })
+  .then(function(recs) {
+    var recIds = [];
+    for (var j = 0; j < recs.length; j++) {
+         recIds.push(recs[j].get('id'));
+    }
+    return recommend.findAll({
+      where: {
+        id: recIds,
+        createdAt: {
+          $lt: new Date(),
+          $gt: new Date(new Date() - 3 * 24 * 60 * 60 * 1000)
         }
-        return data;
-      })
-    });
-  });
+      },
+      include: [{
+        model: Article
+      },
+      {
+        model: User
+      }]
+    })
+  })
+  .then(function(results) {
+    var data = [];
+    for (var k = results.length-1; k >= 0; k--) {
+      data.push({username: results[k].user.dataValues.username, title:results[k].wikiarticle.dataValues.title, createdAt: results[k].dataValues.createdAt})
+    }
+    return data;
+  })
+};
+
+// get all followings' & followings' followings' username
+classMethods.getFollowingFollowing = function(userIds) {
+  var relation = [];
+  return Relation.findAll({
+    where: {
+      follower: userIds,
+      createdAt: {
+        $lt: new Date(),
+        $gt: new Date(new Date() - 3 * 24 * 60 * 60 * 1000)
+      }
+    }
+  })
+  .then(function(followingFollowing) {
+    for (var j = 0; j < followingFollowing.length; j++){
+      relation.push({follower: followingFollowing[j].dataValues.follower, following: followingFollowing[j].dataValues.following, createdAt: followingFollowing[j].dataValues.createdAt});
+    }
+    return relation;
+  })
+  .then(function(relation) {
+     return relation;
+  })
+};
+// get all of the playlists created by followings
+classMethods.getFollowingFollowing = function(userIds) {
+  var relation = [];
+  return Relation.findAll({
+    where: {
+      follower: userIds,
+        createdAt: {
+          $lt: new Date(),
+          $gt: new Date(new Date() - 3 * 24 * 60 * 60 * 1000)
+        }
+    }
+  })
+  .then(function(followingFollowing) {
+    for (var j = 0; j < followingFollowing.length; j++){
+      relation.push({follower: followingFollowing[j].dataValues.follower, following: followingFollowing[j].dataValues.following, createdAt: followingFollowing[j].dataValues.createdAt});
+    }
+    return relation;
+  })
 };
 
 classMethods.getStats = function(userId) {
