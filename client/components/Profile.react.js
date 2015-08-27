@@ -263,7 +263,7 @@ var PlaylistItem = React.createClass({
   render: function() {
     return (
       <div className="playlistItem box" onClick={this.handlePress}>
-        {this.props.playlist.name}
+        {decodeURI(this.props.playlist.name)}
       </div>
     );
   }

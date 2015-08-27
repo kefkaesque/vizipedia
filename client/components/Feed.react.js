@@ -34,7 +34,6 @@ var Feed = React.createClass({
 var FollowingUsers = React.createClass({
 
   render: function() {
-    console.log('FollowingUsers this.props.activities',this.props.activities)
     if(this.props.activities){
       var activities = this.props.activities.map(function(activity, index) {
         if (activity.title) {
