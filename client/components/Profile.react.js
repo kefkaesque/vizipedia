@@ -295,7 +295,11 @@ var RaceButton = React.createClass({
   mixins: [ Router.Navigation ],
 
   handlePress: function(e) {
-    this.transitionTo('createRace');
+    if (!Locals.username) {
+      window.location.href = "/login";
+    } else {
+      this.transitionTo('createRace');
+    }
   },
   render: function() {
     return (
