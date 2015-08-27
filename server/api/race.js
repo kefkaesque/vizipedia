@@ -5,6 +5,7 @@ module.exports = router;
 var Race = require('../models/Race.js');
 var Racer = require('../models/Racer.js');
 var Article = require('../models/WikiArticle.js');
+var User = require('../models/User');
 
 router.post('/', function(req, res) {
 
@@ -87,7 +88,11 @@ function getRaceInfo(raceId) {
 
 function getRacerInfo(raceId) {
   return Racer.findAll({
-    where: {raceId: raceId}
+    where: {raceId: raceId},
+    include: [{
+      model: User,
+      attributes: ['username']
+    }]
   });
 }
 
