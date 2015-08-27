@@ -66,7 +66,7 @@ router.get('/', function(req, res) {
             .then(function(followingRace) {
               var races = [];
               for ( var j = 0; j < followingRace.length; j++) {
-                races.push({start: followingRace[j].race.dataValues.start, end: followingRace[j].race.dataValues.end,
+                races.push({start: followingRace[j].race.dataValues.start, end: followingRace[j].race.dataValues.end, finishTime: followingRace[j].dataValues.finishTime,
                   racer: username[followingRace[j].dataValues.userId-1], raceId: followingRace[j].race.dataValues.id, createdAt: followingRace[j].dataValues.createdAt})
               }
               result.followingRace = races;
@@ -86,6 +86,13 @@ router.get('/', function(req, res) {
                   }
                 }
               }
+              for (var p = 0; p < sortresult.length; p++) {
+                var options = {
+                    weekday: "long", year: "numeric", month: "short",
+                    day: "numeric", hour: "2-digit", minute: "2-digit"
+                };
+                sortresult[p].createdAt = sortresult[p].createdAt.toLocaleTimeString("en-us", options);
+              }
               res.send(JSON.stringify(sortresult));
             });
           });
@@ -94,3 +101,6 @@ router.get('/', function(req, res) {
     });
   });
 });
+
+
+
