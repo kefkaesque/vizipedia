@@ -2,6 +2,7 @@ var React = require('react');
 var RaceActions = require('../actions/RaceActions');
 var Router = require('react-router');
 var RaceStore = require('../stores/RaceStore');
+var ArticleActions = require('../actions/ArticleActions');
 
 var CreateRace = React.createClass({
   mixins: [ Router.Navigation ],
@@ -21,11 +22,20 @@ var CreateRace = React.createClass({
     if (!startText || !endText) {
       return;
     }
-    var data = {
-      startTopic: startText,
-      endTopic: endText
-    };
-    RaceActions.createAndDispatch(data);
+    var data = {};
+    ArticleActions.dispatchQuery(startText)
+      .then(function(query) {
+        data.startTopic = query;
+      })
+      .then(function() {
+        return ArticleActions.dispatchQuery(endText);
+      })
+      .then(function(query) {
+        data.endTopic = query;
+      })
+      .then(function() {
+        RaceActions.createAndDispatch(data);
+      });
   },
   transitionToStart: function() {
     this.transitionTo('race', {raceId: this.state.raceInfo.id});
