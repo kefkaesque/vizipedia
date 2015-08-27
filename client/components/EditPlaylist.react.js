@@ -69,7 +69,9 @@ var CurrentPlaylist = React.createClass({
     if (this.props.playlistitems) {
       var itemNodes = this.props.playlistitems.map(function(item, index) {
         return (
-         <PlaylistItem topic={item.topic} key={index} />
+          <div key={index}>
+            {item.topic}
+          </div>
         );
       });
     } else {
@@ -83,15 +85,5 @@ var CurrentPlaylist = React.createClass({
     );
   }
 });
-
-var PlaylistItem = React.createClass({
-  render: function() {
-    return (
-      <div>
-        {this.props.topic}
-      </div>
-    );
-  }
-})
 
 module.exports = EditPlaylist;
