@@ -39,25 +39,40 @@ var FollowingUsers = React.createClass({
         if (activity.title) {
         return (
           <div>
-          <Link to="wiki" params={{topic: activity.title}}>
-            {activity.username} recommended {activity.title} {activity.createdAt}
+          <Link to="profile" params={{username: activity.username}}>
+            {activity.username}
           </Link>
+            <span> recommended </span> 
+          <Link to="wiki" params={{topic: activity.title}}>
+            {activity.title}
+          </Link>
+            <span> {activity.createdAt}</span>
           </div>
         )};
         if (activity.follower) {
         return (
           <div>
-          <Link to="profile" params={{username: activity.following}}>
-            {activity.follower} followed {activity.following} {activity.createdAt}
+          <Link to="profile" params={{username: activity.follower}}>
+            {activity.follower}
           </Link>
+            <span> followed </span> 
+          <Link to="profile" params={{username: activity.following}}>
+            {activity.following} 
+          </Link>
+            <span> {activity.createdAt}</span>
           </div>
         )};
         if (activity.racer) {
         return (
           <div>
-          <Link to="race" params={{raceId: activity.raceId}}>
-            {activity.racer} played Wiki race start:{activity.start} end:{activity.end} {activity.createdAt}
+          <Link to="profile" params={{username: activity.racer}}>
+            {activity.racer}
           </Link>
+            <span> played Wiki race </span> 
+          <Link to="race" params={{raceId: activity.raceId}}>
+            start:{activity.start} end:{activity.end} finishtime: {activity.finishTime} 
+          </Link>
+            <span> {activity.createdAt}</span>
           </div>
         )};
         if (activity.name) {
