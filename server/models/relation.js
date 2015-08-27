@@ -121,7 +121,6 @@ classMethods.getFollowingRecommended = function(userIds) {
     for (var k = results.length-1; k >= 0; k--) {
       data.push({username: results[k].user.dataValues.username, title:results[k].wikiarticle.dataValues.title, createdAt: results[k].dataValues.createdAt})
     }
-    console.log('getFollowingRecommended data:', data)
     return data;
   })
 };
@@ -145,19 +144,7 @@ classMethods.getFollowingFollowing = function(userIds) {
     return relation;
   })
   .then(function(relation) {
-  //   return User.findAll()
-  // })
-  // .then(function(users) {
-  //   var username = [];
-  //   for (var k = 0; k < users.length; k++){
-  //     username.push(users[k].dataValues.username);
-  //   }
-  //   for (var l = 0; l < relation.length; l++){
-  //     relation[l].follower = username[relation[l].follower-1]
-  //     relation[l].following = username[relation[l].following-1]
-  //   }
-  //   console.log('getFollowingFollowing relation:', relation)
-    return relation;
+     return relation;
   })
 };
 // get all of the playlists created by followings
@@ -178,21 +165,6 @@ classMethods.getFollowingFollowing = function(userIds) {
     }
     return relation;
   })
-  // .then(function(relation) {
-  //   return User.findAll()
-  // })
-  // .then(function(users) {
-  //   var username = [];
-  //   for (var k = 0; k < users.length; k++){
-  //     username.push(users[k].dataValues.username);
-  //   }
-  //   for (var l = 0; l < relation.length; l++){
-  //     relation[l].follower = username[relation[l].follower-1]
-  //     relation[l].following = username[relation[l].following-1]
-  //   }
-  //   console.log('getFollowingFollowing relation:', relation)
-  //   return relation;
-  // })
 };
 
 classMethods.getStats = function(userId) {
