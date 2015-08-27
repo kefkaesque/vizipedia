@@ -17,7 +17,6 @@ router.get('/query/:topic', function(req, res) {
     if (query.query.pages[-1]) {
       res.send(403);
     } else {
-      console.log('!!!!', query.query.pages);
       for (var pageNum in query.query.pages) {
         console.log('pagenum', query.query.pages[pageNum].title);
         res.send(JSON.stringify(query.query.pages[pageNum].title));
