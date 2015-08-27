@@ -17,7 +17,7 @@ function setViewing(playlist) {
     viewing: true,
     current: playlist,
     currentItem: 0
-  }
+  };
 }
 
 function setCurrentItem(index) {
@@ -52,6 +52,7 @@ AppDispatcher.register(function(payload) {
       break;
     case FluxConstants.QUERY:
       loadQuery(action.data);
+      break;
     case FluxConstants.PLAYLIST_VIEWING:
       setViewing(action.data);
       break;
