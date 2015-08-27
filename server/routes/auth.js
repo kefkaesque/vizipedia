@@ -13,7 +13,7 @@ router.get('/signup', function(req, res) {
 
 router.post('/login', passport.authenticate(
   'login', {
-    successRedirect: "/",
+    successRedirect: "/feed",
     failureRedirect: "/login"
   }
 ));

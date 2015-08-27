@@ -10,7 +10,6 @@ var Header = React.createClass({
         <div className="menu">
           <LoginButton/>
           <SignupButton/>
-          <FeedButton/>
         </div>
         <Link to="landing"><div className="logo serif">vizipedia</div></Link>
         <Search />
@@ -39,25 +38,6 @@ var SignupButton = React.createClass({
           Signup
         </div>
       </a>
-    );
-  }
-});
-
-var FeedButton = React.createClass({
-  mixins: [ Router.Navigation ],
-
-  handleClick: function(e) {
-    e.preventDefault();
-    this.transitionTo('feed');
-    return;
-  },
-  render: function() {
-    return (
-      <div className="item">
-        <button onClick={this.handleClick}>
-          Feed
-        </button>
-      </div>
     );
   }
 });

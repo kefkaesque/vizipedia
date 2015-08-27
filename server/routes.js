@@ -17,7 +17,7 @@ router.use('/', auth);
 router.use('/wiki', wiki);
 router.use('/comments', comments);
 router.use('/recommendations', recommendations);
-// router.use('/feed', feed);
+router.use('/feed', landing);
 router.use('/profile', profile);
 
 // ---------------------------------------------------------------------------
