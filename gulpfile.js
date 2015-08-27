@@ -89,6 +89,6 @@ gulp.task('build-js', ['clean'], function() {
     .pipe(gulp.dest('public/assets/dest/javascript'));
 });
 
-gulp.task('ddefault', ['watch', 'jshint', 'minify-css', 'build-js'], function() {
+gulp.task('default', ['watch', 'jshint', 'minify-css', 'build-js'], function() {
   process.exit(0);
 });
