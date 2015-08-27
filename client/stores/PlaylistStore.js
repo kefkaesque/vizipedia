@@ -25,7 +25,7 @@ function setCurrentItem(index) {
 }
 
 function closePlaylist() {
-  playlistInfo.viewing = false; //careful -- might need to clear rest of properties
+  playlistInfo.viewing = false;
 }
 
 var PlaylistStore = _.extend({}, EventEmitter.prototype, {
