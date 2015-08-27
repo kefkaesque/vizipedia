@@ -55,7 +55,6 @@ var PlaylistNavigator = React.createClass({
         </div>
       );
     }
-          // <Link to="profile" params={{username: this.props.query.username}}>{'Return to profile'}</Link>
 
     return (<div></div>);
   },
@@ -63,7 +62,6 @@ var PlaylistNavigator = React.createClass({
     this.setState(
       PlaylistStore.getPlaylistInfo()
     );
-    console.log('playlist nav on change: ', this.state);
   }
 });
 
