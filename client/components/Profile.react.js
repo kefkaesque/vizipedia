@@ -27,7 +27,6 @@ var Profile = React.createClass({
     ProfileActions.dispatchProfileData(query);
   },
   componentWillReceiveProps: function() {
-    // this.setState({username: null, loaded: false});
     var query = window.location.pathname.split('/')[2];
     ProfileActions.dispatchProfileData(query);
   },
@@ -40,7 +39,7 @@ var Profile = React.createClass({
       <Haiku user={this.state}>
       <div className="profile wrapper">
         <ProfileHeader data={this.state.data}/>
-          <UserRaces />
+          <UserRaces data={this.state.data}/>
           <RecommendedArticles/>
           <CommentsMade />
           <Playlists username={this.state.data.username} playlists={this.state.data.playlists} />
@@ -89,9 +88,6 @@ var ProfileHeader = React.createClass({
           </div> :
           <div></div>
         }
-          <div className="item">
-            <RaceButton/>
-          </div>
         </div>
       </div>
     )
@@ -109,21 +105,22 @@ var UserRaces = React.createClass({
     ProfileStore.removeChangeListener(this._onChange);
   },
   render: function() {
+    var itemNodes;
     if (this.state.races) {
-      var itemNodes = this.state.races.map(function(item, index) {
+      itemNodes = this.state.races.map(function(item, index) {
         return (
-          <Link to="race" params={{raceId: item.raceId}} key={index}>
-            <RaceItem raceId={item.raceId} />
-          </Link>
+          <RaceItem raceId={item.raceId} key={index}/>
         );
       });
     } else {
       itemNodes = '';
     }
+
     return (
       <div className="race section">
         <h3>Races</h3>
         <div className="container">
+          {Locals.username === this.props.data.username ? <RaceButton/> : <div></div> }
           {itemNodes}
         </div>
       </div>
@@ -137,9 +134,18 @@ var UserRaces = React.createClass({
 });
 
 var RaceItem = React.createClass({
+  mixins: [ Router.Navigation ],
+
+  handlePress: function(e) {
+    if (!Locals.username) {
+      window.location.href = "/login";
+    } else {
+      this.transitionTo('race', {raceId: this.props.raceId});
+    }
+  },
   render: function() {
     return (
-      <div className="box">
+      <div className="box" onClick={this.handlePress}>
         {this.props.raceId}
       </div>
     );
@@ -161,7 +167,7 @@ var RecommendedArticles = React.createClass({
       var itemNodes = this.state.userRec.map(function(item, index) {
         return (
           <Link to="wiki" params={{topic: item.wikiarticle.title}}  key={index}>
-          <RecItem article={item.wikiarticle} />
+            <RecItem article={item.wikiarticle} />
           </Link>
         );
       });
@@ -221,11 +227,7 @@ var CommentsMade = React.createClass({
 
 var Playlists = React.createClass({
   render: function() {
-    var createLink = '';
-    if(Locals.username===this.props.username){
-      createLink = (<Link to="createPlaylist">{' + Create New Playlist'}</Link>);
-    }
-    var username = this.props.username;
+
     var itemNodes;
     if(this.props.playlists){
       itemNodes = this.props.playlists.map(function(list, index) {
@@ -234,17 +236,17 @@ var Playlists = React.createClass({
         );
       });
     }
-          // <Link to="playlistItems" params={{playlistName: list.name}} query={{ playlistId: list.id, userId: list.userId, username: username }} key={index} >
-          //   <PlaylistItem name={list.name} />
-          // </Link>
 
     return (
       <div className="playlists section">
         <h3>Playlists</h3>
-        <div>
-          {createLink}
-        </div>
         <div className="container" >
+          {Locals.username===this.props.username ? 
+            <Link to="createPlaylist">
+              <div className="box">
+                Create Playlist
+              </div>
+            </Link> : ''}
           {itemNodes}
         </div>
       </div>
@@ -303,10 +305,8 @@ var RaceButton = React.createClass({
   },
   render: function() {
     return (
-      <div className="headerbutton">
-        <span className="button" onClick={this.handlePress}>
-          RACE!
-        </span>
+      <div className="box" onClick={this.handlePress}>
+        Create Race
       </div>
     );
   }
