@@ -88,7 +88,7 @@ var EndRace = React.createClass({
       var itemNodes = this.props.racerInfo.map(function(item, index) {
         return (
           <div key={index}>
-            <p> User ID: {item.userId} </p>
+            <p> User: {item.user.username} </p>
             <p> Finish Time: {item.finishTime} </p>
             <p> Path: {item.path} </p>
           </div>
