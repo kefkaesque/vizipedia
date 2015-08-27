@@ -6,14 +6,6 @@ var _ = require('underscore');
 
 var feed = {};
 function loadData(data) {
-  // var followingUsers = {};
-  // for (var i=0; i<data.length; i++) {
-  //     followingUsers[data[i].username] = followingUsers[data[i].username]||[];
-  //     followingUsers[data[i].username].push(data[i].title)
-  // }
-  // console.log('followingUsers',followingUsers);
-
-
   feed = {data:data};
 }
 
