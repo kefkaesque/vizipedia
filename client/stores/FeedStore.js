@@ -6,7 +6,6 @@ var _ = require('underscore');
 
 var feed = {};
 function loadData(data) {
-  console.log('FeedStore data:', data);
   // var followingUsers = {};
   // for (var i=0; i<data.length; i++) {
   //     followingUsers[data[i].username] = followingUsers[data[i].username]||[];
