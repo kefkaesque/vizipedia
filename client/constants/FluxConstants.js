@@ -7,6 +7,7 @@ module.exports = keyMirror({
   PLAYLIST_EDITED: null,
   PLAYLIST_VIEWING : null,
   PLAYLIST_NAV: null,
+  PLAYLIST_CLOSED: null,
 
   FEED_LOAD_DATA: null,
   USER_RECS: null,
