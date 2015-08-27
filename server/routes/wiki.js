@@ -12,12 +12,16 @@ var Recommend = require('../models/Recommend.js');
 var configEnv = require('../config/env.js');
 
 router.get('/query/:topic', function(req, res) {
-  request('https://en.wikipedia.org/w/api.php?action=query&format=json&titles='+req.params.topic, function(error, response, body) {
+  request('https://en.wikipedia.org/w/api.php?action=query&format=json&titles='+req.params.topic+'&redirects', function(error, response, body) {
     var query = JSON.parse(body);
-    if (query.query.normalized) {
-      res.send(JSON.stringify(query.query.normalized[0].to));
+    if (query.query.pages[-1]) {
+      res.send(403);
     } else {
-      res.send(JSON.stringify(req.params.topic));
+      console.log('!!!!', query.query.pages);
+      for (var pageNum in query.query.pages) {
+        console.log('pagenum', query.query.pages[pageNum].title);
+        res.send(JSON.stringify(query.query.pages[pageNum].title));
+      }
     }
   });
 });
