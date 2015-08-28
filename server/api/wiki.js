@@ -54,8 +54,6 @@ router.get('/:topic', function(req, res) {
         };
         res.send(JSON.stringify(data));
       });
-      // res.locals.article = article.content;
-      // res.render("article");
     } else {
       queue(req, res);
     }
@@ -63,7 +61,7 @@ router.get('/:topic', function(req, res) {
 });
 
 var redirect = function(res, topic) {
-  res.redirect("/wiki/"+topic);
+  res.redirect("/api/wiki/"+topic);
 };
 
 var queue = function(req, res) {
@@ -102,8 +100,6 @@ var queue = function(req, res) {
         } else {
           redirect(res, data.title);
         }
-        // res.locals.article = "FROM REQUEST"+data.article;
-        // res.render("article");
       });
     })).ensure(function() { conn.close(); });
   }).then(null, console.warn);

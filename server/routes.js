@@ -4,34 +4,32 @@ module.exports = router;
 
 var landing = require('./routes/landing');
 var auth = require('./routes/auth');
-var wiki = require('./routes/wiki');
-var comments = require('./routes/comments');
-var recommendations = require('./routes/recommendations');
-// var feed = require('./routes/feed');
-var profile = require('./routes/profile');
 
 // ---------------------------------------------------------------------------
 
 router.use('/', landing);
 router.use('/', auth);
-router.use('/wiki', wiki);
-router.use('/comments', comments);
-router.use('/recommendations', recommendations);
 router.use('/feed', landing);
-router.use('/profile', profile);
+router.use('/profile/:username', landing);
+router.use('/wiki/:article', landing);
+router.use('/race/:raceId', landing);
 
 // ---------------------------------------------------------------------------
 
-var apiRecommend = require('./api/recommend');
-var apiPlaylist = require('./api/playlist');
-var apiPlaylistItem = require('./api/playlistitem');
-var apiRace = require('./api/race');
-var apifeed = require('./api/feed');
+var recommend = require('./api/recommend');
+var playlist = require('./api/playlist');
+var playlistItem = require('./api/playlistitem');
+var race = require('./api/race');
+var feed = require('./api/feed');
+var wiki = require('./api/wiki');
+var profile = require('./api/profile');
 
 // ---------------------------------------------------------------------------
 
-router.use('/api/playlist', apiPlaylist);
-router.use('/api/playlistitem', apiPlaylistItem);
-router.use('/api/recommend', apiRecommend);
-router.use('/api/race', apiRace);
-router.use('/api/feed', apifeed);
+router.use('/api/wiki', wiki);
+router.use('/api/profile', profile);
+router.use('/api/playlist', playlist);
+router.use('/api/playlistitem', playlistItem);
+router.use('/api/recommend', recommend);
+router.use('/api/race', race);
+router.use('/api/feed', feed);
