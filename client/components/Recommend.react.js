@@ -1,7 +1,9 @@
-var React = require('react/addons');
+var React = require('react');
 var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
-var ReactCSS = React.addons.CSSTransitionGroup;
+var Router = require('react-router');
+var Link = Router.Link;
+var Modal = require('./Modal.react');
 
 var RecommendButton = React.createClass({
 
@@ -37,7 +39,6 @@ var RecommendButton = React.createClass({
   },
   openModal: function(articleId) {
     RecActions.dispatchAllRecs(articleId);
-     // {this.state.all[0].user.username}
     this.setState({
       isModalOpen: true
     });
@@ -59,7 +60,6 @@ var RecommendButton = React.createClass({
         <Modal isOpen={this.state.isModalOpen} transitionName="modal-anim">
           <h3> Recommendations </h3>
           <div className="body">
-            <p> this is a modal </p>
             <RecPerson people={this.state.all}/>
           </div>
           <button onClick={this.closeModal}> Close </button>
@@ -79,8 +79,11 @@ var RecPerson = React.createClass({
       var itemNodes = this.props.people.map(function(item, index) {
         return (
           <div key={index}>
-            {item.user.username}
+            <Link to="profile" params={{username: item.user.username}}>
+              {item.user.username}
+            </Link>
           </div>
+
         );
       });
     } else {
@@ -123,21 +126,5 @@ var Heart = React.createClass({
     ]);
   }
 });
-
-var Modal = React.createClass({
-  render: function() {
-    if (this.props.isOpen) {
-      return (
-        <ReactCSS transitionName={this.props.transitionName}>
-          <div className="modal">
-            {this.props.children}
-          </div>
-        </ReactCSS>
-      );
-    } else {
-      return <ReactCSS transitionName = {this.props.transitionName} />
-    }
-  }
-})
 
 module.exports = RecommendButton;
