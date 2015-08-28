@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "d3": "^3.5.6",
     "es6-promise": "^3.0.2",
     "flux": "^2.0.3",
     "jquery": "^2.1.4",
