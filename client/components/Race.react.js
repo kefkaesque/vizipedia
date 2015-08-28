@@ -109,26 +109,28 @@ function d3EndRace(racerInfo) {
     var head = createRaceNode(start, 20, "steelblue");
     treeData.push(head);
 
+    var colors = ["red","orange","blue","green"];
+
     //for each racer
-    racerInfo.forEach(function(racer) {
+    racerInfo.forEach(function(racer, index) {
       var path = JSON.parse(racer.path); //article path array
       var finishTime = racer.finishTime;
       var username = racer.user.username;
 
-      createRacePath(path.slice(1), head, username, finishTime);
+      createRacePath(colors[index], path.slice(1), head, username, finishTime);
 
     });
 
-    function createRacePath(remainingPath, currentNode, username, finishTime) {
+    function createRacePath(color, remainingPath, currentNode, username, finishTime) {
       if(remainingPath.length===0) {
-        var userNode = createRaceNode(username+" finished in "+finishTime+'s', 20, "red");
+        var userNode = createRaceNode(username+" finished in "+finishTime+'s', 20, color);
         addChild(currentNode, userNode);
         return;
       }
 
-      var nextNode = createRaceNode(remainingPath[0], 10, "red"); // Mammal
+      var nextNode = createRaceNode(remainingPath[0], 10, color); // Mammal
       addChild(currentNode, nextNode);
-      createRacePath(remainingPath.slice(1), nextNode, username, finishTime);
+      createRacePath(color, remainingPath.slice(1), nextNode, username, finishTime);
     }
 
     function createRaceNode(title, value, color) {
