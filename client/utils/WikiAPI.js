@@ -5,7 +5,7 @@ module.exports = {
   getArticleData: function(topic) {
     return new Promise(function(resolve, reject) {
       request
-        .get('/wiki/'+topic)
+        .get('/api/wiki/'+topic)
         .end(function(err, res) {
           if (err) {
             reject();
@@ -19,7 +19,7 @@ module.exports = {
   getArticleQuery: function(topic) {
     return new Promise(function(resolve, reject) {
       request
-        .get('/wiki/query/'+topic)
+        .get('/api/wiki/query/'+topic)
         .end(function(err, res) {
           if (err) {
             reject();
