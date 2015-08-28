@@ -6,7 +6,7 @@ module.exports = {
   getProfileData: function(user) {
     return new Promise(function(resolve, reject) {
       request
-        .get('/profile/'+user)
+        .get('/api/profile/'+user)
         .end(function(err, res) {
           if (err) {
             reject();
@@ -51,7 +51,7 @@ module.exports = {
     };
     return new Promise(function(resolve, reject) {
       request
-        .post('/profile/')
+        .post('/api/profile/')
         .send(userData)
         .end(function(err, res) {
           if (err) {

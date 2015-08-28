@@ -4,19 +4,20 @@ module.exports = router;
 
 var landing = require('./routes/landing');
 var auth = require('./routes/auth');
-var comments = require('./routes/comments');
-var recommendations = require('./routes/recommendations');
+// var comments = require('./routes/comments');
+// var recommendations = require('./routes/recommendations');
 // var feed = require('./routes/feed');
-var profile = require('./routes/profile');
+// var profile = require('./routes/profile');
 
 // ---------------------------------------------------------------------------
 
 router.use('/', landing);
 router.use('/', auth);
-router.use('/comments', comments);
-router.use('/recommendations', recommendations);
+// router.use('/comments', comments);
+// router.use('/recommendations', recommendations);
 router.use('/feed', landing);
-router.use('/profile', profile);
+router.use('/profile', landing);
+router.use('/wiki', landing);
 
 // ---------------------------------------------------------------------------
 
@@ -26,10 +27,12 @@ var apiPlaylistItem = require('./api/playlistitem');
 var apiRace = require('./api/race');
 var apifeed = require('./api/feed');
 var apiWiki = require('./api/wiki');
+var apiProfile = require('./api/profile');
 
 // ---------------------------------------------------------------------------
 
 router.use('/api/wiki', apiWiki);
+router.use('/api/profile', apiProfile);
 router.use('/api/playlist', apiPlaylist);
 router.use('/api/playlistitem', apiPlaylistItem);
 router.use('/api/recommend', apiRecommend);
