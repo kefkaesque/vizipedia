@@ -130,18 +130,20 @@ function d3EndRace(racerInfo) {
       var finishTime = racer.finishTime;
       var username = racer.user.username;
 
-      createRacePath(path.slice(1), head);
+      createRacePath(path.slice(1), head, username, finishTime);
 
     });
 
-    function createRacePath(remainingPath, currentNode) {
+    function createRacePath(remainingPath, currentNode, username, finishTime) {
       if(remainingPath.length===0) {
+        var userNode = createRaceNode(username+" finished in "+finishTime+'s', 20, "red");
+        addChild(currentNode, userNode);
         return;
       }
 
       var nextNode = createRaceNode(remainingPath[0], 10, "red"); // Mammal
       addChild(currentNode, nextNode);
-      createRacePath(remainingPath.slice(1), nextNode);
+      createRacePath(remainingPath.slice(1), nextNode, username, finishTime);
     }
 
     function createRaceNode(title, value, color) {
