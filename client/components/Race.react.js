@@ -116,22 +116,47 @@ var EndRace = React.createClass({
 
 module.exports = Race;
 
-/********************************** D3 Section ********************************************/
+/********************************** D3 Tree. Adapted from Collapsible Tree Example ********************************************/
 function d3EndRace(racerInfo) {
     var start = JSON.parse(racerInfo[0].path)[0];
-    var treeData = [
-      {
-        "name": start,
-        "value": 20,
+    var treeData = [];
+
+    var head = createRaceNode(start, 20, "steelblue");
+    treeData.push(head);
+
+    //for each racer
+    racerInfo.forEach(function(racer) {
+      var path = JSON.parse(racer.path); //article path array
+      var finishTime = racer.finishTime;
+      var username = racer.user.username;
+
+      createRacePath(path.slice(1), head);
+
+    });
+
+    function createRacePath(remainingPath, currentNode) {
+      if(remainingPath.length===0) {
+        return;
+      }
+
+      var nextNode = createRaceNode(remainingPath[0], 10, "red"); // Mammal
+      addChild(currentNode, nextNode);
+      createRacePath(remainingPath.slice(1), nextNode);
+    }
+
+    function createRaceNode(title, value, color) {
+      return {
+        "name": title,
+        "value": value,
         "type": "black",
-        "level": "steelblue",
+        "level": color,
         "children": []
       }
-    ];
+    }
 
-    // for (var i = 0; i < racerInfo.length; i++){
-    //   racerInfo[i].path
-    // }
+    function addChild(parent, child) {
+      parent.children.push(child);
+    }
 
     // ************** Generate the tree diagram  *****************
     var margin = {top: 20, right: 120, bottom: 20, left: 120},
