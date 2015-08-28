@@ -10,6 +10,7 @@ var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
 var Haiku = require('./404.react');
 var Loader = require('./Loader.react');
+var Follow = require('./Follow.react');
 
 var Profile = React.createClass({
 
@@ -84,7 +85,7 @@ var ProfileHeader = React.createClass({
         <div className="row">
         {Locals.username !== this.props.data.username ?
           <div className="item">
-            <FollowButton username={this.props.data.username}/>
+            <Follow username={this.props.data.username}/>
           </div> :
           <div></div>
         }
@@ -241,7 +242,7 @@ var Playlists = React.createClass({
       <div className="playlists section">
         <h3>Playlists</h3>
         <div className="container" >
-          {Locals.username===this.props.username ? 
+          {Locals.username===this.props.username ?
             <Link to="createPlaylist">
               <div className="box">
                 Create Playlist
@@ -266,28 +267,6 @@ var PlaylistItem = React.createClass({
     return (
       <div className="playlistItem box" onClick={this.handlePress}>
         {decodeURI(this.props.playlist.name)}
-      </div>
-    );
-  }
-});
-
-var FollowButton = React.createClass({
-
-  mixins: [ Router.Navigation ],
-
-  handlePress: function(e) {
-    if (!Locals.username) {
-      window.location.href = "/login";
-    } else {
-      ProfileActions.dispatchFollow(this.props.username);
-    }
-  },
-  render: function() {
-    return (
-      <div className="headerbutton">
-        <span className="button" onClick={this.handlePress}>
-          FOLLOW
-        </span>
       </div>
     );
   }
