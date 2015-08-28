@@ -4,6 +4,7 @@ var RecActions = require('../actions/RecActions');
 var Router = require('react-router');
 var Link = Router.Link;
 var Modal = require('./Modal.react');
+var Follow = require('./Follow.react');
 
 var RecommendButton = React.createClass({
 
@@ -49,12 +50,10 @@ var RecommendButton = React.createClass({
     });
   },
   render: function() {
-    console.log(this.state);
     return (
       <div className="item">
-       <button onClick={this.openModal.bind(this, this.props.info.id)}>Open modal</button>
         <Heart className="recommend" disabled={this.disable} state={this.state} click={this.handleButton.bind(this, this.props.info.id)}/>
-        {this.state.num ? <span> {this.state.num} </span> :
+        {this.state.num ? <span onClick={this.openModal.bind(this, this.props.info.id)}> {this.state.num} </span> :
           ''}
 
         <Modal isOpen={this.state.isModalOpen} transitionName="modal-anim">
@@ -79,9 +78,10 @@ var RecPerson = React.createClass({
       var itemNodes = this.props.people.map(function(item, index) {
         return (
           <div key={index}>
-            <Link to="profile" params={{username: item.user.username}}>
+            <span><Link to="profile" params={{username: item.user.username}}>
               {item.user.username}
-            </Link>
+            </Link></span>
+            <span className="profile">   <Follow username={item.user.username}/></span>
           </div>
 
         );
