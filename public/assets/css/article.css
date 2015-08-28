@@ -109,3 +109,53 @@ filter: grayscale(10%) sepia(10%);
   fill-opacity: 0;
 }
 
+.modal-anim-enter {
+    opacity: 0.00;
+    transform: scale(0.7);
+    transition: all 0.2s;
+}
+
+.modal-anim-enter.modal-anim-enter-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+.modal-anim-leave {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.2s;
+}
+
+.modal-anim-leave.modal-anim-leave-active {
+    opacity: 0.00;
+    transform: scale(0.7);
+}
+
+/* modal style */
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(255,255,255,0.8);
+}
+
+/* modal closing cross */
+.modal .modal-close {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  overflow: hidden;
+  border: none;
+  background: url(../img/cross.png) no-repeat center center;
+  text-indent: 200%;
+  color: transparent;
+  outline: none;
+  z-index: 100;
+}
+
+
