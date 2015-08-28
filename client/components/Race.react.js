@@ -39,7 +39,7 @@ var Race = React.createClass({
     if(this.userHasCompleted()) {
       // display finished racer data
       return (
-        <div>
+        <div className='race'>
           <div style={{height:200+'px'}}></div>
           <EndRace racerInfo={this.state.racerInfo} />
         </div>
@@ -109,7 +109,7 @@ function d3EndRace(racerInfo) {
     var head = createRaceNode(start, 20, "steelblue");
     treeData.push(head);
 
-    var colors = ["red","orange","blue","green"];
+    var colors = ["red","green","orange","blue"];
 
     //for each racer
     racerInfo.forEach(function(racer, index) {
@@ -123,7 +123,7 @@ function d3EndRace(racerInfo) {
 
     function createRacePath(color, remainingPath, currentNode, username, finishTime) {
       if(remainingPath.length===0) {
-        var userNode = createRaceNode(username+" finished in "+finishTime+'s', 20, color);
+        var userNode = createRaceNode(username+" finished in "+finishTime+'s', 20, "steelblue");
         addChild(currentNode, userNode);
         return;
       }
