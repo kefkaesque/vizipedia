@@ -39,7 +39,7 @@ var Race = React.createClass({
     if(this.userHasCompleted()) {
       // display finished racer data
       return (
-        <div>
+        <div className='race'>
           <div style={{height:200+'px'}}></div>
           <EndRace racerInfo={this.state.racerInfo} />
         </div>
@@ -109,26 +109,31 @@ function d3EndRace(racerInfo) {
     var head = createRaceNode(start, 20, "steelblue");
     treeData.push(head);
 
+    var colors = ["red","green","orange","blue"];
+
     //for each racer
-    racerInfo.forEach(function(racer) {
-      var path = JSON.parse(racer.path); //article path array
+    racerInfo.forEach(function(racer, index) {
+      var path = JSON.parse(racer.path);
       var finishTime = racer.finishTime;
       var username = racer.user.username;
 
-      createRacePath(path.slice(1), head, username, finishTime);
+      createRacePath(colors[index], path.slice(1), head, username, finishTime);
 
     });
 
-    function createRacePath(remainingPath, currentNode, username, finishTime) {
-      if(remainingPath.length===0) {
-        var userNode = createRaceNode(username+" finished in "+finishTime+'s', 20, "red");
-        addChild(currentNode, userNode);
+    function createRacePath(color, remainingPath, currentNode, username, finishTime) {
+      if(remainingPath.length===1) {
+        var nextNode = createRaceNode(remainingPath[0], 20, color);
+        addChild(currentNode, nextNode);
+
+        var userNode = createRaceNode(username+" finished in "+finishTime+'s', 10, "steelblue");
+        addChild(nextNode, userNode);
         return;
       }
 
-      var nextNode = createRaceNode(remainingPath[0], 10, "red"); // Mammal
+      var nextNode = createRaceNode(remainingPath[0], 10, color);
       addChild(currentNode, nextNode);
-      createRacePath(remainingPath.slice(1), nextNode, username, finishTime);
+      createRacePath(color, remainingPath.slice(1), nextNode, username, finishTime);
     }
 
     function createRaceNode(title, value, color) {
