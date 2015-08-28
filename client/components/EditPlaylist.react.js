@@ -3,6 +3,7 @@ var PlaylistActions = require('../actions/PlaylistActions');
 var PlaylistStore = require('../stores/PlaylistStore');
 var Router = require('react-router');
 var Link = Router.Link;
+var ArticleActions = require('../actions/ArticleActions');
 
 var EditPlaylist = React.createClass({
 
@@ -20,9 +21,10 @@ var EditPlaylist = React.createClass({
     PlaylistStore.removeChangeListener(this._onChange);
   },
   render: function() {
+    console.log(this.state);
     return (
       <div>
-        Edit Playlist {this.state.name} ({this.state.id})
+        Edit Playlist {decodeURI(this.state.name)} ({this.state.id})
         <AddPlaylistItem playlistId={this.state.id} />
         <CurrentPlaylist playlistitems={this.state.playlistitems} />
         <Link to="profile" params={{username: Locals.username}}>{'Return to profile'}</Link>
@@ -43,7 +45,10 @@ var AddPlaylistItem = React.createClass({
     if (!text) {
       return;
     }
-    PlaylistActions.dispatchEdit(text, this.props.playlistId);
+    var that = this;
+    ArticleActions.dispatchQuery(text).then(function(data) {
+      PlaylistActions.dispatchEdit(data, that.props.playlistId);
+    });
     React.findDOMNode(this.refs.text).value = '';
   },
   render: function() {
@@ -64,7 +69,9 @@ var CurrentPlaylist = React.createClass({
     if (this.props.playlistitems) {
       var itemNodes = this.props.playlistitems.map(function(item, index) {
         return (
-         <PlaylistItem topic={item.topic} key={index} />
+          <div key={index}>
+            {item.topic}
+          </div>
         );
       });
     } else {
@@ -78,15 +85,5 @@ var CurrentPlaylist = React.createClass({
     );
   }
 });
-
-var PlaylistItem = React.createClass({
-  render: function() {
-    return (
-      <div>
-        {this.props.topic}
-      </div>
-    );
-  }
-})
 
 module.exports = EditPlaylist;

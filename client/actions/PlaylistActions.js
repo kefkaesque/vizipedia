@@ -35,6 +35,42 @@ var PlaylistActions = {
       });
     });
   },
+
+  dispatchLoad: function(playlistId) {
+    PlaylistAPI.getPlaylistItems(playlistId)
+    .then(function(playlist) {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.PLAYLIST_EDITED,
+        data: playlist
+      });
+    })
+    .catch(function() {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.ERROR,
+        error: 'bad req'
+      });
+    });
+  },
+
+  dispatchViewing: function(data) {
+    AppDispatcher.handleViewAction({
+      actionType: FluxConstants.PLAYLIST_VIEWING,
+      data: data
+    });
+  },
+
+  dispatchClose: function() {
+    AppDispatcher.handleViewAction({
+      actionType: FluxConstants.PLAYLIST_CLOSED
+    });
+  },
+
+  dispatchNav: function(data) {
+    AppDispatcher.handleViewAction({
+      actionType: FluxConstants.PLAYLIST_NAV,
+      data: data
+    });
+  }
 };
 
 module.exports = PlaylistActions;

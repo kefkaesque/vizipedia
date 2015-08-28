@@ -8,16 +8,38 @@ var raceData = {
   articlePath: []
 };
 
-function loadData(data) {
-  console.log('raceStore loading data', data);
+function setRaceStart(data) {
   raceData.racing = data.racing;
-  raceData.start = data.start;
-  raceData.end = data.end;
+}
+
+function loadRaceCreate(data) {
+  raceData.raceInfo = data;
 }
 
 function setCurrentArticle(data) {
-  raceData.currentArticle = data.id;
-  raceData.articlePath.push(data.id);
+  if(raceData.racing) {
+    raceData.currentArticle = data.title;
+    raceData.articlePath.push(data.title);
+  }
+}
+
+function setFinishedRacers(data) {
+  var raceInfo = raceData.raceInfo;
+  raceData = {
+    racerInfo: data,
+    raceInfo: raceInfo
+  }
+}
+
+function loadRaceData (data) {
+  raceData.raceInfo = data.raceInfo;
+  raceData.racerInfo = data.racerInfo;
+}
+
+function clearRaceData () {
+  raceData = {
+    articlePath: []
+  };
 }
 
 var RaceStore = _.extend({}, EventEmitter.prototype, {
@@ -39,11 +61,23 @@ var RaceStore = _.extend({}, EventEmitter.prototype, {
 AppDispatcher.register(function(payload) {
   var action = payload.action;
   switch(action.actionType) {
-    case FluxConstants.RACING:
-      loadData(action.data);
+    case FluxConstants.RACE_STARTED:
+      setRaceStart(action.data);
+      break;
+    case FluxConstants.RACE_CREATED:
+      loadRaceCreate(action.data);
+      break;
+    case FluxConstants.RACE_FINISHED:
+      setFinishedRacers(action.data);
+      break;
+    case FluxConstants.RACE_CANCELED:
+      clearRaceData();
+      break;
+    case FluxConstants.RACE_DATA_RETRIEVED:
+      loadRaceData(action.data);
       break;
     case FluxConstants.VIZI_SEARCH:
-      setCurrentArticle(action.data);
+        setCurrentArticle(action.data);
       break;
     default:
       // none

@@ -2,18 +2,17 @@ var express = require('express');
 var router = express.Router();
 module.exports = router;
 var Article = require('../models/WikiArticle.js');
-
+var User = require('../models/User');
 var Recommend = require('../models/Recommend.js');
 
 router.get('/', function(req, res) {
   var userId = req.query.userid;
   var articleId = req.query.articleid;
   if(userId && articleId) {
-    actualId = res.locals.Locals.userid;
-    if(!actualId) {
+    if(!userId) {
       res.send('[]');
     } else {
-      isArticleRecommended(actualId, articleId)
+      isArticleRecommended(userId, articleId)
       .then(function(results) {
         res.send(JSON.stringify(results));
       });
@@ -81,7 +80,10 @@ function getUserRecommends(userId) {
 function getArticleRecommends(articleId) {
   return Recommend.findAll({
     where: {articleId: articleId},
-    include: []
+    include: [{
+      model: User,
+      attributes: ['username']
+    }]
   });
 }
 

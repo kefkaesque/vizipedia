@@ -6,7 +6,7 @@ var _ = require('underscore');
 
 var feed = {};
 function loadData(data) {
-  feed = data;
+  feed = {data:data};
 }
 
 var FeedStore = _.extend({}, EventEmitter.prototype, {
@@ -25,8 +25,8 @@ var FeedStore = _.extend({}, EventEmitter.prototype, {
   }
 });
 
-AppDispatcher.register(function(action) {
-  var text;
+AppDispatcher.register(function(payload) {
+  var action = payload.action;
   switch(action.actionType) {
     case FluxConstants.FEED_LOAD_DATA:
       loadData(action.data);

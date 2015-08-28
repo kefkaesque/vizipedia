@@ -39,7 +39,21 @@ module.exports = {
           }
         });
     });
-  }
+  },
 
+
+  getPlaylistItems: function(playlistId) {
+    return new Promise(function(resolve, reject) {
+      request
+        .get('/api/playlist?id='+playlistId)
+        .end(function(err, res) {
+          if (err) {
+            reject();
+          } else {
+            resolve(JSON.parse(res.text));
+          }
+        });
+    });
+  }
 
 };

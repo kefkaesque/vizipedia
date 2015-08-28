@@ -1,0 +1,15 @@
+.race .node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.race .node text {
+  font: 20px sans-serif;
+}
+
+.race .link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}

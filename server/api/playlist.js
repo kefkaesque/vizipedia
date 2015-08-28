@@ -13,6 +13,7 @@ router.get('/', function(req, res) {
   if(playlistId) {
     getPlaylist(playlistId)
     .then(function(result) {
+      console.log('get playlist use playlistId', result);
       res.send(JSON.stringify(result));
     });
   }
@@ -42,18 +43,19 @@ function getPlaylist(playlistId) {
   return Playlist.findOne({
     where: {id: playlistId},
     include: [{
-      model: PlaylistItem,
-      include: [Article]
+      model: PlaylistItem
+      // ,
+      // include: [Article]
     }]
   });
-};
+}
 
 function getUserPlaylists(userId) {
   return Playlist.findAll({
     where: {userId: userId},
     include: [PlaylistItem]
   });
-};
+}
 
 function createPlaylist(name, userId) {
   return Playlist.create({name: name, userId: userId})
@@ -61,4 +63,4 @@ function createPlaylist(name, userId) {
     playlist.dataValues.playlistitems = [];
     return playlist;
   });
-};
+}

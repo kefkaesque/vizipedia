@@ -11,6 +11,19 @@ var VisitedArticle = require('../models/visitedArticle.js');
 var Recommend = require('../models/Recommend.js');
 var configEnv = require('../config/env.js');
 
+router.get('/query/:topic', function(req, res) {
+  request('https://en.wikipedia.org/w/api.php?action=query&format=json&titles='+req.params.topic+'&redirects', function(error, response, body) {
+    var query = JSON.parse(body);
+    if (query.query.pages[-1]) {
+      res.send(403);
+    } else {
+      for (var pageNum in query.query.pages) {
+        console.log('pagenum', query.query.pages[pageNum].title);
+        res.send(JSON.stringify(query.query.pages[pageNum].title));
+      }
+    }
+  });
+});
 
 router.get('/:topic', function(req, res) {
   WikiArticle.findOne({
@@ -35,6 +48,7 @@ router.get('/:topic', function(req, res) {
       .then(function(results) {
         var data = {
           id: article.id,
+          title: article.title,
           content: article.content,
           recommends: results.count
         };
@@ -82,7 +96,11 @@ var queue = function(req, res) {
 
       return ok.then(function(data) {
         data = JSON.parse(data);
-        redirect(res, data.title);
+        if (data.article === undefined) {
+          res.send(JSON.stringify(data));
+        } else {
+          redirect(res, data.title);
+        }
         // res.locals.article = "FROM REQUEST"+data.article;
         // res.render("article");
       });

@@ -15,6 +15,10 @@ function storeUserPlaylists(data) {
   profileData.playlists = data;
 }
 
+function storeUserRaces(data) {
+  profileData.races = data;
+}
+
 var ProfileStore = _.extend({}, EventEmitter.prototype, {
 
   getData: function() {
@@ -39,6 +43,9 @@ AppDispatcher.register(function(payload) {
       break;
     case FluxConstants.PROFILE_LOAD_PLAYLISTS:
       storeUserPlaylists(action.data);
+      break;
+    case FluxConstants.PROFILE_LOAD_RACES:
+      storeUserRaces(action.data);
       break;
     default:
       // none

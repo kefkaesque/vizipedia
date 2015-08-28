@@ -5,14 +5,20 @@ var ProfileActions = require('../actions/ProfileActions');
 var Router = require('react-router');
 var Link = Router.Link;
 var RaceActions = require('../actions/RaceActions');
+var PlaylistActions = require('../actions/PlaylistActions');
 var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
-
+var Haiku = require('./404.react');
+var Loader = require('./Loader.react');
+var Follow = require('./Follow.react');
 
 var Profile = React.createClass({
 
   getInitialState: function() {
-    return {};
+    return {
+      data: '',
+      loaded: false
+    };
   },
   componentWillMount: function() {
     ProfileStore.addChangeListener(this._onChange);
@@ -30,29 +36,30 @@ var Profile = React.createClass({
   },
   render: function() {
     return (
+      <Loader loaded={this.state.loaded}>
+      <Haiku user={this.state}>
       <div className="profile wrapper">
-        <ProfileHeader data={this.state}/>
+        <ProfileHeader data={this.state.data}/>
+          <UserRaces data={this.state.data}/>
           <RecommendedArticles/>
           <CommentsMade />
-          <Playlists username={this.state.username} playlists={this.state.playlists} />
+          <Playlists username={this.state.data.username} playlists={this.state.data.playlists} />
       </div>
-    )
+      </Haiku>
+      </Loader>
+    );
   },
   _onChange: function() {
-    this.setState(
-      ProfileStore.getData()
-    );
+    this.setState({
+      data: ProfileStore.getData(),
+      loaded: true
+    });
   }
 });
 
 var ProfileHeader = React.createClass({
 
   render: function() {
-    // var followButton ='';
-    // if(Locals.username && Locals.username !== this.props.data.username){
-    //   followButton = (<FollowButton username={this.props.data.username}/>);
-    // }
-
     return (
       <div className="profileheader">
         <div className="row">
@@ -76,15 +83,73 @@ var ProfileHeader = React.createClass({
         </div>
         <hr/>
         <div className="row">
+        {Locals.username !== this.props.data.username ?
           <div className="item">
-            <FollowButton username={this.props.data.username}/>
-          </div>
-          <div className="item">
-            <RaceButton/>
-          </div>
+            <Follow username={this.props.data.username}/>
+          </div> :
+          <div></div>
+        }
         </div>
       </div>
     )
+  }
+});
+
+var UserRaces = React.createClass({
+  getInitialState: function() {
+    return {};
+  },
+  componentWillMount: function() {
+    ProfileStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    ProfileStore.removeChangeListener(this._onChange);
+  },
+  render: function() {
+    var itemNodes;
+    if (this.state.races) {
+      itemNodes = this.state.races.map(function(item, index) {
+        return (
+          <RaceItem raceId={item.raceId} key={index}/>
+        );
+      });
+    } else {
+      itemNodes = '';
+    }
+
+    return (
+      <div className="race section">
+        <h3>Races</h3>
+        <div className="container">
+          {Locals.username === this.props.data.username ? <RaceButton/> : <div></div> }
+          {itemNodes}
+        </div>
+      </div>
+    )
+  },
+  _onChange: function() {
+    this.setState(
+      ProfileStore.getData()
+    );
+  }
+});
+
+var RaceItem = React.createClass({
+  mixins: [ Router.Navigation ],
+
+  handlePress: function(e) {
+    if (!Locals.username) {
+      window.location.href = "/login";
+    } else {
+      this.transitionTo('race', {raceId: this.props.raceId});
+    }
+  },
+  render: function() {
+    return (
+      <div className="box" onClick={this.handlePress}>
+        {this.props.raceId}
+      </div>
+    );
   }
 });
 
@@ -102,7 +167,9 @@ var RecommendedArticles = React.createClass({
     if (this.state.userRec) {
       var itemNodes = this.state.userRec.map(function(item, index) {
         return (
-         <RecItem article={item.wikiarticle} key={index} />
+          <Link to="wiki" params={{topic: item.wikiarticle.title}}  key={index}>
+            <RecItem article={item.wikiarticle} />
+          </Link>
         );
       });
     } else {
@@ -127,7 +194,7 @@ var RecommendedArticles = React.createClass({
 var RecItem = React.createClass({
   render: function() {
     return (
-      <div className="box">
+      <div className="box" style={{backgroundImage:'url('+this.props.article.image+')' }}>
         {this.props.article.title}
       </div>
     );
@@ -141,17 +208,17 @@ var CommentsMade = React.createClass({
       <div className="commentsMade section">
         <h3>Comments</h3>
         <div className="container">
-          <div className="box">
-            Morocco
+          <div className="sky box">
+            Sky
           </div>
-          <div className="box">
-            Basketball
+          <div className="cat box">
+            Cat
           </div>
-          <div className="box">
-            San Francisco Giants
+          <div className="niagara box">
+            Niagara Falls
           </div>
-          <div className="box">
-            Socks
+          <div className="sound box">
+            Sound of Music
           </div>
         </div>
       </div>
@@ -161,16 +228,12 @@ var CommentsMade = React.createClass({
 
 var Playlists = React.createClass({
   render: function() {
-    var createLink = '';
-    if(Locals.username===this.props.username){
-      createLink = (<Link to="createPlaylist">{' + Create New Playlist'}</Link>);
-    }
 
     var itemNodes;
     if(this.props.playlists){
       itemNodes = this.props.playlists.map(function(list, index) {
         return (
-          <PlaylistItem name={list.name} key={index} />
+          <PlaylistItem playlist={list} key={index} />
         );
       });
     }
@@ -178,10 +241,13 @@ var Playlists = React.createClass({
     return (
       <div className="playlists section">
         <h3>Playlists</h3>
-        <div>
-          {createLink}
-        </div>
-        <div className="container">
+        <div className="container" >
+          {Locals.username===this.props.username ?
+            <Link to="createPlaylist">
+              <div className="box">
+                Create Playlist
+              </div>
+            </Link> : ''}
           {itemNodes}
         </div>
       </div>
@@ -190,25 +256,17 @@ var Playlists = React.createClass({
 });
 
 var PlaylistItem = React.createClass({
-  render: function() {
-    return (
-      <div className="playlistItem box">
-        {this.props.name}
-      </div>
-    );
-  }
-});
+  mixins: [ Router.Navigation ],
 
-var FollowButton = React.createClass({
   handlePress: function(e) {
-    ProfileActions.dispatchFollow(this.props.username);
+    PlaylistActions.dispatchViewing(this.props.playlist);
+    var topic = this.props.playlist.playlistitems[0].topic;
+    this.transitionTo('wiki', {topic: topic});
   },
   render: function() {
     return (
-      <div className="headerbutton">
-        <span className="button" onClick={this.handlePress}>
-          FOLLOWING
-        </span>
+      <div className="playlistItem box" onClick={this.handlePress}>
+        {decodeURI(this.props.playlist.name)}
       </div>
     );
   }
@@ -218,20 +276,16 @@ var RaceButton = React.createClass({
   mixins: [ Router.Navigation ],
 
   handlePress: function(e) {
-    RaceActions.dispatchRacing({
-      racing:true,
-      start: 2, //article id for cat in my db
-      end: 8, //article id for dog in my db
-    });
-    this.transitionTo('wiki', {topic: 'Cat'}); //hardcoded in...should get from article id
-
+    if (!Locals.username) {
+      window.location.href = "/login";
+    } else {
+      this.transitionTo('createRace');
+    }
   },
   render: function() {
     return (
-      <div className="headerbutton">
-        <span className="button" onClick={this.handlePress}>
-          CHALLENGE!
-        </span>
+      <div className="box" onClick={this.handlePress}>
+        Create Race
       </div>
     );
   }

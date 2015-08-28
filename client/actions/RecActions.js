@@ -23,6 +23,21 @@ var RecActions = {
     .then(function(numRec) {
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.GET_REC,
+        data: numRec.length
+      });
+    })
+    .catch(function() {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.ERROR,
+        error: 'bad req'
+      });
+    });
+  },
+  dispatchAllRecs: function(articleId) {
+    RecAPI.getArticleRecs(articleId)
+    .then(function(numRec) {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.GET_ALL,
         data: numRec
       });
     })
@@ -64,7 +79,7 @@ var RecActions = {
     });
   },
   dispatchRecState: function(userId, articleId) {
-    RecAPI.recommendState(userId, articleId)
+    return RecAPI.recommendState(userId, articleId)
     .then(function(articles) {
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.STATE,

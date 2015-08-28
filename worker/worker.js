@@ -38,6 +38,14 @@ amqp.connect(url).then(function(conn) {
     function reply(msg) {
       var query = msg.content.toString();
       var response = getWikiPage(query, function(article, title) {
+        if (!title) {
+          ch.sendToQueue(msg.properties.replyTo,
+            new Buffer(JSON.stringify({
+              title: query
+            })),
+            {correlationId: msg.properties.correlationId});
+            return;
+        }
         var ntitle = title.replace(/ /g, '_');
 
         /*if(query === ntitle)
@@ -47,9 +55,9 @@ amqp.connect(url).then(function(conn) {
         if(query !== ntitle)
           article = '';
 
-        Vizifier.vizify(article, title, function(article) {
+        Vizifier.vizify(article, title, function(article, url) {
         //console.log("******", query, title, article.substring(0,100));
-        WikiArticle.create({query: query, title: ntitle, content: article});
+        WikiArticle.create({query: query, title: ntitle, content: article, image: url});
         /*if(query !== ntitle) {
           WikiArticle.create({query: query, title: ntitle, content: ''});
           if(query !== title)

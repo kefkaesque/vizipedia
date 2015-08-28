@@ -1,9 +1,13 @@
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
+var Search = require('./Search.react');
+var RaceActions = require('../actions/RaceActions');
 
 var Header = React.createClass({
-
+  handleClick: function() {
+    RaceActions.cancelRace();
+  },
   render: function() {
     return (
       <div className="filled"><div className="header">
@@ -11,9 +15,8 @@ var Header = React.createClass({
           <LoginButton/>
           <SignupButton/>
         </div>
-        <div className="logo serif">vizipedia</div>
-        <HeaderForm />
-        <UserSearch />
+        <Link to="landing"><div className="logo serif" onClick={this.handleClick}>vizipedia</div></Link>
+        <Search />
       </div></div>
     )
   }
@@ -39,54 +42,6 @@ var SignupButton = React.createClass({
           Signup
         </div>
       </a>
-    );
-  }
-});
-
-var HeaderForm = React.createClass({
-  mixins: [ Router.Navigation ],
-
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var text = React.findDOMNode(this.refs.text).value.trim();
-    if (!text) {
-      return;
-    }
-    this.transitionTo('wiki', {topic: text});
-    React.findDOMNode(this.refs.text).value = '';
-    return;
-  },
-  render: function() {
-    return (
-      <form className="headerForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Search..." ref="text" />
-        <button type="submit"><span className="fa fa-fw fa-search"></span></button>
-      </form>
-    );
-  }
-});
-
-
-var UserSearch = React.createClass({
-  mixins: [ Router.Navigation ],
-
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var text = React.findDOMNode(this.refs.text).value.trim();
-    if (!text) {
-      return;
-    }
-    this.transitionTo('profile', {username: text});
-    React.findDOMNode(this.refs.text).value = '';
-    return;
-  },
-
-  render: function() {
-    return (
-      <form className="headerForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Search Users" ref="text" />
-        <button type="submit"><span className="fa fa-search"></span></button>
-      </form>
     );
   }
 });

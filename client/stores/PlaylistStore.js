@@ -8,6 +8,25 @@ var playlistInfo = {};
 function loadData(data) {
   playlistInfo = data;
 }
+function loadQuery(data) {
+  playlistInfo.query = data;
+}
+
+function setViewing(playlist) {
+  playlistInfo = {
+    viewing: true,
+    current: playlist,
+    currentItem: 0
+  };
+}
+
+function setCurrentItem(index) {
+  playlistInfo.currentItem = index;
+}
+
+function closePlaylist() {
+  playlistInfo.viewing = false;
+}
 
 var PlaylistStore = _.extend({}, EventEmitter.prototype, {
 
@@ -30,6 +49,18 @@ AppDispatcher.register(function(payload) {
   switch(action.actionType) {
     case FluxConstants.PLAYLIST_EDITED:
       loadData(action.data);
+      break;
+    case FluxConstants.QUERY:
+      loadQuery(action.data);
+      break;
+    case FluxConstants.PLAYLIST_VIEWING:
+      setViewing(action.data);
+      break;
+    case FluxConstants.PLAYLIST_CLOSED:
+      closePlaylist();
+      break;
+    case FluxConstants.PLAYLIST_NAV:
+      setCurrentItem(action.data);
       break;
     default:
       // none
