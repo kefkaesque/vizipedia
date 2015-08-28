@@ -31,10 +31,10 @@ var Header = require('./components/Header.react');
 var Article = require('./components/Article.react');
 var Profile = require('./components/Profile.react');
 var Landing = require('./components/Landing.react');
-var CreatePlaylist = require('./components/CreatePlaylist.react');
-var EditPlaylist = require('./components/EditPlaylist.react');
+var PlaylistCreate = require('./components/PlaylistCreate.react');
+var PlaylistEdit = require('./components/PlaylistEdit.react');
 var Feed = require('./components/Feed.react');
-var CreateRace = require('./components/CreateRace.react');
+var RaceCreate = require('./components/RaceCreate.react');
 var Race = require('./components/Race.react');
 
 
@@ -45,11 +45,11 @@ var routes = (
     <Route name="landing" path='/' handler={Landing}/>
     <Route name="wiki" path='/wiki/:topic' handler={Article}/>
     <Route name="profile" path='/profile/:username' handler={Profile}/>
-    <Route name="createPlaylist" path='/playlist/create' handler={CreatePlaylist}/>
-    <Route name="editPlaylist" path='/playlist/edit/:playlistName' handler={EditPlaylist}/>
+    <Route name="createPlaylist" path='/playlist/create' handler={PlaylistCreate}/>
+    <Route name="editPlaylist" path='/playlist/edit/:playlistName' handler={PlaylistEdit}/>
     <Route name="feed" path='/feed' handler={Feed}/>
     <Route name="race" path='/race/:raceId' handler={Race}/>
-    <Route name="createRace" path='/createrace' handler={CreateRace}/>
+    <Route name="createRace" path='/createrace' handler={RaceCreate}/>
   </Route>
 );
 

@@ -5,7 +5,7 @@ var Router = require('react-router');
 var Link = Router.Link;
 var ArticleActions = require('../actions/ArticleActions');
 
-var EditPlaylist = React.createClass({
+var PlaylistEdit = React.createClass({
 
   getInitialState: function() {
     return {};
@@ -86,4 +86,4 @@ var CurrentPlaylist = React.createClass({
   }
 });
 
-module.exports = EditPlaylist;
+module.exports = PlaylistEdit;

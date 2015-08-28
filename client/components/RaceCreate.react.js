@@ -4,7 +4,7 @@ var Router = require('react-router');
 var RaceStore = require('../stores/RaceStore');
 var ArticleActions = require('../actions/ArticleActions');
 
-var CreateRace = React.createClass({
+var RaceCreate = React.createClass({
   mixins: [ Router.Navigation ],
   getInitialState: function() {
     return {};
@@ -60,4 +60,4 @@ var CreateRace = React.createClass({
   }
 });
 
-module.exports = CreateRace;
+module.exports = RaceCreate;

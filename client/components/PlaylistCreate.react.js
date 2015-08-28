@@ -1,7 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 
-var CreatePlaylist = React.createClass({
+var PlaylistCreate = React.createClass({
   mixins: [ Router.Navigation ],
 
   handleSubmit: function(e) {
@@ -24,4 +24,4 @@ var CreatePlaylist = React.createClass({
   }
 });
 
-module.exports = CreatePlaylist;
+module.exports = PlaylistCreate;
