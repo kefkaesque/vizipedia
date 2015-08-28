@@ -3,19 +3,19 @@ When submitting a pull request use the following format
 
 * always pull request to dev branch
 
-* [feat] What feature you created
+* [feat] what feature you created
 
-* [fix] What you fixed
+* [fix] what you fixed
 
-* [style] What you changed e.g. formatting, semi colons
+* [style] what you changed e.g. formatting, semi colons
 
-* [test] Anything related to test files
+* [test] anything related to test files
 
-* [chore] Anything related to grunt
+* [chore] anything related to grunt
 
-* [refactor] Anything related to shortening/ cleaning up code
+* [refactor] anything related to shortening/ cleaning up code
 
-* [docs] Changes in documentation
+* [docs] changes in documentation
 
 
 When writing any block of code that is logically subordinate to the line immediately before and after it, that block should be indented two spaces more than the surrounding lines
@@ -212,6 +212,10 @@ When writing any block of code that is logically subordinate to the line immedia
 * Be aware that comments come at some cost. They make a file longer and can drift out of sync with the code they annotate.
 * Comment on what code is attempting to do, not how it will achieve it.
 * A good comment is often less effective than a good variable name.
+* For multi-line comments. Include a description, specify types and values for all parameters and return values and why it is that way.
+* Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment.
+
+
 
 
 ### Padding & additional whitespace
