@@ -1,12 +1,15 @@
-var React = require('react');
+var React = require('react/addons');
 var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
+var ReactCSS = React.addons.CSSTransitionGroup;
 
 var RecommendButton = React.createClass({
 
   disable: false,
   getInitialState: function() {
-    return {};
+    return {
+      isModalOpen: false
+    };
   },
   componentWillMount: function() {
     RecommendStore.addChangeListener(this._onChange);
@@ -32,18 +35,62 @@ var RecommendButton = React.createClass({
       }
     }
   },
+  openModal: function(articleId) {
+    RecActions.dispatchAllRecs(articleId);
+     // {this.state.all[0].user.username}
+    this.setState({
+      isModalOpen: true
+    });
+  },
+  closeModal: function() {
+    this.setState({
+      isModalOpen: false
+    });
+  },
   render: function() {
+    console.log(this.state);
     return (
       <div className="item">
+       <button onClick={this.openModal.bind(this, this.props.info.id)}>Open modal</button>
         <Heart className="recommend" disabled={this.disable} state={this.state} click={this.handleButton.bind(this, this.props.info.id)}/>
         {this.state.num ? <span> {this.state.num} </span> :
           ''}
+
+        <Modal isOpen={this.state.isModalOpen} transitionName="modal-anim">
+          <h3> Recommendations </h3>
+          <div className="body">
+            <p> this is a modal </p>
+            <RecPerson people={this.state.all}/>
+          </div>
+          <button onClick={this.closeModal}> Close </button>
+        </Modal>
       </div>
     );
   },
   _onChange: function() {
     this.disable = false;
     this.setState(RecommendStore.getData());
+  }
+});
+
+var RecPerson = React.createClass({
+  render: function() {
+    if (this.props.people) {
+      var itemNodes = this.props.people.map(function(item, index) {
+        return (
+          <div key={index}>
+            {item.user.username}
+          </div>
+        );
+      });
+    } else {
+      itemNodes = '';
+    }
+    return (
+      <div>
+        {itemNodes}
+      </div>
+    );
   }
 });
 
@@ -76,5 +123,21 @@ var Heart = React.createClass({
     ]);
   }
 });
+
+var Modal = React.createClass({
+  render: function() {
+    if (this.props.isOpen) {
+      return (
+        <ReactCSS transitionName={this.props.transitionName}>
+          <div className="modal">
+            {this.props.children}
+          </div>
+        </ReactCSS>
+      );
+    } else {
+      return <ReactCSS transitionName = {this.props.transitionName} />
+    }
+  }
+})
 
 module.exports = RecommendButton;

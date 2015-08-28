@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 module.exports = router;
 var Article = require('../models/WikiArticle.js');
-
+var User = require('../models/User');
 var Recommend = require('../models/Recommend.js');
 
 router.get('/', function(req, res) {
@@ -80,7 +80,10 @@ function getUserRecommends(userId) {
 function getArticleRecommends(articleId) {
   return Recommend.findAll({
     where: {articleId: articleId},
-    include: []
+    include: [{
+      model: User,
+      attributes: ['username']
+    }]
   });
 }
 
