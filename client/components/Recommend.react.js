@@ -1,12 +1,18 @@
 var React = require('react');
 var RecommendStore = require('../stores/RecommendStore');
 var RecActions = require('../actions/RecActions');
+var Router = require('react-router');
+var Link = Router.Link;
+var Modal = require('./Modal.react');
+var Follow = require('./Follow.react');
 
 var RecommendButton = React.createClass({
 
   disable: false,
   getInitialState: function() {
-    return {};
+    return {
+      isModalOpen: false
+    };
   },
   componentWillMount: function() {
     RecommendStore.addChangeListener(this._onChange);
@@ -32,18 +38,62 @@ var RecommendButton = React.createClass({
       }
     }
   },
+  openModal: function(articleId) {
+    RecActions.dispatchAllRecs(articleId);
+    this.setState({
+      isModalOpen: true
+    });
+  },
+  closeModal: function() {
+    this.setState({
+      isModalOpen: false
+    });
+  },
   render: function() {
     return (
       <div className="item">
         <Heart className="recommend" disabled={this.disable} state={this.state} click={this.handleButton.bind(this, this.props.info.id)}/>
-        {this.state.num ? <span> {this.state.num} </span> :
+        {this.state.num ? <span onClick={this.openModal.bind(this, this.props.info.id)}> {this.state.num} </span> :
           ''}
+
+        <Modal isOpen={this.state.isModalOpen} transitionName="modal-anim">
+          <h3> Recommendations </h3>
+          <div className="body">
+            <RecPerson people={this.state.all}/>
+          </div>
+          <button onClick={this.closeModal}> Close </button>
+        </Modal>
       </div>
     );
   },
   _onChange: function() {
     this.disable = false;
     this.setState(RecommendStore.getData());
+  }
+});
+
+var RecPerson = React.createClass({
+  render: function() {
+    if (this.props.people) {
+      var itemNodes = this.props.people.map(function(item, index) {
+        return (
+          <div key={index}>
+            <span><Link to="profile" params={{username: item.user.username}}>
+              {item.user.username}
+            </Link></span>
+            <span className="profile">   <Follow username={item.user.username}/></span>
+          </div>
+
+        );
+      });
+    } else {
+      itemNodes = '';
+    }
+    return (
+      <div>
+        {itemNodes}
+      </div>
+    );
   }
 });
 
