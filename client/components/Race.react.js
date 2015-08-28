@@ -113,7 +113,7 @@ function d3EndRace(racerInfo) {
 
     //for each racer
     racerInfo.forEach(function(racer, index) {
-      var path = JSON.parse(racer.path); //article path array
+      var path = JSON.parse(racer.path);
       var finishTime = racer.finishTime;
       var username = racer.user.username;
 
@@ -122,13 +122,16 @@ function d3EndRace(racerInfo) {
     });
 
     function createRacePath(color, remainingPath, currentNode, username, finishTime) {
-      if(remainingPath.length===0) {
-        var userNode = createRaceNode(username+" finished in "+finishTime+'s', 20, "steelblue");
-        addChild(currentNode, userNode);
+      if(remainingPath.length===1) {
+        var nextNode = createRaceNode(remainingPath[0], 20, color);
+        addChild(currentNode, nextNode);
+
+        var userNode = createRaceNode(username+" finished in "+finishTime+'s', 10, "steelblue");
+        addChild(nextNode, userNode);
         return;
       }
 
-      var nextNode = createRaceNode(remainingPath[0], 10, color); // Mammal
+      var nextNode = createRaceNode(remainingPath[0], 10, color);
       addChild(currentNode, nextNode);
       createRacePath(color, remainingPath.slice(1), nextNode, username, finishTime);
     }
