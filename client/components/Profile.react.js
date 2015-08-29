@@ -40,10 +40,9 @@ var Profile = React.createClass({
       <Haiku user={this.state}>
       <div className="profile wrapper">
         <ProfileHeader data={this.state.data}/>
-          <UserRaces data={this.state.data}/>
           <RecommendedArticles/>
-          <CommentsMade />
           <Playlists username={this.state.data.username} playlists={this.state.data.playlists} />
+          <UserRaces data={this.state.data}/>
       </div>
       </Haiku>
       </Loader>
@@ -198,31 +197,6 @@ var RecItem = React.createClass({
         {this.props.article.title}
       </div>
     );
-  }
-});
-
-var CommentsMade = React.createClass({
-
-  render: function() {
-    return (
-      <div className="commentsMade section">
-        <h3>Comments</h3>
-        <div className="container">
-          <div className="sky box">
-            Sky
-          </div>
-          <div className="cat box">
-            Cat
-          </div>
-          <div className="niagara box">
-            Niagara Falls
-          </div>
-          <div className="sound box">
-            Sound of Music
-          </div>
-        </div>
-      </div>
-    )
   }
 });
 
