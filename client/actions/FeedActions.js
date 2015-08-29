@@ -4,6 +4,7 @@ var FeedAPI = require('../utils/FeedAPI.js');
 
 var FeedActions = {
 
+  // sends API request to our server and dispatches returned activity data of those followed by logged-in user
   dispatchFeedData: function(data) {
     FeedAPI.getFeedData(data)
     .then(function(feeddata) {
