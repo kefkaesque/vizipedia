@@ -9,8 +9,7 @@ var gulp  = require('gulp'),
 
     // for compiling CSS
     minifyCss = require('gulp-minify-css'),
-    concat = require('gulp-concat'),
-    sourcemaps = require('gulp-sourcemaps');
+    concat = require('gulp-concat');
 
 var buffer = require('vinyl-buffer');
 
@@ -53,7 +52,14 @@ gulp.task('watchify', function() {
 gulp.task('compress', function() {
   return gulp.src('./public/assets/js/app.js')
     .pipe(uglify())
-    .pipe(gulp.dest('./public/assets/js/dist'));
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('css', function() {
+  gulp.src('./public/assets/css/**/*.css')
+      .pipe(minifyCss())
+      .pipe(concat('style.min.css'))
+      .pipe(gulp.dest('./public/assets'));
 });
 
 // gulp.task('browserify', function () {
