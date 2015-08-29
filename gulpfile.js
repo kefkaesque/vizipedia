@@ -76,4 +76,4 @@ gulp.task('test', function () {
     .pipe(mocha({reporter: 'nyan'}));
 });
 
-gulp.task('default', ['watch','watchify']);
+gulp.task('default', ['cssmin', 'watch', 'watchify']);
