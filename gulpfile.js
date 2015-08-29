@@ -16,7 +16,9 @@ var gulp  = require('gulp'),
     concat = require('gulp-concat'),
 
     // for checking js for errors
-    jshint = require('gulp-jshint');
+    jshint = require('gulp-jshint'),
+    gutil = require('gulp-util');
+
 
 gulp.task('watchify', function() {
   var options = {
@@ -41,8 +43,8 @@ gulp.task('watchify', function() {
       this.emit('end');
     })
     .pipe(source('app.js'))
-    // .pipe(buffer())
-    // .pipe(uglify())
+    .pipe(buffer())
+    .pipe(uglify().on('error', gutil.log))
     .pipe(gulp.dest('./public/assets/js'));
   };
 
