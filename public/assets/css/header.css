@@ -40,6 +40,8 @@
   background-size:auto 60%;
 }
 
+.aheader form:last-of-type {display:none;}
+
 .header form {
   #line-height:1em;
   padding-left:.5em;
