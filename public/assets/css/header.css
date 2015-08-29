@@ -67,6 +67,14 @@
   color:#fff;
 }
 
+.header .greet {
+  display:inline-block;
+  margin-right:1.6em;
+
+  font-size:16px;
+  font-weight:600;
+}
+
 .header .menu {
   float:right;
   display:inline-block;

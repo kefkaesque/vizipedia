@@ -9,7 +9,7 @@ var gulp  = require('gulp'),
 
     // for uglifying js
     uglify = require('gulp-uglify'),
-    buffer = require('vinyl-buffer'),
+    // buffer = require('vinyl-buffer'),
 
     // for compiling CSS
     minifyCss = require('gulp-minify-css'),
