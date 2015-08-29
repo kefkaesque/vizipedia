@@ -47,7 +47,6 @@ var Race = React.createClass({
     // otherwise
     } else {
       // display start page
-      console.log('race state ', this.state);
       return (
         <div>
           <div style={{height:200+'px'}}></div>

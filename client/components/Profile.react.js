@@ -110,7 +110,7 @@ var UserRaces = React.createClass({
     if (this.state.races) {
       itemNodes = this.state.races.map(function(item, index) {
         return (
-          <RaceItem raceId={item.raceId} key={index}/>
+          <RaceItem raceInfo={item} key={index}/>
         );
       });
     } else {
@@ -141,13 +141,13 @@ var RaceItem = React.createClass({
     if (!Locals.username) {
       window.location.href = "/login";
     } else {
-      this.transitionTo('race', {raceId: this.props.raceId});
+      this.transitionTo('race', {raceId: this.props.raceInfo.raceId});
     }
   },
   render: function() {
     return (
       <div className="box" onClick={this.handlePress}>
-        {this.props.raceId}
+        {this.props.raceInfo.race.start} to {this.props.raceInfo.race.end }
       </div>
     );
   }
