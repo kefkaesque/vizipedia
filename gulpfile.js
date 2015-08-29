@@ -59,12 +59,6 @@ gulp.task('watchify', function() {
   });
 });
 
-gulp.task('compress', function() {
-  return gulp.src('./public/assets/js/app.js')
-    .pipe(uglify())
-    .pipe(gulp.dest('dist'));
-});
-
 gulp.task('minifyCss', function() {
   gulp.src('./public/assets/css/**/*.css')
       .pipe(minifyCss())
