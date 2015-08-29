@@ -98,6 +98,9 @@ function getRacerInfo(raceId) {
 
 function getUserRaces(userId) {
   return Racer.findAll({
-    where: {userId: userId}
+    where: {userId: userId},
+    include: [{
+      model: Race
+    }]
   });
 };
