@@ -17,7 +17,10 @@ var gulp  = require('gulp'),
 
     // for checking js for errors
     jshint = require('gulp-jshint'),
-    gutil = require('gulp-util');
+    gutil = require('gulp-util'),
+
+    // for testing
+    mocha = require('gulp-mocha');
 
 
 gulp.task('watchify', function() {
@@ -56,13 +59,7 @@ gulp.task('watchify', function() {
   });
 });
 
-gulp.task('compress', function() {
-  return gulp.src('./public/assets/js/app.js')
-    .pipe(uglify())
-    .pipe(gulp.dest('dist'));
-});
-
-gulp.task('minifyCss', function() {
+gulp.task('cssmin', function() {
   gulp.src('./public/assets/css/**/*.css')
       .pipe(minifyCss())
       .pipe(concat('style.min.css'))
@@ -70,7 +67,13 @@ gulp.task('minifyCss', function() {
 });
 
 gulp.task('watch', function () {
-   gulp.watch('./public/assets/css/**/*.css', ['minifyCss']);
+   gulp.watch('./public/assets/css/**/*.css', ['cssmin']);
 });
 
-gulp.task('default', ['watch','watchify']);
+
+gulp.task('test', function () {
+  return gulp.src('./tests/*.js', {read: false})
+    .pipe(mocha({reporter: 'nyan'}));
+});
+
+gulp.task('default', ['cssmin', 'watch', 'watchify']);
