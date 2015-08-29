@@ -62,6 +62,8 @@ gulp.task('css', function() {
       .pipe(gulp.dest('./public/assets'));
 });
 
+gulp.task('default', ['css','watchify']);
+
 // gulp.task('browserify', function () {
 //   var options = {
 //     entries: ['./client/app.js'],
