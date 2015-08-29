@@ -1,5 +1,5 @@
 .login {
-  background:url("../img/login.jpg"), #333;
+  background:url("./img/login.jpg"), #333;
   background-size:cover;
   height:100%;
   text-align:center;
