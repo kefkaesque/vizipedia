@@ -9,6 +9,18 @@ var Header = React.createClass({
     RaceActions.cancelRace();
   },
   render: function() {
+    if(Locals.userid)
+    return (
+      <div className="filled"><div className="header">
+        <div className="menu">
+          <div className="greet">Welcome, {Locals.username}</div>
+          <LogoutButton/>
+        </div>
+        <Link to="landing"><div className="logo serif" onClick={this.handleClick}>vizipedia</div></Link>
+        <Search />
+      </div></div>
+    );
+    else
     return (
       <div className="filled"><div className="header">
         <div className="menu">
@@ -18,7 +30,19 @@ var Header = React.createClass({
         <Link to="landing"><div className="logo serif" onClick={this.handleClick}>vizipedia</div></Link>
         <Search />
       </div></div>
-    )
+    );
+  }
+});
+
+var LogoutButton = React.createClass({
+  render: function() {
+    return (
+      <a href='/logout'>
+        <div className="item">
+          Logout
+        </div>
+      </a>
+    );
   }
 });
 
