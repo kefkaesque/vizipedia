@@ -17,7 +17,10 @@ var gulp  = require('gulp'),
 
     // for checking js for errors
     jshint = require('gulp-jshint'),
-    gutil = require('gulp-util');
+    gutil = require('gulp-util'),
+
+    // for testing
+    mocha = require('gulp-mocha');
 
 
 gulp.task('watchify', function() {
@@ -71,6 +74,12 @@ gulp.task('minifyCss', function() {
 
 gulp.task('watch', function () {
    gulp.watch('./public/assets/css/**/*.css', ['minifyCss']);
+});
+
+
+gulp.task('test', function () {
+  return gulp.src('./tests/*.js', {read: false})
+    .pipe(mocha({reporter: 'nyan'}));
 });
 
 gulp.task('default', ['watch','watchify']);
