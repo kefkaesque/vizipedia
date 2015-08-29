@@ -59,7 +59,7 @@ gulp.task('watchify', function() {
   });
 });
 
-gulp.task('minifyCss', function() {
+gulp.task('cssmin', function() {
   gulp.src('./public/assets/css/**/*.css')
       .pipe(minifyCss())
       .pipe(concat('style.min.css'))
@@ -67,7 +67,7 @@ gulp.task('minifyCss', function() {
 });
 
 gulp.task('watch', function () {
-   gulp.watch('./public/assets/css/**/*.css', ['minifyCss']);
+   gulp.watch('./public/assets/css/**/*.css', ['cssmin']);
 });
 
 
