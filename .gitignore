@@ -1,5 +1,3 @@
 node_modules
 .DS_Store
 vizidb.sqlite
-public/assets/js/app.js
-public/assets/style.min.css
