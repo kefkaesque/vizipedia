@@ -60,11 +60,15 @@ gulp.task('compress', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('css', function() {
+gulp.task('minifyCss', function() {
   gulp.src('./public/assets/css/**/*.css')
       .pipe(minifyCss())
       .pipe(concat('style.min.css'))
       .pipe(gulp.dest('./public/assets'));
 });
 
-gulp.task('default', ['css','watchify']);
+gulp.task('watch', function () {
+   gulp.watch('./public/assets/css/**/*.css', ['minifyCss']);
+});
+
+gulp.task('default', ['watch','watchify']);
