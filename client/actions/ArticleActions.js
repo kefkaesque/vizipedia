@@ -3,6 +3,8 @@ var FluxConstants = require('../constants/FluxConstants.js');
 var WikiAPI = require('../utils/WikiAPI.js');
 
 var ArticleActions = {
+
+  // sends API request with topic to our server and dispatches returned article data
   dispatchArticle: function(topic) {
     WikiAPI.getArticleData(topic)
     .then(function(article) {
@@ -19,6 +21,7 @@ var ArticleActions = {
     });
   },
 
+  // sends API request with topic to our server, receives corresponding article title, and dispatches
   dispatchQuery: function(topic) {
     return WikiAPI.getArticleQuery(topic)
     .then(function(query) {
