@@ -23,6 +23,7 @@
     "es6-promise": "^3.0.2",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
+    "gulp-util": "^3.0.6",
     "jackrabbit": "^3.0.9",
     "jade": "^1.11.0",
     "node-uuid": "^1.4.3",
