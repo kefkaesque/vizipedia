@@ -93,7 +93,7 @@ var EndRace = React.createClass({
 
     return (
       <div className='d3Section'>
-          End
+          Wiki Race
       </div>
     )
   }
@@ -105,6 +105,8 @@ module.exports = Race;
 function d3EndRace(racerInfo) {
     var start = JSON.parse(racerInfo[0].path)[0];
     var treeData = [];
+    var nodeCount = 0;
+    var curCount = 0;
 
     var head = createRaceNode(start, 20, "steelblue");
     treeData.push(head);
@@ -126,11 +128,15 @@ function d3EndRace(racerInfo) {
         var nextNode = createRaceNode(remainingPath[0], 20, color);
         addChild(currentNode, nextNode);
 
-        var userNode = createRaceNode(username+" finished in "+finishTime+'s', 10, "steelblue");
+        var userNode = createRaceNode(username+" finished in "+finishTime+'s', 10, "transparent");
         addChild(nextNode, userNode);
+        if (curCount > nodeCount) {
+          nodeCount = curCount;
+        }
+        curCount = 0;
         return;
       }
-
+      curCount++;
       var nextNode = createRaceNode(remainingPath[0], 10, color);
       addChild(currentNode, nextNode);
       createRacePath(color, remainingPath.slice(1), nextNode, username, finishTime);
@@ -140,7 +146,7 @@ function d3EndRace(racerInfo) {
       return {
         "name": title,
         "value": value,
-        "type": "black",
+        "type": "transparent",
         "level": color,
         "children": []
       }
@@ -152,8 +158,8 @@ function d3EndRace(racerInfo) {
 
     // ************** Generate the tree diagram  *****************
     var margin = {top: 20, right: 120, bottom: 20, left: 120},
-      width = 960 - margin.right - margin.left,
-      height = 500 - margin.top - margin.bottom;
+      width = 1580 - margin.right - margin.left,
+      height = 800 - margin.top - margin.bottom;
 
     var i = 0;
 
@@ -180,7 +186,7 @@ function d3EndRace(racerInfo) {
       var links = tree.links(nodes);
 
       // Normalize for fixed-depth.
-      nodes.forEach(function(d) { d.y = d.depth * 180; });
+      nodes.forEach(function(d) { d.y = d.depth * (1240)/(nodeCount+2); });
 
       // Declare the nodes…
       var node = svg.selectAll("g.node")
@@ -198,12 +204,12 @@ function d3EndRace(racerInfo) {
         .style("fill", function(d) { return d.level; });
 
       nodeEnter.append("text")
-        .attr("x", function(d) {
+        .attr("y", function(d) {
           return d.children || d._children ?
-          (d.value + 4) * -1 : d.value + 4 })
-        .attr("dy", ".35em")
+          (d.value + 25) * -1 : d.value + 35 })
+        .attr("dx", "0.45em")
         .attr("text-anchor", function(d) {
-          return d.children || d._children ? "end" : "start"; })
+          return d.children || d._children ? "middle" : "end"; })
         .text(function(d) { return d.name; })
         .style("fill-opacity", 1);
 
