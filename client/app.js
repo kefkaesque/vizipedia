@@ -10,6 +10,11 @@ var Link = Router.Link;
 // --------------------------------------------------------------------------------
 
 var App = React.createClass({
+  statics: {
+    willTransitionTo: function() {
+      console.log('what is this');
+    }
+  },
   render: function() {
     return (
       <div className="app">
