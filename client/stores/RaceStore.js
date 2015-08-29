@@ -1,8 +1,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var FluxConstants = require('../constants/FluxConstants');
-
-var _ = require('underscore');
+var assign = require('object-assign');
 
 var raceData = {
   articlePath: []
@@ -42,7 +41,7 @@ function clearRaceData () {
   };
 }
 
-var RaceStore = _.extend({}, EventEmitter.prototype, {
+var RaceStore = assign({}, EventEmitter.prototype, {
 
   getData: function() {
     return raceData;

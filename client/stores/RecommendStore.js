@@ -1,8 +1,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var FluxConstants = require('../constants/FluxConstants');
-
-var _ = require('underscore');
+var assign = require('object-assign');
 
 var rec = {};
 function loadData(data) {
@@ -18,7 +17,7 @@ function loadAll(data) {
   rec.all = data;
 }
 
-var RecommendStore = _.extend({}, EventEmitter.prototype, {
+var RecommendStore = assign({}, EventEmitter.prototype, {
 
   getData: function() {
     return rec;

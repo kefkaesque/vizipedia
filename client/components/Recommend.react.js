@@ -83,7 +83,6 @@ var RecPerson = React.createClass({
             </Link></span>
             <span className="profile">   <Follow username={item.user.username}/></span>
           </div>
-
         );
       });
     } else {
@@ -109,9 +108,6 @@ var Heart = React.createClass({
     } else {
       return this.state.classes + ' empty';
     }
-  },
-  handleClick: function() {
-
   },
   render: function() {
     var classNames = this.getClasses();

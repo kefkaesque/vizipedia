@@ -1,8 +1,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var FluxConstants = require('../constants/FluxConstants');
-
-var _ = require('underscore');
+var assign = require('object-assign');
 
 var article = {};
 function loadData(data) {
@@ -11,7 +10,7 @@ function loadData(data) {
 function loadRecData(data) {
   article.recs = data;
 }
-var ArticleStore = _.extend({}, EventEmitter.prototype, {
+var ArticleStore = assign({}, EventEmitter.prototype, {
 
   getData: function() {
     return article;

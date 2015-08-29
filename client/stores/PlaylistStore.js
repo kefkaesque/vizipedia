@@ -1,8 +1,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var FluxConstants = require('../constants/FluxConstants');
-
-var _ = require('underscore');
+var assign = require('object-assign');
 
 var playlistInfo = {};
 function loadData(data) {
@@ -28,7 +27,7 @@ function closePlaylist() {
   playlistInfo.viewing = false;
 }
 
-var PlaylistStore = _.extend({}, EventEmitter.prototype, {
+var PlaylistStore = assign({}, EventEmitter.prototype, {
 
   getPlaylistInfo: function() {
     return playlistInfo;
