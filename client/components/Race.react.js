@@ -47,10 +47,11 @@ var Race = React.createClass({
     // otherwise
     } else {
       // display start page
+      console.log('race state ', this.state);
       return (
         <div>
           <div style={{height:200+'px'}}></div>
-          <StartRace start={this.state.raceInfo.start} />
+          <StartRace raceInfo={this.state.raceInfo} />
         </div>
       )
     }
@@ -70,11 +71,17 @@ var StartRace = React.createClass({
       racing: true
     });
 
-    this.transitionTo('wiki', {topic: this.props.start});
+    this.transitionTo('wiki', {topic: this.props.raceInfo.start});
   },
   render: function() {
     return (
       <div>
+        <div>
+          RACE
+        </div>
+        <div>
+          {this.props.raceInfo.start} to {this.props.raceInfo.end}
+        </div>
         <span className="button" onClick={this.startRace}>
           Start
         </span>
