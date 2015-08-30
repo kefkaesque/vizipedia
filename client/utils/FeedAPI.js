@@ -3,7 +3,7 @@ var request = require('superagent');
 
 module.exports = {
 
-  getFeedData: function(user) {
+  getFeedData: function() {
     return new Promise(function(resolve, reject) {
       request
         .get('/api/feed/')
