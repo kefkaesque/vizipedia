@@ -4,8 +4,9 @@ var FeedAPI = require('../utils/FeedAPI.js');
 
 var FeedActions = {
 
-  dispatchFeedData: function(data) {
-    FeedAPI.getFeedData(data)
+  // sends API request to our server and dispatches returned activity data of those followed by logged-in user
+  dispatchFeedData: function() {
+    FeedAPI.getFeedData()
     .then(function(feeddata) {
       AppDispatcher.handleViewAction({
         actionType: FluxConstants.FEED_LOAD_DATA,
