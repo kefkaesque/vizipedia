@@ -11,6 +11,7 @@ var Follow = React.createClass({
     }
   },
   render: function() {
+    console.log(this.props);
     return (
       <div className="headerbutton">
         <span className="button" onClick={this.handlePress}>

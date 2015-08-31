@@ -55,7 +55,7 @@ var getData = function(user , cb) {
           data.followedBy = res.followedBy;
           data.following = res.following;
           cb(data);
-        })
+        });
     });
     }
   });

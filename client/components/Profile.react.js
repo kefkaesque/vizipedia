@@ -59,6 +59,7 @@ var Profile = React.createClass({
 var ProfileHeader = React.createClass({
 
   render: function() {
+    console.log(this.props);
     return (
       <div className="profileheader">
         <div className="row">
