@@ -38,11 +38,13 @@ var Profile = React.createClass({
     return (
       <Loader loaded={this.state.loaded}>
       <Haiku user={this.state}>
-      <div className="profile wrapper">
+      <div className="profile">
         <ProfileHeader data={this.state.data}/>
+        <div className="wrapper">
           <RecommendedArticles/>
           <Playlists username={this.state.data.username} playlists={this.state.data.playlists} />
           <UserRaces data={this.state.data}/>
+        </div>
       </div>
       </Haiku>
       </Loader>
@@ -61,30 +63,30 @@ var ProfileHeader = React.createClass({
   render: function() {
     console.log(this.props.data);
     return (
-      <div className="profileheader">
-        <div className="row">
-          <div className="username item">
+      <div className="top">
+        <div className="info wrapper">
+          <div className="username serif">
             {this.props.data.username}
           </div>
-        </div>
-        <div className="info row">
-          <div className="item">
-            <p>FOLLOWERS</p>
-            <p className="stat">{this.props.data.followedBy}</p>
+          <div className="actions">
+            {Locals.username !== this.props.data.username ?
+              <Follow username={this.props.data.username}/> :
+              <div></div>
+            }
           </div>
-          <div className="item">
-            <p>FOLLOWING</p>
-            <p className="stat">{this.props.data.following}</p>
-          </div>
-          <div className="item">
-            <p>ARTICLES READ</p>
-            <p className="stat">{this.props.data.numArticle}</p>
-          </div>
-        </div>
-        <hr/>
-        <div className="row">
-          <div className="item">
-            <Follow username={this.props.data.username}/>
+          <div className="row">
+            <div className="item">
+              <p>FOLLOWERS</p>
+              <span className="serif">{this.props.data.followedBy}</span>
+            </div>
+            <div className="item">
+              <p>FOLLOWING</p>
+              <span className="serif">{this.props.data.following}</span>
+            </div>
+            <div className="item">
+              <p>ARTICLES READ</p>
+              <span className="serif">{this.props.data.numArticle}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -116,7 +118,7 @@ var UserRaces = React.createClass({
 
     return (
       <div className="race section">
-        <h3>Races</h3>
+        <h2>Races</h2>
         <div className="container">
           {Locals.username === this.props.data.username ? <RaceButton/> : <div></div> }
           {itemNodes}
@@ -174,7 +176,7 @@ var RecommendedArticles = React.createClass({
     }
     return (
       <div className="recommended section">
-        <h3>Recommended</h3>
+        <h2>Recommended</h2>
         <div className="container">
           {itemNodes}
         </div>
@@ -212,7 +214,7 @@ var Playlists = React.createClass({
 
     return (
       <div className="playlists section">
-        <h3>Playlists</h3>
+        <h2>Playlists</h2>
         <div className="container" >
           {Locals.username===this.props.username ?
             <Link to="createPlaylist">

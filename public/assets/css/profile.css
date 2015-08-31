@@ -1,81 +1,66 @@
-.profile {
-  padding-top: 3em;
-}
-
-.profile .row {
-  display:flex;
+.profile .top {
+  position:relative;
+  z-index:-1;
+  padding-top:calc(52px + 0em);
+  width:100%;
+  #height:62vh;
+  margin-bottom:2.6em;
+  background:url('./img/profile.jpg');
+  background-size:cover;
   text-align:center;
-  flex-direction:column;
 }
 
-.profile .username {
-  font-size: 60px;
-  font-family: Lora, serif;
-  padding-bottom: 20px;
+.profile .top:after {
+  content:"";
+  z-index:-1;
+  display:block;
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:radial-gradient(rgba(0,0,0,.5) 20%,rgba(0,0,0,.95) 95%);
+}
+
+.profile .spacer,
+.profile .info {
+  display:inline-block;
+  vertical-align:bottom;
 }
 
 .profile .info {
-  padding-left: 20px;
-  padding-right: 20px;
-  font-size: 15px;
-  font-family:"lucida sans";
+  color:#fff;
 }
 
-.profile .stat {
-  font-size: 30px;
+.profile .username {
+  margin:1.6em 0 0em;
+  #font-family:abril fatface;
+  font-size:3em;
 }
 
-@media all and ( min-width: 700px ) {
-
-  .profile .row {
-    flex-direction: row;
-  }
-
+.profile .row {
+  width:100%;
+  margin:2.6em 0;
+  font-size:.65em;
 }
 
-.profile .item {
-  flex: 1;
+.profile span {
+  font-size:1.8em;
 }
 
-.profile .container {
-  text-align: center;
+.profile .row .item {
+  display:inline-block;
+  width:120px;
 }
 
-.profile .box {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-around;
-  height: 180px;
-  width: 180px;
-  border: solid 1px #e7e7e7;
-}
+.profile .actions .button {
+  display:inline-block;
+  margin:1em .62em;
+  margin-bottom:4.2em;
+  padding:0 1.3em;
+  line-height:2.6em;
 
-.profile .section {
-  padding-top: 50px;
-}
+  #background:rgba(0,0,0,.8);
+  border:1px solid rgba(255,255,255,1);
+  border-radius:1.6em;
 
-.profile h3 {
-  padding-bottom: 15px;
-  font-family: "Lucida Sans Unicode";
+  font-size:.65em;
 }
-
-.profile .button {
-  border: solid 2px black;
-  border-radius: 25px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.profile .headerbutton {
-  margin-top: 20px;
-}
-
-/* remove later */
-.profile .box {
-  background-size: 180px 180px;
-  background-repeat: no-repeat;
-  color: white;
-  text-shadow:  2px 2px black;
-  font-family: "Lucida Sans Unicode";
-}
-
