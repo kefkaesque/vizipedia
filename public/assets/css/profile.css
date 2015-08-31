@@ -1,3 +1,7 @@
+.profile h2 {
+  margin-top:.38em;
+}
+
 .profile .top {
   position:relative;
   z-index:-1;
@@ -63,4 +67,24 @@
   border-radius:1.6em;
 
   font-size:.65em;
+}
+
+
+
+.profile .box {
+  display:inline-block;
+  margin-top:1em;
+  background-size:cover !important;
+  background-position:center !important;
+  width:calc((100% - 3 * .62em) / 4);
+}
+
+.profile a:nth-child(n+2) .box {
+  margin-left:.62em;
+}
+
+.profile .box .text {
+  margin-top:10em;
+  padding:.62em 0;
+  background:#fff;
 }

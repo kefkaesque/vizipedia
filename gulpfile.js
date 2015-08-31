@@ -46,8 +46,8 @@ gulp.task('watchify', function() {
       this.emit('end');
     })
     .pipe(source('app.js'))
-    .pipe(buffer())
-    .pipe(uglify().on('error', gutil.log))
+    //.pipe(buffer())
+    //.pipe(uglify().on('error', gutil.log))
     .pipe(gulp.dest('./public/assets/js'));
   };
 
