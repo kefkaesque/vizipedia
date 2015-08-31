@@ -61,7 +61,6 @@ var Profile = React.createClass({
 var ProfileHeader = React.createClass({
 
   render: function() {
-    console.log(this.props.data);
     return (
       <div className="top">
         <div className="info wrapper">
@@ -194,7 +193,7 @@ var RecItem = React.createClass({
   render: function() {
     return (
       <div className="box" style={{backgroundImage:'url('+this.props.article.image+')' }}>
-        {this.props.article.title}
+        <div className="text">{this.props.article.title}</div>
       </div>
     );
   }
@@ -240,7 +239,7 @@ var PlaylistItem = React.createClass({
   render: function() {
     return (
       <div className="playlistItem box" onClick={this.handlePress}>
-        {decodeURI(this.props.playlist.name)}
+        <div className="text">{decodeURI(this.props.playlist.name)}</div>
       </div>
     );
   }
