@@ -59,7 +59,6 @@ var Profile = React.createClass({
 var ProfileHeader = React.createClass({
 
   render: function() {
-    console.log(this.props);
     return (
       <div className="profileheader">
         <div className="row">
@@ -83,12 +82,9 @@ var ProfileHeader = React.createClass({
         </div>
         <hr/>
         <div className="row">
-        {Locals.username !== this.props.data.username ?
           <div className="item">
             <Follow username={this.props.data.username}/>
-          </div> :
-          <div></div>
-        }
+          </div>
         </div>
       </div>
     )
