@@ -13,7 +13,7 @@ var Header = React.createClass({
     return (
       <div className="filled"><div className="header">
         <div className="menu">
-          <div className="greet">Welcome, {Locals.username}</div>
+          <Link to="feed"><div className="greet">Welcome, {Locals.username}</div></Link>
           <LogoutButton/>
         </div>
         <Link to="landing"><div className="logo serif" onClick={this.handleClick}>vizipedia</div></Link>
