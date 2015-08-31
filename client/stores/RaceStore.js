@@ -27,7 +27,7 @@ function setFinishedRacers(data) {
   raceData = {
     racerInfo: data,
     raceInfo: raceInfo
-  }
+  };
 }
 
 function loadRaceData (data) {

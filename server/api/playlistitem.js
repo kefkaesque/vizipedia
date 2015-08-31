@@ -5,9 +5,6 @@ module.exports = router;
 var Playlist = require('../models/Playlist.js');
 var PlaylistItem = require('../models/PlaylistItem.js');
 
-//router.get('/', function(req, res) {
-//});
-
 router.post('/', function(req, res) {
   var playlistId = req.body.playlistId;
   var topic = req.body.topic;

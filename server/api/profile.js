@@ -21,9 +21,6 @@ router.post('/', function(req, res) {
     }
   })
   .then(function(user) {
-    // if (!user) {
-    //   res.send(JSON.stringify(''));
-    // }
     relation.follow(res.locals.user.id, user.dataValues.id)
     .then(function(relation) {
       getData(req.body.user, function(data) {

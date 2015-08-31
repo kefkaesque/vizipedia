@@ -58,7 +58,7 @@ router.get('/', function(req, res) {
     getUserRaces(userId)
     .then(function(raceInfo) {
       res.send(JSON.stringify(raceInfo));
-    })
+    });
   }
 
 });

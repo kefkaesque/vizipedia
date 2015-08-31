@@ -67,7 +67,7 @@ router.get('/', function(req, res) {
               var races = [];
               for ( var j = 0; j < followingRace.length; j++) {
                 races.push({start: followingRace[j].race.dataValues.start, end: followingRace[j].race.dataValues.end, finishTime: followingRace[j].dataValues.finishTime,
-                  racer: username[followingRace[j].dataValues.userId-1], raceId: followingRace[j].race.dataValues.id, createdAt: followingRace[j].dataValues.createdAt})
+                  racer: username[followingRace[j].dataValues.userId-1], raceId: followingRace[j].race.dataValues.id, createdAt: followingRace[j].dataValues.createdAt});
               }
               result.followingRace = races;
               var sortresult = [];

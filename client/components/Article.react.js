@@ -19,7 +19,6 @@ var Article = React.createClass({
   componentDidMount: function() {
     var query = window.location.pathname.split('/')[2];
     ArticleActions.dispatchArticle(query);
-    // console.log(this.props.params.topic);
   },
   componentWillReceiveProps: function() {
     this.setState({
