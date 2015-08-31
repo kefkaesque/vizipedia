@@ -33,6 +33,7 @@ var PlaylistNavigator = React.createClass({
   },
   closePlaylist: function() {
     PlaylistActions.dispatchClose();
+    this.transitionTo('profile', {username: this.state.current.user.username});
   },
   componentWillUnmount: function() {
     PlaylistStore.removeChangeListener(this._onChange);
