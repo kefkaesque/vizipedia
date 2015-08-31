@@ -5,6 +5,7 @@ module.exports = router;
 var Article = require('../models/WikiArticle.js');
 var Playlist = require('../models/Playlist.js');
 var PlaylistItem = require('../models/PlaylistItem.js');
+var User = require('../models/User.js');
 
 router.get('/', function(req, res) {
   var playlistId = req.query.id;
@@ -44,8 +45,6 @@ function getPlaylist(playlistId) {
     where: {id: playlistId},
     include: [{
       model: PlaylistItem
-      // ,
-      // include: [Article]
     }]
   });
 }
@@ -53,7 +52,9 @@ function getPlaylist(playlistId) {
 function getUserPlaylists(userId) {
   return Playlist.findAll({
     where: {userId: userId},
-    include: [PlaylistItem]
+
+    //TODO: only include username attribute of user model
+    include: [PlaylistItem, User]
   });
 }
 
