@@ -196,6 +196,5 @@ classMethods.getStats = function(userId) {
 
 
 var Relation = db.define('relations', schema, {classMethods: classMethods});
-Relation.getStats(1);
 db.sync();
 module.exports = Relation;
