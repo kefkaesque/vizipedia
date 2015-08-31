@@ -15,7 +15,7 @@ var schema = {
 var PlaylistItem = db.define('playlistitem', schema);
 
 Playlist.hasMany(PlaylistItem, {foreignKey: "playlistId"});
-PlaylistItem.belongsTo(Playlist, {foreignKey: "playlistId"})
+PlaylistItem.belongsTo(Playlist, {foreignKey: "playlistId"});
 
 db.sync();
 module.exports = PlaylistItem;

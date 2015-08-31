@@ -13,9 +13,12 @@ var Follow = React.createClass({
   render: function() {
     return (
       <div className="headerbutton">
-        <span className="button" onClick={this.handlePress}>
-          FOLLOW
-        </span>
+      {Locals.username !== this.props.username ?
+          <span className="button" onClick={this.handlePress}>
+            FOLLOW
+          </span> :
+        <div></div>
+      }
       </div>
     );
   }

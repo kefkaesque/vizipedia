@@ -71,7 +71,7 @@ classMethods.getFollowing = function(userId) {
       ids.push(following[i].get('following'));
     }
     return ids;
-  })
+  });
 };
 
 // get all recommended articles from all following
@@ -93,7 +93,7 @@ classMethods.getFollowingRecommended = function(userIds) {
       where: {
         userId: userIds
       }
-    })
+    });
   })
   .then(function(recs) {
     var recIds = [];
@@ -114,15 +114,15 @@ classMethods.getFollowingRecommended = function(userIds) {
       {
         model: User
       }]
-    })
+    });
   })
   .then(function(results) {
     var data = [];
     for (var k = results.length-1; k >= 0; k--) {
-      data.push({username: results[k].user.dataValues.username, title:results[k].wikiarticle.dataValues.title, createdAt: results[k].dataValues.createdAt})
+      data.push({username: results[k].user.dataValues.username, title:results[k].wikiarticle.dataValues.title, createdAt: results[k].dataValues.createdAt});
     }
     return data;
-  })
+  });
 };
 
 // get all followings' & followings' followings' username
@@ -145,7 +145,7 @@ classMethods.getFollowingFollowing = function(userIds) {
   })
   .then(function(relation) {
      return relation;
-  })
+  });
 };
 // get all of the playlists created by followings
 classMethods.getFollowingFollowing = function(userIds) {
@@ -164,7 +164,7 @@ classMethods.getFollowingFollowing = function(userIds) {
       relation.push({follower: followingFollowing[j].dataValues.follower, following: followingFollowing[j].dataValues.following, createdAt: followingFollowing[j].dataValues.createdAt});
     }
     return relation;
-  })
+  });
 };
 
 classMethods.getStats = function(userId) {
@@ -196,6 +196,5 @@ classMethods.getStats = function(userId) {
 
 
 var Relation = db.define('relations', schema, {classMethods: classMethods});
-Relation.getStats(1);
 db.sync();
 module.exports = Relation;

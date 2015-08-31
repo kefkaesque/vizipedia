@@ -15,7 +15,7 @@ var schema = {
 var Racer = db.define('racer', schema);
 
 Race.hasMany(Racer, {foreignKey: "raceId"});
-Racer.belongsTo(Race, {foreignKey: "raceId"})
+Racer.belongsTo(Race, {foreignKey: "raceId"});
 
 User.hasMany(Racer, {foreignKey: "userId"});
 Racer.belongsTo(User, {foreignKey: "userId"});
