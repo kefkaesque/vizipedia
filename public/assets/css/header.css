@@ -97,6 +97,7 @@
   position:absolute;
   #padding-top:.24em;
   background:rgba(0,0,0,.6);
+  z-index:1;
 }
 
 .filled .header:after {
@@ -118,4 +119,4 @@
   #background:#7fc400;
   #background:rgba(255,255,255,.03);
   #border:1px solid rgba(255,255,255,.12);
-}	
+}
