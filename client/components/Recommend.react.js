@@ -12,6 +12,7 @@ var RecommendButton = React.createClass({
   getInitialState: function() {
     return {
       isModalOpen: false
+
     };
   },
   componentWillMount: function() {

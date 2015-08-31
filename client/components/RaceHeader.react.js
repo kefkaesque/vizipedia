@@ -20,8 +20,17 @@ var RaceHeader = React.createClass({
     RaceStore.removeChangeListener(this._onChange);
   },
   componentDidUpdate: function() {
-    if(!this.state.finished && this.state.raceInfo && this.state.racing) { // if the race is done and the race is loaded and still racing
-      if(this.state.raceInfo.end===this.state.currentArticle){
+   // if the race is done and the race is loaded and still racing
+    if(!this.state.finished && this.state.raceInfo && this.state.racing) {
+      var end = this.state.raceInfo.end;
+      if (end) {
+        end = end.replace(/_/g, " ").toLowerCase();
+      }
+      var start = this.state.currentArticle;
+      if (start) {
+        start = start.replace(/_/g, " ").toLowerCase();
+      }
+      if(start===end){
         this.setState({finished: true});
       }
     }
