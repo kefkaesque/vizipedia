@@ -238,7 +238,7 @@ var PlaylistItem = React.createClass({
   },
   render: function() {
     return (
-      <div className="playlistItem box" onClick={this.handlePress}>
+      <div className="playlistItem box" onClick={this.handlePress} style={{background:'url("'+this.props.playlist.playlistitems[0].wikiarticle.image+'")'}}>
         <div className="text">{decodeURI(this.props.playlist.name)}</div>
       </div>
     );
