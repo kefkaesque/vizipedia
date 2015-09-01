@@ -18,6 +18,7 @@ var Feed = React.createClass({
   render: function() {
     return (
       <div className="feed wrapper">
+        <div className="hax"/>
         <h1> FEED DATA </h1>
           <h3>Following Activities</h3>
           <FollowingUsers activities={this.state.data}/>
