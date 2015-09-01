@@ -176,11 +176,12 @@ filter: grayscale(10%) sepia(10%);
   right: 0;
   display: block;
   z-index: 2;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(0,0,0,0.9);
   width: 100%;
   padding: 0;
   margin: 0;
   border: 0;
+  font-size:.6em;
 }
 
 .overlay-modal {
@@ -188,8 +189,11 @@ filter: grayscale(10%) sepia(10%);
   vertical-align: middle;
   outline: none;
   overflow: hidden;
-  max-width: 580px;
-  padding: 80px 80px;
+  max-width: 550px;
+  margin:8.4em 6.9em;
+  padding:2em 2.6em;
+  background:rgba(0,0,0,.95);
+  border-radius:.38em;
 }
 
 /* modal closing cross */
@@ -217,6 +221,12 @@ filter: grayscale(10%) sepia(10%);
   display: block;
   float: right !important;
 }
+
+
+.stupid {
+  clear:both;
+}
+
 .left-text-align {
   text-align: left !important;
   padding: 20px 0 10px;

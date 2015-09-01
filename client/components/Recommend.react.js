@@ -85,7 +85,7 @@ var RecPerson = React.createClass({
     if (this.props.people) {
       var itemNodes = this.props.people.map(function(item, index) {
         return (
-          <div key={index} className="left-text-align">
+          <div key={index} className="left-text-align stupid">
             <span className="float-left"><Link to="profile" params={{username: item.user.username}}>
               {item.user.username}
             </Link></span>
