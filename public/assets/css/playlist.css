@@ -1,8 +1,39 @@
+.playlist {
+  position:fixed;
+  bottom:0; left:0;
+  width:100%;
+  padding:1em 1em .68em 1em;
+
+  background:rgba(0,0,0,.95);
+}
+
+.playlist .close {
+  cursor:pointer;
+  float:right;
+  color:#fff;
+  font-weight:600;
+}
+
 .playlist .box {
   display:inline-block;
-  margin-top:1em;
   margin-left:.62em;
   background-size:cover !important;
   background-position:center !important;
-  width:calc((100% - 3 * .62em) / 4);
+  border:.15em solid #111;
+
+  width:calc((100% - 6 * .62em) / 7);
+}
+
+.playlist a:first-child .box {
+  margin-left:0;
+}
+
+.playlist .text {
+  padding:.38em;
+  margin-top:6.9em;
+  background:rgba(0,0,0,.9);
+  color:#fff;
+  text-align:center;
+  font-size:.7em;
+  font-weight:600;
 }
