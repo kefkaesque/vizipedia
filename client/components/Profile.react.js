@@ -192,9 +192,8 @@ var RecommendedArticles = React.createClass({
 var RecItem = React.createClass({
   render: function() {
     return (
-      <div>
-        <img className="box" src={this.props.article.image}/>
-        <div className="text">{this.props.article.title}</div>
+      <div className="box" style={{background:'url("'+this.props.article.image+'")'}}>
+        <div className="text">{this.props.article.title.replace(/_/g," ")}</div>
       </div>
     );
   }
