@@ -80,7 +80,8 @@
   width:calc((100% - 3 * .62em) / 4);
 }
 
-.profile a:nth-child(4n+1) .box {
+.profile a:nth-child(4n+1) .box,
+div.playlistitem:nth-of-type(4n+1) {
   margin-left:0;
 }
 
