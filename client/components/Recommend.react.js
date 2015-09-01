@@ -51,18 +51,22 @@ var RecommendButton = React.createClass({
     });
   },
   render: function() {
+    console.log(this.state);
     return (
       <div className="item">
         <Heart className="recommend" disabled={this.disable} state={this.state} click={this.handleButton.bind(this, this.props.info.id)}/>
         {this.state.num ? <span onClick={this.openModal.bind(this, this.props.info.id)}> {this.state.num} </span> :
           ''}
-
         <Modal isOpen={this.state.isModalOpen} transitionName="modal-anim">
-          <h3> Recommendations </h3>
+        <div className="overlay-modal">
+          <h3 className="overlay-title"> Recommendations for {this.props.info.title.replace(/_/g, ' ')}</h3>
           <div className="body">
             <RecPerson people={this.state.all}/>
           </div>
-          <button onClick={this.closeModal}> Close </button>
+          <div className="overlay-x">
+          <button className="modal-x"onClick={this.closeModal}> x </button>
+          </div>
+        </div>
         </Modal>
       </div>
     );
@@ -78,11 +82,11 @@ var RecPerson = React.createClass({
     if (this.props.people) {
       var itemNodes = this.props.people.map(function(item, index) {
         return (
-          <div key={index}>
-            <span><Link to="profile" params={{username: item.user.username}}>
+          <div key={index} className="left-text-align">
+            <span className="float-left"><Link to="profile" params={{username: item.user.username}}>
               {item.user.username}
             </Link></span>
-            <span className="profile">   <Follow username={item.user.username}/></span>
+            <div className="actions float-right">   <Follow username={item.user.username}/></div>
           </div>
         );
       });

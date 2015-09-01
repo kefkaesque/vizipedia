@@ -140,11 +140,28 @@ filter: grayscale(10%) sepia(10%);
 /* modal style */
 .modal {
   position: fixed;
-  width: 100%;
-  height: 100%;
+  overflow: auto;
+  text-align: center;
   top: 0;
   left: 0;
-  background: rgba(255,255,255,0.8);
+  bottom: 0;
+  right: 0;
+  display: block;
+  z-index: 2;
+  background-color: rgba(255,255,255,0.8);
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.overlay-modal {
+  display: inline-block;
+  vertical-align: middle;
+  outline: none;
+  overflow: hidden;
+  max-width: 580px;
+  padding: 80px 80px;
 }
 
 /* modal closing cross */
@@ -154,13 +171,41 @@ filter: grayscale(10%) sepia(10%);
   position: absolute;
   right: 20px;
   top: 20px;
-  overflow: hidden;
+  /*overflow: hidden;*/
   border: none;
-  background: url(./img/cross.png) no-repeat center center;
   text-indent: 200%;
   color: transparent;
   outline: none;
-  z-index: 100;
+  z-index: 3;
+  font-weight: 300;
+
+}
+.float-left {
+  display: block;
+  float: left;
+  position: relative;
+}
+.float-right {
+  display: block;
+  float: right !important;
+}
+.left-text-align {
+  text-align: left !important;
+  padding: 20px 0 10px;
+}
+.overlay-title {
+  max-width: 580px;
 }
 
-
+.modal-x{
+  font-size: 32px;
+  padding: 10px 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  letter-spacing: -0.02em;
+  font-weight: 300;
+  font-style: normal;
+  overflow: visible;
+  border: 0;
+}
