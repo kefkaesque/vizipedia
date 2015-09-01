@@ -39,10 +39,9 @@ var PlaylistNavigator = React.createClass({
     PlaylistStore.removeChangeListener(this._onChange);
   },
   render: function() {
-
     if(this.state.viewing) {
       return (
-        <div className="playlistitems wrapper">
+        <div className="playlist wrapper">
           <CurrentPlaylist playlistitems={this.state.current.playlistitems} />
           <div onClick={this.closePlaylist}>
             Close
@@ -72,7 +71,7 @@ var CurrentPlaylist = React.createClass({
       var itemNodes = this.props.playlistitems.map(function(item, index) {
         return (
           <Link to="wiki" params={{topic: item.topic}} key={index}>
-          <PlaylistItem topic={item.topic} key={index} />
+            <PlaylistItem topic={item.topic} image={item.wikiarticle.image} key={index} />
           </Link>
         );
       });
@@ -91,7 +90,7 @@ var CurrentPlaylist = React.createClass({
 var PlaylistItem = React.createClass({
   render: function() {
     return (
-      <div className="box">
+      <div className="box" style={{background:'url("'+this.props.image+'")'}}>
         {this.props.topic}
       </div>
     );

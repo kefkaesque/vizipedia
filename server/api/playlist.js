@@ -21,6 +21,7 @@ router.get('/', function(req, res) {
   else if(userId) {
     getUserPlaylists(userId)
     .then(function(result) {
+      console.log('get playlist use userID ', result[0].playlistitems[0].wikiarticle);
       res.send(JSON.stringify(result));
     });
   }
@@ -52,9 +53,17 @@ function getPlaylist(playlistId) {
 function getUserPlaylists(userId) {
   return Playlist.findAll({
     where: {userId: userId},
-
-    //TODO: only include username attribute of user model
-    include: [PlaylistItem, User]
+    include: [{
+      model: PlaylistItem,
+      include: [{
+        model: Article,
+        attributes: ['image']
+      }]
+    },
+    {
+      model: User,
+      attributes: ['username']
+    }]
   });
 }
 
