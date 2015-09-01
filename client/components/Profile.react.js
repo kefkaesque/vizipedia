@@ -119,7 +119,7 @@ var UserRaces = React.createClass({
       <div className="race section">
         <h2>Races</h2>
         <div className="container">
-          {Locals.username === this.props.data.username ? <RaceButton/> : <div></div> }
+          {Locals.username === this.props.data.username ? <RaceButton/> : null }
           {itemNodes}
         </div>
       </div>
@@ -144,9 +144,11 @@ var RaceItem = React.createClass({
   },
   render: function() {
     return (
+    <a href="javascript:;">
       <div className="box" onClick={this.handlePress}>
         {this.props.raceInfo.race.start} to {this.props.raceInfo.race.end }
       </div>
+    </a>
     );
   }
 });
@@ -220,7 +222,7 @@ var Playlists = React.createClass({
               <div className="box">
                 Create Playlist
               </div>
-            </Link> : ''}
+            </Link> : null}
           {itemNodes}
         </div>
       </div>
@@ -238,9 +240,11 @@ var PlaylistItem = React.createClass({
   },
   render: function() {
     return (
+    <a href="javascript:;">
       <div className="playlistItem box" onClick={this.handlePress} style={{background:'url("'+this.props.playlist.playlistitems[0].wikiarticle.image+'")'}}>
         <div className="text">{decodeURI(this.props.playlist.name)}</div>
       </div>
+    </a>
     );
   }
 });
