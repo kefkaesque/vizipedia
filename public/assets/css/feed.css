@@ -27,3 +27,7 @@
   font-size:.65em;
   opacity:.3;
 }
+
+.feed .container > div a {
+  color:#2a80b9;
+}
