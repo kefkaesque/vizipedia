@@ -19,8 +19,7 @@ var Feed = React.createClass({
     return (
       <div className="feed wrapper">
         <div className="hax"/>
-        <h1> FEED DATA </h1>
-          <h3>Following Activities</h3>
+        <h1>Recent Events</h1>
           <FollowingUsers activities={this.state.data}/>
       </div>
     );
