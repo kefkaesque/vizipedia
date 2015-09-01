@@ -43,11 +43,11 @@ var FollowingUsers = React.createClass({
           <Link to="profile" params={{username: activity.username}}>
             {activity.username}
           </Link>
-            <span> recommended </span> 
+            <span> recommended </span>
           <Link to="wiki" params={{topic: activity.title}}>
-            {activity.title}
+            {activity.title.replace(/_/g, ' ')}
           </Link>
-            <span> {activity.createdAt}</span>
+            <div> {activity.createdAt}</div>
           </div>
         )};
         if (activity.follower) {
@@ -56,11 +56,11 @@ var FollowingUsers = React.createClass({
           <Link to="profile" params={{username: activity.follower}}>
             {activity.follower}
           </Link>
-            <span> followed </span> 
+            <span> followed </span>
           <Link to="profile" params={{username: activity.following}}>
-            {activity.following} 
+            {activity.following}
           </Link>
-            <span> {activity.createdAt}</span>
+            <div> {activity.createdAt}</div>
           </div>
         )};
         if (activity.racer) {
@@ -69,19 +69,22 @@ var FollowingUsers = React.createClass({
           <Link to="profile" params={{username: activity.racer}}>
             {activity.racer}
           </Link>
-            <span> played Wiki race </span> 
+            <span> raced </span>
           <Link to="race" params={{raceId: activity.raceId}}>
-            start:{activity.start} end:{activity.end} finishtime: {activity.finishTime} 
+            from {activity.start} to {activity.end} in {activity.finishTime} seconds
           </Link>
-            <span> {activity.createdAt}</span>
+            <div> {activity.createdAt}</div>
           </div>
         )};
         if (activity.name) {
         return (
           <div>
           <Link to="profile" params={{username: activity.username}}>
-            {activity.username} created playlist name:{activity.name} {activity.createdAt}
+            {activity.username} created playlist {activity.name}
           </Link>
+          <div>
+            {activity.createdAt}
+          </div>
           </div>
         )};
       });
