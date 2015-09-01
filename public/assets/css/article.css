@@ -98,12 +98,40 @@ filter: grayscale(10%) sepia(10%);
   display:none;
 }
 
+.des {
+  position:absolute;
+  top:0; left:0;
+  width:100%;
+  height:50vh;
+}
+
+.par {
+  position:absolute;
+  bottom:20px; left:0; right:0;
+  text-align:right;
+  color:#fff;
+  font-weight:600;
+}
+
+.ation span {
+  font-size:1.6em;
+}
+
+.ation span,
+.ation svg {
+}
+
 .heart {
   max-width: 2em;
   fill: #093c4f;
   stroke: #093c4f;
   stroke-width: 0.2em;
   overflow: visible;
+
+
+  fill: #fff;
+  stroke: #fff;
+  stroke-width: .3em;
 }
 
 .filled {

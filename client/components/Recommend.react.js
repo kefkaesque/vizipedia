@@ -52,7 +52,9 @@ var RecommendButton = React.createClass({
   },
   render: function() {
     return (
-      <div className="item">
+      <div className="des">
+      <div className="par wrapper">
+      <div className="ation serif">
         <Heart className="recommend" disabled={this.disable} state={this.state} click={this.handleButton.bind(this, this.props.info.id)}/>
         {this.state.num ? <span onClick={this.openModal.bind(this, this.props.info.id)}> {this.state.num} </span> :
           ''}
@@ -67,6 +69,8 @@ var RecommendButton = React.createClass({
           </div>
         </div>
         </Modal>
+      </div>
+      </div>
       </div>
     );
   },
