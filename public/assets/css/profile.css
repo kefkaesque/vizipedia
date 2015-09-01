@@ -74,13 +74,14 @@
 .profile .box {
   display:inline-block;
   margin-top:1em;
+  margin-left:.62em;
   background-size:cover !important;
   background-position:center !important;
   width:calc((100% - 3 * .62em) / 4);
 }
 
-.profile a:nth-child(n+2) .box {
-  margin-left:.62em;
+.profile a:nth-child(4n+1) .box {
+  margin-left:0;
 }
 
 .profile .box .text {
