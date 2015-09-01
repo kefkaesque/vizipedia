@@ -4,6 +4,7 @@ module.exports = router;
 
 var Playlist = require('../models/Playlist.js');
 var PlaylistItem = require('../models/PlaylistItem.js');
+var Article = require('../models/WikiArticle.js');
 
 router.post('/', function(req, res) {
   var playlistId = req.body.playlistId;
@@ -20,7 +21,13 @@ router.post('/', function(req, res) {
 // --------------------------------------------------------------------------------
 
 function addPlaylistItem(playlistId, topic) {
-  return PlaylistItem.create({playlistId: playlistId, topic: topic})
+  return Article.findOne({
+    where: {title: topic}
+  })
+  .then(function(article) {
+    var articleId = article ? article.id : null;
+    return PlaylistItem.create({playlistId: playlistId, topic: topic, articleId: articleId})
+  })
   .then(function() {
     return Playlist.findOne({
       where: {id: playlistId},
