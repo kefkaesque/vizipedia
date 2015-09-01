@@ -189,8 +189,11 @@ filter: grayscale(10%) sepia(10%);
   vertical-align: middle;
   outline: none;
   overflow: hidden;
-  max-width: 580px;
-  padding: 80px 80px;
+  max-width: 550px;
+  margin:8.4em 6.9em;
+  padding:2em 2.6em;
+  background:rgba(0,0,0,.95);
+  border-radius:.38em;
 }
 
 /* modal closing cross */
