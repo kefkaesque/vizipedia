@@ -21,6 +21,7 @@ router.get('/', function(req, res) {
   else if(userId) {
     getUserPlaylists(userId)
     .then(function(result) {
+      console.log('get playlist use userID ', result[0].playlistitems[0].wikiarticle);
       res.send(JSON.stringify(result));
     });
   }

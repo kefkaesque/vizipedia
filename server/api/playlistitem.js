@@ -22,7 +22,7 @@ router.post('/', function(req, res) {
 
 function addPlaylistItem(playlistId, topic) {
   return Article.findOne({
-    where: {title: topic}
+    where: {query: topic}
   })
   .then(function(article) {
     var articleId = article ? article.id : null;
