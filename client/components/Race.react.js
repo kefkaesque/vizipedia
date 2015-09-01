@@ -19,7 +19,7 @@ var Race = React.createClass({
     var currentUser = Locals.userid;
 
     // if anyone has finished the race
-    if(this.state.racerInfo) { //.length?
+    if(this.state.racerInfo) {
       // see if the current user has finished the race
       return this.state.racerInfo.reduce(function(previousValue, currentValue) {
         return previousValue || currentValue.userId === currentUser;
@@ -40,7 +40,6 @@ var Race = React.createClass({
       // display finished racer data
       return (
         <div className='race'>
-          <div style={{height:200+'px'}}></div>
           <EndRace racerInfo={this.state.racerInfo} />
         </div>
       )
@@ -99,7 +98,7 @@ var EndRace = React.createClass({
 
     return (
       <div className='d3Section'>
-          Wiki Race
+          FINISHED!
       </div>
     )
   }
@@ -176,7 +175,6 @@ function d3EndRace(racerInfo) {
       .projection(function(d) { return [d.y, d.x]; });
 
     var svg = d3.select(".d3Section").append("svg")
-      .attr("width", width + margin.right + margin.left)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -213,7 +211,7 @@ function d3EndRace(racerInfo) {
         .attr("y", function(d) {
           return d.children || d._children ?
           (d.value + 25) * -1 : d.value + 35 })
-        .attr("dx", "0.45em")
+        .attr("dx", "0.3em")
         .attr("text-anchor", function(d) {
           return d.children || d._children ? "middle" : "end"; })
         .text(function(d) { return d.name; })

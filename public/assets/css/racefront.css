@@ -36,3 +36,7 @@
 .raceheader .timer {
   font-size:2.5em;
 }
+
+svg {
+  width: 100%;
+}
