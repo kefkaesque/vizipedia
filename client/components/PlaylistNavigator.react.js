@@ -41,17 +41,11 @@ var PlaylistNavigator = React.createClass({
   render: function() {
     if(this.state.viewing) {
       return (
-        <div className="playlist wrapper">
+        <div className="playlist">
+          <div className="close" onClick={this.closePlaylist}>
+            <span className="fa fa-fw fa-close"></span> Close
+          </div>
           <CurrentPlaylist playlistitems={this.state.current.playlistitems} />
-          <div onClick={this.closePlaylist}>
-            Close
-          </div>
-          <div onClick={this.nextArticle}>
-            Next
-          </div>
-          <div onClick={this.prevArticle}>
-            Previous
-          </div>
         </div>
       );
     }
@@ -80,7 +74,6 @@ var CurrentPlaylist = React.createClass({
     }
     return (
       <div>
-        <h2 className="head">Current Playlist</h2>
         {itemNodes}
       </div>
     );
@@ -91,7 +84,7 @@ var PlaylistItem = React.createClass({
   render: function() {
     return (
       <div className="box" style={{background:'url("'+this.props.image+'")'}}>
-        {this.props.topic}
+        <div className="text">{this.props.topic}</div>
       </div>
     );
   }
