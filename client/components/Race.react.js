@@ -48,7 +48,7 @@ var Race = React.createClass({
     } else {
       // display start page
       return (
-        <div>
+        <div className='racefront'>
           <div style={{height:200+'px'}}></div>
           <StartRace raceInfo={this.state.raceInfo} />
         </div>
@@ -75,10 +75,10 @@ var StartRace = React.createClass({
   render: function() {
     return (
       <div>
-        <div>
-          RACE
+        <div className='big'>
+          starting race...
         </div>
-        <div>
+        <div className='med'>
           {this.props.raceInfo.start} to {this.props.raceInfo.end}
         </div>
         <span className="button" onClick={this.startRace}>

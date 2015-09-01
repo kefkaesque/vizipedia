@@ -62,12 +62,9 @@ var RaceHeader = React.createClass({
   render: function() {
     if(this.state.racing) {
       return (
-        <div className="race">
-          Race!
-          <p>{this.state.currentArticle || 'no current article'}</p>
-          <p>From {this.state.raceInfo.start || '?'} to {this.state.raceInfo.end || '?'}</p>
+        <div className="raceheader">
+          <p>Racing from {this.state.raceInfo.start || '?'} to {this.state.raceInfo.end || '?'}</p>
           <Timer finished={this.state.finished} endRace={this.endRace} />
-          <p>Path: {this.state.articlePath}</p>
         </div>
       );
     }
@@ -121,7 +118,7 @@ var Timer = React.createClass({
           centiseconds = "0" + centiseconds;
         }
 
-        return <p>Time elapsed: <b> {min}:{seconds}:{centiseconds}</b> </p>;
+        return <p className='timer serif'>{min}:{seconds}:{centiseconds}</p>;
     }
 });
 
