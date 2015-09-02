@@ -24,3 +24,8 @@ router.post('/signup', passport.authenticate(
     failureRedirect: "/signup"
   }
 ));
+
+router.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
