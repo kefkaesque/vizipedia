@@ -28,5 +28,19 @@ module.exports = {
           }
         });
     });
+  },
+
+  getAutoComplete: function(topic) {
+    return new Promise(function(resolve, reject) {
+      request
+        .get('/api/wiki/auto/'+topic)
+        .end(function(err, res) {
+          if (err) {
+            reject();
+          } else {
+            resolve(JSON.parse(res.text));
+          }
+        });
+    });
   }
 };

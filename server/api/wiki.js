@@ -11,6 +11,13 @@ var VisitedArticle = require('../models/visitedArticle.js');
 var Recommend = require('../models/Recommend.js');
 var configEnv = require('../config/env.js');
 
+router.get('auto/:topic', function(req, res) {
+  request('https://en.wikipedia.org/w/api.php?action=opensearch&search='+req.params.topic+'&limit=10&namespace=0&format=json', function(error, response, body) {
+    console.log('!!!!!!!', body);
+    res.send(JSON.parse(body));
+  });
+});
+
 router.get('/query/:topic', function(req, res) {
   request('https://en.wikipedia.org/w/api.php?action=query&format=json&titles='+req.params.topic+'&redirects', function(error, response, body) {
     var query = JSON.parse(body);
