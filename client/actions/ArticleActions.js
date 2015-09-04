@@ -31,6 +31,26 @@ var ArticleActions = {
       });
       return query;
     });
+  },
+
+  dispatchAutoComplete: function(topic) {
+    WikiAPI.getAutoComplete(topic)
+    .then(function(topics) {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.AUTO_COMPLETE,
+        data: topics
+      });
+    });
+  },
+
+  dispatchHeaderComplete: function(topic) {
+    WikiAPI.getAutoComplete(topic)
+    .then(function(topics) {
+      AppDispatcher.handleViewAction({
+        actionType: FluxConstants.HEADER_COMPLETE,
+        data: topics
+      });
+    });
   }
 };
 

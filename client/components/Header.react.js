@@ -1,7 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
-var Search = require('./Search.react');
+var SearchHeader = require('./SearchHeader.react');
 var RaceActions = require('../actions/RaceActions');
 
 var Header = React.createClass({
@@ -17,7 +17,7 @@ var Header = React.createClass({
           <LogoutButton/>
         </div>
         <Link to="landing"><div className="logo serif" onClick={this.handleClick}>vizipedia</div></Link>
-        <Search />
+        <SearchHeader />
       </div></div>
     );
     else
@@ -28,7 +28,7 @@ var Header = React.createClass({
           <SignupButton/>
         </div>
         <Link to="landing"><div className="logo serif" onClick={this.handleClick}>vizipedia</div></Link>
-        <Search />
+        <SearchHeader />
       </div></div>
     );
   }

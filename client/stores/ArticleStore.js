@@ -10,6 +10,12 @@ function loadData(data) {
 function loadRecData(data) {
   article.recs = data;
 }
+function loadAutoComplete(data) {
+  article.topics = data;
+}
+function loadHeaderAutoComplete(data) {
+  article.headerTopics = data;
+}
 var ArticleStore = assign({}, EventEmitter.prototype, {
 
   getData: function() {
@@ -34,6 +40,12 @@ AppDispatcher.register(function(payload) {
       break;
     case FluxConstants.GET_REC:
       loadRecData(action.data);
+      break;
+    case FluxConstants.AUTO_COMPLETE:
+      loadAutoComplete(action.data);
+      break;
+    case FluxConstants.HEADER_COMPLETE:
+      loadHeaderAutoComplete(action.data);
       break;
     default:
       // none

@@ -4,7 +4,7 @@ var RaceActions = require('../actions/RaceActions');
 var ArticleActions = require('../actions/ArticleActions');
 var ArticleStore = require('../stores/ArticleStore');
 
-var Search = React.createClass({
+var SearchHeader = React.createClass({
   mixins: [ Router.Navigation ],
 
   getInitialState: function() {
@@ -36,17 +36,17 @@ var Search = React.createClass({
   },
   autoComplete: function(e) {
     var text = React.findDOMNode(this.refs.text).value.trim();
-    ArticleActions.dispatchAutoComplete(text);
+    ArticleActions.dispatchHeaderComplete(text);
   },
   render: function() {
     return (
-      <div>
+      <span>
       <form className="headerForm" onSubmit={this.handleSubmit}>
         <input type="text" placeholder="Search..." ref="text" onKeyUp={this.autoComplete} />
         <button type="submit"><span className="fa fa-fw fa-search"></span></button>
       </form>
-      <SearchItems topics={this.state.topics}/>
-      </div>
+      <SearchItemsHeader topics={this.state.headerTopics}/>
+      </span>
     );
   },
   _onChange: function() {
@@ -54,7 +54,7 @@ var Search = React.createClass({
   }
 });
 
-var SearchItems = React.createClass({
+var SearchItemsHeader = React.createClass({
   render: function() {
     if (this.props.topics) {
       var itemNodes = this.props.topics[1].map(function(item, index) {
@@ -80,4 +80,4 @@ var SearchItems = React.createClass({
 
 
 
-module.exports = Search;
+module.exports = SearchHeader;
