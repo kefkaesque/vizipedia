@@ -51,6 +51,20 @@ var ArticleActions = {
         data: topics
       });
     });
+  },
+
+  dispatchClearHeader: function() {
+    AppDispatcher.handleViewAction({
+      actionType: FluxConstants.HEADER_COMPLETE,
+      data: ''
+    });
+  },
+
+  dispatchClearLanding: function() {
+    AppDispatcher.handleViewAction({
+      actionType: FluxConstants.AUTO_COMPLETE,
+      data: ''
+    });
   }
 };
 

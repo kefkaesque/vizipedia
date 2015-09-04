@@ -49,14 +49,18 @@ var SearchHeader = React.createClass({
   },
   autoComplete: function() {
     var text = React.findDOMNode(this.refs.text).value.trim();
-    ArticleActions.dispatchHeaderComplete(text);
+    if (text) {
+      ArticleActions.dispatchHeaderComplete(text);
+    } else {
+      ArticleActions.dispatchClearHeader();
+    }
   },
   render: function() {
     console.log('header state', this.state);
     return (
       <span>
       <form className="headerForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Search..." ref="text" onKeyPress={this.debounce(this.autoComplete, 250)} />
+        <input type="text" placeholder="Search..." ref="text" onKeyUp={this.debounce(this.autoComplete, 250)} />
         <button type="submit"><span className="fa fa-fw fa-search"></span></button>
       </form>
       <SearchItemsHeader topics={this.state.headerTopics}/>

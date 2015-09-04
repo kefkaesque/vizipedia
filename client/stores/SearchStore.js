@@ -31,11 +31,9 @@ AppDispatcher.register(function(payload) {
   var action = payload.action;
   switch(action.actionType) {
     case FluxConstants.AUTO_COMPLETE:
-      console.log('landing',action.data);
       loadAutoComplete(action.data);
       break;
     case FluxConstants.HEADER_COMPLETE:
-      console.log('header',action.data);
       loadHeaderAutoComplete(action.data);
       break;
     default:

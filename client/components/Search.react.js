@@ -47,16 +47,20 @@ var Search = React.createClass({
       timeout = setTimeout(later, wait);
     };
   },
-  autoComplete: function() {
+  autoComplete: function(e) {
     var text = React.findDOMNode(this.refs.text).value.trim();
-    ArticleActions.dispatchAutoComplete(text);
+    if (text) {
+      ArticleActions.dispatchAutoComplete(text);
+    } else {
+      ArticleActions.dispatchClearLanding();
+    }
   },
   render: function() {
     console.log('landing state', this.state);
     return (
       <div>
       <form className="headerForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Search..." ref="text" onKeyPress={this.debounce(this.autoComplete, 250)} />
+        <input type="text" placeholder="Search..." ref="text" onKeyUp={this.debounce(this.autoComplete, 250)} />
         <button type="submit"><span className="fa fa-fw fa-search"></span></button>
       </form>
       <SearchItems topics={this.state.topics}/>
