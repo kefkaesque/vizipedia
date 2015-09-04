@@ -56,7 +56,6 @@ var SearchHeader = React.createClass({
     }
   },
   render: function() {
-    console.log('header state', this.state);
     return (
       <span>
       <form className="headerForm" onSubmit={this.handleSubmit}>
@@ -77,18 +76,16 @@ var SearchItemsHeader = React.createClass({
     if (this.props.topics) {
       var itemNodes = this.props.topics[1].map(function(item, index) {
         return (
-          <span key={index}>
-            <span> {item} </span>
-          </span>
+          <li className="autocomplete-li" key={index}> {item} </li>
         );
       });
     } else {
       itemNodes = '';
     }
     return (
-      <div>
+      <ul className="autocomplete-ul">
         {itemNodes}
-      </div>
+      </ul>
     );
   }
 });

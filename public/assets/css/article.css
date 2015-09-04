@@ -247,3 +247,19 @@ filter: grayscale(10%) sepia(10%);
   overflow: visible;
   border: 0;
 }
+
+.autocomplete-li {
+  padding: 1px;
+  list-style: none;
+  width:240px;
+  font-size: 15px;
+  margin-right: .38em;
+}
+
+.autocomplete-ul {
+  text-align:center;
+  padding: .5em 1em;
+  max-height: 200px;
+  width:265px;
+  overflow: auto;
+}
