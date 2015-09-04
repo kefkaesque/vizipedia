@@ -3,17 +3,18 @@ var EventEmitter = require('events').EventEmitter;
 var FluxConstants = require('../constants/FluxConstants');
 var assign = require('object-assign');
 
-var article = {};
-function loadData(data) {
-  article = data;
+var search = {};
+
+function loadAutoComplete(data) {
+  search.topics = data;
 }
-function loadRecData(data) {
-  article.recs = data;
+function loadHeaderAutoComplete(data) {
+  search.headerTopics = data;
 }
 var ArticleStore = assign({}, EventEmitter.prototype, {
 
   getData: function() {
-    return article;
+    return search;
   },
   emitChange: function() {
     this.emit('change');
@@ -29,11 +30,13 @@ var ArticleStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(payload) {
   var action = payload.action;
   switch(action.actionType) {
-    case FluxConstants.VIZI_SEARCH:
-      loadData(action.data);
+    case FluxConstants.AUTO_COMPLETE:
+      console.log('landing',action.data);
+      loadAutoComplete(action.data);
       break;
-    case FluxConstants.GET_REC:
-      loadRecData(action.data);
+    case FluxConstants.HEADER_COMPLETE:
+      console.log('header',action.data);
+      loadHeaderAutoComplete(action.data);
       break;
     default:
       // none

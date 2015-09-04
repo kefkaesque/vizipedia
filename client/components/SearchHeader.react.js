@@ -2,7 +2,7 @@ var React = require('react');
 var Router = require('react-router');
 var RaceActions = require('../actions/RaceActions');
 var ArticleActions = require('../actions/ArticleActions');
-var ArticleStore = require('../stores/ArticleStore');
+var SearchStore = require('../stores/SearchStore');
 
 var SearchHeader = React.createClass({
   mixins: [ Router.Navigation ],
@@ -11,10 +11,10 @@ var SearchHeader = React.createClass({
     return {};
   },
   componentWillMount: function() {
-    ArticleStore.addChangeListener(this._onChange);
+    SearchStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
-    ArticleStore.removeChangeListener(this._onChange);
+    SearchStore.removeChangeListener(this._onChange);
   },
   handleSubmit: function(e) {
     e.preventDefault();
@@ -34,15 +34,29 @@ var SearchHeader = React.createClass({
     }
     React.findDOMNode(this.refs.text).value = '';
   },
-  autoComplete: function(e) {
+  debounce: function(func, wait) {
+    var timeout;
+    return function() {
+      var context = this;
+      var args = Array.prototype.slice.apply(arguments);
+      var later = function() {
+        timeout = null;
+        func.apply(context, args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  },
+  autoComplete: function() {
     var text = React.findDOMNode(this.refs.text).value.trim();
     ArticleActions.dispatchHeaderComplete(text);
   },
   render: function() {
+    console.log('header state', this.state);
     return (
       <span>
       <form className="headerForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Search..." ref="text" onKeyUp={this.autoComplete} />
+        <input type="text" placeholder="Search..." ref="text" onKeyPress={this.debounce(this.autoComplete, 250)} />
         <button type="submit"><span className="fa fa-fw fa-search"></span></button>
       </form>
       <SearchItemsHeader topics={this.state.headerTopics}/>
@@ -50,7 +64,7 @@ var SearchHeader = React.createClass({
     );
   },
   _onChange: function() {
-    this.setState(ArticleStore.getData());
+    this.setState(SearchStore.getData());
   }
 });
 
